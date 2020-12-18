@@ -36,14 +36,21 @@ class Feed extends Component {
     });
   }
 
+//   componentDidMount() {
+//     document.body.style.backgroundColor = "blue"
+// }
+
   render() {
+      
     const feedScroll = this.state.feed.map((feed) => {
       return (
+
+        
         <div className=" d-flex flex-column  " key={feed.id}>
           <div className="flip-card ">
-            <div className="flip-card-front rounded-lg">
+            <div className="flip-card-front rounded-lg"style={{backgroundColor:"white" }}>
               <h3 className="projectreason text-nowrap">
-                <div style={{ fontSize: "12px" }}>
+                <div style={{ fontSize: "12px", backgroundColor:"white" }}>
                   <img
                     id="music"
                     className="profileImg"
@@ -67,7 +74,7 @@ class Feed extends Component {
         <div className="row row-content">
           <div className="col-12 mx-auto p-2">
             <div className="flip-card ">
-              <div className="flip-card-front rounded-lg">
+              <div className="flip-card-front rounded-lg"style={{backgroundColor:"white" }}>
                 <h3 className="projectreason text-nowrap">
                   <div style={{ fontSize: "12px" }}>
                     <img
@@ -81,15 +88,17 @@ class Feed extends Component {
                   </div>
                   <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
+                   
                       <Input
                         type="textarea"
                         id="postText"
                         name="postText"
-                        rows="1"
+                        rows="3"
                         value={this.state.postText}
                         onChange={this.handleInputChange}
                         className="textArea"
                       ></Input>
+                      
                       <Input
                         type="file"
                         name="postImage"

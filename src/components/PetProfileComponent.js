@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 
+function Uni(props) {
+  if (props.uniqueId) {
+    return <div>{props.uniqueId}</div>;
+  } else {
+    return <div>Failed</div>;
+  }
+}
+
 class PetProfile extends Component {
   constructor(props) {
     super(props);
@@ -49,14 +57,13 @@ class PetProfile extends Component {
 
     reader.readAsDataURL(file);
   }
-  render() {
-    console.log(this.props.uniqueId);
 
+  render() {
     return (
       <React.Fragment>
         <FormGroup className="d-flex flex-column col">
-          <Label>Your Unique Pet Id</Label>
-          {this.props.uniqueId}
+          <Label>Your Unique Pet Id </Label>
+          <Uni uniqueId={this.props.uniqueId} />
         </FormGroup>
 
         <Form onSubmit={this.handleSubmit}>

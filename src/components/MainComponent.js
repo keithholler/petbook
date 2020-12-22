@@ -1,40 +1,58 @@
 import React, { Component } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
-
+import { connect } from "react-redux";
 import Header from "./HeaderComponent";
 import Feed from "./FeedComponent";
 import PetProfile from "./PetProfileComponent";
 import Shelters from "./SheltersComponent";
 import Lostpet from "./LostpetsComponent";
-import uuid from "react-uuid";
+import { addUniqueId, addFeed, postComment } from "../redux/ActionCreators";
+//import { FEED } from "../shared/feedObjects";
+const mapStateToProps = (state) => {
+  return {
+    uniqueId: state.uniqueId,
+    feed: state.feed,
+    text: state.text,
+  };
+};
+
+const mapDispatchToProps = {
+  addUniqueId: (uniqueId) => addUniqueId(uniqueId),
+  addFeed: (id, profileImg, profileName, text) =>
+    addFeed(id, profileImg, profileName, text),
+  postComment: (text) => postComment(text),
+};
+
 class Main extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      uniqueId: "",
+      feed: Feed,
     };
-    this.generateId = this.generateId.bind(this);
-  }
-
-  generateId(event) {
-    event.preventDefault();
-    this.setState({
-      uniqueId: uuid(),
-    });
-    event.preventDefault();
-    console.log(this.state.uniqueId);
   }
   render() {
     return (
       <React.Fragment>
-        <Header />
+        <Header
+          addUniqueId={this.props.addUniqueId}
+          uniqueId={this.props.uniqueId}
+        />
         <Switch>
-          <Route path="/Feed">
-            <Feed />
-          </Route>
+          <Route
+            path="/Feed"
+            render={() => (
+              <Feed
+                postComment={this.props.postComment}
+                text={this.props.text}
+                feed={this.state.feed}
+              />
+            )}
+          />
           <Route
             path="/PetProfile"
-            render={() => <PetProfile uniqueId={this.state.uniqueId} />}
+            render={() => (
+              <PetProfile uniqueId={this.props.uniqueId.uniqueId} />
+            )}
           />
           <Route path="/Shelters">
             <Shelters />
@@ -49,4 +67,4 @@ class Main extends Component {
   }
 }
 
-export default withRouter(Main);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

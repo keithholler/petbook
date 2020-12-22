@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Button, FormControl, Form } from "react-bootstrap";
+import { UNIQUEID } from "../shared/uniqueId";
+
 import uuid from "react-uuid";
 import {
   Nav,
@@ -31,7 +33,8 @@ class Header extends Component {
       isModalOpen: false,
       isPetIdModalOpen: false,
       activeTab: "1",
-      uniqueId: "",
+      uniqueIdState: "",
+      uniqueId: UNIQUEID,
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -39,6 +42,7 @@ class Header extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.toggleTab = this.toggleTab.bind(this);
     this.generateId = this.generateId.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
   handleLogin(event) {
     alert(
@@ -65,6 +69,7 @@ class Header extends Component {
   }
 
   generateId() {
+    this.props.addUniqueId(uuid());
     this.setState({
       uniqueId: uuid(),
     });
@@ -75,6 +80,8 @@ class Header extends Component {
         isPetIdModalOpen: true,
       },
       () => {
+        console.log("Current state is: " + JSON.stringify(this.state.uniqueId));
+        alert("Current state is: " + JSON.stringify(this.state.uniqueId));
         setTimeout(this.handleClose, 3000);
       }
     );
@@ -135,7 +142,7 @@ class Header extends Component {
             </Form>
           </Collapse>
           <span className="navbar-text ml-auto">
-            <Button outline size="sm" onClick={this.toggleModal}>
+            <Button size="sm" onClick={this.toggleModal}>
               <i className="fa fa-sign-in fa-lg" /> Login
             </Button>
           </span>

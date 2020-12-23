@@ -48,4 +48,29 @@ export const FEED =
         profileName: "Zain ",
         text: "Foaming At The Mouth",
     },
+    {
+        id: 8,
+        profileImg:"./assets/Piper2.png",
+        profileName: "Jayson ",
+        text: "Burst Your Bubble",
+    },
+    {
+        id: 9,
+        profileImg:"./assets/Piper2.png",
+        profileName: "Zain ",
+        text: "Foaming At The Mouth",
+    },
+    {
+        id: 10,
+        profileImg:"./assets/Piper2.png",
+        profileName: "Jayson ",
+        text: "Burst Your Bubble",
+    },
+    {
+        id: 11,
+        profileImg:"./assets/Piper2.png",
+        profileName: "Zain ",
+        text: "Foaming At The Mouth",
+    },
+    
 ]

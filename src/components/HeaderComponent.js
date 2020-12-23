@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button, FormControl, Form } from "react-bootstrap";
-import { UNIQUEID } from "../shared/uniqueId";
 
 import uuid from "react-uuid";
 import {
@@ -33,8 +32,7 @@ class Header extends Component {
       isModalOpen: false,
       isPetIdModalOpen: false,
       activeTab: "1",
-      uniqueIdState: "",
-      uniqueId: UNIQUEID,
+      
     };
     this.toggleNav = this.toggleNav.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -43,7 +41,25 @@ class Header extends Component {
     this.toggleTab = this.toggleTab.bind(this);
     this.generateId = this.generateId.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    if (typeof window !== 'undefined') {
+      let prevScrollpos = window.pageYOffset;
+      window.onscroll = function () {
+        const maxScroll = document.body.clientHeight - window.innerHeight;
+        let currentScrollPos = window.pageYOffset;
+        if (
+            (maxScroll > 0 && prevScrollpos > currentScrollPos && prevScrollpos <= maxScroll) 
+          || (maxScroll <= 0 && prevScrollpos > currentScrollPos)
+          || (prevScrollpos <= 0 && currentScrollPos <= 0)
+          ) {
+          document.getElementById("navbar").style.top = "0";
+        } else {
+          document.getElementById("navbar").style.top = "-5.0rem"; // adjustable based your need
+        }
+        prevScrollpos = currentScrollPos;
+      }
+    }
   }
+  
   handleLogin(event) {
     alert(
       `Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`
@@ -70,9 +86,9 @@ class Header extends Component {
 
   generateId() {
     this.props.addUniqueId(uuid());
-    this.setState({
-      uniqueId: uuid(),
-    });
+    // this.setState({
+    //   uniqueId: uuid(),
+    // });
   }
   toggleModalPetId() {
     this.setState(
@@ -80,8 +96,6 @@ class Header extends Component {
         isPetIdModalOpen: true,
       },
       () => {
-        console.log("Current state is: " + JSON.stringify(this.state.uniqueId));
-        alert("Current state is: " + JSON.stringify(this.state.uniqueId));
         setTimeout(this.handleClose, 3000);
       }
     );
@@ -110,13 +124,13 @@ class Header extends Component {
   render() {
     return (
       <React.Fragment>
-        <Navbar light className="site-header" sticky="top" expand="lg">
+        <Navbar id="navbar" light className="site-header "  expand="lg" >
           <NavbarBrand href="/home" className="mr-auto">
             PetBook
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
-            <Nav navbar>
+            <Nav navbar >
               <NavItem>
                 <NavLink href="/Feed">Feed</NavLink>
               </NavItem>
@@ -126,11 +140,11 @@ class Header extends Component {
               <NavItem>
                 <NavLink href="/Shelters">Shelters</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink href="/LostPets">LostPets</NavLink>
+              <NavItem >
+                <NavLink href="/LostPets" >LostPets</NavLink>
               </NavItem>
             </Nav>
-            <Form inline>
+            <Form inline clasName="d-flex justify-content-center">
               <Button variant="outline-secondary" className="mr-2">
                 Search
               </Button>
@@ -262,7 +276,7 @@ class Header extends Component {
           <ModalHeader toggle={this.toggleModalPetId}>
             Unique Pet Id
           </ModalHeader>
-          <ModalBody>{this.state.uniqueId}</ModalBody>
+          <ModalBody>{this.props.uniqueId.uniqueId}</ModalBody>
         </Modal>
       </React.Fragment>
     );

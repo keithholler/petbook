@@ -30,6 +30,8 @@ function Post(props) {
                 style={{ backgroundColor: "white" }}
               >
                 <h3 className="projectreason text-nowrap">
+
+                  {/* {props.userInfo.userPick} */}
                   <div style={{ fontSize: "12px" }}>
                     <img
                       id="music"
@@ -72,20 +74,30 @@ class PostForm extends Component {
   }
   handleSubmit(values) {
     this.toggleModal();
+   // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
     this.props.postComment(values.text);
   }
 
   render() {
     return (
-      <div>
+      <div className="m-2">
         <Button
           type="submit"
+          color="primary"
           outline
           className="fa-lg"
           onClick={this.toggleModal}
         >
           <i className="fa fa-pencil" /> Post
         </Button>
+        <Input
+        type="textarea"
+        color="primary"
+        outline
+        className="fa-lg"
+        onClick={this.toggleModal}
+        >
+        </Input>
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
@@ -103,6 +115,16 @@ class PostForm extends Component {
                 />
               </div>
               <div className="form-group">
+              <FormGroup>
+              <Control.file
+                    model=".file"
+                    id="file"
+                    name="file"
+                    placeholder="Image"
+                    className="form-control"
+                    
+                  />
+        </FormGroup>
                 <Button type="submit" value="submit" color="primary">
                   Submit
                 </Button>
@@ -119,7 +141,6 @@ class Feed extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // feed: FEED,
       mainProfileName: "Keith",
       postText: "",
       postImage: "",
@@ -146,6 +167,24 @@ class Feed extends Component {
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    if (typeof window !== 'undefined') {
+      let prevScrollpos = window.pageYOffset;
+      window.onscroll = function () {
+        const maxScroll = document.body.clientHeight - window.innerHeight;
+        let currentScrollPos = window.pageYOffset;
+        if (
+            (maxScroll > 0 && prevScrollpos > currentScrollPos && prevScrollpos <= maxScroll) 
+          || (maxScroll <= 0 && prevScrollpos > currentScrollPos)
+          || (prevScrollpos <= 0 && currentScrollPos <= 0)
+          ) {
+          document.getElementById("postHead").style.top = "0";
+        } else {
+          document.getElementById("postHead").style.top = "-5.0rem"; // adjustable based your need
+        }
+        prevScrollpos = currentScrollPos;
+      }
+    }
   }
 
   handleInputChange(event) {
@@ -171,10 +210,10 @@ class Feed extends Component {
   render() {
     const feedScroll = this.props.feed.feed.map((feed) => {
       return (
-        <div className=" d-flex flex-column  " key={feed.id}>
+        <div className=" d-flex flex-column p-2 " key={feed.id}>
           <div className="flip-card ">
             <div
-              className="flip-card-front rounded-lg"
+              className="flip-card-front rounded-lg border"
               style={{ backgroundColor: "white" }}
             >
               <h3 className="projectreason text-nowrap">
@@ -198,16 +237,16 @@ class Feed extends Component {
     });
 
     return (
-      <div className="container">
-        <div className="row row-content">
-          <div className="col-12 mx-auto p-2">
+      <div className="container " >
+        <div id="postHead" className="row row-content" style={{position:"relative"}}>
+          <div className="col-12 mx-auto p-2 " >
             <div className="flip-card ">
               <div
                 className="flip-card-front rounded-lg"
                 style={{ backgroundColor: "white" }}
               >
                 <h3 className="projectreason text-nowrap">
-                  <div style={{ fontSize: "12px" }}>
+                  <div style={{ fontSize: "12px"}}>
                     <img
                       id="music"
                       className="profileImg"
@@ -216,19 +255,23 @@ class Feed extends Component {
                       style={{ width: "40px" }}
                     />
                     {this.state.mainProfileName}
-                  </div>
-
+                    <div className="border">
                   <PostForm postComment={this.props.postComment} />
-                  <div>
+                  </div>
+                  </div>
+                  </h3>
+                  </div>
+                  </div>
+          </div>
+        </div>
+                  <div className="border">
                     <Post text={this.props.text} />
 
                     {feedScroll}
                   </div>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
+                
+              
+           
       </div>
     );
   }

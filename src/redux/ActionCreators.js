@@ -14,3 +14,9 @@ export const postComment = (text) => ({
   type: ActionTypes.ADD_POST,
   payload: text,
 });
+
+export const addUserInfo = (userId,userPick,userInfo) => ({
+  type: ActionTypes.ADD_USERINFO,
+  payload: {userId,userPick,userInfo},
+});
+

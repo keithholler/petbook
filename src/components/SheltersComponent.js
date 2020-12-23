@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FEED } from "../shared/feedObjects";
 
+
 class Shelters extends Component {
   constructor(props) {
     super(props);

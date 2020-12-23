@@ -3,6 +3,7 @@
 .site-header {
   background-color: #68d0f0;
   padding: 20px 0;
+   z-index: 1;
 }
 .accent{
   color:#d19648
@@ -30,16 +31,23 @@
 }
 
 .flip-card-front:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2); 
 }
 
 
-
+#navbar {
+  transition: top 0.5s;
+}
+#postHead {
+  transition: top 0.5s;
+  z-index: 0;
+}
 
 
 
 .App{
   background-color: #f5f5f5;
+  z-index: -1;
 }
 
 

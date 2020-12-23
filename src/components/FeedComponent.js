@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { FEED } from "../shared/feedObjects";
+
 import {
   Form,
   FormGroup,
@@ -19,9 +19,7 @@ import {
 import { Control, LocalForm, Errors } from "react-redux-form";
 
 function Post(props) {
-  if (props.text.text === "default") {
-    return <div></div>;
-  } else {
+  return props.text.text.map((post) => {
     return (
       <div className="container">
         <div className="row row-content">
@@ -43,7 +41,7 @@ function Post(props) {
                     {/* {this.state.mainProfileName} */}
                   </div>
 
-                  <div className="text-center">{props.text.text}</div>
+                  <div className="text-center">{post}</div>
                 </h3>
               </div>
             </div>
@@ -51,7 +49,7 @@ function Post(props) {
         </div>
       </div>
     );
-  }
+  });
 }
 
 class PostForm extends Component {
@@ -171,7 +169,7 @@ class Feed extends Component {
   }
 
   render() {
-    const feedScroll = this.state.feed.map((feed) => {
+    const feedScroll = this.props.feed.feed.map((feed) => {
       return (
         <div className=" d-flex flex-column  " key={feed.id}>
           <div className="flip-card ">

@@ -44,7 +44,7 @@ class Main extends Component {
               <Feed
                 postComment={this.props.postComment}
                 text={this.props.text}
-                feed={this.state.feed}
+                feed={this.props.feed}
               />
             )}
           />

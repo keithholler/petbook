@@ -93,8 +93,7 @@ class PostForm extends Component {
         <Input
         type="textarea"
         color="primary"
-        outline
-        className="fa-lg"
+      
         onClick={this.toggleModal}
         >
         </Input>

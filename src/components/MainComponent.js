@@ -30,27 +30,29 @@ const mapDispatchToProps = {
   postComment: (text) => postComment(text),
   addUserInfo: (
     profileImage,
+    profileName,
     firstName,
     lastName,
+    email,
     animalType,
     breed,
     mainColor,
     secondaryColor,
-    ownerFirstName,
-    ownerLastName,
-    email
+
+    
   ) =>
     addUserInfo(
       profileImage,
+      profileName,
       firstName,
       lastName,
+      email,
       animalType,
       breed,
       mainColor,
       secondaryColor,
-      ownerFirstName,
-      ownerLastName,
-      email
+
+      
     ),
   resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),

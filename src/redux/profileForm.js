@@ -1,12 +1,11 @@
 export const InitialFeedback = {
-    profileImage:'',
-    firstName: '',
-    lastName: '',
-    animalType: '',
-    breed: '',
-    mainColor: '',
-    secondaryColor: '',
-    ownerFirstName: '',
-    ownerLastName: '',
-    email:''
+    profileImage: "",
+      profileName: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      animalType: "",
+      breed: "",
+      mainColor: "",
+      secondaryColor: "",
 };

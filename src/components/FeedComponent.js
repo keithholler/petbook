@@ -168,25 +168,7 @@ class Feed extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    if (typeof window !== 'undefined') {
-      let prevScrollpos = window.pageYOffset;
-      window.onscroll = function () {
-        const maxScroll = document.body.clientHeight - window.innerHeight;
-        let currentScrollPos = window.pageYOffset;
-        if (
-            (maxScroll > 0 && prevScrollpos > currentScrollPos && prevScrollpos <= maxScroll) 
-          || (maxScroll <= 0 && prevScrollpos > currentScrollPos)
-          || (prevScrollpos <= 0 && currentScrollPos <= 0)
-          ) {
-          document.getElementById("postHead").style.top = "0";
-        } else {
-          document.getElementById("postHead").style.top = "-5.0rem"; // adjustable based your need
-        }
-        prevScrollpos = currentScrollPos;
-      }
-    }
   }
-
   handleInputChange(event) {
     const target = event.target;
     const name = target.name;

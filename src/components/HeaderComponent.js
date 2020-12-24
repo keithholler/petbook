@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, FormControl, Form } from "react-bootstrap";
-
+import { Link } from "react-router-dom";
 import uuid from "react-uuid";
 import {
   Nav,
@@ -12,12 +12,12 @@ import {
   Input,
   Label,
   NavItem,
-  NavLink,
   TabContent,
   TabPane,
   Collapse,
   Navbar,
   NavbarToggler,
+  NavLink
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import classnames from "classnames";
@@ -40,6 +40,7 @@ class Header extends Component {
     this.handleRegister = this.handleRegister.bind(this);
     this.toggleTab = this.toggleTab.bind(this);
     this.generateId = this.generateId.bind(this);
+    this.toggleModalPetId = this.toggleModalPetId.bind(this);
     this.handleClose = this.handleClose.bind(this);
     if (typeof window !== 'undefined') {
       let prevScrollpos = window.pageYOffset;
@@ -125,27 +126,27 @@ class Header extends Component {
     return (
       <React.Fragment>
         <Navbar id="navbar" light className="site-header "  expand="lg" >
-          <NavbarBrand href="/home" className="mr-auto">
-            PetBook
+          <NavbarBrand to="/home" className="mr-auto" style={{color:"white"}}>
+            <h3>PetBook</h3>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
-            <Nav navbar >
-              <NavItem>
-                <NavLink href="/Feed">Feed</NavLink>
+            <Nav navbar className="ml-5 ">
+              <NavItem className="m-2 " >
+                <Link className="headerLinks" to="/Feed">Feed</Link>
               </NavItem>
-              <NavItem>
-                <NavLink href="/PetProfile">PetProfile</NavLink>
+              <NavItem className="m-2 ">
+                <Link className="headerLinks" to="/PetProfile">PetProfile</Link>
               </NavItem>
-              <NavItem>
-                <NavLink href="/Shelters">Shelters</NavLink>
+              <NavItem className="m-2 ">
+                <Link className="headerLinks" to="/Shelters">Shelters</Link>
               </NavItem>
-              <NavItem >
-                <NavLink href="/LostPets" >LostPets</NavLink>
+              <NavItem className="m-2 ">
+                <Link className="headerLinks" to="/LostPets" >LostPets</Link>
               </NavItem>
             </Nav>
-            <Form inline clasName="d-flex justify-content-center">
-              <Button variant="outline-secondary" className="mr-2">
+            <Form inline clasName="d-flex justify-content-center ">
+              <Button variant="secondary" className="m-2">
                 Search
               </Button>
               <FormControl
@@ -155,7 +156,7 @@ class Header extends Component {
               />
             </Form>
           </Collapse>
-          <span className="navbar-text ml-auto">
+          <span className="navbar-text">
             <Button size="sm" onClick={this.toggleModal}>
               <i className="fa fa-sign-in fa-lg" /> Login
             </Button>

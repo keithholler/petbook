@@ -1,7 +1,7 @@
 
 
 .site-header {
-  background-color: #68d0f0;
+  background-color: #1b8eb1;
   padding: 20px 0;
    z-index: 1;
 }
@@ -9,7 +9,12 @@
   color:#d19648
 }
 
-
+.headerLinks{
+  color:white;
+}
+.headerLinks:hover{
+  color:black;
+}
 
 .flip-card {
   position: relative;

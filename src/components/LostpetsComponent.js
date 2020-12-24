@@ -1,15 +1,26 @@
 import React, { Component } from "react";
 import { Control, Form, Errors } from "react-redux-form";
-import { Button, Label,Row,Col } from "reactstrap";
+import { Button, Label,Row,Col, Modal,
+  ModalHeader,
+  ModalBody, } from "reactstrap";
 import * as emailjs from 'emailjs-com'
 
 class Lostpet extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      isEmailSentModalOpen:false
+    }
+    this.toggleModalEmailSent = this.toggleModalEmailSent.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
 
 
   handleSubmit(values) {
-console.log(this.props.uniqueId.uniqueId)
+    this.toggleModalEmailSent ()
+console.log(this.props.userInfo.userInfo.userId)
 console.log(values.petId)
-    if(this.props.uniqueId.uniqueId === values.petId){
+    if(this.props.userInfo.userInfo.userId === values.petId){
 
       let templateParams = {
         from_name: "PetProfile",
@@ -24,11 +35,27 @@ console.log(values.petId)
         'user_HqDyxgYEp2AfHpa0ga1B3'
        )
     }
-  
+    this.toggleModalEmailSent ()
  
   this.props.resetLostPetForm();
   }
 
+  toggleModalEmailSent () {
+    this.setState(
+      {
+        isEmailSentModalOpen: true,
+      },
+      () => {
+        setTimeout(this.handleClose, 3000);
+      }
+    );
+  }
+
+  handleClose = () => {
+    this.setState({
+      isEmailSentModalOpen: false,
+    });
+  };
   render() {
     return <React.Fragment>LostPets
 
@@ -69,6 +96,17 @@ console.log(values.petId)
                 </Col>
               </Row>
             </Form>
+
+
+            <Modal
+          isOpen={this.state.isEmailSentModalOpen}
+          toggle={this.toggleModalEmailSent}
+        >
+          <ModalHeader toggle={this.toggleModalEmailSent}>
+            Notification
+          </ModalHeader>
+          <ModalBody>Email was sent to the owner.</ModalBody>
+        </Modal>
     </React.Fragment>;
   }
 }

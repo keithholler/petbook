@@ -128,6 +128,18 @@ function Uni(props) {
 class PetProfile extends Component {
   constructor(props) {
     super(props);
+    this.state ={
+      profileImage:'',
+      firstName: '',
+      lastName: '',
+      animalType: '',
+      breed: '',
+      mainColor: '',
+      secondaryColor: '',
+      ownerFirstName: '',
+      ownerLastName: '',
+      email:''
+    }
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

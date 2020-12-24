@@ -101,6 +101,7 @@ class Main extends Component {
               <Lostpet
               resetLostPetForm={this.props.resetLostPetForm}
                 uniqueId={this.props.uniqueId}
+                userInfo={this.props.userInfo}
               />
             )}
           />

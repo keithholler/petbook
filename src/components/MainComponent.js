@@ -12,6 +12,7 @@ import {
   addFeed,
   postComment,
   addUserInfo,
+  addPetCard
 } from "../redux/ActionCreators";
 //import { FEED } from "../shared/feedObjects";
 const mapStateToProps = (state) => {
@@ -20,6 +21,7 @@ const mapStateToProps = (state) => {
     feed: state.feed,
     text: state.text,
     userInfo: state.userInfo,
+    petcard:state.petcard
   };
 };
 
@@ -54,6 +56,7 @@ const mapDispatchToProps = {
 
       
     ),
+    addPetCard: (petcard) => addPetCard(petcard),
   resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
@@ -91,6 +94,8 @@ class Main extends Component {
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
                 resetProfileForm={this.props.resetProfileForm}
+                petcard={this.props.petcard}
+                addPetCard={this.props.addPetCard}
               />
             )}
           />

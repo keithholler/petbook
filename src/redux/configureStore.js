@@ -5,6 +5,7 @@ import { UniqueIds } from "./uniqueId";
 import { Text } from "./post";
 import { Feed } from "./feedObjects";
 import { UserInfo } from "./userInfo";
+import { Petcard } from "./petCard";
 import {InitialFeedback} from './profileForm';
 import {InitialFeedback2} from './lostPetForm';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -15,6 +16,7 @@ export const ConfigureStore = () => {
       text: Text,
       feed: Feed,
       userInfo:UserInfo,
+      petcard:Petcard,
       ...createForms({
         profileForm: InitialFeedback,
         lostPetForm: InitialFeedback2

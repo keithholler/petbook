@@ -63,6 +63,21 @@
   border-style: dashed;
  
 }
+
+.square-box2{
+  position: relative;
+  width: 20%;
+  overflow: hidden;
+  border-style: solid;
+ 
+}
+
+.square-box2:before{
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
 .square-box:before{
   content: "";
   display: block;

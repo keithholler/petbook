@@ -47,25 +47,25 @@ class Header extends Component {
     this.generateId = this.generateId.bind(this);
     this.toggleModalPetId = this.toggleModalPetId.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    if (typeof window !== "undefined") {
-      let prevScrollpos = window.pageYOffset;
-      window.onscroll = function () {
-        const maxScroll = document.body.clientHeight - window.innerHeight;
-        let currentScrollPos = window.pageYOffset;
-        if (
-          (maxScroll > 0 &&
-            prevScrollpos > currentScrollPos &&
-            prevScrollpos <= maxScroll) ||
-          (maxScroll <= 0 && prevScrollpos > currentScrollPos) ||
-          (prevScrollpos <= 0 && currentScrollPos <= 0)
-        ) {
-          document.getElementById("navbar").style.top = "0";
-        } else {
-          document.getElementById("navbar").style.top = "-5.0rem"; // adjustable based your need
-        }
-        prevScrollpos = currentScrollPos;
-      };
-    }
+    // if (typeof window !== "undefined") {
+    //   let prevScrollpos = window.pageYOffset;
+    //   window.onscroll = function () {
+    //     const maxScroll = document.body.clientHeight - window.innerHeight;
+    //     let currentScrollPos = window.pageYOffset;
+    //     if (
+    //       (maxScroll > 0 &&
+    //         prevScrollpos > currentScrollPos &&
+    //         prevScrollpos <= maxScroll) ||
+    //       (maxScroll <= 0 && prevScrollpos > currentScrollPos) ||
+    //       (prevScrollpos <= 0 && currentScrollPos <= 0)
+    //     ) {
+    //       document.getElementById("navbar").style.top = "0";
+    //     } else {
+    //       document.getElementById("navbar").style.top = "-5.0rem"; // adjustable based your need
+    //     }
+    //     prevScrollpos = currentScrollPos;
+    //   };
+    // }
   }
 
   handleLogin(event) {
@@ -340,7 +340,7 @@ class Header extends Component {
           toggle={this.toggleModalPetId}
         >
           <ModalHeader toggle={this.toggleModalPetId}>
-            Unique Pet Id
+            Owner Id
           </ModalHeader>
           <ModalBody>{this.props.uniqueId.uniqueId}</ModalBody>
         </Modal>

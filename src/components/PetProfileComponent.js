@@ -10,6 +10,7 @@ import {
   FormGroup,
 } from "reactstrap";
 import { Control, Form, LocalForm, Errors } from "react-redux-form";
+import uuid from "react-uuid";
 //import {useDropzone} from 'react-dropzone';
 const required = (val) => val && val.length;
 function Uni(props) {
@@ -23,15 +24,24 @@ function Uni(props) {
 function ProfilePet(props) {
   return props.petcard.petcard.map((pet) => {
     return (
-      <div class="square-box m-2 ">
+      <div class="square-box2 m-2 ">
         <div class="square-content">
-          <div>
-            <span style={{color:"black"}}>
-              {pet}
-              </span>
+          <div
+            style={{ color: "black" }}
+            className="d-flex flex-column justify-content-center "
+          >
+            <div className="d-flex align-items-center justify-content-center">
+              {pet.petcard}
+            </div>
+            <div className="d-flex flex-row justify-content-center">
+              <div className="d-flex align-items-center justify-content-center">
+                Animals Id:{" "}
+                {pet.petId}
               </div>
-              </div>
-              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     );
   });
 }
@@ -57,23 +67,20 @@ class AddPet extends Component {
   handleSubmit(values) {
     this.toggleModal();
     // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
-    this.props.addPetCard(values.text);
+    this.props.addPetCard(uuid(),values.text);
   }
   render() {
     return (
       <div class="square-box  m-2 ">
         <div class="square-content">
-          <div>
-            <span>
-              <Button
-                type="submit"
-                value="submit"
-                color="primary"
-                onClick={this.toggleModal}
-              >
-                <i class="fa fa-plus-circle" />
-              </Button>
-            </span>
+          <div
+            onClick={this.toggleModal}
+            className="d-flex flex-row justify-content-center"
+          >
+            <i
+              className="fa fa-plus-circle fa-3x d-flex align-items-center"
+              style={{ color: "black" }}
+            />
           </div>
         </div>
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
@@ -169,7 +176,7 @@ class PetProfile extends Component {
     return (
       <React.Fragment>
         <div className="row">
-          <h3 className="col-2">Your Unique Pet Id:</h3>
+          <h3 className="col-2">Owners Id:</h3>
           <h3 className="col">
             <Uni uniqueId={this.props.uniqueId} />
           </h3>
@@ -433,7 +440,10 @@ class PetProfile extends Component {
           </Row>
         </Form>
         <div className="d-flex flex-row ml-4">
-          <ProfilePet petcard={this.props.petcard}  />
+          <ProfilePet
+            petcard={this.props.petcard}
+            uniqueId={this.props.uniqueId}
+          />
 
           <AddPet addPetCard={this.props.addPetCard} />
         </div>

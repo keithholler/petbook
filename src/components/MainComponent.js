@@ -56,7 +56,7 @@ const mapDispatchToProps = {
 
       
     ),
-    addPetCard: (petcard) => addPetCard(petcard),
+    addPetCard: (petId,petcard) => addPetCard(petId,petcard),
   resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
@@ -107,6 +107,7 @@ class Main extends Component {
             render={() => (
               <Lostpet
               resetLostPetForm={this.props.resetLostPetForm}
+              petcard={this.props.petcard}
                 uniqueId={this.props.uniqueId}
                 userInfo={this.props.userInfo}
               />

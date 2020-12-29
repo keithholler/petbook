@@ -10,9 +10,9 @@ export const addFeed = (feed) => ({
   payload: feed,
 });
 
-export const postComment = (text) => ({
+export const postComment = (text,username) => ({
   type: ActionTypes.ADD_POST,
-  payload: text,
+  payload: {text,username}
 });
 
 export const addUserInfo = (userId,userPick,profileInfo) => ({

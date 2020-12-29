@@ -22,11 +22,13 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
-  Form,
   UncontrolledTooltip,
+  Row,
+  Col,
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import classnames from "classnames";
+import { Control, Form, Errors } from "react-redux-form";
 
 class Header extends Component {
   constructor(props) {
@@ -76,14 +78,15 @@ class Header extends Component {
     event.preventDefault();
   }
 
-  handleRegister(event) {
+  handleRegister(values) {
     // alert(
     //   `Username: ${this.username.value} Email: ${this.email.value} Password: ${this.password.value} `
     // );
+    this.props.addUserInfo(this.props.uniqueId.uniqueId, "localImageUrl", values) 
     this.toggleModal();
     this.toggleModalPetId();
     this.generateId();
-    event.preventDefault();
+
   }
 
   toggleModal() {
@@ -120,7 +123,7 @@ class Header extends Component {
       //  isNavOpen: !this.state.isNavOpen,
       collapsed: !this.state.collapsed,
     });
-    console.log(this.state.collapsed);
+
   }
 
   toggleTab(tab) {
@@ -261,26 +264,34 @@ class Header extends Component {
               <TabPane tabId="1">
                 <div className="row">
                   <div className="col-sm-12">
-                    <Form onSubmit={this.handleLogin}>
-                      <FormGroup>
-                        <Label htmlFor="email">Email</Label>
-                        <Input
-                          type="email"
-                          id="email"
-                          name="email"
-                          innerRef={(input) => (this.email = input)}
-                        />
-                      </FormGroup>
-                      <FormGroup>
-                        <Label htmlFor="password">Password</Label>
-                        <Input
-                          type="password"
-                          id="password"
-                          name="password"
-                          innerRef={(input) => (this.password = input)}
-                        />
-                      </FormGroup>
-                      <FormGroup check>
+                    <Form 
+                    model="profileForm"
+                    onSubmit={(values) => this.handleLogin(values)}>
+                     <Row className="form-group">
+                    <Label htmlFor="email">Email</Label>
+                    <Col md={10}>
+                    <Control.text
+                      model=".email"
+                      id="email"
+                      name="email"
+                      placeholder="email"
+                      className="form-control"
+                    />
+                     </Col>
+                     </Row>
+                     <Row className="form-group">
+                    <Label htmlFor="password">Password</Label>
+                    <Col md={10}>
+                    <Control.text
+                     model=".password"
+                      id="password"
+                      name="password"
+                      placeholder="password"
+                      className="form-control"
+                    />
+                     </Col>
+                     </Row>
+                      {/* <FormGroup check>
                         <Label check>
                           <Input
                             type="checkbox"
@@ -289,7 +300,7 @@ class Header extends Component {
                           />
                           Remember me
                         </Label>
-                      </FormGroup>
+                      </FormGroup> */}
 
                       <Button type="submit" value="submit" color="primary">
                         Login
@@ -299,34 +310,46 @@ class Header extends Component {
                 </div>
               </TabPane>
               <TabPane tabId="2">
-                <Form onSubmit={this.handleRegister}>
-                  <FormGroup>
+                <Form model="petForm"
+                onSubmit={(values) => this.handleRegister(values)}>
+
+                  <Row className="form-group">
                     <Label htmlFor="profileName">Profile Name</Label>
-                    <Input
-                      type="text"
+                    <Col md={10}>
+                    <Control.text
+                      model=".profileName"
                       id="profileName"
                       name="profileName"
-                      innerRef={(input) => (this.profileName = input)}
+                      placeholder="profileName"
+                      className="form-control"
+
                     />
-                  </FormGroup>
-                  <FormGroup>
+                     </Col>
+                  </Row>
+                  <Row className="form-group">
                     <Label htmlFor="email">Email</Label>
-                    <Input
-                      type="email"
+                    <Col md={10}>
+                    <Control.text
+                      model=".email"
                       id="email"
                       name="email"
-                      innerRef={(input) => (this.email = input)}
+                      placeholder="email"
+                      className="form-control"
                     />
-                  </FormGroup>
-                  <FormGroup>
+                     </Col>
+                     </Row>
+                    <Row className="form-group">
                     <Label htmlFor="password">Password</Label>
-                    <Input
-                      type="password"
+                    <Col md={10}>
+                    <Control.text
+                     model=".password"
                       id="password"
                       name="password"
-                      innerRef={(input) => (this.password = input)}
+                      placeholder="password"
+                      className="form-control"
                     />
-                  </FormGroup>
+                     </Col>
+                     </Row>
                   <Button type="submit" value="submit" color="primary">
                     Register
                   </Button>

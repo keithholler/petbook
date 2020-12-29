@@ -18,6 +18,47 @@ import {
 } from "reactstrap";
 import { Control, LocalForm, Errors } from "react-redux-form";
 
+function Post(props) {
+    const profileName=props.userInfo.userInfo.profileInfo.profileName
+     
+    
+    return props.text.text.map((post) => {
+      return (
+        
+        <div className="container">
+          <div className="row row-content">
+            <div className="col-12 mx-auto p-2">
+              <div className="flip-cardfeed ">
+                <div
+                  className="flip-card-frontfeed rounded-lg"
+                  style={{ backgroundColor: "white" }}
+                >
+                  <h3 className="projectreason text-nowrap">
+  
+                    {/* {props.userInfo.userPick} */}
+                    <div style={{ fontSize: "12px" }}>
+                      <img
+                        id="music"
+                        className="profileImg"
+                        src="./assets/Hugo2.png"
+                        alt=""
+                        style={{ width: "40px" }}
+                      />
+                      {profileName ?(profileName): ("Not Logged In")}
+                    </div>
+                    
+  
+                    <div className="text-center">{post.text}</div>
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  }
+
 class PublicProfile extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +82,6 @@ class PublicProfile extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("Current state is: " + JSON.stringify(this.state));
     alert("Current state is: " + JSON.stringify(this.state));
     this.setState({
       postText: "",
@@ -50,6 +90,7 @@ class PublicProfile extends Component {
   }
 
   render() {
+      console.log(this.props.userInfo.userInfo.profileInfo.profileName)
     const pets = this.props.petcard.petcard.map((pet) => {
       return (
         <div className=" container-container col col-lg-6 ">
@@ -138,12 +179,12 @@ class PublicProfile extends Component {
             >
               Hello I am
             </h3>
-
+            
             <img
               className="rounded-circle me mx-auto d-block"
               data-aos="fade-up"
               data-aos-duration="1000"
-              src="./assets/Hugo2.png"
+              src={this.props.userInfo.userInfo.profileName}
               alt=""
               id="profile"
               style={{ width: "400px", height: "200px" }}
@@ -155,7 +196,7 @@ class PublicProfile extends Component {
               data-aos-duration="1000"
               style={{ color: "black" }}
             >
-              Keith
+             {this.props.userInfo.userInfo.profileInfo.profileName}
             </h1>
 
             <p
@@ -170,8 +211,11 @@ class PublicProfile extends Component {
         </div>
 
         <div className="border">
-          {pets}
-          {feedScroll}
+            {pets}
+        <Post
+        text={this.props.text}
+        userInfo={this.props.userInfo}/>
+          
         </div>
       </div>
     );

@@ -18,8 +18,7 @@ class Lostpet extends Component {
 
   handleSubmit(values) {
     this.toggleModalEmailSent ()
-console.log(this.props.userInfo.userInfo.userId)
-console.log(values.petId)
+
     if(this.props.userInfo.userInfo.userId === values.petId){
 
       let templateParams = {

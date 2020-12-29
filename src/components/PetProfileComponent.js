@@ -277,8 +277,7 @@ class PetProfile extends Component {
   handleSubmit(values) {
     const localImageUrl = window.URL.createObjectURL(values.profileImage[0]);
     this.props.addUserInfo(this.props.uniqueId.uniqueId, localImageUrl, values);
-    console.log(values.profileImage[0]);
-    console.log(values);
+
 
     // this.props.resetProfileForm();
   }

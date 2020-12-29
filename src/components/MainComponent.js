@@ -75,8 +75,20 @@ class Main extends Component {
         <Header
           addUniqueId={this.props.addUniqueId}
           uniqueId={this.props.uniqueId}
+          addUserInfo={this.props.addUserInfo}
         />
         <Switch>
+        <Route
+    exact
+    path="/"
+    render={() => {
+        return (
+          this.props.userInfo.userInfo.profileName ?
+            <Redirect to="/Feed" /> :
+            <Redirect to="/PetProfile" /> 
+        )
+    }}
+/>
           <Route
             path="/Feed"
             render={() => (
@@ -105,6 +117,7 @@ class Main extends Component {
             path="/PublicProfile"
             render={() => (
               <PublicProfile
+              text={this.props.text}
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
                 resetProfileForm={this.props.resetProfileForm}

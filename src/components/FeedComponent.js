@@ -19,8 +19,12 @@ import {
 import { Control, LocalForm, Errors } from "react-redux-form";
 
 function Post(props) {
+  const profileName=props.userInfo.userInfo.profileInfo.profileName
+   
+  
   return props.text.text.map((post) => {
     return (
+      
       <div className="container">
         <div className="row row-content">
           <div className="col-12 mx-auto p-2">
@@ -40,10 +44,11 @@ function Post(props) {
                       alt=""
                       style={{ width: "40px" }}
                     />
-                    {/* {this.state.mainProfileName} */}
+                    {profileName ?(profileName): ("Not Logged In")}
                   </div>
+                  
 
-                  <div className="text-center">{post}</div>
+                  <div className="text-center">{post.text}</div>
                 </h3>
               </div>
             </div>
@@ -161,7 +166,6 @@ class Feed extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log("Current state is: " + JSON.stringify(this.state));
     alert("Current state is: " + JSON.stringify(this.state));
     this.setState({
       postText: "",
@@ -170,6 +174,8 @@ class Feed extends Component {
   }
 
   render() {
+  
+   
     const feedScroll = this.props.feed.feed.map((feed) => {
       return (
         <div className=" d-flex flex-column p-2 " key={feed.id}>
@@ -227,7 +233,9 @@ class Feed extends Component {
           </div>
         </div>
                   <div className="border">
-                    <Post text={this.props.text} />
+                    <Post text={this.props.text}
+                    userInfo={this.props.userInfo}
+                     />
 
                     {feedScroll}
                   </div>

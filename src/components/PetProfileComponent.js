@@ -7,11 +7,10 @@ import {
   ModalHeader,
   Modal,
   ModalBody,
-  FormGroup,
 } from "reactstrap";
-import { Control, Form, LocalForm, Errors } from "react-redux-form";
+import { Control, Form, Errors } from "react-redux-form";
 import uuid from "react-uuid";
-//import {useDropzone} from 'react-dropzone';
+import { Link } from "react-router-dom";
 const required = (val) => val && val.length;
 function Uni(props) {
   if (props.uniqueId.uniqueId) {
@@ -24,19 +23,44 @@ function Uni(props) {
 function ProfilePet(props) {
   return props.petcard.petcard.map((pet) => {
     return (
-      <div class="square-box2 m-2 ">
-        <div class="square-content">
-          <div
-            style={{ color: "black" }}
-            className="d-flex flex-column justify-content-center "
-          >
-            <div className="d-flex align-items-center justify-content-center">
-              {pet.petcard}
+      <div className=" container-container col col-lg-6 ">
+        <div className="flip-card-container mx-auto pr-3 pr-md-0 mb-5">
+          <div className="flip-card ">
+            <div
+              className="flip-card-front rounded-lg text-center"
+              style={{ color: "black" }}
+            >
+              <div>{pet.petcard.name}</div>
+
+              <img
+                id="profile"
+                className="profileImg "
+                src="./assets/Hugo2.png"
+                alt=""
+                style={{ width: "70%" }}
+              ></img>
             </div>
-            <div className="d-flex flex-row justify-content-center">
-              <div className="d-flex align-items-center justify-content-center">
-                Animals Id:{" "}
-                {pet.petId}
+            <div className="flip-card-back rounded-lg">
+              <div
+                style={{ color: "black" }}
+                className="d-flex flex-column justify-content-center "
+              >
+                <div className="d-flex align-items-center justify-content-center">
+                  <span>Type:{pet.petcard.animalType}</span>
+                </div>
+
+                <div className="d-flex align-items-center justify-content-center">
+                  Breed: {pet.petcard.breed}
+                </div>
+                <div className="d-flex align-items-center justify-content-center">
+                  Main Color: {pet.petcard.mainColor}
+                </div>
+                <div className="d-flex align-items-center justify-content-center">
+                  Secondary Color: {pet.petcard.secondaryColor}
+                </div>
+                <div className="d-flex align-items-end justify-content-center">
+                  Animals Id: {pet.petId}
+                </div>
               </div>
             </div>
           </div>
@@ -67,52 +91,163 @@ class AddPet extends Component {
   handleSubmit(values) {
     this.toggleModal();
     // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
-    this.props.addPetCard(uuid(),values.text);
+    this.props.addPetCard(uuid(), values);
   }
+
   render() {
     return (
-      <div class="square-box  m-2 ">
-        <div class="square-content">
-          <div
-            onClick={this.toggleModal}
-            className="d-flex flex-row justify-content-center"
-          >
-            <i
-              className="fa fa-plus-circle fa-3x d-flex align-items-center"
-              style={{ color: "black" }}
-            />
-          </div>
-        </div>
+      <div>
+        <i
+          className="fa fa-plus-circle fa-2x d-flex align-items-center"
+          style={{ color: "black" }}
+          onClick={this.toggleModal}
+        />
+
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
           <ModalBody>
-            <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
-              <div className="form-group">
-                <Label htmlFor="text">Comment</Label>
-                <Control.textarea
-                  model=".text"
-                  id="text"
-                  name="text"
-                  rows="6"
-                  className="form-control"
-                  defaultValue=""
-                />
-              </div>
-              <div className="form-group">
-                <FormGroup>
-                  <Control.file
-                    model=".file"
-                    id="file"
-                    name="file"
-                    placeholder="Image"
+            <Form
+              model="petForm"
+              onSubmit={(values) => this.handleSubmit(values)}
+            >
+              <Row className="form-group">
+                <Label htmlFor="name" md={2}>
+                  Name
+                </Label>
+                <Col md={10}>
+                  <Control.text
+                    model=".name"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
                     className="form-control"
+                    validators={{
+                      required,
+                    }}
                   />
-                </FormGroup>
-                <Button type="submit" value="submit" color="primary">
-                  Submit
-                </Button>
-              </div>
-            </LocalForm>
+                  <Errors
+                    className="text-danger"
+                    model=".name"
+                    show="touched"
+                    component="div"
+                    messages={{
+                      required: "Required",
+                    }}
+                  />
+                </Col>
+              </Row>
+              <Row className="form-group">
+                <Label htmlFor="animalType" md={2}>
+                  Animal Type
+                </Label>
+                <Col md={10}>
+                  <Control.text
+                    model=".animalType"
+                    id="animalType"
+                    name="animalType"
+                    placeholder="Animal Type"
+                    className="form-control"
+                    validators={{
+                      required,
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".animalType"
+                    show="touched"
+                    component="div"
+                    messages={{
+                      required: "Required",
+                    }}
+                  />
+                </Col>
+              </Row>
+
+              <Row className="form-group">
+                <Label htmlFor="breed" md={2}>
+                  Breed
+                </Label>
+                <Col md={10}>
+                  <Control.text
+                    model=".breed"
+                    id="breed"
+                    name="breed"
+                    placeholder="Breed"
+                    className="form-control"
+                    validators={{
+                      required,
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".breed"
+                    show="touched"
+                    component="div"
+                    messages={{
+                      required: "Required",
+                    }}
+                  />
+                </Col>
+              </Row>
+
+              <Row className="form-group">
+                <Label htmlFor="mainColor" md={2}>
+                  Main Color
+                </Label>
+                <Col md={10}>
+                  <Control.text
+                    model=".mainColor"
+                    id="mainColor"
+                    name="mainColor"
+                    placeholder="Main Color"
+                    className="form-control"
+                    validators={{
+                      required,
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".mainColor"
+                    show="touched"
+                    component="div"
+                    messages={{
+                      required: "Required",
+                    }}
+                  />
+                </Col>
+              </Row>
+
+              <Row className="form-group">
+                <Label htmlFor="secondaryColor" md={2}>
+                  Secondary Color
+                </Label>
+                <Col md={10}>
+                  <Control.text
+                    model=".secondaryColor"
+                    id="secondaryColor"
+                    name="secondaryColor"
+                    placeholder="Secondary Color"
+                    className="form-control"
+                    validators={{
+                      required,
+                    }}
+                  />
+                  <Errors
+                    className="text-danger"
+                    model=".secondaryColor"
+                    show="touched"
+                    component="div"
+                    messages={{
+                      required: "Required",
+                    }}
+                  />
+                </Col>
+              </Row>
+
+              <Button type="submit" value="submit" color="primary">
+                Submit
+              </Button>
+            </Form>
           </ModalBody>
         </Modal>
       </div>
@@ -145,7 +280,7 @@ class PetProfile extends Component {
     console.log(values.profileImage[0]);
     console.log(values);
 
-    this.props.resetProfileForm();
+    // this.props.resetProfileForm();
   }
 
   handleInputChange(event) {
@@ -176,10 +311,7 @@ class PetProfile extends Component {
     return (
       <React.Fragment>
         <div className="row">
-          <h3 className="col-2">Owners Id:</h3>
-          <h3 className="col">
-            <Uni uniqueId={this.props.uniqueId} />
-          </h3>
+        <h5 className="col-2"><Link to="/PublicProfile">View Public Profile</Link></h5>
         </div>
 
         <Form
@@ -187,6 +319,15 @@ class PetProfile extends Component {
           onSubmit={(values) => this.handleSubmit(values)}
           className="ml-4"
         >
+           <Row className="form-group">
+            <Label htmlFor="profileImage" md={2}>
+            Owners Id:
+            </Label>
+            <Col md={10}>
+            <Uni uniqueId={this.props.uniqueId} />
+          
+            </Col>
+          </Row>
           <Row className="form-group">
             <Label htmlFor="profileImage" md={2}>
               Profile Image
@@ -318,113 +459,6 @@ class PetProfile extends Component {
               />
             </Col>
           </Row>
-          <Row className="form-group">
-            <Label htmlFor="animalType" md={2}>
-              Animal Type
-            </Label>
-            <Col md={10}>
-              <Control.text
-                model=".animalType"
-                id="animalType"
-                name="animalType"
-                placeholder="Animal Type"
-                className="form-control"
-                validators={{
-                  required,
-                }}
-              />
-              <Errors
-                className="text-danger"
-                model=".animalType"
-                show="touched"
-                component="div"
-                messages={{
-                  required: "Required",
-                }}
-              />
-            </Col>
-          </Row>
-
-          <Row className="form-group">
-            <Label htmlFor="breed" md={2}>
-              Breed
-            </Label>
-            <Col md={10}>
-              <Control.text
-                model=".breed"
-                id="breed"
-                name="breed"
-                placeholder="Breed"
-                className="form-control"
-                validators={{
-                  required,
-                }}
-              />
-              <Errors
-                className="text-danger"
-                model=".breed"
-                show="touched"
-                component="div"
-                messages={{
-                  required: "Required",
-                }}
-              />
-            </Col>
-          </Row>
-
-          <Row className="form-group">
-            <Label htmlFor="mainColor" md={2}>
-              Main Color
-            </Label>
-            <Col md={10}>
-              <Control.text
-                model=".mainColor"
-                id="mainColor"
-                name="mainColor"
-                placeholder="Main Color"
-                className="form-control"
-                validators={{
-                  required,
-                }}
-              />
-              <Errors
-                className="text-danger"
-                model=".mainColor"
-                show="touched"
-                component="div"
-                messages={{
-                  required: "Required",
-                }}
-              />
-            </Col>
-          </Row>
-
-          <Row className="form-group">
-            <Label htmlFor="secondaryColor" md={2}>
-              Secondary Color
-            </Label>
-            <Col md={10}>
-              <Control.text
-                model=".secondaryColor"
-                id="secondaryColor"
-                name="secondaryColor"
-                placeholder="Secondary Color"
-                className="form-control"
-                validators={{
-                  required,
-                }}
-              />
-              <Errors
-                className="text-danger"
-                model=".secondaryColor"
-                show="touched"
-                component="div"
-                messages={{
-                  required: "Required",
-                }}
-              />
-            </Col>
-          </Row>
 
           <Row className="form-group">
             <Col md={{ size: 10, offset: 2 }}>
@@ -435,17 +469,24 @@ class PetProfile extends Component {
           </Row>
 
           <Row className="form-group mx-auto">
-            <h2 className="mx-auto">Pets</h2>
+            <h2 className="mx-auto">Pets </h2>
+
+            <AddPet addPetCard={this.props.addPetCard} />
+
             <Col className="mx-auto "></Col>
           </Row>
         </Form>
-        <div className="d-flex flex-row ml-4">
-          <ProfilePet
-            petcard={this.props.petcard}
-            uniqueId={this.props.uniqueId}
-          />
 
-          <AddPet addPetCard={this.props.addPetCard} />
+        <div className="container">
+          <div
+            className="row row-content justify-content-around"
+            style={{ color: "black" }}
+          >
+            <ProfilePet
+              petcard={this.props.petcard}
+              uniqueId={this.props.uniqueId}
+            />
+          </div>
         </div>
       </React.Fragment>
     );

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Header from "./HeaderComponent";
 import Feed from "./FeedComponent";
 import PetProfile from "./PetProfileComponent";
+import PublicProfile from "./PublicProfile";
 import Shelters from "./SheltersComponent";
 import Lostpet from "./LostpetsComponent";
 import { actions } from "react-redux-form";
@@ -57,7 +58,7 @@ const mapDispatchToProps = {
       
     ),
     addPetCard: (petId,petcard) => addPetCard(petId,petcard),
-  resetProfileForm: () => actions.reset("profileForm"),
+  // resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
 
@@ -91,11 +92,26 @@ class Main extends Component {
             path="/PetProfile"
             render={() => (
               <PetProfile
+              postComment={this.props.postComment}
+              feed={this.props.feed}
+                petcard={this.props.petcard}
+                uniqueId={this.props.uniqueId}
+                addPetCard={this.props.addPetCard}
+                addUserInfo={this.props.addUserInfo}
+              />
+            )}
+          />
+           <Route
+            path="/PublicProfile"
+            render={() => (
+              <PublicProfile
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
                 resetProfileForm={this.props.resetProfileForm}
                 petcard={this.props.petcard}
                 addPetCard={this.props.addPetCard}
+                userInfo={this.props.userInfo}
+                feed={this.props.feed}
               />
             )}
           />

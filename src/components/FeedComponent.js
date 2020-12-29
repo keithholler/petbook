@@ -24,9 +24,9 @@ function Post(props) {
       <div className="container">
         <div className="row row-content">
           <div className="col-12 mx-auto p-2">
-            <div className="flip-card ">
+            <div className="flip-cardfeed ">
               <div
-                className="flip-card-front rounded-lg"
+                className="flip-card-frontfeed rounded-lg"
                 style={{ backgroundColor: "white" }}
               >
                 <h3 className="projectreason text-nowrap">
@@ -143,26 +143,7 @@ class Feed extends Component {
       mainProfileName: "Keith",
       postText: "",
       postImage: "",
-      feed: [
-        {
-          id: 0,
-          profileImg: "./assets/Piper2.png",
-          profileName: "Keith",
-          text: "What a magnificent view!",
-        },
-        {
-          id: 1,
-          profileImg: "./assets/Piper2.png",
-          profileName: "Marley ",
-          text: "Go Out On a Limb",
-        },
-        {
-          id: 2,
-          profileImg: "./assets/Piper2.png",
-          profileName: "Darrel",
-          text: "Cut To The Chase",
-        },
-      ],
+    
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -192,15 +173,15 @@ class Feed extends Component {
     const feedScroll = this.props.feed.feed.map((feed) => {
       return (
         <div className=" d-flex flex-column p-2 " key={feed.id}>
-          <div className="flip-card ">
+          <div className="flip-cardfeed ">
             <div
-              className="flip-card-front rounded-lg border"
+              className="flip-card-frontfeed rounded-lg border"
               style={{ backgroundColor: "white" }}
             >
               <h3 className="projectreason text-nowrap">
                 <div style={{ fontSize: "12px", backgroundColor: "white" }}>
                   <img
-                    id="music"
+                    id="profile"
                     className="profileImg"
                     src={feed.profileImg}
                     alt={feed.profileImg}
@@ -221,9 +202,9 @@ class Feed extends Component {
       <div className="container " >
         <div id="postHead" className="row row-content" style={{position:"relative"}}>
           <div className="col-12 mx-auto p-2 " >
-            <div className="flip-card ">
+            <div className="flip-cardfeed ">
               <div
-                className="flip-card-front rounded-lg"
+                className="flip-card-frontfeed rounded-lg"
                 style={{ backgroundColor: "white" }}
               >
                 <h3 className="projectreason text-nowrap">

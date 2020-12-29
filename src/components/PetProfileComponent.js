@@ -121,18 +121,15 @@ class AddPet extends Component {
                     name="name"
                     placeholder="Name"
                     className="form-control"
-                    validators={{
-                      required,
-                    }}
+                  
+                  
                   />
                   <Errors
                     className="text-danger"
                     model=".name"
                     show="touched"
                     component="div"
-                    messages={{
-                      required: "Required",
-                    }}
+                  
                   />
                 </Col>
               </Row>
@@ -147,18 +144,14 @@ class AddPet extends Component {
                     name="animalType"
                     placeholder="Animal Type"
                     className="form-control"
-                    validators={{
-                      required,
-                    }}
+                   
                   />
                   <Errors
                     className="text-danger"
                     model=".animalType"
                     show="touched"
                     component="div"
-                    messages={{
-                      required: "Required",
-                    }}
+                  
                   />
                 </Col>
               </Row>
@@ -174,18 +167,14 @@ class AddPet extends Component {
                     name="breed"
                     placeholder="Breed"
                     className="form-control"
-                    validators={{
-                      required,
-                    }}
+                 
                   />
                   <Errors
                     className="text-danger"
                     model=".breed"
                     show="touched"
                     component="div"
-                    messages={{
-                      required: "Required",
-                    }}
+                    
                   />
                 </Col>
               </Row>
@@ -201,18 +190,14 @@ class AddPet extends Component {
                     name="mainColor"
                     placeholder="Main Color"
                     className="form-control"
-                    validators={{
-                      required,
-                    }}
+                 
                   />
                   <Errors
                     className="text-danger"
                     model=".mainColor"
                     show="touched"
                     component="div"
-                    messages={{
-                      required: "Required",
-                    }}
+                
                   />
                 </Col>
               </Row>
@@ -228,18 +213,14 @@ class AddPet extends Component {
                     name="secondaryColor"
                     placeholder="Secondary Color"
                     className="form-control"
-                    validators={{
-                      required,
-                    }}
+                  
                   />
                   <Errors
                     className="text-danger"
                     model=".secondaryColor"
                     show="touched"
                     component="div"
-                    messages={{
-                      required: "Required",
-                    }}
+                   
                   />
                 </Col>
               </Row>
@@ -276,7 +257,7 @@ class PetProfile extends Component {
   }
   handleSubmit(values) {
     const localImageUrl = window.URL.createObjectURL(values.profileImage[0]);
-    this.props.addUserInfo(this.props.uniqueId.uniqueId, localImageUrl, values);
+    this.props.addUserInfo(this.props.uniqueId.uniqueId, "localImageUrl", values);
 
 
     // this.props.resetProfileForm();
@@ -310,7 +291,11 @@ class PetProfile extends Component {
     return (
       <React.Fragment>
         <div className="row">
-        <h5 className="col-2"><Link to="/PublicProfile">View Public Profile</Link></h5>
+        <h5 className="col-2">
+        {this.props.userInfo.userInfo.profileInfo ? <Link  to="/PublicProfile">View Public Profile</Link>: ""}
+          
+          {/* <Link  to="/PublicProfile">View Public Profile</Link> */}
+          </h5>
         </div>
 
         <Form
@@ -338,18 +323,14 @@ class PetProfile extends Component {
                 name="profileImage"
                 placeholder="Profile Image"
                 className="form-control"
-                validators={{
-                  required,
-                }}
+               
               />
               <Errors
                 className="text-danger"
                 model=".profileImage"
                 show="touched"
                 component="div"
-                messages={{
-                  required: "Required",
-                }}
+               
               />
             </Col>
           </Row>
@@ -362,20 +343,17 @@ class PetProfile extends Component {
                 model=".profileName"
                 id="profileName"
                 name="profileName"
-                placeholder="Profile Name"
+                placeholder={this.props.userInfo.userInfo.profileInfo ? this.props.userInfo.userInfo.profileInfo.profileName: ""}
                 className="form-control"
-                validators={{
-                  required,
-                }}
+                
+                
               />
               <Errors
                 className="text-danger"
                 model=".profileName"
                 show="touched"
                 component="div"
-                messages={{
-                  required: "Required",
-                }}
+                
               />
             </Col>
           </Row>
@@ -390,18 +368,14 @@ class PetProfile extends Component {
                 name="firstName"
                 placeholder="First Name"
                 className="form-control"
-                validators={{
-                  required,
-                }}
+               
               />
               <Errors
                 className="text-danger"
                 model=".firstName"
                 show="touched"
                 component="div"
-                messages={{
-                  required: "Required",
-                }}
+           
               />
             </Col>
           </Row>
@@ -417,18 +391,14 @@ class PetProfile extends Component {
                 name="lastName"
                 placeholder="Last Name"
                 className="form-control"
-                validators={{
-                  required,
-                }}
+          
               />
               <Errors
                 className="text-danger"
                 model=".lastName"
                 show="touched"
                 component="div"
-                messages={{
-                  required: "Required",
-                }}
+              
               />
             </Col>
           </Row>
@@ -441,20 +411,17 @@ class PetProfile extends Component {
                 model=".email"
                 id="email"
                 name="email"
-                placeholder="Email"
+                placeholder= {this.props.userInfo.userInfo.profileInfo ? this.props.userInfo.userInfo.profileInfo.email: ""}
                 className="form-control"
-                validators={{
-                  required,
-                }}
+                disabled={true}
+                
               />
               <Errors
                 className="text-danger"
                 model=".email"
                 show="touched"
                 component="div"
-                messages={{
-                  required: "Required",
-                }}
+         
               />
             </Col>
           </Row>

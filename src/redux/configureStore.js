@@ -21,7 +21,7 @@ export const ConfigureStore = () => {
       ...createForms({
         profileForm: InitialFeedback,
         lostPetForm: InitialFeedback2,
-        petForm: InitialFeedback2
+        petForm: InitialFeedback3
       })
     }),
     composeEnhancers(applyMiddleware(thunk))

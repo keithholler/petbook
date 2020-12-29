@@ -70,19 +70,25 @@ class Header extends Component {
     // }
   }
 
-  handleLogin(event) {
+  handleLogin(values) {
     // alert(
     //   `Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`
     // );
+ 
+   
+    if(values.email ){
+      alert("Logged In")
+    }else{
+      alert("Please Register First")
+    }
     this.toggleModal();
-    event.preventDefault();
   }
 
   handleRegister(values) {
     // alert(
     //   `Username: ${this.username.value} Email: ${this.email.value} Password: ${this.password.value} `
     // );
-    this.props.addUserInfo(this.props.uniqueId.uniqueId, "localImageUrl", values) 
+    this.props.addUserInfo(this.props.uniqueId.uniqueId, "localImageUrl", values, true) 
     this.toggleModal();
     this.toggleModalPetId();
     this.generateId();
@@ -147,7 +153,7 @@ class Header extends Component {
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar className="mx-auto">
               <NavItem className="m-2 ">
-                <NavLink
+              {this.props.userInfo.userInfo.profileInfo ? <NavLink
                   tag={Link}
                   className="headerLinks"
                   activeClassName="active"
@@ -155,11 +161,26 @@ class Header extends Component {
                     fontWeight: "bold",
                     color: "yellow",
                   }}
+                  
                   to="/Feed"
                  
                 >
                   <h5>Feed</h5>
-                </NavLink>
+                </NavLink>: <NavLink
+                  tag={Link}
+                  className="headerLinks"
+                  activeClassName="active"
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "yellow",
+                  }}
+                  
+                  to="/"
+                 
+                >
+                  <h5>Feed</h5>
+                </NavLink>}
+            
               </NavItem>
 
               <NavItem className="m-2 ">
@@ -189,7 +210,7 @@ class Header extends Component {
           <UncontrolledDropdown inNavbar>
             <DropdownToggle nav caret style={{ color: "white" }}>
               <img
-                id="music"
+                id="proPic"
                 className="profileImg rounded-circle"
                 src="./assets/Hugo2.png"
                 alt=""
@@ -198,7 +219,7 @@ class Header extends Component {
             </DropdownToggle>
             <DropdownMenu right>
               <NavItem className="">
-                <Link style={{ color: "black" }} to="/PetProfile">
+              {this.props.userInfo.userInfo.profileInfo ? <Link style={{ color: "black" }} to="/PetProfile">
                   <DropdownItem id="profileSettings">
                     <img
                       id="music"
@@ -215,7 +236,25 @@ class Header extends Component {
                   >
                     Profile and Settings
                   </UncontrolledTooltip>
-                </Link>
+                </Link>: <Link style={{ color: "black" }} to="/">
+                  <DropdownItem id="profileSettings">
+                    <img
+                      id="music"
+                      className="profileImg rounded-circle"
+                      src="./assets/Hugo2.png"
+                      alt=""
+                      style={{ width: "40px" }}
+                    />
+                    Your Profile
+                  </DropdownItem>
+                  <UncontrolledTooltip
+                    placement="left"
+                    target="profileSettings"
+                  >
+                    Profile and Settings
+                  </UncontrolledTooltip>
+                </Link>}
+               
               </NavItem>
               <DropdownItem divider />
               <DropdownItem>Settings</DropdownItem>
@@ -262,8 +301,7 @@ class Header extends Component {
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-                <div className="row">
-                  <div className="col-sm-12">
+
                     <Form 
                     model="profileForm"
                     onSubmit={(values) => this.handleLogin(values)}>
@@ -306,11 +344,10 @@ class Header extends Component {
                         Login
                       </Button>
                     </Form>
-                  </div>
-                </div>
+                  
               </TabPane>
               <TabPane tabId="2">
-                <Form model="petForm"
+                <Form model="profileForm"
                 onSubmit={(values) => this.handleRegister(values)}>
 
                   <Row className="form-group">

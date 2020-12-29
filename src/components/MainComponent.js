@@ -76,6 +76,7 @@ class Main extends Component {
           addUniqueId={this.props.addUniqueId}
           uniqueId={this.props.uniqueId}
           addUserInfo={this.props.addUserInfo}
+          userInfo={this.props.userInfo}
         />
         <Switch>
         <Route
@@ -85,7 +86,7 @@ class Main extends Component {
         return (
           this.props.userInfo.userInfo.profileName ?
             <Redirect to="/Feed" /> :
-            <Redirect to="/PetProfile" /> 
+            <Redirect to="/Shelters" /> 
         )
     }}
 />
@@ -110,6 +111,7 @@ class Main extends Component {
                 uniqueId={this.props.uniqueId}
                 addPetCard={this.props.addPetCard}
                 addUserInfo={this.props.addUserInfo}
+                userInfo={this.props.userInfo}
               />
             )}
           />

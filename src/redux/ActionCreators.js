@@ -15,9 +15,9 @@ export const postComment = (text,username) => ({
   payload: {text,username}
 });
 
-export const addUserInfo = (userId,userPick,profileInfo) => ({
+export const addUserInfo = (userId,userPick,profileInfo, isRegistered) => ({
   type: ActionTypes.ADD_USERINFO,
-  payload: {userId,userPick,profileInfo},
+  payload: {userId,userPick,profileInfo,isRegistered},
 });
 
 export const addPetCard = (petId,petcard) => ({

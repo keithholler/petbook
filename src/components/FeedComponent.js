@@ -33,7 +33,7 @@ function Post(props) {
                 className="flip-card-frontfeed rounded-lg"
                 style={{ backgroundColor: "white" }}
               >
-                <h3 className="projectreason text-nowrap">
+                <h3 className="projectreason ">
 
                   {/* {props.userInfo.userPick} */}
                   <div style={{ fontSize: "12px" }}>
@@ -48,7 +48,7 @@ function Post(props) {
                   </div>
                   
 
-                  <div className="text-center">{post.text}</div>
+                  <div className="text-center text-break text-wrap"style={{fontSize: "calc(1em + 1vw)",height:"auto!important"}}>{post.text}</div>
                 </h3>
               </div>
             </div>
@@ -95,13 +95,8 @@ class PostForm extends Component {
         >
           <i className="fa fa-pencil" /> Post
         </Button>
-        <Input
-        type="textarea"
-        color="primary"
       
-        onClick={this.toggleModal}
-        >
-        </Input>
+        <div className="rectangle rounded" onClick={this.toggleModal}></div>
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
@@ -115,6 +110,7 @@ class PostForm extends Component {
                   name="text"
                   rows="6"
                   className="form-control"
+                  
                   defaultValue=""
                 />
               </div>
@@ -181,11 +177,11 @@ class Feed extends Component {
         <div className=" d-flex flex-column p-2 " key={feed.id}>
           <div className="flip-cardfeed ">
             <div
-              className="flip-card-frontfeed rounded-lg border"
+              className="flip-card-frontfeed rounded-lg border feed"
               style={{ backgroundColor: "white" }}
             >
-              <h3 className="projectreason text-nowrap">
-                <div style={{ fontSize: "12px", backgroundColor: "white" }}>
+              <h3 className="projectreason text-nowrap ">
+                <div style={{ fontSize: "12px"}}>
                   <img
                     id="profile"
                     className="profileImg"
@@ -196,7 +192,7 @@ class Feed extends Component {
 
                   {feed.profileName}
                 </div>
-                <div className="text-center">{feed.text}</div>
+                <div className="text-center"style={{fontSize: "calc(1em + 1vw)"}}>{feed.text}</div>
               </h3>
             </div>
           </div>

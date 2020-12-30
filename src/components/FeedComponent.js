@@ -68,9 +68,13 @@ class PostForm extends Component {
         author: false,
       },
     };
+    this.postInput = React.createRef();
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
+
+
 
   toggleModal() {
     this.setState({
@@ -81,6 +85,11 @@ class PostForm extends Component {
     this.toggleModal();
    // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
     this.props.postComment(values.text);
+  }
+
+  focus(){
+    console.log(this.postInput)
+    this.postInput.current.focus(); 
   }
 
   render() {
@@ -110,7 +119,7 @@ class PostForm extends Component {
                   name="text"
                   rows="6"
                   className="form-control"
-                  
+                  getRef="postInput"
                   defaultValue=""
                 />
               </div>
@@ -218,7 +227,7 @@ class Feed extends Component {
                       alt=""
                       style={{ width: "40px" }}
                     />
-                    {this.state.mainProfileName}
+                    {this.mainProfileName ?(this.mainProfileName): ("Not Logged In")}
                     <div className="border">
                   <PostForm postComment={this.props.postComment} />
                   </div>

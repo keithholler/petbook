@@ -294,6 +294,7 @@ class Header extends Component {
                   onClick={() => {
                     this.toggleTab("1");
                   }}
+                  
                 >
                   Log In
                 </NavLink>
@@ -314,6 +315,7 @@ class Header extends Component {
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
                 <Form
+                
                   model="profileForm"
                   onSubmit={(values) => this.handleLogin(values)}
                   className="mt-2"

@@ -42,7 +42,7 @@
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2); 
 }
 
-.
+
 
 #navbar {
   transition: top 0.5s;
@@ -54,10 +54,11 @@
 
 
 
-.App{
+.App {
   background-color: #e2e2e2;
   z-index: -1;
 }
+html{  background-color: #e2e2e2;}
 
 
 .square-box{
@@ -73,6 +74,14 @@
 }
 
 .rectangle {
+  cursor:pointer;
+  height: 50px;
+  width: 100%;
+  background-color: white;
+  border: rgb(179, 179, 179) 1px solid;
+}
+
+.lostPetDisclaimer {
   cursor:pointer;
   height: 50px;
   width: 100%;

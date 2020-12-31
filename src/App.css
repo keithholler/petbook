@@ -9,17 +9,8 @@
   color:#d19648
 }
 
-.headerLinks{
-  color:white; 
-}
-/* a{
-  color:green ;
-} */
-a:hover{
-  color:white !important;
 
-  text-decoration: underline !important;
-}
+
 
 
 
@@ -53,10 +44,14 @@ a:hover{
 
 }
 
+.headerLinks{
+  color:white;
+}
 
 #navbar {
   transition: top 0.5s;
 }
+
 #postHead {
   transition: top 0.5s;
   z-index: 0;
@@ -118,9 +113,7 @@ html{  background-color: #e2e2e2;}
  height: 100%;
 }
 
-h5{
-  /* color:white */
-}
+
 
 
 .flip-card-container {
@@ -141,6 +134,7 @@ h5{
 }
 .flip-card-container:hover .flip-card {
   transform: rotateY(180deg);
+
 }
 
 .flip-card {
@@ -152,7 +146,7 @@ h5{
   padding: 0;
   transition: transform 1s;
   transform-style: preserve-3d;
-  
+  background-color: white;
 }
 
 .flip-card-front,
@@ -181,7 +175,7 @@ h5{
 }
 
 .flip-card-back {
-  background-color: #4b4b4b;
+  height: 100%;
   color: black;
   box-sizing: border-box;
   margin: 0;
@@ -189,7 +183,7 @@ h5{
   transform: rotateY(180deg);
   text-align: center;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-
+  background-color: #1b8eb1;
 }
 
 .flip-card-front,

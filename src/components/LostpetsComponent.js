@@ -140,7 +140,7 @@ class Lostpet extends Component {
           <CardBody>
             <CardTitle>What Happens When Your Pet Is Lost?</CardTitle>
             <CardText>
-              When you register you get an unique owners ID. When you sign your
+              When you register you get a unique owners ID. When you sign your
               pet up they will have one as well. Your identity chip will have
               both. When someone submits a lost ID the ID will be matched to
               your profile and an email will be sent out to you with the persons

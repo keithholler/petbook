@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link,NavLink as RRNavLink } from "react-router-dom";
 import uuid from "react-uuid";
 import {
   Nav,
@@ -48,25 +48,7 @@ class Header extends Component {
     this.generateId = this.generateId.bind(this);
     this.toggleModalPetId = this.toggleModalPetId.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    // if (typeof window !== "undefined") {
-    //   let prevScrollpos = window.pageYOffset;
-    //   window.onscroll = function () {
-    //     const maxScroll = document.body.clientHeight - window.innerHeight;
-    //     let currentScrollPos = window.pageYOffset;
-    //     if (
-    //       (maxScroll > 0 &&
-    //         prevScrollpos > currentScrollPos &&
-    //         prevScrollpos <= maxScroll) ||
-    //       (maxScroll <= 0 && prevScrollpos > currentScrollPos) ||
-    //       (prevScrollpos <= 0 && currentScrollPos <= 0)
-    //     ) {
-    //       document.getElementById("navbar").style.top = "0";
-    //     } else {
-    //       document.getElementById("navbar").style.top = "-5.0rem"; // adjustable based your need
-    //     }
-    //     prevScrollpos = currentScrollPos;
-    //   };
-    // }
+ 
   }
 
   handleLogin(values) {
@@ -147,6 +129,7 @@ class Header extends Component {
           className="site-header "
           expand="lg"
           style={{ boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)" }}
+          light
         >
           <NavbarBrand
             to="/home"
@@ -158,36 +141,11 @@ class Header extends Component {
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar className="mx-auto">
-              <NavItem className="m-2 ">
-                {this.props.userInfo.userInfo.profileInfo ? (
-                  <NavLink
-                    tag={Link}
- 
-                    className="headerLinks"
-                    onClick={!this.state.collapsed ? this.toggleNav : ""}
-                    to="/Feed"
-                  >
-               
-                    <h5>Feed</h5>
-                  </NavLink>
-                ) : (
-                  <NavLink
-                    tag={Link}
-                  
-                    className="headerLinks"
-                    
-                    onClick={!this.state.collapsed ? this.toggleNav : ""}
-                    to="/"
-                  >
-                    
-                    <h5>Feed</h5>
-                  </NavLink>
-                )}
-              </NavItem>
+              
 
               {/* <NavItem className="m-2 ">
                 <NavLink
-                  tag={Link}
+                  tag={RRNavLink}
                   className="headerLinks"
                   activeClassName="active"
                   to="/Shelters"
@@ -198,14 +156,58 @@ class Header extends Component {
               </NavItem> */}
               <NavItem className="m-2 ">
                 <NavLink
-                  tag={Link}
+                  tag={RRNavLink}
                      
-                  className="headerLinks"
+                  style={{
+                    fontWeight: "bold",
+                    color: "white"
+                  }}
                   to="/LostPets"
                   onClick={!this.state.collapsed ? this.toggleNav : ""}
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "white",
+                    textDecoration:"underline"
+                  }}
+                  
                 >
                   <h5>LostPets</h5>
                 </NavLink>
+              </NavItem>
+              <NavItem className="m-2 ">
+                {this.props.userInfo.userInfo.profileInfo ? (
+                  <NavLink
+                    tag={RRNavLink}
+             
+                    onClick={!this.state.collapsed ? this.toggleNav : ""}
+                    to="/Feed"
+                    style={{
+                      fontWeight: "bold",
+                      color: "white"
+                    }}
+                    activeStyle={{
+                      fontWeight: "bold",
+                      color: "white",
+                      textDecoration:"underline"
+                    }}
+                  >
+                    <h5>Feed</h5>
+                  </NavLink>
+                ) : (
+                  <NavLink
+                    tag={RRNavLink}
+                   // className="headerLinks"
+                    onClick={!this.state.collapsed ? this.toggleNav : ""}
+                    to="/LostPets"
+                    activeStyle={{
+                      fontWeight: "bold",
+                      color: "white"
+                    }}
+                  >
+                    
+                    <h5>Feed</h5>
+                  </NavLink>
+                )}
               </NavItem>
             </Nav>
           </Collapse>

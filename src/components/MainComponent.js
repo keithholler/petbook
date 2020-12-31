@@ -85,22 +85,12 @@ class Main extends Component {
     render={() => {
         return (
           this.props.userInfo.userInfo.profileName ?
-            <Redirect to="/Feed" /> :
-            <Redirect to="/Shelters" /> 
+            <Redirect to="/PetProfile" /> :
+            <Redirect to="/LostPets" /> 
         )
     }}
 />
-          <Route
-            path="/Feed"
-            render={() => (
-              <Feed
-                postComment={this.props.postComment}
-                text={this.props.text}
-                feed={this.props.feed}
-                userInfo={this.props.userInfo}
-              />
-            )}
-          />
+          
           <Route
             path="/PetProfile"
             render={() => (
@@ -135,7 +125,7 @@ class Main extends Component {
           </Route>
           <Route
            
-            path="/Lostpets"
+            path="/LostPets"
             render={() => (
               <Lostpet
               resetLostPetForm={this.props.resetLostPetForm}
@@ -144,9 +134,19 @@ class Main extends Component {
                 userInfo={this.props.userInfo}
               />
             )}
-          />
+          /><Route
+          path="/Feed"
+          render={() => (
+            <Feed
+              postComment={this.props.postComment}
+              text={this.props.text}
+              feed={this.props.feed}
+              userInfo={this.props.userInfo}
+            />
+          )}
+        />
 
-          <Redirect to="/Feed" />
+          <Redirect to="/LostPets" />
         </Switch>
       </React.Fragment>
     );

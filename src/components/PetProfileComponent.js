@@ -7,6 +7,12 @@ import {
   ModalHeader,
   Modal,
   ModalBody,
+  Container,
+  Card,
+  CardImg,
+  CardText,
+  CardBody,
+  CardTitle,
 } from "reactstrap";
 import { Control, Form, Errors } from "react-redux-form";
 import uuid from "react-uuid";
@@ -40,28 +46,73 @@ function ProfilePet(props) {
                 style={{ width: "70%" }}
               ></img>
             </div>
-            <div className="flip-card-back rounded-lg">
+            <div className="flip-card-back rounded-lg ">
+            <Card style={{ height:"100%",width:"100%" }} 
+             className="d-flex flex-column ">
+                 <CardTitle style={{border:"1px solid #1b8eb1",backgroundColor:"#1b8eb1",color:"white"}}
+               ><h5>Pet Info</h5></CardTitle>
+              <CardBody>
               <div
-                style={{ color: "black" }}
-                className="d-flex flex-column justify-content-center "
+                
+                className="d-flex flex-column  justify-content-around "
               >
-                <div className="d-flex align-items-center justify-content-center">
-                  <span>Type:{pet.petcard.animalType}</span>
+              
+                <Row className=" " style={{backgroundColor:"white",border:"1px solid #1b8eb1"}}>
+                  <Col md={4}  className="text-left d-flex align-items-center" style={{border:"1px solid #1b8eb1",backgroundColor:"#1b8eb1",color:"white"}}>
+                    Type:</Col>
+                  <Col className="">{pet.petcard.animalType}</Col>
+
+                </Row>
+
+                <Row className=" " style={{backgroundColor:"white",border:"1px solid #1b8eb1"}}>
+                <Col md={4}  className="text-left d-flex align-items-center" style={{border:"1px solid #1b8eb1",backgroundColor:"#1b8eb1",color:"white"}}>
+                  Breed:</Col>
+                  <Col className="">{pet.petcard.breed}</Col>
+
+                </Row>
+
+                <Row className=" " style={{backgroundColor:"white",border:"1px solid #1b8eb1"}}>
+                <Col md={4}  className="text-left d-flex align-items-center" style={{border:"1px solid #1b8eb1",backgroundColor:"#1b8eb1",color:"white"}}>
+                Main Color:</Col>
+                  <Col className="">{pet.petcard.mainColor}</Col>
+
+                </Row>
+
+                <Row className=" " style={{backgroundColor:"white",border:"1px solid #1b8eb1"}}>
+                <Col md={4}  className="text-left d-flex align-items-center" style={{border:"1px solid #1b8eb1",backgroundColor:"#1b8eb1",color:"white"}}>
+                  Secondary Color:</Col>
+                  <Col className="">{pet.petcard.secondaryColor}</Col>
+
+                </Row>
+
+                <Row className=" " style={{backgroundColor:"white",border:"1px solid #1b8eb1"}}>
+
+                <Col md={4}  className="text-left d-flex align-items-center" style={{border:"1px solid #1b8eb1",backgroundColor:"#1b8eb1",color:"white"}}>
+                  Animals Id: </Col>
+                  <Col className="">{pet.petId}</Col>
+                </Row>
+
+              </div>
+              <div className="d-flex flex-column  justify-content-around "
+              >
+              
+                <Row className=" " style={{border:"1px solid #1b8eb1",backgroundColor:"#1b8eb1",color:"white"}}>
+                About:
+                                 
+                </Row>
                 </div>
 
-                <div className="d-flex align-items-center justify-content-center">
-                  Breed: {pet.petcard.breed}
-                </div>
-                <div className="d-flex align-items-center justify-content-center">
-                  Main Color: {pet.petcard.mainColor}
-                </div>
-                <div className="d-flex align-items-center justify-content-center">
-                  Secondary Color: {pet.petcard.secondaryColor}
-                </div>
-                <div className="d-flex align-items-end justify-content-center">
-                  Animals Id: {pet.petId}
-                </div>
-              </div>
+                
+                <div className="d-flex "
+              style={{height:"50%",width:"100%"}}>
+                  <Row className="d-flex " 
+                  style={{backgroundColor:"white",border:"1px solid #1b8eb1"}}
+                  >{pet.petcard.animalType}</Row> 
+                  </div>
+
+                
+                  </CardBody>
+              </Card>
             </div>
           </div>
         </div>
@@ -121,15 +172,15 @@ class AddPet extends Component {
                     name="name"
                     placeholder="Name"
                     className="form-control"
-                  
-                  
+
+
                   />
                   <Errors
                     className="text-danger"
                     model=".name"
                     show="touched"
                     component="div"
-                  
+
                   />
                 </Col>
               </Row>
@@ -144,14 +195,14 @@ class AddPet extends Component {
                     name="animalType"
                     placeholder="Animal Type"
                     className="form-control"
-                   
+
                   />
                   <Errors
                     className="text-danger"
                     model=".animalType"
                     show="touched"
                     component="div"
-                  
+
                   />
                 </Col>
               </Row>
@@ -167,14 +218,14 @@ class AddPet extends Component {
                     name="breed"
                     placeholder="Breed"
                     className="form-control"
-                 
+
                   />
                   <Errors
                     className="text-danger"
                     model=".breed"
                     show="touched"
                     component="div"
-                    
+
                   />
                 </Col>
               </Row>
@@ -190,14 +241,14 @@ class AddPet extends Component {
                     name="mainColor"
                     placeholder="Main Color"
                     className="form-control"
-                 
+
                   />
                   <Errors
                     className="text-danger"
                     model=".mainColor"
                     show="touched"
                     component="div"
-                
+
                   />
                 </Col>
               </Row>
@@ -213,14 +264,14 @@ class AddPet extends Component {
                     name="secondaryColor"
                     placeholder="Secondary Color"
                     className="form-control"
-                  
+
                   />
                   <Errors
                     className="text-danger"
                     model=".secondaryColor"
                     show="touched"
                     component="div"
-                   
+
                   />
                 </Col>
               </Row>
@@ -293,7 +344,7 @@ class PetProfile extends Component {
         <div className="row">
         <h5 className="col-2">
         {this.props.userInfo.userInfo.profileInfo ? <Link  to="/PublicProfile">View Public Profile</Link>: ""}
-          
+
           {/* <Link  to="/PublicProfile">View Public Profile</Link> */}
           </h5>
         </div>
@@ -309,7 +360,7 @@ class PetProfile extends Component {
             </Label>
             <Col md={10}>
             <Uni uniqueId={this.props.uniqueId} />
-          
+
             </Col>
           </Row>
           <Row className="form-group">
@@ -323,14 +374,14 @@ class PetProfile extends Component {
                 name="profileImage"
                 placeholder="Profile Image"
                 className="form-control"
-               
+
               />
               <Errors
                 className="text-danger"
                 model=".profileImage"
                 show="touched"
                 component="div"
-               
+
               />
             </Col>
           </Row>
@@ -345,15 +396,15 @@ class PetProfile extends Component {
                 name="profileName"
                 placeholder={this.props.userInfo.userInfo.profileInfo ? this.props.userInfo.userInfo.profileInfo.profileName: ""}
                 className="form-control"
-                
-                
+
+
               />
               <Errors
                 className="text-danger"
                 model=".profileName"
                 show="touched"
                 component="div"
-                
+
               />
             </Col>
           </Row>
@@ -368,14 +419,14 @@ class PetProfile extends Component {
                 name="firstName"
                 placeholder="First Name"
                 className="form-control"
-               
+
               />
               <Errors
                 className="text-danger"
                 model=".firstName"
                 show="touched"
                 component="div"
-           
+
               />
             </Col>
           </Row>
@@ -391,14 +442,14 @@ class PetProfile extends Component {
                 name="lastName"
                 placeholder="Last Name"
                 className="form-control"
-          
+
               />
               <Errors
                 className="text-danger"
                 model=".lastName"
                 show="touched"
                 component="div"
-              
+
               />
             </Col>
           </Row>
@@ -414,14 +465,14 @@ class PetProfile extends Component {
                 placeholder= {this.props.userInfo.userInfo.profileInfo ? this.props.userInfo.userInfo.profileInfo.email: ""}
                 className="form-control"
                 disabled={true}
-                
+
               />
               <Errors
                 className="text-danger"
                 model=".email"
                 show="touched"
                 component="div"
-         
+
               />
             </Col>
           </Row>

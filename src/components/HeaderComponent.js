@@ -23,8 +23,7 @@ import {
   UncontrolledTooltip,
   Row,
   Col,
-  FormGroup,
-  Input,
+
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import classnames from "classnames";
@@ -145,7 +144,6 @@ class Header extends Component {
       <React.Fragment>
         <Navbar
           id="navbar"
-          light
           className="site-header "
           expand="lg"
           style={{ boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)" }}
@@ -164,35 +162,30 @@ class Header extends Component {
                 {this.props.userInfo.userInfo.profileInfo ? (
                   <NavLink
                     tag={Link}
+ 
                     className="headerLinks"
-                    activeClassName="active"
-                    activeStyle={{
-                      fontWeight: "bold",
-                      color: "yellow",
-                    }}
                     onClick={!this.state.collapsed ? this.toggleNav : ""}
                     to="/Feed"
                   >
+               
                     <h5>Feed</h5>
                   </NavLink>
                 ) : (
                   <NavLink
                     tag={Link}
+                  
                     className="headerLinks"
-                    activeClassName="active"
-                    activeStyle={{
-                      fontWeight: "bold",
-                      color: "yellow",
-                    }}
+                    
                     onClick={!this.state.collapsed ? this.toggleNav : ""}
                     to="/"
                   >
+                    
                     <h5>Feed</h5>
                   </NavLink>
                 )}
               </NavItem>
 
-              <NavItem className="m-2 ">
+              {/* <NavItem className="m-2 ">
                 <NavLink
                   tag={Link}
                   className="headerLinks"
@@ -202,12 +195,12 @@ class Header extends Component {
                 >
                   <h5>Shelters</h5>
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <NavItem className="m-2 ">
                 <NavLink
                   tag={Link}
+                     
                   className="headerLinks"
-                  activeClassName="active"
                   to="/LostPets"
                   onClick={!this.state.collapsed ? this.toggleNav : ""}
                 >
@@ -294,7 +287,6 @@ class Header extends Component {
                   onClick={() => {
                     this.toggleTab("1");
                   }}
-                  
                 >
                   Log In
                 </NavLink>
@@ -315,7 +307,6 @@ class Header extends Component {
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
                 <Form
-                
                   model="profileForm"
                   onSubmit={(values) => this.handleLogin(values)}
                   className="mt-2"

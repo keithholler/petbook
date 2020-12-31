@@ -134,6 +134,7 @@ class Main extends Component {
             <Shelters />
           </Route>
           <Route
+           
             path="/Lostpets"
             render={() => (
               <Lostpet

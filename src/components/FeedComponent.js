@@ -1,31 +1,19 @@
 import React, { Component } from "react";
 
 import {
-  Form,
   FormGroup,
-  Input,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  Breadcrumb,
-  BreadcrumbItem,
   Button,
   ModalHeader,
   Modal,
   ModalBody,
   Label,
 } from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
+import { Control, LocalForm } from "react-redux-form";
 
 function Post(props) {
-  const profileName=props.userInfo.userInfo.profileInfo.profileName
-   
-  
-  return props.text.text.map((post) => {
+  return props.text.text.map((post, index) => {
     return (
-      
-      <div className="container">
+      <div className="container" key={index}>
         <div className="row row-content">
           <div className="col-12 mx-auto p-2">
             <div className="flip-cardfeed ">
@@ -34,7 +22,6 @@ function Post(props) {
                 style={{ backgroundColor: "white" }}
               >
                 <h3 className="projectreason ">
-
                   {/* {props.userInfo.userPick} */}
                   <div style={{ fontSize: "12px" }}>
                     <img
@@ -44,11 +31,20 @@ function Post(props) {
                       alt=""
                       style={{ width: "40px" }}
                     />
-                    {profileName ?(profileName): ("Not Logged In")}
+                    {props.userInfo.userInfo.profileInfo.profileName
+                      ? props.userInfo.userInfo.profileInfo.profileName
+                      : "Not Logged In"}
                   </div>
-                  
 
-                  <div className="text-center text-break text-wrap"style={{fontSize: "calc(1em + 1vw)",height:"auto!important"}}>{post.text}</div>
+                  <div
+                    className="text-center text-break text-wrap"
+                    style={{
+                      fontSize: "calc(1em + 1vw)",
+                      height: "auto!important",
+                    }}
+                  >
+                    {post.text}
+                  </div>
                 </h3>
               </div>
             </div>
@@ -68,13 +64,10 @@ class PostForm extends Component {
         author: false,
       },
     };
-    this.postInput = React.createRef();
+   
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-
-
 
   toggleModal() {
     this.setState({
@@ -83,14 +76,11 @@ class PostForm extends Component {
   }
   handleSubmit(values) {
     this.toggleModal();
-   // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
+    // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
     this.props.postComment(values.text);
   }
 
-  focus(){
-    console.log(this.postInput)
-    this.postInput.current.focus(); 
-  }
+ 
 
   render() {
     return (
@@ -104,7 +94,7 @@ class PostForm extends Component {
         >
           <i className="fa fa-pencil" /> Post
         </Button>
-      
+
         <div className="rectangle rounded" onClick={this.toggleModal}></div>
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
@@ -119,21 +109,20 @@ class PostForm extends Component {
                   name="text"
                   rows="6"
                   className="form-control"
-                  getRef="postInput"
+           
                   defaultValue=""
                 />
               </div>
               <div className="form-group">
-              <FormGroup>
-              <Control.file
+                <FormGroup>
+                  <Control.file
                     model=".file"
                     id="file"
                     name="file"
                     placeholder="Image"
                     className="form-control"
-                    
                   />
-        </FormGroup>
+                </FormGroup>
                 <Button type="submit" value="submit" color="primary">
                   Submit
                 </Button>
@@ -153,11 +142,9 @@ class Feed extends Component {
       mainProfileName: "Keith",
       postText: "",
       postImage: "",
-    
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
   handleInputChange(event) {
     const target = event.target;
@@ -179,8 +166,6 @@ class Feed extends Component {
   }
 
   render() {
-  
-   
     const feedScroll = this.props.feed.feed.map((feed) => {
       return (
         <div className=" d-flex flex-column p-2 " key={feed.id}>
@@ -190,7 +175,7 @@ class Feed extends Component {
               style={{ backgroundColor: "white" }}
             >
               <h3 className="projectreason text-nowrap ">
-                <div style={{ fontSize: "12px"}}>
+                <div style={{ fontSize: "12px" }}>
                   <img
                     id="profile"
                     className="profileImg"
@@ -201,7 +186,12 @@ class Feed extends Component {
 
                   {feed.profileName}
                 </div>
-                <div className="text-center"style={{fontSize: "calc(1em + 1vw)"}}>{feed.text}</div>
+                <div
+                  className="text-center text-break text-wrap"
+                  style={{ fontSize: "calc(1em + 1vw)" }}
+                >
+                  {feed.text}
+                </div>
               </h3>
             </div>
           </div>
@@ -210,16 +200,20 @@ class Feed extends Component {
     });
 
     return (
-      <div className="container " >
-        <div id="postHead" className="row row-content" style={{position:"relative"}}>
-          <div className="col-12 mx-auto p-2 " >
+      <div className="container ">
+        <div
+          id="postHead"
+          className="row row-content"
+          style={{ position: "relative" }}
+        >
+          <div className="col-12 mx-auto p-2 ">
             <div className="flip-cardfeed ">
               <div
                 className="flip-card-frontfeed rounded-lg"
                 style={{ backgroundColor: "white" }}
               >
                 <h3 className="projectreason text-nowrap">
-                  <div style={{ fontSize: "12px"}}>
+                  <div style={{ fontSize: "12px" }}>
                     <img
                       id="music"
                       className="profileImg"
@@ -227,26 +221,23 @@ class Feed extends Component {
                       alt=""
                       style={{ width: "40px" }}
                     />
-                    {this.mainProfileName ?(this.mainProfileName): ("Not Logged In")}
+                    {this.props.userInfo.userInfo.profileInfo.profileName
+                      ? this.props.userInfo.userInfo.profileInfo.profileName
+                      : "Not Logged In"}
                     <div className="border">
-                  <PostForm postComment={this.props.postComment} />
+                      <PostForm postComment={this.props.postComment} />
+                    </div>
                   </div>
-                  </div>
-                  </h3>
-                  </div>
-                  </div>
+                </h3>
+              </div>
+            </div>
           </div>
         </div>
-                  <div className="border">
-                    <Post text={this.props.text}
-                    userInfo={this.props.userInfo}
-                     />
+        <div className="border">
+          <Post text={this.props.text} userInfo={this.props.userInfo} />
 
-                    {feedScroll}
-                  </div>
-                
-              
-           
+          {feedScroll}
+        </div>
       </div>
     );
   }

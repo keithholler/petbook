@@ -10,11 +10,18 @@
 }
 
 .headerLinks{
-  color:white;
+  color:white; 
 }
-.headerLinks:hover{
-  color:black;
+/* a{
+  color:green ;
+} */
+a:hover{
+  color:white !important;
+
+  text-decoration: underline !important;
 }
+
+
 
 .flip-cardfeed {
   position: relative;
@@ -41,7 +48,10 @@
 .feed{
   box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2); 
 }
+.lostPetCard{
+  box-shadow: 1px 1px 1px 0px rgba(0, 0, 0, 0.2); 
 
+}
 
 
 #navbar {
@@ -109,7 +119,7 @@ html{  background-color: #e2e2e2;}
 }
 
 h5{
-  color:white
+  /* color:white */
 }
 
 

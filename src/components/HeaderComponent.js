@@ -216,12 +216,12 @@ class Header extends Component {
               <img
                 id="proPic"
                 className="profileImg rounded-circle"
-                src="./assets/default.png"
+                src="petbook/assets/default.png"
                 alt=""
                 style={{ width: "40px"}}
               />
             </DropdownToggle>
-            <DropdownMenu right>
+            {this.state.collapsed ?  <DropdownMenu right>
               <NavItem className="">
                 {this.props.userInfo.userInfo.profileInfo ? (
                   <Link style={{ color: "black" }} to="/PetProfile">
@@ -229,7 +229,7 @@ class Header extends Component {
                       <img
                         id="music"
                         className="profileImg rounded-circle"
-                        src="./assets/Hugo2.png"
+                        src="petbook/assets/default.png"
                         alt=""
                         style={{ width: "40px" }}
                       />
@@ -248,7 +248,7 @@ class Header extends Component {
                       <img
                         id="music"
                         className="profileImg rounded-circle"
-                        src="./assets/Hugo2.png"
+                        src="petbook/assets/default.png"
                         alt=""
                         style={{ width: "40px" }}
                       />
@@ -273,7 +273,60 @@ class Header extends Component {
                   </Button>
                 </span>
               </DropdownItem>
-            </DropdownMenu>
+            </DropdownMenu >:  <DropdownMenu  >
+              <NavItem className="">
+                {this.props.userInfo.userInfo.profileInfo ? (
+                  <Link style={{ color: "black" }} to="/PetProfile">
+                    <DropdownItem id="profileSettings">
+                      <img
+                        id="music"
+                        className="profileImg rounded-circle"
+                        src="petbook/assets/default.png"
+                        alt=""
+                        style={{ width: "40px" }}
+                      />
+                      Your Profile
+                    </DropdownItem>
+                    <UncontrolledTooltip
+                      placement="left"
+                      target="profileSettings"
+                    >
+                      Profile and Settings
+                    </UncontrolledTooltip>
+                  </Link>
+                ) : (
+                  <Link style={{ color: "black" }} to="/">
+                    <DropdownItem id="profileSettings">
+                      <img
+                        id="music"
+                        className="profileImg rounded-circle"
+                        src="petbook/assets/default.png"
+                        alt=""
+                        style={{ width: "40px" }}
+                      />
+                      Your Profile
+                    </DropdownItem>
+                    <UncontrolledTooltip
+                      placement="left"
+                      target="profileSettings"
+                    >
+                      Profile and Settings
+                    </UncontrolledTooltip>
+                  </Link>
+                )}
+              </NavItem>
+              <DropdownItem divider />
+              <DropdownItem>Settings</DropdownItem>
+              <DropdownItem>Help</DropdownItem>
+              <DropdownItem>
+                <span className="navbar-text ml-2">
+                  <Button color="primary" onClick={this.toggleModal}>
+                    <i className="fa fa-sign-in fa-lg" /> Login
+                  </Button>
+                </span>
+              </DropdownItem>
+            </DropdownMenu>}
+           
           </UncontrolledDropdown>
         </Navbar>
 

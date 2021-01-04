@@ -27,7 +27,7 @@ function Post(props) {
                     <img
                       id="music"
                       className="profileImg mr-2"
-                      src="./assets/default.png"
+                      src="petbook/assets/default.png"
                       alt=""
                       style={{ width: "40px" }}
                     />
@@ -179,7 +179,7 @@ class Feed extends Component {
                   <img
                     id="profile"
                     className="profileImg mr-2"
-                    src={feed.profileImg}
+                    src="petbook/assets/default.png"
                     alt={feed.profileImg}
                     style={{ width: "40px" }}
                   />
@@ -217,7 +217,7 @@ class Feed extends Component {
                     <img
                       id="music"
                       className="profileImg mr-2"
-                      src="./assets/default.png"
+                      src="petbook/assets/default.png"
                       alt=""
                       style={{ width: "40px" }}
                     />

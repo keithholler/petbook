@@ -40,7 +40,7 @@ function Post(props) {
                       <img
                         id="music"
                         className="profileImg"
-                        src="./assets/Hugo2.png"
+                        src="petbook/assets/Hugo2.png"
                         alt=""
                         style={{ width: "40px" }}
                       />
@@ -105,7 +105,7 @@ class PublicProfile extends Component {
                 <img
                   id="profile"
                   className="profileImg "
-                  src="./assets/Hugo2.png"
+                  src="petbook/assets/Hugo2.png"
                   alt=""
                   style={{ width: "70%" }}
                 ></img>
@@ -152,7 +152,7 @@ class PublicProfile extends Component {
                   <img
                     id="profile"
                     className="profileImg"
-                    src={feed.profileImg}
+                    src="petbook/assets/default.png"
                     alt={feed.profileImg}
                     style={{ width: "40px" }}
                   />
@@ -184,10 +184,10 @@ class PublicProfile extends Component {
               className="rounded-circle me mx-auto d-block"
               data-aos="fade-up"
               data-aos-duration="1000"
-              src="./assets/default.png"
+              src="petbook/assets/default.png"
               alt=""
               id="profile"
-              style={{ width: "300px", height: "300px" }}
+              style={{ width: "200px", height: "200px" }}
             />
 
             <h1
@@ -210,7 +210,7 @@ class PublicProfile extends Component {
           </div>
         </div>
 
-        <div className=" row border justify-content-center">
+        <div className="row row-content justify-content-around">
             {pets}
         <Post
         text={this.props.text}

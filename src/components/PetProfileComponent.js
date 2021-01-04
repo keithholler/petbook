@@ -29,7 +29,7 @@ function Uni(props) {
 function ProfilePet(props) {
   return props.petcard.petcard.map((pet) => {
     return (
-      <div className=" container-container col col-lg-6 ">
+      // <div className=" container-container col col-lg-6 ">
         <div className="flip-card-container mx-auto pr-3 pr-md-0 mb-5">
           <div className="flip-card ">
             <div
@@ -41,7 +41,7 @@ function ProfilePet(props) {
               <img
                 id="profile"
                 className="profileImg "
-                src="./assets/Hugo2.png"
+                src="petbook/assets/Hugo2.png"
                 alt=""
                 style={{ width: "70%" }}
               ></img>
@@ -117,7 +117,7 @@ function ProfilePet(props) {
             </div>
           </div>
         </div>
-      </div>
+      // </div> 
     );
   });
 }
@@ -343,7 +343,7 @@ class PetProfile extends Component {
     return (
       <React.Fragment>
         <div className="row">
-        <h5 className="col-2 ml-4 mt-2">
+        <h5 className="col-2 ml-4 mt-2 text-nowrap">
         {this.props.userInfo.userInfo.profileInfo ? <Link  to="/PublicProfile" style={{ textDecoration: 'none'}}>View Public Profile</Link>: ""}
 
           {/* <Link  to="/PublicProfile">View Public Profile</Link> */}

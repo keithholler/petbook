@@ -86,7 +86,7 @@ class Main extends Component {
         return (
           this.props.userInfo.userInfo.profileName ?
             <Redirect to="/PetProfile" /> :
-            <Redirect to="/LostPets" /> 
+            <Redirect to="/" /> 
         )
     }}
 />

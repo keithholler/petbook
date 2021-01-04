@@ -132,6 +132,7 @@ class Main extends Component {
               petcard={this.props.petcard}
                 uniqueId={this.props.uniqueId}
                 userInfo={this.props.userInfo}
+                petcard={this.props.petcard}
               />
             )}
           /><Route

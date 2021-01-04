@@ -26,8 +26,8 @@ function Post(props) {
                   <div style={{ fontSize: "12px" }}>
                     <img
                       id="music"
-                      className="profileImg"
-                      src="./assets/Hugo2.png"
+                      className="profileImg mr-2"
+                      src="./assets/default.png"
                       alt=""
                       style={{ width: "40px" }}
                     />
@@ -178,7 +178,7 @@ class Feed extends Component {
                 <div style={{ fontSize: "12px" }}>
                   <img
                     id="profile"
-                    className="profileImg"
+                    className="profileImg mr-2"
                     src={feed.profileImg}
                     alt={feed.profileImg}
                     style={{ width: "40px" }}
@@ -216,8 +216,8 @@ class Feed extends Component {
                   <div style={{ fontSize: "12px" }}>
                     <img
                       id="music"
-                      className="profileImg"
-                      src="./assets/Hugo2.png"
+                      className="profileImg mr-2"
+                      src="./assets/default.png"
                       alt=""
                       style={{ width: "40px" }}
                     />

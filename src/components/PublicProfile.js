@@ -184,10 +184,10 @@ class PublicProfile extends Component {
               className="rounded-circle me mx-auto d-block"
               data-aos="fade-up"
               data-aos-duration="1000"
-              src={this.props.userInfo.userInfo.profileName}
+              src="./assets/default.png"
               alt=""
               id="profile"
-              style={{ width: "400px", height: "200px" }}
+              style={{ width: "300px", height: "300px" }}
             />
 
             <h1
@@ -210,7 +210,7 @@ class PublicProfile extends Component {
           </div>
         </div>
 
-        <div className="border">
+        <div className=" row border justify-content-center">
             {pets}
         <Post
         text={this.props.text}

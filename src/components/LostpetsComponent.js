@@ -25,12 +25,14 @@ class Lostpet extends Component {
     };
     this.toggleModalEmailSent = this.toggleModalEmailSent.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.toggleModalEmailNotSent = this.toggleModalEmailNotSent.bind(this);
+    this.handleClose2 = this.handleClose2.bind(this);
   }
 
   handleSubmit(values) {
-    this.toggleModalEmailSent();
+ 
 
-    if (this.props.userInfo.userInfo.userId === values.petId) {
+    if (this.props.petcard.petcard[0].petId + this.props.userInfo.userInfo.userId === values.petId) {
       let templateParams = {
         from_name: "PetProfile",
         to_name: "keithandkaylee@gmail.com",
@@ -43,8 +45,11 @@ class Lostpet extends Component {
         templateParams,
         "user_HqDyxgYEp2AfHpa0ga1B3"
       );
+      this.toggleModalEmailSent();
+    }else{
+      this.toggleModalEmailNotSent();
     }
-    this.toggleModalEmailSent();
+    
 
     this.props.resetLostPetForm();
   }
@@ -63,6 +68,23 @@ class Lostpet extends Component {
   handleClose = () => {
     this.setState({
       isEmailSentModalOpen: false,
+    });
+  };
+
+  toggleModalEmailNotSent() {
+    this.setState(
+      {
+        isEmailNotSentModalOpen: true,
+      },
+      () => {
+        setTimeout(this.handleClose2, 3000);
+      }
+    );
+  }
+
+  handleClose2 = () => {
+    this.setState({
+      isEmailNotSentModalOpen: false,
     });
   };
   render() {
@@ -160,6 +182,16 @@ class Lostpet extends Component {
             Notification
           </ModalHeader>
           <ModalBody>Email was sent to the owner.</ModalBody>
+        </Modal>
+
+        <Modal
+          isOpen={this.state.isEmailNotSentModalOpen}
+          toggle={this.toggleModalEmailNotSent}
+        >
+          <ModalHeader toggle={this.toggleModalEmailNotSent}>
+            Notification
+          </ModalHeader>
+          <ModalBody>Pet Id does not match!</ModalBody>
         </Modal>
 </div>
     );

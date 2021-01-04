@@ -96,19 +96,20 @@ function ProfilePet(props) {
               <div className="d-flex flex-column  justify-content-around "
               >
               
-                <Row className=" " style={{border:"1px solid #1b8eb1",backgroundColor:"#1b8eb1",color:"white"}}>
+                <Row className=" d-flex flex-column align-items-stretch " style={{border:"1px solid #1b8eb1",backgroundColor:"#1b8eb1",color:"white"}}>
                 About:
                                  
                 </Row>
                 </div>
 
                 
-                <div className="d-flex "
-              style={{height:"50%",width:"100%"}}>
-                  <Row className="d-flex " 
+                <Row className="d-flex flex-column align-items-stretch "
+              style={{height:"50%",width:"106.5%"}}>
+              
+                  <Col className="d-flex flex-column  align-items-stretch align-self-stretch" 
                   style={{backgroundColor:"white",border:"1px solid #1b8eb1"}}
-                  >{pet.petcard.animalType}</Row> 
-                  </div>
+                  >{pet.petcard.animalType}</Col> 
+                  </Row>
 
                 
                   </CardBody>
@@ -150,7 +151,7 @@ class AddPet extends Component {
       <div>
         <i
           className="fa fa-plus-circle fa-2x d-flex align-items-center"
-          style={{ color: "black" }}
+          style={{ color: "black",cursor:'pointer'}}
           onClick={this.toggleModal}
         />
 
@@ -342,8 +343,8 @@ class PetProfile extends Component {
     return (
       <React.Fragment>
         <div className="row">
-        <h5 className="col-2">
-        {this.props.userInfo.userInfo.profileInfo ? <Link  to="/PublicProfile">View Public Profile</Link>: ""}
+        <h5 className="col-2 ml-4 mt-2">
+        {this.props.userInfo.userInfo.profileInfo ? <Link  to="/PublicProfile" style={{ textDecoration: 'none'}}>View Public Profile</Link>: ""}
 
           {/* <Link  to="/PublicProfile">View Public Profile</Link> */}
           </h5>
@@ -374,7 +375,7 @@ class PetProfile extends Component {
                 name="profileImage"
                 placeholder="Profile Image"
                 className="form-control"
-
+               
               />
               <Errors
                 className="text-danger"
@@ -485,12 +486,15 @@ class PetProfile extends Component {
             </Col>
           </Row>
 
-          <Row className="form-group mx-auto">
-            <h2 className="mx-auto">Pets </h2>
+          <Row className="form-group mx-auto align-items-center">
+          
+          <h2 className="mr-2" style={{cursor:'default'}}>Pets</h2>
+         
+              <AddPet addPetCard={this.props.addPetCard} />
+         
 
-            <AddPet addPetCard={this.props.addPetCard} />
-
-            <Col className="mx-auto "></Col>
+            <Col className="mx-auto ">
+            </Col>
           </Row>
         </Form>
 

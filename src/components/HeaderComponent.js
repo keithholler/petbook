@@ -216,9 +216,9 @@ class Header extends Component {
               <img
                 id="proPic"
                 className="profileImg rounded-circle"
-                src="./assets/Hugo2.png"
+                src="./assets/default.png"
                 alt=""
-                style={{ width: "40px" }}
+                style={{ width: "40px"}}
               />
             </DropdownToggle>
             <DropdownMenu right>
@@ -289,6 +289,7 @@ class Header extends Component {
                   onClick={() => {
                     this.toggleTab("1");
                   }}
+                  href="#"
                 >
                   Log In
                 </NavLink>
@@ -301,6 +302,7 @@ class Header extends Component {
                   onClick={() => {
                     this.toggleTab("2");
                   }}
+                  href="#"
                 >
                   Register
                 </NavLink>

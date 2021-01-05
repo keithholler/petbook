@@ -13,7 +13,7 @@ import {
   CardText,
   CardBody,
   CardTitle,
-  Container
+  Container,
 } from "reactstrap";
 import * as emailjs from "emailjs-com";
 
@@ -30,9 +30,11 @@ class Lostpet extends Component {
   }
 
   handleSubmit(values) {
- 
-
-    if (this.props.petcard.petcard[0].petId + this.props.userInfo.userInfo.userId === values.petId) {
+    if (
+      this.props.petcard.petcard[0].petId +
+        this.props.userInfo.userInfo.userId ===
+      values.petId
+    ) {
       let templateParams = {
         from_name: "PetProfile",
         to_name: "keithandkaylee@gmail.com",
@@ -46,10 +48,9 @@ class Lostpet extends Component {
         "user_HqDyxgYEp2AfHpa0ga1B3"
       );
       this.toggleModalEmailSent();
-    }else{
+    } else {
       this.toggleModalEmailNotSent();
     }
-    
 
     this.props.resetLostPetForm();
   }
@@ -92,89 +93,86 @@ class Lostpet extends Component {
       <div>
         <h4 className="text-center m-3">Lost Pet Submission</h4>
         <Container>
-        <Row>
-          <Col>
-        <Form
-          model="lostPetForm"
-          onSubmit={(values) => this.handleSubmit(values)}
-          className="mx-auto"
-        >
-          <Row className="form-group">
-            <Label htmlFor="petId" md={2}>
-              Enter Lost Pet ID:
-            </Label>
-            <Col md={8}>
-              <Control.text
-                model=".petId"
-                id="petId"
-                name="petId"
-                placeholder="Enter Lost Pet ID"
-                className="form-control"
-                validators={{}}
-              />
-              <Errors
-                className="text-danger"
-                model=".petId"
-                show="touched"
-                component="div"
-                messages={{}}
-              />
+          <Row>
+            <Col>
+              <Form
+                model="lostPetForm"
+                onSubmit={(values) => this.handleSubmit(values)}
+                className="mx-auto"
+              >
+                <Row className="form-group">
+                  <Label htmlFor="petId" md={2}>
+                    Enter Lost Pet ID:
+                  </Label>
+                  <Col md={8}>
+                    <Control.text
+                      model=".petId"
+                      id="petId"
+                      name="petId"
+                      placeholder="Enter Lost Pet ID"
+                      className="form-control"
+                      validators={{}}
+                    />
+                    <Errors
+                      className="text-danger"
+                      model=".petId"
+                      show="touched"
+                      component="div"
+                      messages={{}}
+                    />
+                  </Col>
+                </Row>
+                <Row className="form-group">
+                  <Label htmlFor="phoneNumber" md={2}>
+                    Phone Number:
+                  </Label>
+                  <Col md={8}>
+                    <Control.text
+                      model=".phoneNumber"
+                      id="phoneNumber"
+                      name="phoneNumber"
+                      placeholder="Phone Number"
+                      className="form-control"
+                      validators={{}}
+                    />
+                    <Errors
+                      className="text-danger"
+                      model=".phoneNumber"
+                      show="touched"
+                      component="div"
+                    />
+                  </Col>
+                </Row>
+                <Row className="form-group">
+                  <Col md={{ size: 10, offset: 2 }}>
+                    <Button type="submit" value="submit" color="primary">
+                      Submit Lost Pet
+                    </Button>
+                  </Col>
+                </Row>
+              </Form>
             </Col>
           </Row>
-          <Row className="form-group">
-            <Label htmlFor="phoneNumber" md={2}>
-              Phone Number:
-            </Label>
-            <Col md={8}>
-              <Control.text
-                model=".phoneNumber"
-                id="phoneNumber"
-                name="phoneNumber"
-                placeholder="Phone Number"
-                className="form-control"
-                validators={{}}
-              />
-              <Errors
-                className="text-danger"
-                model=".phoneNumber"
-                show="touched"
-                component="div"
-              />
+
+          <Row>
+            <Col>
+              <Card className="m-2 lostPetCard">
+                <CardBody>
+                  <CardTitle>What Happens When Your Pet Is Lost?</CardTitle>
+                  <CardText>
+                    When you register you get a unique owners ID. When you sign
+                    your pet up they will have one as well. Your identity chip
+                    will have both. When someone submits a lost ID the ID will
+                    be matched to your profile and an email will be sent out to
+                    you with the persons phone number who found your pet.
+                  </CardText>
+                </CardBody>
+              </Card>
             </Col>
           </Row>
-          <Row className="form-group">
-            <Col md={{ size: 10, offset: 2 }}>
-              <Button type="submit" value="submit" color="primary">
-                Submit Lost Pet
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-        </Col>
-        </Row>
-       
+        </Container>
 
-
-  <Row>
-    <Col>
-        <Card className="m-2 lostPetCard"
-        >
-          <CardBody>
-            <CardTitle>What Happens When Your Pet Is Lost?</CardTitle>
-            <CardText>
-              When you register you get a unique owners ID. When you sign your
-              pet up they will have one as well. Your identity chip will have
-              both. When someone submits a lost ID the ID will be matched to
-              your profile and an email will be sent out to you with the persons
-              phone number who found your pet.
-            </CardText>
-          </CardBody>
-        </Card>
-        </Col>
-        </Row>
-</Container> 
-
-<Modal
+        <Modal
           isOpen={this.state.isEmailSentModalOpen}
           toggle={this.toggleModalEmailSent}
         >
@@ -193,7 +191,7 @@ class Lostpet extends Component {
           </ModalHeader>
           <ModalBody>Pet Id does not match!</ModalBody>
         </Modal>
-</div>
+      </div>
     );
   }
 }

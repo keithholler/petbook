@@ -4,4 +4,5 @@ export const InitialFeedback3 = {
     breed:'',
     mainColor:'',
     secondaryColor:'',
+    about:'',
  };

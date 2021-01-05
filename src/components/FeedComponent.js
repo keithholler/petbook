@@ -64,7 +64,7 @@ class PostForm extends Component {
         author: false,
       },
     };
-   
+
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -79,8 +79,6 @@ class PostForm extends Component {
     // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
     this.props.postComment(values.text);
   }
-
- 
 
   render() {
     return (
@@ -109,7 +107,6 @@ class PostForm extends Component {
                   name="text"
                   rows="6"
                   className="form-control"
-           
                   defaultValue=""
                 />
               </div>

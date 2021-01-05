@@ -13,7 +13,7 @@ import {
   addFeed,
   postComment,
   addUserInfo,
-  addPetCard
+  addPetCard,
 } from "../redux/ActionCreators";
 //import { FEED } from "../shared/feedObjects";
 const mapStateToProps = (state) => {
@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
     feed: state.feed,
     text: state.text,
     userInfo: state.userInfo,
-    petcard:state.petcard
+    petcard: state.petcard,
   };
 };
 
@@ -40,9 +40,7 @@ const mapDispatchToProps = {
     animalType,
     breed,
     mainColor,
-    secondaryColor,
-
-    
+    secondaryColor
   ) =>
     addUserInfo(
       profileImage,
@@ -53,11 +51,9 @@ const mapDispatchToProps = {
       animalType,
       breed,
       mainColor,
-      secondaryColor,
-
-      
+      secondaryColor
     ),
-    addPetCard: (petId,petcard) => addPetCard(petId,petcard),
+  addPetCard: (petId, petcard) => addPetCard(petId, petcard),
   // resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
@@ -79,24 +75,24 @@ class Main extends Component {
           userInfo={this.props.userInfo}
         />
         <Switch>
-        <Route
-    exact
-    path="/"
-    render={() => {
-        return (
-          this.props.userInfo.userInfo.profileName ?
-            <Redirect to="/PetProfile" /> :
-            <Redirect to="/" /> 
-        )
-    }}
-/>
-          
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return this.props.userInfo.userInfo.profileName ? (
+                <Redirect to="/PetProfile" />
+              ) : (
+                <Redirect to="/" />
+              );
+            }}
+          />
+
           <Route
             path="/PetProfile"
             render={() => (
               <PetProfile
-              postComment={this.props.postComment}
-              feed={this.props.feed}
+                postComment={this.props.postComment}
+                feed={this.props.feed}
                 petcard={this.props.petcard}
                 uniqueId={this.props.uniqueId}
                 addPetCard={this.props.addPetCard}
@@ -105,11 +101,11 @@ class Main extends Component {
               />
             )}
           />
-           <Route
+          <Route
             path="/PublicProfile"
             render={() => (
               <PublicProfile
-              text={this.props.text}
+                text={this.props.text}
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
                 resetProfileForm={this.props.resetProfileForm}
@@ -124,28 +120,28 @@ class Main extends Component {
             <Shelters />
           </Route>
           <Route
-           
             path="/LostPets"
             render={() => (
               <Lostpet
-              resetLostPetForm={this.props.resetLostPetForm}
-              petcard={this.props.petcard}
+                resetLostPetForm={this.props.resetLostPetForm}
+                petcard={this.props.petcard}
                 uniqueId={this.props.uniqueId}
                 userInfo={this.props.userInfo}
                 petcard={this.props.petcard}
               />
             )}
-          /><Route
-          path="/Feed"
-          render={() => (
-            <Feed
-              postComment={this.props.postComment}
-              text={this.props.text}
-              feed={this.props.feed}
-              userInfo={this.props.userInfo}
-            />
-          )}
-        />
+          />
+          <Route
+            path="/Feed"
+            render={() => (
+              <Feed
+                postComment={this.props.postComment}
+                text={this.props.text}
+                feed={this.props.feed}
+                userInfo={this.props.userInfo}
+              />
+            )}
+          />
 
           <Redirect to="/LostPets" />
         </Switch>

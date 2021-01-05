@@ -1,63 +1,41 @@
 import React, { Component } from "react";
 
-import {
-  Form,
-  FormGroup,
-  Input,
-  Card,
-  CardImg,
-  CardText,
-  CardBody,
-  Breadcrumb,
-  BreadcrumbItem,
-  Button,
-  ModalHeader,
-  Modal,
-  ModalBody,
-  Label,
-} from "reactstrap";
-import { Control, LocalForm, Errors } from "react-redux-form";
-
 function Post(props) {
-    const profileName=props.userInfo.userInfo.profileInfo.profileName
-     
-    
-    return props.text.text.map((post) => {
-      return (
-        
-        <div className="container">
-          <div className="row row-content">
-            <div className="col-12 mx-auto p-2">
-              <div className="flip-cardfeed ">
-                <div
-                  className="flip-card-frontfeed rounded-lg"
-                  style={{ backgroundColor: "white" }}
-                >
-                  <h3 className="projectreason text-nowrap">
-  
-                    {/* {props.userInfo.userPick} */}
-                    <div style={{ fontSize: "12px" }}>
-                      <img
-                        id="music"
-                        className="profileImg"
-                        src="petbook/assets/Hugo2.png"
-                        alt=""
-                        style={{ width: "40px" }}
-                      />
-                      {profileName ?(profileName): ("Not Logged In")}
-                    </div>
-                    
-  
-                    <div className="text-center">{post.text}</div>
-                  </h3>
-                </div>
+  const profileName = props.userInfo.userInfo.profileInfo.profileName;
+
+  return props.text.text.map((post) => {
+    return (
+      <div className="container">
+        <div className="row row-content">
+          <div className="col-12 mx-auto p-2">
+            <div className="flip-cardfeed ">
+              <div
+                className="flip-card-frontfeed rounded-lg"
+                style={{ backgroundColor: "white" }}
+              >
+                <h3 className="projectreason text-nowrap">
+                  {/* {props.userInfo.userPick} */}
+                  <div style={{ fontSize: "12px" }}>
+                    <img
+                      id="music"
+                      className="profileImg"
+                      src="petbook/assets/Hugo2.png"
+                      alt=""
+                      style={{ width: "40px" }}
+                    />
+                    {profileName ? profileName : "Not Logged In"}
+                  </div>
+
+                  <div className="text-center">{post.text}</div>
+                </h3>
               </div>
             </div>
           </div>
         </div>
-      );
-    });
-  }
+      </div>
+    );
+  });
+}
 
 class PublicProfile extends Component {
   constructor(props) {
@@ -90,10 +68,10 @@ class PublicProfile extends Component {
   }
 
   render() {
-      console.log(this.props.userInfo.userInfo.profileInfo.profileName)
-    const pets = this.props.petcard.petcard.map((pet) => {
+    console.log(this.props.userInfo.userInfo.profileInfo.profileName);
+    const pets = this.props.petcard.petcard.map((pet, index) => {
       return (
-        <div className=" container-container col col-lg-6 ">
+        <div key={index} className=" container-container col col-lg-6 ">
           <div className="flip-card-container mx-auto pr-3 pr-md-0 mb-5">
             <div className="flip-card ">
               <div
@@ -139,9 +117,9 @@ class PublicProfile extends Component {
       );
     });
 
-    const feedScroll = this.props.feed.feed.map((feed) => {
+    const feedScroll = this.props.feed.feed.map((feed, index) => {
       return (
-        <div className=" d-flex flex-column p-2 " key={feed.id}>
+        <div key={index} className=" d-flex flex-column p-2 " key={feed.id}>
           <div className="flip-cardfeed ">
             <div
               className="flip-card-frontfeed rounded-lg border"
@@ -179,7 +157,7 @@ class PublicProfile extends Component {
             >
               Hello I am
             </h3>
-            
+
             <img
               className="rounded-circle me mx-auto d-block"
               data-aos="fade-up"
@@ -196,7 +174,7 @@ class PublicProfile extends Component {
               data-aos-duration="1000"
               style={{ color: "black" }}
             >
-             {this.props.userInfo.userInfo.profileInfo.profileName}
+              {this.props.userInfo.userInfo.profileInfo.profileName}
             </h1>
 
             <p
@@ -211,11 +189,8 @@ class PublicProfile extends Component {
         </div>
 
         <div className="row row-content justify-content-around">
-            {pets}
-        <Post
-        text={this.props.text}
-        userInfo={this.props.userInfo}/>
-          
+          {pets}
+          <Post text={this.props.text} userInfo={this.props.userInfo} />
         </div>
       </div>
     );

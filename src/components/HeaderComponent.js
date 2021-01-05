@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link,NavLink as RRNavLink } from "react-router-dom";
+import { Link, NavLink as RRNavLink } from "react-router-dom";
 import uuid from "react-uuid";
 import {
   Nav,
@@ -23,7 +23,6 @@ import {
   UncontrolledTooltip,
   Row,
   Col,
-
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import classnames from "classnames";
@@ -48,7 +47,6 @@ class Header extends Component {
     this.generateId = this.generateId.bind(this);
     this.toggleModalPetId = this.toggleModalPetId.bind(this);
     this.handleClose = this.handleClose.bind(this);
- 
   }
 
   handleLogin(values) {
@@ -141,8 +139,6 @@ class Header extends Component {
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar className="mx-auto">
-              
-
               {/* <NavItem className="m-2 ">
                 <NavLink
                   tag={RRNavLink}
@@ -157,19 +153,17 @@ class Header extends Component {
               <NavItem className="m-2 ">
                 <NavLink
                   tag={RRNavLink}
-                     
                   style={{
                     fontWeight: "bold",
-                    color: "white"
+                    color: "white",
                   }}
                   to="/LostPets"
                   onClick={!this.state.collapsed ? this.toggleNav : ""}
                   activeStyle={{
                     fontWeight: "bold",
                     color: "white",
-                    textDecoration:"underline"
+                    textDecoration: "underline",
                   }}
-                  
                 >
                   <h5>LostPets</h5>
                 </NavLink>
@@ -178,17 +172,16 @@ class Header extends Component {
                 {this.props.userInfo.userInfo.profileInfo ? (
                   <NavLink
                     tag={RRNavLink}
-             
                     onClick={!this.state.collapsed ? this.toggleNav : ""}
                     to="/Feed"
                     style={{
                       fontWeight: "bold",
-                      color: "white"
+                      color: "white",
                     }}
                     activeStyle={{
                       fontWeight: "bold",
                       color: "white",
-                      textDecoration:"underline"
+                      textDecoration: "underline",
                     }}
                   >
                     <h5>Feed</h5>
@@ -196,15 +189,14 @@ class Header extends Component {
                 ) : (
                   <NavLink
                     tag={RRNavLink}
-                   // className="headerLinks"
+                    // className="headerLinks"
                     onClick={!this.state.collapsed ? this.toggleNav : ""}
                     to="/LostPets"
                     activeStyle={{
                       fontWeight: "bold",
-                      color: "white"
+                      color: "white",
                     }}
                   >
-                    
                     <h5>Feed</h5>
                   </NavLink>
                 )}
@@ -218,115 +210,118 @@ class Header extends Component {
                 className="profileImg rounded-circle"
                 src="petbook/assets/default.png"
                 alt=""
-                style={{ width: "40px"}}
+                style={{ width: "40px" }}
               />
             </DropdownToggle>
-            {this.state.collapsed ?  <DropdownMenu right>
-              <NavItem className="">
-                {this.props.userInfo.userInfo.profileInfo ? (
-                  <Link style={{ color: "black" }} to="/PetProfile">
-                    <DropdownItem id="profileSettings">
-                      <img
-                        id="music"
-                        className="profileImg rounded-circle"
-                        src="petbook/assets/default.png"
-                        alt=""
-                        style={{ width: "40px" }}
-                      />
-                      Your Profile
-                    </DropdownItem>
-                    <UncontrolledTooltip
-                      placement="left"
-                      target="profileSettings"
-                    >
-                      Profile and Settings
-                    </UncontrolledTooltip>
-                  </Link>
-                ) : (
-                  <Link style={{ color: "black" }} to="/">
-                    <DropdownItem id="profileSettings">
-                      <img
-                        id="music"
-                        className="profileImg rounded-circle"
-                        src="petbook/assets/default.png"
-                        alt=""
-                        style={{ width: "40px" }}
-                      />
-                      Your Profile
-                    </DropdownItem>
-                    <UncontrolledTooltip
-                      placement="left"
-                      target="profileSettings"
-                    >
-                      Profile and Settings
-                    </UncontrolledTooltip>
-                  </Link>
-                )}
-              </NavItem>
-              <DropdownItem divider />
-              <DropdownItem>Settings</DropdownItem>
-              <DropdownItem>Help</DropdownItem>
-              <DropdownItem>
-                <span className="navbar-text ml-2">
-                  <Button color="primary" onClick={this.toggleModal}>
-                    <i className="fa fa-sign-in fa-lg" /> Login
-                  </Button>
-                </span>
-              </DropdownItem>
-            </DropdownMenu >:  <DropdownMenu  >
-              <NavItem className="">
-                {this.props.userInfo.userInfo.profileInfo ? (
-                  <Link style={{ color: "black" }} to="/PetProfile">
-                    <DropdownItem id="profileSettings">
-                      <img
-                        id="music"
-                        className="profileImg rounded-circle"
-                        src="petbook/assets/default.png"
-                        alt=""
-                        style={{ width: "40px" }}
-                      />
-                      Your Profile
-                    </DropdownItem>
-                    <UncontrolledTooltip
-                      placement="left"
-                      target="profileSettings"
-                    >
-                      Profile and Settings
-                    </UncontrolledTooltip>
-                  </Link>
-                ) : (
-                  <Link style={{ color: "black" }} to="/">
-                    <DropdownItem id="profileSettings">
-                      <img
-                        id="music"
-                        className="profileImg rounded-circle"
-                        src="petbook/assets/default.png"
-                        alt=""
-                        style={{ width: "40px" }}
-                      />
-                      Your Profile
-                    </DropdownItem>
-                    <UncontrolledTooltip
-                      placement="left"
-                      target="profileSettings"
-                    >
-                      Profile and Settings
-                    </UncontrolledTooltip>
-                  </Link>
-                )}
-              </NavItem>
-              <DropdownItem divider />
-              <DropdownItem>Settings</DropdownItem>
-              <DropdownItem>Help</DropdownItem>
-              <DropdownItem>
-                <span className="navbar-text ml-2">
-                  <Button color="primary" onClick={this.toggleModal}>
-                    <i className="fa fa-sign-in fa-lg" /> Login
-                  </Button>
-                </span>
-              </DropdownItem>
-            </DropdownMenu>}
-           
+            {this.state.collapsed ? (
+              <DropdownMenu right>
+                <NavItem className="">
+                  {this.props.userInfo.userInfo.profileInfo ? (
+                    <Link style={{ color: "black" }} to="/PetProfile">
+                      <DropdownItem id="profileSettings">
+                        <img
+                          id="music"
+                          className="profileImg rounded-circle"
+                          src="petbook/assets/default.png"
+                          alt=""
+                          style={{ width: "40px" }}
+                        />
+                        Your Profile
+                      </DropdownItem>
+                      <UncontrolledTooltip
+                        placement="left"
+                        target="profileSettings"
+                      >
+                        Profile and Settings
+                      </UncontrolledTooltip>
+                    </Link>
+                  ) : (
+                    <Link style={{ color: "black" }} to="/">
+                      <DropdownItem id="profileSettings">
+                        <img
+                          id="music"
+                          className="profileImg rounded-circle"
+                          src="petbook/assets/default.png"
+                          alt=""
+                          style={{ width: "40px" }}
+                        />
+                        Your Profile
+                      </DropdownItem>
+                      <UncontrolledTooltip
+                        placement="left"
+                        target="profileSettings"
+                      >
+                        Profile and Settings
+                      </UncontrolledTooltip>
+                    </Link>
+                  )}
+                </NavItem>
+                <DropdownItem divider />
+                <DropdownItem>Settings</DropdownItem>
+                <DropdownItem>Help</DropdownItem>
+                <DropdownItem>
+                  <span className="navbar-text ml-2">
+                    <Button color="primary" onClick={this.toggleModal}>
+                      <i className="fa fa-sign-in fa-lg" /> Login
+                    </Button>
+                  </span>
+                </DropdownItem>
+              </DropdownMenu>
+            ) : (
+              <DropdownMenu>
+                <NavItem className="">
+                  {this.props.userInfo.userInfo.profileInfo ? (
+                    <Link style={{ color: "black" }} to="/PetProfile">
+                      <DropdownItem id="profileSettings">
+                        <img
+                          id="music"
+                          className="profileImg rounded-circle"
+                          src="petbook/assets/default.png"
+                          alt=""
+                          style={{ width: "40px" }}
+                        />
+                        Your Profile
+                      </DropdownItem>
+                      <UncontrolledTooltip
+                        placement="left"
+                        target="profileSettings"
+                      >
+                        Profile and Settings
+                      </UncontrolledTooltip>
+                    </Link>
+                  ) : (
+                    <Link style={{ color: "black" }} to="/">
+                      <DropdownItem id="profileSettings">
+                        <img
+                          id="music"
+                          className="profileImg rounded-circle"
+                          src="petbook/assets/default.png"
+                          alt=""
+                          style={{ width: "40px" }}
+                        />
+                        Your Profile
+                      </DropdownItem>
+                      <UncontrolledTooltip
+                        placement="left"
+                        target="profileSettings"
+                      >
+                        Profile and Settings
+                      </UncontrolledTooltip>
+                    </Link>
+                  )}
+                </NavItem>
+                <DropdownItem divider />
+                <DropdownItem>Settings</DropdownItem>
+                <DropdownItem>Help</DropdownItem>
+                <DropdownItem>
+                  <span className="navbar-text ml-2">
+                    <Button color="primary" onClick={this.toggleModal}>
+                      <i className="fa fa-sign-in fa-lg" /> Login
+                    </Button>
+                  </span>
+                </DropdownItem>
+              </DropdownMenu>
+            )}
           </UncontrolledDropdown>
         </Navbar>
 

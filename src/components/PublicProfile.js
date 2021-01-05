@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardTitle,
+} from "reactstrap";
 function Post(props) {
   const profileName = props.userInfo.userInfo.profileInfo.profileName;
 
@@ -89,27 +95,155 @@ class PublicProfile extends Component {
                 ></img>
               </div>
               <div className="flip-card-back rounded-lg">
-                <div
-                  style={{ color: "black" }}
-                  className="d-flex flex-column justify-content-center "
-                >
-                  <div className="d-flex align-items-center justify-content-center">
-                    <span>Type:{pet.petcard.animalType}</span>
-                  </div>
+              <Card
+              style={{ height: "100%", width: "100%", overflow: "hidden" }}
+              className="d-flex flex-column "
+            >
+              <CardTitle
+                style={{
+                  border: "1px solid #1b8eb1",
+                  backgroundColor: "#1b8eb1",
+                  color: "white",
+                }}
+              >
+                <h5>Pet Info</h5>
+              </CardTitle>
+              <CardBody>
+                <div className="d-flex flex-column  justify-content-around ">
+                  <Row
+                    className=" "
+                    style={{
+                      backgroundColor: "white",
+                      border: "1px solid #1b8eb1",
+                    }}
+                  >
+                    <Col
+                      md={4}
+                      className="text-left d-flex align-items-center"
+                      style={{
+                        border: "1px solid #1b8eb1",
+                        backgroundColor: "#1b8eb1",
+                        color: "white",
+                      }}
+                    >
+                      Type:
+                    </Col>
+                    <Col className="">{pet.petcard.animalType}</Col>
+                  </Row>
 
-                  <div className="d-flex align-items-center justify-content-center">
-                    Breed: {pet.petcard.breed}
-                  </div>
-                  <div className="d-flex align-items-center justify-content-center">
-                    Main Color: {pet.petcard.mainColor}
-                  </div>
-                  <div className="d-flex align-items-center justify-content-center">
-                    Secondary Color: {pet.petcard.secondaryColor}
-                  </div>
-                  <div className="d-flex align-items-end justify-content-center">
-                    Animals Id: {pet.petId}
-                  </div>
+                  <Row
+                    className=" "
+                    style={{
+                      backgroundColor: "white",
+                      border: "1px solid #1b8eb1",
+                    }}
+                  >
+                    <Col
+                      md={4}
+                      className="text-left d-flex align-items-center"
+                      style={{
+                        border: "1px solid #1b8eb1",
+                        backgroundColor: "#1b8eb1",
+                        color: "white",
+                      }}
+                    >
+                      Breed:
+                    </Col>
+                    <Col className="">{pet.petcard.breed}</Col>
+                  </Row>
+
+                  <Row
+                    className=" "
+                    style={{
+                      backgroundColor: "white",
+                      border: "1px solid #1b8eb1",
+                    }}
+                  >
+                    <Col
+                      md={4}
+                      className="text-left d-flex align-items-center"
+                      style={{
+                        border: "1px solid #1b8eb1",
+                        backgroundColor: "#1b8eb1",
+                        color: "white",
+                      }}
+                    >
+                      Main Color:
+                    </Col>
+                    <Col className="">{pet.petcard.mainColor}</Col>
+                  </Row>
+
+                  <Row
+                    className=" "
+                    style={{
+                      backgroundColor: "white",
+                      border: "1px solid #1b8eb1",
+                    }}
+                  >
+                    <Col
+                      md={4}
+                      className="text-left d-flex align-items-center"
+                      style={{
+                        border: "1px solid #1b8eb1",
+                        backgroundColor: "#1b8eb1",
+                        color: "white",
+                      }}
+                    >
+                      Secondary Color:
+                    </Col>
+                    <Col className="">{pet.petcard.secondaryColor}</Col>
+                  </Row>
+
+                  <Row
+                    className=" "
+                    style={{
+                      backgroundColor: "white",
+                      border: "1px solid #1b8eb1",
+                    }}
+                  >
+                    <Col
+                      md={4}
+                      className="text-left d-flex align-items-center"
+                      style={{
+                        border: "1px solid #1b8eb1",
+                        backgroundColor: "#1b8eb1",
+                        color: "white",
+                      }}
+                    >
+                      Animals Id:{" "}
+                    </Col>
+                    <Col className="">{pet.petId}</Col>
+                  </Row>
                 </div>
+                <div className="d-flex flex-column  justify-content-around ">
+                  <Row
+                    className=" d-flex flex-column align-items-stretch "
+                    style={{
+                      border: "1px solid #1b8eb1",
+                      backgroundColor: "#1b8eb1",
+                      color: "white",
+                    }}
+                  >
+                    About:
+                  </Row>
+                </div>
+
+                <Row
+                  className="d-flex flex-column align-items-stretch "
+                  style={{ height: "50%", width: "108.4%" }}
+                >
+                  <div
+                    className="d-flex flex-column  align-items-stretch align-self-stretch text-break text-wrap"
+                    style={{
+                      backgroundColor: "white",
+                      border: "1px solid #1b8eb1",
+                    }}
+                  >
+                    {pet.petcard.about}
+                  </div>
+                </Row>
+              </CardBody>
+            </Card>
               </div>
             </div>
           </div>

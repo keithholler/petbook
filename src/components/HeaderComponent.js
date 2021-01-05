@@ -214,7 +214,7 @@ class Header extends Component {
               />
             </DropdownToggle>
             {this.state.collapsed ? (
-              <DropdownMenu right>
+              <DropdownMenu right>.
                 <NavItem className="">
                   {this.props.userInfo.userInfo.profileInfo ? (
                     <Link style={{ color: "black" }} to="/PetProfile">

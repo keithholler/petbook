@@ -207,7 +207,7 @@ class Header extends Component {
             <DropdownToggle nav caret style={{ color: "white" }}>
               <img
                 id="proPic"
-                className="profileImg rounded-circle"
+                className="profileImg rounded-circle ml-3"
                 src="petbook/assets/default.png"
                 alt=""
                 style={{ width: "40px" }}

@@ -131,10 +131,10 @@ class Header extends Component {
         >
           <NavbarBrand
             to="/home"
-            className="mr-auto"
+            className="ml-4"
             style={{ color: "white" }}
           >
-            <h3>PetBook</h3>
+            <h5 style={{fontSize: "30px"}}>PetBook</h5>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
@@ -165,7 +165,7 @@ class Header extends Component {
                     textDecoration: "underline",
                   }}
                 >
-                  <h5>LostPets</h5>
+                  <h5 style={{fontSize: "30px"}}>LostPets</h5>
                 </NavLink>
               </NavItem>
               <NavItem className="m-2 ">
@@ -184,7 +184,7 @@ class Header extends Component {
                       textDecoration: "underline",
                     }}
                   >
-                    <h5>Feed</h5>
+                    <h5 style={{fontSize: "30px"}}>Feed</h5>
                   </NavLink>
                 ) : (
                   <NavLink
@@ -205,6 +205,7 @@ class Header extends Component {
           </Collapse>
           <UncontrolledDropdown inNavbar>
             <DropdownToggle nav caret style={{ color: "white" }}>
+            Login
               <img
                 id="proPic"
                 className="profileImg rounded-circle ml-3"
@@ -212,7 +213,9 @@ class Header extends Component {
                 alt=""
                 style={{ width: "40px" }}
               />
+  
             </DropdownToggle>
+         
             {this.state.collapsed ? (
               <DropdownMenu right>.
                 <NavItem className="">

@@ -238,7 +238,7 @@ class AddPet extends Component {
         />
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+          <ModalHeader toggle={this.toggleModal} style={{backgroundColor:"#1b8eb1", color:"white"}}>Animal Details</ModalHeader>
           <ModalBody>
             <Form
               model="petForm"
@@ -255,6 +255,7 @@ class AddPet extends Component {
                     name="name"
                     placeholder="Name"
                     className="form-control"
+                    style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
                   />
                   <Errors
                     className="text-danger"
@@ -275,6 +276,7 @@ class AddPet extends Component {
                     name="animalType"
                     placeholder="Animal Type"
                     className="form-control"
+                    style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
                   />
                   <Errors
                     className="text-danger"
@@ -296,6 +298,7 @@ class AddPet extends Component {
                     name="breed"
                     placeholder="Breed"
                     className="form-control"
+                    style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
                   />
                   <Errors
                     className="text-danger"
@@ -317,6 +320,7 @@ class AddPet extends Component {
                     name="mainColor"
                     placeholder="Main Color"
                     className="form-control"
+                    style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
                   />
                   <Errors
                     className="text-danger"
@@ -338,6 +342,7 @@ class AddPet extends Component {
                     name="secondaryColor"
                     placeholder="Secondary Color"
                     className="form-control"
+                    style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
                   />
                   <Errors
                     className="text-danger"
@@ -358,6 +363,7 @@ class AddPet extends Component {
                     name="about"
                     placeholder="About"
                     className="form-control"
+                    style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
                   />
                   <Errors
                     className="text-danger"
@@ -473,6 +479,7 @@ class PetProfile extends Component {
                 name="profileImage"
                 placeholder="Profile Image"
                 className="form-control"
+                style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
               />
               <Errors
                 className="text-danger"
@@ -497,6 +504,7 @@ class PetProfile extends Component {
                     : ""
                 }
                 className="form-control"
+                style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
               />
               <Errors
                 className="text-danger"
@@ -517,6 +525,7 @@ class PetProfile extends Component {
                 name="firstName"
                 placeholder="First Name"
                 className="form-control"
+                style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
               />
               <Errors
                 className="text-danger"
@@ -538,6 +547,7 @@ class PetProfile extends Component {
                 name="lastName"
                 placeholder="Last Name"
                 className="form-control"
+                style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
               />
               <Errors
                 className="text-danger"

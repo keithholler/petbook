@@ -31,15 +31,16 @@ class Lostpet extends Component {
 
   handleSubmit(values) {
     if (
-      this.props.petcard.petcard[0].petId +
-        this.props.userInfo.userInfo.userId ===
-      values.petId
+      this.props.petcard.petcard[0].petId === values.petId
+      // +
+      //   this.props.userInfo.userInfo.userId ===
+      // values.petId
     ) {
       let templateParams = {
-        from_name: "PetProfile",
-        to_name: "keithandkaylee@gmail.com",
+        from: "PetProfile",
+        to: this.props.userInfo.userInfo.profileInfo.email,
         subject: "PetFound",
-        message_html: "Your Pet Was Found",
+        html: `Your Pet Was Found Please call ${values.phoneNumber} to contact the person who found them.`,
       };
       emailjs.send(
         "service_6u1iluk",
@@ -160,9 +161,9 @@ class Lostpet extends Component {
                 <CardBody>
                   <CardTitle>What Happens When Your Pet Is Lost?</CardTitle>
                   <CardText>
-                    When you register you get a unique owners ID. When you sign
-                    your pet up they will have one as well. Your identity chip
-                    will have both. When someone submits a lost ID the ID will
+                    When you sign your pet up they will have a unique ID number.
+                    Your pets identiy chip will have that unique ID number in it
+                    available by NFC. When someone submits a lost ID the ID will
                     be matched to your profile and an email will be sent out to
                     you with the persons phone number who found your pet.
                   </CardText>

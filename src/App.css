@@ -66,10 +66,10 @@ html,body,#root,.App {
 
 
 .App {
-  background-color: #e2e2e2;
+  background: rgb(240, 240, 240) ;
   z-index: -1;
 }
-html{  background-color: #e2e2e2;}
+ html{  background:rgb(240, 240, 240) }
 
 
 .square-box{

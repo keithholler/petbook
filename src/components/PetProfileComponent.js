@@ -14,6 +14,7 @@ import {
 import { Control, Form, Errors } from "react-redux-form";
 import uuid from "react-uuid";
 import { Link } from "react-router-dom";
+import { storage } from "../firebase";
 
 function Uni(props) {
   if (props.uniqueId.uniqueId) {
@@ -41,7 +42,7 @@ function ProfilePet(props) {
             <img
               id="profile"
               className="profileImg "
-              src="petbook/assets/Hugo2.png"
+              src={pet.petImage}
               alt=""
               style={{ width: "70%" }}
             ></img>
@@ -212,6 +213,8 @@ class AddPet extends Component {
       touched: {
         author: false,
       },
+      petImg:null,
+      petImgURL:""
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -225,8 +228,40 @@ class AddPet extends Component {
   handleSubmit(values) {
     this.toggleModal();
     // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
-    this.props.addPetCard(uuid(), values);
+    this.props.addPetCard(uuid(), values, this.state.petImgURL);
   }
+
+  handleChange = (e) => {
+    if (e.target.files[0]) {
+      this.setState({ petImg: e.target.files[0] });
+    }
+  };
+  handleUpload = (event) => {
+    event.preventDefault()
+    console.log(this.state.petImg)
+    const uploadTask = storage
+      .ref(`images/${this.state.petImg.name}`)
+      .put(this.state.petImg);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(this.state.petImg.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            this.setState({ petImgURL: url});
+            console.log(this.state.petImgURL)
+          });
+      }
+    );
+  };
 
   render() {
     return (
@@ -238,7 +273,12 @@ class AddPet extends Component {
         />
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal} style={{backgroundColor:"#1b8eb1", color:"white"}}>Animal Details</ModalHeader>
+          <ModalHeader
+            toggle={this.toggleModal}
+            style={{ backgroundColor: "#1b8eb1", color: "white" }}
+          >
+            Animal Details
+          </ModalHeader>
           <ModalBody>
             <Form
               model="petForm"
@@ -265,6 +305,33 @@ class AddPet extends Component {
                   />
                 </Col>
               </Row>
+              <Row className="form-group">
+            <Label htmlFor="petImg" md={2}>
+              Pet Image
+            </Label>
+
+            <Col md={10}>
+
+              <Control.file
+                model=".petImg"
+                id="petImg"
+                name="petImg"
+                placeholder="Pet Image"
+                className="form-control"
+                onChange={this.handleChange}
+                style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
+              />
+                          <button style={{marginTop:"5px"}} onClick={this.handleUpload}>Upload</button>
+
+              <Errors
+                className="text-danger"
+                model=".petImg"
+                show="touched"
+                component="div"
+              />
+            </Col>            
+            
+          </Row>
               <Row className="form-group">
                 <Label htmlFor="animalType" md={2}>
                   Animal Type:
@@ -389,7 +456,8 @@ class PetProfile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      profileImage: "",
+      profileImage: null,
+      profileImageURL:"",
       profileName: "",
       firstName: "",
       lastName: "",
@@ -402,12 +470,12 @@ class PetProfile extends Component {
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChangeForImage = this.handleChangeForImage.bind(this);
+
   }
   handleSubmit(values) {
     this.props.addUserInfo(
       this.props.uniqueId.uniqueId,
-      "localImageUrl",
+      this.state.profileImageURL,
       values
     );
 
@@ -424,19 +492,38 @@ class PetProfile extends Component {
     });
   }
 
-  handleChangeForImage(event) {
-    let reader = new FileReader();
-    let file = event.target.files[0];
 
-    reader.onloadend = () => {
-      this.setState({
-        profileImage: file,
-        imagePreviewUrl: reader.result,
-      });
-    };
 
-    reader.readAsDataURL(file);
-  }
+  handleChange = (e) => {
+    if (e.target.files[0]) {
+      this.setState({ profileImage: e.target.files[0] });
+    }
+  };
+
+  handleUpload = () => {
+    const uploadTask = storage
+      .ref(`images/${this.state.profileImage.name}`)
+      .put(this.state.profileImage);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {},
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(this.state.profileImage.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            this.setState({ profileImageURL: url});
+            
+          });
+      }
+    );
+  };
 
   render() {
     return (
@@ -451,7 +538,7 @@ class PetProfile extends Component {
               ""
             )}
 
-            {/* <Link  to="/PublicProfile">View Public Profile</Link> */}
+          
           </h5>
         </div>
 
@@ -471,6 +558,8 @@ class PetProfile extends Component {
           <Row className="form-group">
             <Label htmlFor="profileImage" md={2}>
               Profile Image
+              <button className="ml-4" onClick={this.handleUpload}>Upload</button>
+
             </Label>
             <Col md={10}>
               <Control.file
@@ -479,6 +568,7 @@ class PetProfile extends Component {
                 name="profileImage"
                 placeholder="Profile Image"
                 className="form-control"
+                onChange={this.handleChange}
                 style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
               />
               <Errors
@@ -487,7 +577,8 @@ class PetProfile extends Component {
                 show="touched"
                 component="div"
               />
-            </Col>
+            </Col>            
+            
           </Row>
           <Row className="form-group">
             <Label htmlFor="profileName" md={2}>

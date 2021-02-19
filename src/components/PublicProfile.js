@@ -25,7 +25,7 @@ function Post(props) {
                     <img
                       id="music"
                       className="profileImg"
-                      src="petbook/assets/Hugo2.png"
+                      src= {props.userInfo.userInfo.userPick}
                       alt=""
                       style={{ width: "40px" }}
                     />
@@ -89,7 +89,7 @@ class PublicProfile extends Component {
                 <img
                   id="profile"
                   className="profileImg "
-                  src="petbook/assets/Hugo2.png"
+                  src={pet.petImage}
                   alt=""
                   style={{ width: "70%" }}
                 ></img>
@@ -264,7 +264,7 @@ class PublicProfile extends Component {
                   <img
                     id="profile"
                     className="profileImg"
-                    src="petbook/assets/default.png"
+                    src= {this.props.userInfo.userInfo.userPick}
                     alt={feed.profileImg}
                     style={{ width: "40px" }}
                   />
@@ -296,7 +296,7 @@ class PublicProfile extends Component {
               className="rounded-circle me mx-auto d-block"
               data-aos="fade-up"
               data-aos-duration="1000"
-              src="petbook/assets/default.png"
+              src= {this.props.userInfo.userInfo.userPick}
               alt=""
               id="profile"
               style={{ width: "200px", height: "200px" }}

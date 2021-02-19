@@ -20,7 +20,7 @@ export const addUserInfo = (userId,userPick,profileInfo, isRegistered) => ({
   payload: {userId,userPick,profileInfo,isRegistered},
 });
 
-export const addPetCard = (petId,petcard) => ({
+export const addPetCard = (petId,petcard,petImage) => ({
   type: ActionTypes.ADD_PETCARD,
-  payload: {petId,petcard}
+  payload: {petId,petcard,petImage}
 });

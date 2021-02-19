@@ -53,7 +53,7 @@ const mapDispatchToProps = {
       mainColor,
       secondaryColor
     ),
-  addPetCard: (petId, petcard) => addPetCard(petId, petcard),
+  addPetCard: (petId, petcard,petImage) => addPetCard(petId, petcard,petImage),
   // resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };

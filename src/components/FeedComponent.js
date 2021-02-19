@@ -27,7 +27,7 @@ function Post(props) {
                     <img
                       id="music"
                       className="profileImg mr-2"
-                      src="petbook/assets/default.png"
+                      src= {props.userPick}
                       alt=""
                       style={{ width: "40px" }}
                     />
@@ -214,7 +214,7 @@ class Feed extends Component {
                     <img
                       id="music"
                       className="profileImg mr-2"
-                      src="petbook/assets/default.png"
+                      src= {this.props.userInfo.userInfo.userPick}
                       alt=""
                       style={{ width: "40px" }}
                     />
@@ -231,7 +231,7 @@ class Feed extends Component {
           </div>
         </div>
         <div className="border">
-          <Post text={this.props.text} userInfo={this.props.userInfo} />
+          <Post text={this.props.text} userInfo={this.props.userInfo} userPick = {this.props.userInfo.userInfo.userPick} />
 
           {feedScroll}
         </div>

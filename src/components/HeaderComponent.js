@@ -209,7 +209,7 @@ class Header extends Component {
               <img
                 id="proPic"
                 className="profileImg rounded-circle ml-3"
-                src="petbook/assets/default.png"
+                src= {this.props.userInfo.userInfo.userPick}
                 alt=""
                 style={{ width: "40px" }}
               />

@@ -19,11 +19,12 @@ import {
   Nav,
   NavItem,
   NavLink,
+  
 } from "reactstrap";
 import classnames from "classnames";
 import uuid from "react-uuid";
 import * as emailjs from "emailjs-com";
-
+import { Switch, Route, Redirect, withRouter,Link } from "react-router-dom";
 class Lostpet extends Component {
   constructor(props) {
     super(props);
@@ -126,6 +127,9 @@ class Lostpet extends Component {
     this.toggleModal();
    // this.toggleModalPetId();
     this.generateId();
+   
+ 
+
   };
 
   generateId = () => {
@@ -278,6 +282,7 @@ class Lostpet extends Component {
                   model="profileForm"
                   onSubmit={(values) => this.handleLogin(values)}
                   className="mt-2"
+
                 >
                   <Row className="form-group ">
                     <Col>
@@ -377,9 +382,13 @@ class Lostpet extends Component {
                       </Col>
                     </Col>
                   </Row>
+                 
                   <Button type="submit" value="submit" color="primary">
                     Register
+                    
                   </Button>
+                  
+                  
                 </Form>
               </TabPane>
             </TabContent>

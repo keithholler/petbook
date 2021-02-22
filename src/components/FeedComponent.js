@@ -208,39 +208,7 @@ class Feed extends Component {
   }
 
   render() {
-    const feedScroll = this.props.feed.feed.map((feed) => {
-      return (
-        <div className=" d-flex flex-column p-2 " key={feed.id}>
-          <div className="flip-cardfeed ">
-            <div
-              className="flip-card-frontfeed rounded-lg border feed"
-              style={{ backgroundColor: "white" }}
-            >
-              <h3 className="projectreason text-nowrap ">
-                <div style={{ fontSize: "12px" }}>
-                  <img
-                    id="profile"
-                    className="profileImg mr-2"
-                    src="petbook/assets/default.png"
-                    alt={feed.profileImg}
-                    style={{ width: "40px" }}
-                  />
-
-                  {feed.profileName}
-                </div>
-                <div
-                  className="text-center text-break text-wrap"
-                  style={{ fontSize: "calc(1em + 1vw)" }}
-                >
-                  {feed.text}
-                </div>
-              </h3>
-            </div>
-          </div>
-        </div>
-      );
-    });
-
+   
     return (
       <div className="container ">
         <div
@@ -277,8 +245,6 @@ class Feed extends Component {
         </div>
         <div className="border">
           <Post post={this.props.post} userInfo={this.props.userInfo} userPick = {this.props.userInfo.userInfo.userPick} />
-
-          {feedScroll}
         </div>
       </div>
     );

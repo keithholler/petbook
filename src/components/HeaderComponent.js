@@ -190,7 +190,7 @@ class Header extends Component {
           </Collapse>
           <UncontrolledDropdown inNavbar>
             <DropdownToggle nav caret style={{ color: "white" }}>
-            Login
+            Profile
               <img
                 id="proPic"
                 className="profileImg rounded-circle ml-3"

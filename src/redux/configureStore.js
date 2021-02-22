@@ -2,7 +2,7 @@ import { createStore, combineReducers,applyMiddleware,compose  } from "redux";
 import thunk from 'redux-thunk';
 import {createForms} from 'react-redux-form';
 import { UniqueIds } from "./uniqueId";
-import { Text } from "./post";
+import { Post } from "./post";
 import { Feed } from "./feedObjects";
 import { UserInfo } from "./userInfo";
 import { Petcard } from "./petCard";
@@ -14,7 +14,7 @@ export const ConfigureStore = () => {
   const store = createStore(
     combineReducers({
       uniqueId: UniqueIds,
-      text: Text,
+      post: Post,
       feed: Feed,
       userInfo:UserInfo,
       petcard:Petcard,

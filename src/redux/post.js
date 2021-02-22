@@ -1,9 +1,9 @@
 import * as ActionTypes from "./ActionTypes";
 
-export const Text = (state = { text: [] }, action) => {
+export const Post = (state = { post: [] }, action) => {
   switch (action.type) {
     case ActionTypes.ADD_POST:
-      return { ...state, text:state.text.concat(action.payload).reverse()};
+      return { ...state, post:state.post.concat(action.payload).reverse()};
     default:
       return state;
   }

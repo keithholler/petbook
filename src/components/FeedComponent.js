@@ -9,9 +9,11 @@ import {
   Label,
 } from "reactstrap";
 import { Control, LocalForm } from "react-redux-form";
+import { storage } from "../firebase";
+
 
 function Post(props) {
-  return props.text.text.map((post, index) => {
+  return props.post.post.map((post, index) => {
     return (
       <div className="container" key={index}>
         <div className="row row-content">
@@ -45,6 +47,7 @@ function Post(props) {
                   >
                     {post.text}
                   </div>
+                  <div className="text-center"><img style={{width:"500px"}} src={post.postImage}/></div>
                 </h3>
               </div>
             </div>
@@ -63,6 +66,9 @@ class PostForm extends Component {
       touched: {
         author: false,
       },
+      feedPicPost: null,
+      feedPicPostURL:null,
+      progressState:0
     };
 
     this.toggleModal = this.toggleModal.bind(this);
@@ -77,8 +83,44 @@ class PostForm extends Component {
   handleSubmit(values) {
     this.toggleModal();
     // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
-    this.props.postComment(values.text);
+    this.props.postComment(values.text,this.state.feedPicPostURL);
   }
+
+  handleChange = (e) => {
+    if (e.target.files[0]) {
+      this.setState({ feedPicPost: e.target.files[0] });
+    }
+  };
+
+  handleUpload = (event) => {
+    event.preventDefault()
+    const uploadTask = storage
+      .ref(`images/${this.state.feedPicPost.name}`)
+      .put(this.state.feedPicPost);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes)*100
+        )
+        this.setState({progressState:progress})
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(this.state.feedPicPost.name)
+          .getDownloadURL()
+          .then((url) => {
+            console.log(url);
+            this.setState({ feedPicPostURL: url});
+            
+          });
+      }
+    );
+  };
 
   render() {
     return (
@@ -118,7 +160,10 @@ class PostForm extends Component {
                     name="file"
                     placeholder="Image"
                     className="form-control"
+                    onChange={this.handleChange}
                   />
+                  <button type="button" className="ml-4 btn btn-primary" onClick={this.handleUpload}>Upload</button>
+                  <progress value={this.state.progressState}/>
                 </FormGroup>
                 <Button type="submit" value="submit" color="primary">
                   Submit
@@ -231,7 +276,7 @@ class Feed extends Component {
           </div>
         </div>
         <div className="border">
-          <Post text={this.props.text} userInfo={this.props.userInfo} userPick = {this.props.userInfo.userInfo.userPick} />
+          <Post post={this.props.post} userInfo={this.props.userInfo} userPick = {this.props.userInfo.userInfo.userPick} />
 
           {feedScroll}
         </div>

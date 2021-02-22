@@ -213,8 +213,9 @@ class AddPet extends Component {
       touched: {
         author: false,
       },
-      petImg:null,
-      petImgURL:""
+      petImg: null,
+      petImgURL: "",
+      progressState:0
     };
     this.toggleModal = this.toggleModal.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -237,15 +238,20 @@ class AddPet extends Component {
     }
   };
   handleUpload = (event) => {
-    event.preventDefault()
-    console.log(this.state.petImg)
+    event.preventDefault();
+    console.log(this.state.petImg);
     const uploadTask = storage
       .ref(`images/${this.state.petImg.name}`)
       .put(this.state.petImg);
 
     uploadTask.on(
       "state_changed",
-      (snapshot) => {},
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        this.setState({ progressState: progress });
+      },
       (error) => {
         console.log(error);
       },
@@ -256,8 +262,8 @@ class AddPet extends Component {
           .getDownloadURL()
           .then((url) => {
             console.log(url);
-            this.setState({ petImgURL: url});
-            console.log(this.state.petImgURL)
+            this.setState({ petImgURL: url });
+            console.log(this.state.petImgURL);
           });
       }
     );
@@ -306,32 +312,36 @@ class AddPet extends Component {
                 </Col>
               </Row>
               <Row className="form-group">
-            <Label htmlFor="petImg" md={2}>
-              Pet Image
-            </Label>
+                <Label htmlFor="petImg" md={2}>
+                  Pet Image
+                </Label>
 
-            <Col md={10}>
-
-              <Control.file
-                model=".petImg"
-                id="petImg"
-                name="petImg"
-                placeholder="Pet Image"
-                className="form-control"
-                onChange={this.handleChange}
-                style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
-              />
-                          <button style={{marginTop:"5px"}} onClick={this.handleUpload}>Upload</button>
-
-              <Errors
-                className="text-danger"
-                model=".petImg"
-                show="touched"
-                component="div"
-              />
-            </Col>            
-            
-          </Row>
+                <Col md={10}>
+                  <Control.file
+                    model=".petImg"
+                    id="petImg"
+                    name="petImg"
+                    placeholder="Pet Image"
+                    className="form-control"
+                    onChange={this.handleChange}
+                    style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
+                  />
+                  <button
+                    type="button"
+                    className=" btn btn-primary mt-1"
+                    onClick={this.handleUpload}
+                  >
+                    Upload
+                    <progress className="ml-1" style={{width:"50px",height:"10px",color:"green"}} value={this.state.progressState}/>
+                  </button>
+                  <Errors
+                    className="text-danger"
+                    model=".petImg"
+                    show="touched"
+                    component="div"
+                  />
+                </Col>
+              </Row>
               <Row className="form-group">
                 <Label htmlFor="animalType" md={2}>
                   Animal Type:
@@ -457,7 +467,7 @@ class PetProfile extends Component {
     super(props);
     this.state = {
       profileImage: null,
-      profileImageURL:"",
+      profileImageURL: "",
       profileName: "",
       firstName: "",
       lastName: "",
@@ -466,11 +476,11 @@ class PetProfile extends Component {
       breed: "",
       mainColor: "",
       secondaryColor: "",
+      progressState:0
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-
   }
   handleSubmit(values) {
     this.props.addUserInfo(
@@ -492,8 +502,6 @@ class PetProfile extends Component {
     });
   }
 
-
-
   handleChange = (e) => {
     if (e.target.files[0]) {
       this.setState({ profileImage: e.target.files[0] });
@@ -507,7 +515,12 @@ class PetProfile extends Component {
 
     uploadTask.on(
       "state_changed",
-      (snapshot) => {},
+      (snapshot) => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        this.setState({ progressState: progress });
+      },
       (error) => {
         console.log(error);
       },
@@ -518,8 +531,7 @@ class PetProfile extends Component {
           .getDownloadURL()
           .then((url) => {
             console.log(url);
-            this.setState({ profileImageURL: url});
-            
+            this.setState({ profileImageURL: url });
           });
       }
     );
@@ -537,8 +549,6 @@ class PetProfile extends Component {
             ) : (
               ""
             )}
-
-          
           </h5>
         </div>
 
@@ -556,10 +566,9 @@ class PetProfile extends Component {
             </Col>
           </Row>
           <Row className="form-group">
-            <Label htmlFor="profileImage" md={2}>
+            <Label htmlFor="profileImage" md={2} className="">
               Profile Image
-              <button className="ml-4" onClick={this.handleUpload}>Upload</button>
-
+             
             </Label>
             <Col md={10}>
               <Control.file
@@ -571,14 +580,22 @@ class PetProfile extends Component {
                 onChange={this.handleChange}
                 style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
               />
+               <button
+                type="button"
+                className="btn btn-primary text-nowrap mt-1"
+                onClick={this.handleUpload}
+          
+              >
+                Upload
+                <progress className="ml-1" style={{width:"50px",height:"10px"}} value={this.state.progressState}/>
+              </button>
               <Errors
                 className="text-danger"
                 model=".profileImage"
                 show="touched"
                 component="div"
               />
-            </Col>            
-            
+            </Col>
           </Row>
           <Row className="form-group">
             <Label htmlFor="profileName" md={2}>

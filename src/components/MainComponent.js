@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
   return {
     uniqueId: state.uniqueId,
     feed: state.feed,
-    text: state.text,
+    post: state.post,
     userInfo: state.userInfo,
     petcard: state.petcard,
   };
@@ -30,7 +30,7 @@ const mapDispatchToProps = {
   addUniqueId: (uniqueId) => addUniqueId(uniqueId),
   addFeed: (id, profileImg, profileName, text) =>
     addFeed(id, profileImg, profileName, text),
-  postComment: (text) => postComment(text),
+  postComment: (postImage,text) => postComment(postImage,text),
   addUserInfo: (
     profileImage,
     profileName,
@@ -105,7 +105,7 @@ class Main extends Component {
             path="/PublicProfile"
             render={() => (
               <PublicProfile
-                text={this.props.text}
+                post={this.props.post}
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
                 resetProfileForm={this.props.resetProfileForm}
@@ -123,9 +123,11 @@ class Main extends Component {
             path="/LostPets"
             render={() => (
               <Lostpet
+              addUniqueId={this.props.addUniqueId}
                 resetLostPetForm={this.props.resetLostPetForm}
                 petcard={this.props.petcard}
                 uniqueId={this.props.uniqueId}
+                addUserInfo={this.props.addUserInfo}
                 userInfo={this.props.userInfo}
                 petcard={this.props.petcard}
               />
@@ -136,7 +138,8 @@ class Main extends Component {
             render={() => (
               <Feed
                 postComment={this.props.postComment}
-                text={this.props.text}
+                addFeed={this.props.addFeed}
+                post={this.props.post}
                 feed={this.props.feed}
                 userInfo={this.props.userInfo}
               />

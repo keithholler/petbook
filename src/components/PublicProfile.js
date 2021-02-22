@@ -6,10 +6,11 @@ import {
   CardBody,
   CardTitle,
 } from "reactstrap";
+
 function Post(props) {
   const profileName = props.userInfo.userInfo.profileInfo.profileName;
 
-  return props.text.text.map((post) => {
+  return props.post.post.map((post) => {
     return (
       <div className="container">
         <div className="row row-content">
@@ -32,7 +33,10 @@ function Post(props) {
                     {profileName ? profileName : "Not Logged In"}
                   </div>
 
-                  <div className="text-center">{post.text}</div>
+                  <div className="text-center">{post.text} </div>
+                  <div className="text-center"><img style={{width:"500px"}} src={post.postImage}/></div>
+                  
+                  
                 </h3>
               </div>
             </div>
@@ -324,7 +328,7 @@ class PublicProfile extends Component {
 
         <div className="row row-content justify-content-around">
           {pets}
-          <Post text={this.props.text} userInfo={this.props.userInfo} />
+          <Post post={this.props.post} userInfo={this.props.userInfo} />
         </div>
       </div>
     );

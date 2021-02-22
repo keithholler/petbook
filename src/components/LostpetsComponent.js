@@ -14,7 +14,14 @@ import {
   CardBody,
   CardTitle,
   Container,
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
 } from "reactstrap";
+import classnames from "classnames";
+import uuid from "react-uuid";
 import * as emailjs from "emailjs-com";
 
 class Lostpet extends Component {
@@ -22,6 +29,9 @@ class Lostpet extends Component {
     super(props);
     this.state = {
       isEmailSentModalOpen: false,
+      isModalOpen: false,
+       activeTab: "2",
+       profileNameHolder:null
     };
     this.toggleModalEmailSent = this.toggleModalEmailSent.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -90,6 +100,61 @@ class Lostpet extends Component {
     });
   };
 
+  handleLogin = (values) => {
+    // alert(
+    //   `Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`
+    // );
+
+    if (values.email) {
+      alert("Logged In");
+    } else {
+      alert("Please Register First");
+    }
+    this.toggleModal();
+  };
+
+  handleRegister = (values) => {
+    // alert(
+    //   `Username: ${this.username.value} Email: ${this.email.value} Password: ${this.password.value} `
+    // );
+    this.props.addUserInfo(
+      this.props.uniqueId.uniqueId,
+      "localImageUrl",
+      values,
+      true
+    );
+    this.toggleModal();
+   // this.toggleModalPetId();
+    this.generateId();
+  };
+
+  generateId = () => {
+    this.props.addUniqueId(uuid());
+    
+  }
+
+  toggleModal = () => {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+    });
+  };
+
+  componentDidMount() {
+    
+    if( typeof this.props.userInfo.userInfo.profileInfo === 'undefined' ){
+     
+      this.setState({
+        isModalOpen: !this.state.isModalOpen
+      })
+    } 
+    
+  }
+
+  toggleTab = (tab) => {
+    if (this.state.activeTab !== tab) {
+      this.setState({ activeTab: tab });
+    }
+  }
 
 
   render() {
@@ -175,6 +240,151 @@ class Lostpet extends Component {
             </Col>
           </Row>
         </Container>
+
+        <Modal backdrop="static" isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+          <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+          <ModalBody>
+            <Nav tabs>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === "1",
+                  })}
+                  onClick={() => {
+                    this.toggleTab("1");
+                  }}
+                  href="#"
+                >
+                  Log In
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === "2",
+                  })}
+                  onClick={() => {
+                    this.toggleTab("2");
+                  }}
+                  href="#"
+                >
+                  Register
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="1">
+                <Form
+                  model="profileForm"
+                  onSubmit={(values) => this.handleLogin(values)}
+                  className="mt-2"
+                >
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="email" className="ml-3">
+                        Email:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".email"
+                          id="email"
+                          name="email"
+                          placeholder="email"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="password" className="ml-3">
+                        Password:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".password"
+                          id="password"
+                          name="password"
+                          placeholder="password"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+
+                  <Button type="submit" value="submit" color="primary">
+                    Login
+                  </Button>
+                </Form>
+              </TabPane>
+              <TabPane tabId="2">
+                <Form
+                  model="profileForm"
+                  onSubmit={(values) => this.handleRegister(values)}
+                  className="mt-2"
+                >
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="profileName" className="ml-3">
+                        Profile Name:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".profileName"
+                          id="profileName"
+                          name="profileName"
+                          placeholder="profileName"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="email" className="ml-3">
+                        Email:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".email"
+                          id="email"
+                          name="email"
+                          placeholder="email"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="password" className="ml-3">
+                        Password:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".password"
+                          id="password"
+                          name="password"
+                          placeholder="password"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+                  <Button type="submit" value="submit" color="primary">
+                    Register
+                  </Button>
+                </Form>
+              </TabPane>
+            </TabContent>
+          </ModalBody>
+        </Modal>
 
         <Modal
           isOpen={this.state.isEmailSentModalOpen}

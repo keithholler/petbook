@@ -85,9 +85,7 @@ class Header extends Component {
 
   generateId() {
     this.props.addUniqueId(uuid());
-    // this.setState({
-    //   uniqueId: uuid(),
-    // });
+    
   }
   toggleModalPetId() {
     this.setState(
@@ -169,7 +167,7 @@ class Header extends Component {
                 </NavLink>
               </NavItem>
               <NavItem className="m-2 ">
-                {this.props.userInfo.userInfo.profileInfo ? (
+                
                   <NavLink
                     tag={RRNavLink}
                     onClick={!this.state.collapsed ? this.toggleNav : ""}
@@ -186,20 +184,7 @@ class Header extends Component {
                   >
                     <h5 style={{fontSize: "30px"}}>Feed</h5>
                   </NavLink>
-                ) : (
-                  <NavLink
-                    tag={RRNavLink}
-                    // className="headerLinks"
-                    onClick={!this.state.collapsed ? this.toggleNav : ""}
-                    to="/LostPets"
-                    activeStyle={{
-                      fontWeight: "bold",
-                      color: "white",
-                    }}
-                  >
-                    <h5>Feed</h5>
-                  </NavLink>
-                )}
+               
               </NavItem>
             </Nav>
           </Collapse>
@@ -209,7 +194,7 @@ class Header extends Component {
               <img
                 id="proPic"
                 className="profileImg rounded-circle ml-3"
-                src= {this.props.userInfo.userInfo.userPick}
+                src= {this.props.userInfo.userInfo.userPick }
                 alt=""
                 style={{ width: "40px" }}
               />
@@ -225,7 +210,7 @@ class Header extends Component {
                         <img
                           id="music"
                           className="profileImg rounded-circle"
-                          src="petbook/assets/default.png"
+                          src={this.props.userInfo.userInfo.userPick}
                           alt=""
                           style={{ width: "40px" }}
                         />

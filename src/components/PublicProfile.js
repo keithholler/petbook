@@ -247,34 +247,6 @@ class PublicProfile extends Component {
       );
     });
 
-    const feedScroll = this.props.feed.feed.map((feed, index) => {
-      return (
-        <div key={index} className=" d-flex flex-column p-2 " key={feed.id}>
-          <div className="flip-cardfeed ">
-            <div
-              className="flip-card-frontfeed rounded-lg border"
-              style={{ backgroundColor: "white" }}
-            >
-              <h3 className="projectreason text-nowrap">
-                <div style={{ fontSize: "12px", backgroundColor: "white" }}>
-                  <img
-                    id="profile"
-                    className="profileImg"
-                    src={this.props.userInfo.userInfo.userPick}
-                    alt={feed.profileImg}
-                    style={{ width: "40px" }}
-                  />
-
-                  {feed.profileName}
-                </div>
-                <div className="text-center">{feed.text}</div>
-              </h3>
-            </div>
-          </div>
-        </div>
-      );
-    });
-
     return (
       <div className="container ">
         <div className="row row-content-noborder row-content-topbord">
@@ -287,25 +259,35 @@ class PublicProfile extends Component {
             >
               Hello I am
             </h3>
-
-            <img
-              className="rounded-circle me mx-auto d-block"
-              data-aos="fade-up"
-              data-aos-duration="1000"
-              src={this.props.userInfo.userInfo.userPick}
-              alt=""
-              id="profile"
-              style={{ width: "200px", height: "200px" }}
-            />
+            {typeof this.props.userInfo.userInfo.profileInfo === "undefined" ||
+            this.props.userInfo.userInfo.userPick === "localImageUrl" ? (
+              <img
+                className="rounded-circle me mx-auto d-block"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                src="petbook/assets/default.png"
+                alt=""
+                id="profile"
+                style={{ width: "200px", height: "200px" }}
+              />
+            ) : (
+              <img
+                className="rounded-circle me mx-auto d-block"
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                src={this.props.userInfo.userInfo.userPick}
+                alt=""
+                id="profile"
+                style={{ width: "200px", height: "200px" }}
+              />
+            )}
 
             <h1
               className="name text-nowrap  text-center mb-5"
               data-aos="fade-up"
               data-aos-duration="1000"
               style={{ color: "black" }}
-            >
-              {this.props.userInfo.userInfo.profileInfo.profileName}
-            </h1>
+            ></h1>
 
             <p
               className="intro text-no-wroap text-center"

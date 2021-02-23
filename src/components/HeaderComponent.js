@@ -47,6 +47,7 @@ class Header extends Component {
       alert("Please Register First");
     }
     this.toggleModal();
+    alert(this.props.userInfo.userInfo.userPick);
   };
 
   handleRegister = (values) => {
@@ -108,7 +109,21 @@ class Header extends Component {
           light
         >
           <NavbarBrand to="/home" className="ml-4" style={{ color: "white" }}>
-            <h5 style={{ fontSize: "40px",textShadow: "1px 1px 3px #363636 " }}>PetBook</h5>
+            <h5
+              style={{
+                fontSize: "40px",
+                textShadow: "1px 1px 3px #363636",
+                fontFamily: "Fredoka One",
+                fontWeight: "200",
+              }}
+            >
+              PetB
+              <img
+                src="petbook/assets/pawPrint2.png"
+                style={{ width: "40px", margin: "3px" }}
+              />
+              k
+            </h5>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
@@ -139,10 +154,34 @@ class Header extends Component {
                     textDecoration: "underline",
                   }}
                 >
-                  <h5 style={{ fontSize: "30px",textShadow: "1px 1px 3px #363636"}}>LostPets</h5>
+                  {window.location.pathname === "/LostPets" ? (
+                    <img
+                      src="petbook/assets/lostFound.png"
+                      alt="lostPets"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        position: "relative",
+                        margin: "3px",
+                      }}
+                      className="lostFound2"
+                    />
+                  ) : (
+                    <img
+                      src="petbook/assets/lostFound.png"
+                      alt="lostPets"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        position: "relative",
+                        margin: "3px",
+                      }}
+                      className="lostFound"
+                    />
+                  )}
                 </NavLink>
               </NavItem>
-              <NavItem className="m-2 ">
+              <NavItem className="m-2 align-self-center">
                 <NavLink
                   tag={RRNavLink}
                   onClick={!this.state.collapsed ? this.toggleNav : ""}
@@ -156,8 +195,33 @@ class Header extends Component {
                     color: "white",
                     textDecoration: "underline",
                   }}
+                  activeClassName="petHome"
                 >
-                  <h5 style={{ fontSize: "30px",textShadow: "1px 1px 3px #363636" }}>Feed</h5>
+                  {window.location.pathname === "/Feed" ? (
+                    <img
+                      src="petbook/assets/home4.png"
+                      alt="feed"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        position: "relative",
+                        margin: "3px",
+                      }}
+                      className="petHome2"
+                    />
+                  ) : (
+                    <img
+                      src="petbook/assets/home4.png"
+                      alt="feed"
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        position: "relative",
+                        margin: "3px",
+                      }}
+                      className="petHome"
+                    />
+                  )}
                 </NavLink>
               </NavItem>
             </Nav>
@@ -165,13 +229,25 @@ class Header extends Component {
           <UncontrolledDropdown inNavbar>
             <DropdownToggle nav caret style={{ color: "white" }}>
               Profile
-              <img
-                id="proPic"
-                className="profileImg rounded-circle ml-3"
-                src={this.props.userInfo.userInfo.userPick}
-                alt=""
-                style={{ width: "40px" }}
-              />
+              {typeof this.props.userInfo.userInfo.profileInfo ===
+                "undefined" ||
+              this.props.userInfo.userInfo.userPick === "localImageUrl" ? (
+                <img
+                  id="proPic"
+                  className="profileImg rounded-circle ml-3"
+                  src="petbook/assets/default.png"
+                  alt=""
+                  style={{ width: "40px" }}
+                />
+              ) : (
+                <img
+                  id="proPic"
+                  className="profileImg rounded-circle ml-3"
+                  src={this.props.userInfo.userInfo.userPick}
+                  alt=""
+                  style={{ width: "40px" }}
+                />
+              )}
             </DropdownToggle>
 
             {this.state.collapsed ? (
@@ -181,13 +257,26 @@ class Header extends Component {
                   {this.props.userInfo.userInfo.profileInfo ? (
                     <Link style={{ color: "black" }} to="/PetProfile">
                       <DropdownItem id="profileSettings">
-                        <img
-                          id="music"
-                          className="profileImg rounded-circle"
-                          src={this.props.userInfo.userInfo.userPick}
-                          alt=""
-                          style={{ width: "40px" }}
-                        />
+                        {typeof this.props.userInfo.userInfo.profileInfo ===
+                          "undefined" ||
+                        this.props.userInfo.userInfo.userPick ===
+                          "localImageUrl" ? (
+                          <img
+                            id="proPic"
+                            className="profileImg rounded-circle ml-3"
+                            src="petbook/assets/default.png"
+                            alt=""
+                            style={{ width: "40px" }}
+                          />
+                        ) : (
+                          <img
+                            id="proPic"
+                            className="profileImg rounded-circle ml-3"
+                            src={this.props.userInfo.userInfo.userPick}
+                            alt=""
+                            style={{ width: "40px" }}
+                          />
+                        )}
                         Your Profile
                       </DropdownItem>
                       <UncontrolledTooltip
@@ -290,7 +379,13 @@ class Header extends Component {
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader
             toggle={this.toggleModal}
-            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+            style={{
+              backgroundColor: "#1b8eb1",
+              color: "white",
+              textShadow: "1px 1px 3px #363636",
+              fontFamily: "Nunit, sans-serif",
+              fontWeight: "bold",
+            }}
           >
             Login
           </ModalHeader>
@@ -442,7 +537,11 @@ class Header extends Component {
         >
           <ModalHeader
             toggle={this.toggleModalPetId}
-            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+            style={{
+              backgroundColor: "#1b8eb1",
+              color: "white",
+              textShadow: "1px 1px 3px #363636",
+            }}
           >
             Owner Id
           </ModalHeader>

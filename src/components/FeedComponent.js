@@ -135,7 +135,11 @@ class PostForm extends Component {
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader
             toggle={this.toggleModal}
-            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+            style={{
+              backgroundColor: "#1b8eb1",
+              color: "white",
+              textShadow: "1px 1px 3px #363636",
+            }}
           >
             Submit Comment
           </ModalHeader>
@@ -232,7 +236,8 @@ class Feed extends Component {
                       alt=""
                       style={{ width: "40px" }}
                     />
-                    {this.props.userInfo.userInfo.profileInfo.profileName
+                    {!typeof this.props.userInfo.userInfo.profileInfo ===
+                    "undefined"
                       ? this.props.userInfo.userInfo.profileInfo.profileName
                       : "Not Logged In"}
                     <div className="border">

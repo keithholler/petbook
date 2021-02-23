@@ -10,7 +10,6 @@ import Lostpet from "./LostpetsComponent";
 import { actions } from "react-redux-form";
 import {
   addUniqueId,
-  addFeed,
   postComment,
   addUserInfo,
   addPetCard,
@@ -19,7 +18,6 @@ import {
 const mapStateToProps = (state) => {
   return {
     uniqueId: state.uniqueId,
-    feed: state.feed,
     post: state.post,
     userInfo: state.userInfo,
     petcard: state.petcard,
@@ -28,8 +26,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addUniqueId: (uniqueId) => addUniqueId(uniqueId),
-  addFeed: (id, profileImg, profileName, text) =>
-    addFeed(id, profileImg, profileName, text),
   postComment: (postImage,text) => postComment(postImage,text),
   addUserInfo: (
     profileImage,
@@ -61,9 +57,6 @@ const mapDispatchToProps = {
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      feed: Feed,
-    };
   }
   render() {
     return (
@@ -92,7 +85,6 @@ class Main extends Component {
             render={() => (
               <PetProfile
                 postComment={this.props.postComment}
-                feed={this.props.feed}
                 petcard={this.props.petcard}
                 uniqueId={this.props.uniqueId}
                 addPetCard={this.props.addPetCard}
@@ -112,7 +104,6 @@ class Main extends Component {
                 petcard={this.props.petcard}
                 addPetCard={this.props.addPetCard}
                 userInfo={this.props.userInfo}
-                feed={this.props.feed}
               />
             )}
           />
@@ -138,9 +129,7 @@ class Main extends Component {
             render={() => (
               <Feed
                 postComment={this.props.postComment}
-                addFeed={this.props.addFeed}
                 post={this.props.post}
-                feed={this.props.feed}
                 userInfo={this.props.userInfo}
               />
             )}

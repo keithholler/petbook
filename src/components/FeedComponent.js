@@ -11,7 +11,6 @@ import {
 import { Control, LocalForm } from "react-redux-form";
 import { storage } from "../firebase";
 
-
 function Post(props) {
   return props.post.post.map((post, index) => {
     return (
@@ -29,7 +28,7 @@ function Post(props) {
                     <img
                       id="music"
                       className="profileImg mr-2"
-                      src= {props.userPick}
+                      src={props.userPick}
                       alt=""
                       style={{ width: "40px" }}
                     />
@@ -47,7 +46,9 @@ function Post(props) {
                   >
                     {post.text}
                   </div>
-                  <div className="text-center"><img style={{width:"500px"}} src={post.postImage}/></div>
+                  <div className="text-center">
+                    <img style={{ width: "500px" }} src={post.postImage} />
+                  </div>
                 </h3>
               </div>
             </div>
@@ -67,43 +68,38 @@ class PostForm extends Component {
         author: false,
       },
       feedPicPost: null,
-      feedPicPostURL:null,
-      progressState:0
+      feedPicPostURL: null,
+      progressState: 0,
     };
-
-    this.toggleModal = this.toggleModal.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  toggleModal() {
+  toggleModal = () => {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
     });
-  }
-  handleSubmit(values) {
+  };
+  handleSubmit = (values) => {
     this.toggleModal();
     // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
-    this.props.postComment(values.text,this.state.feedPicPostURL);
-  }
-
+    this.props.postComment(values.text, this.state.feedPicPostURL);
+  };
   handleChange = (e) => {
     if (e.target.files[0]) {
       this.setState({ feedPicPost: e.target.files[0] });
     }
   };
-
   handleUpload = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const uploadTask = storage
       .ref(`images/${this.state.feedPicPost.name}`)
       .put(this.state.feedPicPost);
-
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes)*100
-        )
-        this.setState({progressState:progress})
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        this.setState({ progressState: progress });
       },
       (error) => {
         console.log(error);
@@ -115,8 +111,7 @@ class PostForm extends Component {
           .getDownloadURL()
           .then((url) => {
             console.log(url);
-            this.setState({ feedPicPostURL: url});
-            
+            this.setState({ feedPicPostURL: url });
           });
       }
     );
@@ -138,7 +133,12 @@ class PostForm extends Component {
         <div className="rectangle rounded" onClick={this.toggleModal}></div>
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
+          <ModalHeader
+            toggle={this.toggleModal}
+            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+          >
+            Submit Comment
+          </ModalHeader>
           <ModalBody>
             <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
               <div className="form-group">
@@ -162,8 +162,14 @@ class PostForm extends Component {
                     className="form-control"
                     onChange={this.handleChange}
                   />
-                  <button type="button" className="ml-4 btn btn-primary" onClick={this.handleUpload}>Upload</button>
-                  <progress value={this.state.progressState}/>
+                  <button
+                    type="button"
+                    className="ml-4 btn btn-primary"
+                    onClick={this.handleUpload}
+                  >
+                    Upload
+                  </button>
+                  <progress value={this.state.progressState} />
                 </FormGroup>
                 <Button type="submit" value="submit" color="primary">
                   Submit
@@ -185,10 +191,8 @@ class Feed extends Component {
       postText: "",
       postImage: "",
     };
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -196,19 +200,16 @@ class Feed extends Component {
     this.setState({
       [name]: value,
     });
-  }
-
-  handleSubmit(event) {
+  };
+  handleSubmit = (event) => {
     event.preventDefault();
     alert("Current state is: " + JSON.stringify(this.state));
     this.setState({
       postText: "",
       postImage: "",
     });
-  }
-
+  };
   render() {
-   
     return (
       <div className="container ">
         <div
@@ -227,7 +228,7 @@ class Feed extends Component {
                     <img
                       id="music"
                       className="profileImg mr-2"
-                      src= {this.props.userInfo.userInfo.userPick}
+                      src={this.props.userInfo.userInfo.userPick}
                       alt=""
                       style={{ width: "40px" }}
                     />
@@ -244,7 +245,11 @@ class Feed extends Component {
           </div>
         </div>
         <div className="border">
-          <Post post={this.props.post} userInfo={this.props.userInfo} userPick = {this.props.userInfo.userInfo.userPick} />
+          <Post
+            post={this.props.post}
+            userInfo={this.props.userInfo}
+            userPick={this.props.userInfo.userInfo.userPick}
+          />
         </div>
       </div>
     );

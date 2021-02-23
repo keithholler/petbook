@@ -31,7 +31,6 @@ import { Control, Form, Errors } from "react-redux-form";
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.toggleNav = this.toggleNav.bind(this);
     this.state = {
       collapsed: true,
       isNavOpen: false,
@@ -39,33 +38,18 @@ class Header extends Component {
       isPetIdModalOpen: false,
       activeTab: "1",
     };
-    this.toggleNav = this.toggleNav.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
-    this.toggleTab = this.toggleTab.bind(this);
-    this.generateId = this.generateId.bind(this);
-    this.toggleModalPetId = this.toggleModalPetId.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
-  handleLogin(values) {
-    // alert(
-    //   `Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`
-    // );
-
+  handleLogin = (values) => {
     if (values.email) {
       alert("Logged In");
     } else {
       alert("Please Register First");
     }
     this.toggleModal();
-  }
+  };
 
-  handleRegister(values) {
-    // alert(
-    //   `Username: ${this.username.value} Email: ${this.email.value} Password: ${this.password.value} `
-    // );
+  handleRegister = (values) => {
     this.props.addUserInfo(
       this.props.uniqueId.uniqueId,
       "localImageUrl",
@@ -75,19 +59,16 @@ class Header extends Component {
     this.toggleModal();
     this.toggleModalPetId();
     this.generateId();
-  }
-
-  toggleModal() {
+  };
+  toggleModal = () => {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
     });
-  }
-
-  generateId() {
+  };
+  generateId = () => {
     this.props.addUniqueId(uuid());
-    
-  }
-  toggleModalPetId() {
+  };
+  toggleModalPetId = () => {
     this.setState(
       {
         isPetIdModalOpen: true,
@@ -96,7 +77,7 @@ class Header extends Component {
         setTimeout(this.handleClose, 3000);
       }
     );
-  }
+  };
 
   handleClose = () => {
     this.setState({
@@ -104,18 +85,17 @@ class Header extends Component {
     });
   };
 
-  toggleNav() {
+  toggleNav = () => {
     this.setState({
-      //  isNavOpen: !this.state.isNavOpen,
       collapsed: !this.state.collapsed,
     });
-  }
+  };
 
-  toggleTab(tab) {
+  toggleTab = (tab) => {
     if (this.state.activeTab !== tab) {
       this.setState({ activeTab: tab });
     }
-  }
+  };
 
   render() {
     return (
@@ -127,12 +107,8 @@ class Header extends Component {
           style={{ boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)" }}
           light
         >
-          <NavbarBrand
-            to="/home"
-            className="ml-4"
-            style={{ color: "white" }}
-          >
-            <h5 style={{fontSize: "30px"}}>PetBook</h5>
+          <NavbarBrand to="/home" className="ml-4" style={{ color: "white" }}>
+            <h5 style={{ fontSize: "40px",textShadow: "1px 1px 3px #363636 " }}>PetBook</h5>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
@@ -163,46 +139,44 @@ class Header extends Component {
                     textDecoration: "underline",
                   }}
                 >
-                  <h5 style={{fontSize: "30px"}}>LostPets</h5>
+                  <h5 style={{ fontSize: "30px",textShadow: "1px 1px 3px #363636"}}>LostPets</h5>
                 </NavLink>
               </NavItem>
               <NavItem className="m-2 ">
-                
-                  <NavLink
-                    tag={RRNavLink}
-                    onClick={!this.state.collapsed ? this.toggleNav : ""}
-                    to="/Feed"
-                    style={{
-                      fontWeight: "bold",
-                      color: "white",
-                    }}
-                    activeStyle={{
-                      fontWeight: "bold",
-                      color: "white",
-                      textDecoration: "underline",
-                    }}
-                  >
-                    <h5 style={{fontSize: "30px"}}>Feed</h5>
-                  </NavLink>
-               
+                <NavLink
+                  tag={RRNavLink}
+                  onClick={!this.state.collapsed ? this.toggleNav : ""}
+                  to="/Feed"
+                  style={{
+                    fontWeight: "bold",
+                    color: "white",
+                  }}
+                  activeStyle={{
+                    fontWeight: "bold",
+                    color: "white",
+                    textDecoration: "underline",
+                  }}
+                >
+                  <h5 style={{ fontSize: "30px",textShadow: "1px 1px 3px #363636" }}>Feed</h5>
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
           <UncontrolledDropdown inNavbar>
             <DropdownToggle nav caret style={{ color: "white" }}>
-            Profile
+              Profile
               <img
                 id="proPic"
                 className="profileImg rounded-circle ml-3"
-                src= {this.props.userInfo.userInfo.userPick }
+                src={this.props.userInfo.userInfo.userPick}
                 alt=""
                 style={{ width: "40px" }}
               />
-  
             </DropdownToggle>
-         
+
             {this.state.collapsed ? (
-              <DropdownMenu right>.
+              <DropdownMenu right>
+                .
                 <NavItem className="">
                   {this.props.userInfo.userInfo.profileInfo ? (
                     <Link style={{ color: "black" }} to="/PetProfile">
@@ -314,7 +288,12 @@ class Header extends Component {
         </Navbar>
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+          <ModalHeader
+            toggle={this.toggleModal}
+            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+          >
+            Login
+          </ModalHeader>
           <ModalBody>
             <Nav tabs>
               <NavItem>
@@ -461,7 +440,12 @@ class Header extends Component {
           isOpen={this.state.isPetIdModalOpen}
           toggle={this.toggleModalPetId}
         >
-          <ModalHeader toggle={this.toggleModalPetId}>Owner Id</ModalHeader>
+          <ModalHeader
+            toggle={this.toggleModalPetId}
+            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+          >
+            Owner Id
+          </ModalHeader>
           <ModalBody>{this.props.uniqueId.uniqueId}</ModalBody>
         </Modal>
       </React.Fragment>

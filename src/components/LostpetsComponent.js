@@ -9,7 +9,6 @@ import {
   ModalHeader,
   ModalBody,
   Card,
-  CardImg,
   CardText,
   CardBody,
   CardTitle,
@@ -19,28 +18,22 @@ import {
   Nav,
   NavItem,
   NavLink,
-  
 } from "reactstrap";
 import classnames from "classnames";
 import uuid from "react-uuid";
 import * as emailjs from "emailjs-com";
-import { Switch, Route, Redirect, withRouter,Link } from "react-router-dom";
 class Lostpet extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isEmailSentModalOpen: false,
       isModalOpen: false,
-       activeTab: "2",
-       profileNameHolder:null
+      activeTab: "2",
+      profileNameHolder: null,
     };
-    this.toggleModalEmailSent = this.toggleModalEmailSent.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.toggleModalEmailNotSent = this.toggleModalEmailNotSent.bind(this);
-    this.handleClose2 = this.handleClose2.bind(this);
   }
 
-  handleSubmit(values) {
+  handleSubmit = (values) => {
     if (
       this.props.petcard.petcard[0].petId === values.petId
       // +
@@ -65,9 +58,9 @@ class Lostpet extends Component {
     }
 
     this.props.resetLostPetForm();
-  }
+  };
 
-  toggleModalEmailSent() {
+  toggleModalEmailSent = () => {
     this.setState(
       {
         isEmailSentModalOpen: true,
@@ -76,7 +69,7 @@ class Lostpet extends Component {
         setTimeout(this.handleClose, 3000);
       }
     );
-  }
+  };
 
   handleClose = () => {
     this.setState({
@@ -84,7 +77,7 @@ class Lostpet extends Component {
     });
   };
 
-  toggleModalEmailNotSent() {
+  toggleModalEmailNotSent = () => {
     this.setState(
       {
         isEmailNotSentModalOpen: true,
@@ -93,7 +86,7 @@ class Lostpet extends Component {
         setTimeout(this.handleClose2, 3000);
       }
     );
-  }
+  };
 
   handleClose2 = () => {
     this.setState({
@@ -102,10 +95,6 @@ class Lostpet extends Component {
   };
 
   handleLogin = (values) => {
-    // alert(
-    //   `Username: ${this.username.value} Password: ${this.password.value} Remember: ${this.remember.checked}`
-    // );
-
     if (values.email) {
       alert("Logged In");
     } else {
@@ -115,9 +104,6 @@ class Lostpet extends Component {
   };
 
   handleRegister = (values) => {
-    // alert(
-    //   `Username: ${this.username.value} Email: ${this.email.value} Password: ${this.password.value} `
-    // );
     this.props.addUserInfo(
       this.props.uniqueId.uniqueId,
       "localImageUrl",
@@ -125,17 +111,12 @@ class Lostpet extends Component {
       true
     );
     this.toggleModal();
-   // this.toggleModalPetId();
     this.generateId();
-   
- 
-
   };
 
   generateId = () => {
     this.props.addUniqueId(uuid());
-    
-  }
+  };
 
   toggleModal = () => {
     this.setState({
@@ -143,24 +124,18 @@ class Lostpet extends Component {
     });
   };
 
-  componentDidMount() {
-    
-    if( typeof this.props.userInfo.userInfo.profileInfo === 'undefined' ){
-     
+  componentDidMount = () => {
+    if (typeof this.props.userInfo.userInfo.profileInfo === "undefined") {
       this.setState({
-        isModalOpen: !this.state.isModalOpen
-      })
-    } 
-    
-  }
-
+        isModalOpen: !this.state.isModalOpen,
+      });
+    }
+  };
   toggleTab = (tab) => {
     if (this.state.activeTab !== tab) {
       this.setState({ activeTab: tab });
     }
-  }
-
-
+  };
   render() {
     return (
       <div>
@@ -245,8 +220,18 @@ class Lostpet extends Component {
           </Row>
         </Container>
 
-        <Modal backdrop="static" isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
-          <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
+        <Modal
+          backdrop="static"
+          isOpen={this.state.isModalOpen}
+          toggle={this.toggleModal}
+        >
+          <ModalHeader
+            toggle={this.toggleModal}
+            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636 "}}
+
+          >
+            Login
+          </ModalHeader>
           <ModalBody>
             <Nav tabs>
               <NavItem>
@@ -282,7 +267,6 @@ class Lostpet extends Component {
                   model="profileForm"
                   onSubmit={(values) => this.handleLogin(values)}
                   className="mt-2"
-
                 >
                   <Row className="form-group ">
                     <Col>
@@ -382,13 +366,10 @@ class Lostpet extends Component {
                       </Col>
                     </Col>
                   </Row>
-                 
+
                   <Button type="submit" value="submit" color="primary">
                     Register
-                    
                   </Button>
-                  
-                  
                 </Form>
               </TabPane>
             </TabContent>
@@ -399,7 +380,10 @@ class Lostpet extends Component {
           isOpen={this.state.isEmailSentModalOpen}
           toggle={this.toggleModalEmailSent}
         >
-          <ModalHeader toggle={this.toggleModalEmailSent}>
+          <ModalHeader
+            toggle={this.toggleModalEmailSent}
+            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+          >
             Notification
           </ModalHeader>
           <ModalBody>Email was sent to the owner.</ModalBody>
@@ -409,7 +393,10 @@ class Lostpet extends Component {
           isOpen={this.state.isEmailNotSentModalOpen}
           toggle={this.toggleModalEmailNotSent}
         >
-          <ModalHeader toggle={this.toggleModalEmailNotSent}>
+          <ModalHeader
+            toggle={this.toggleModalEmailNotSent}
+            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+          >
             Notification
           </ModalHeader>
           <ModalBody>Pet Id does not match!</ModalBody>

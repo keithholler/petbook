@@ -3,7 +3,6 @@ import thunk from 'redux-thunk';
 import {createForms} from 'react-redux-form';
 import { UniqueIds } from "./uniqueId";
 import { Post } from "./post";
-import { Feed } from "./feedObjects";
 import { UserInfo } from "./userInfo";
 import { Petcard } from "./petCard";
 import {InitialFeedback} from './profileForm';
@@ -14,8 +13,7 @@ export const ConfigureStore = () => {
   const store = createStore(
     combineReducers({
       uniqueId: UniqueIds,
-      post: Post,
-      feed: Feed,
+      post: Post, 
       userInfo:UserInfo,
       petcard:Petcard,
       ...createForms({

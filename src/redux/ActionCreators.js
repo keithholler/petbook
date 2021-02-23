@@ -5,11 +5,6 @@ export const addUniqueId = (uniqueId) => ({
   payload: uniqueId,
 });
 
-export const addFeed = (feed) => ({
-  type: ActionTypes.ADD_FEED,
-  payload: feed,
-});
-
 export const postComment = (text,postImage) => ({
   type: ActionTypes.ADD_POST,
   payload: {text,postImage}

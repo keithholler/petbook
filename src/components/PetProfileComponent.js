@@ -27,7 +27,6 @@ function Uni(props) {
 function ProfilePet(props) {
   return props.petcard.petcard.map((pet, index) => {
     return (
-      // <div className=" container-container col col-lg-6 ">
       <div
         key={index}
         className="flip-card-container mx-auto pr-3 pr-md-0 mb-5"
@@ -200,7 +199,6 @@ function ProfilePet(props) {
           </div>
         </div>
       </div>
-      // </div>
     );
   });
 }
@@ -215,22 +213,20 @@ class AddPet extends Component {
       },
       petImg: null,
       petImgURL: "",
-      progressState:0
+      progressState: 0,
     };
-    this.toggleModal = this.toggleModal.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  toggleModal() {
+  toggleModal = () => {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
     });
-  }
-  handleSubmit(values) {
+  };
+  handleSubmit = (values) => {
     this.toggleModal();
     // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
     this.props.addPetCard(uuid(), values, this.state.petImgURL);
-  }
+  };
 
   handleChange = (e) => {
     if (e.target.files[0]) {
@@ -281,7 +277,7 @@ class AddPet extends Component {
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader
             toggle={this.toggleModal}
-            style={{ backgroundColor: "#1b8eb1", color: "white" }}
+            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
           >
             Animal Details
           </ModalHeader>
@@ -332,7 +328,11 @@ class AddPet extends Component {
                     onClick={this.handleUpload}
                   >
                     Upload
-                    <progress className="ml-1" style={{width:"50px",height:"10px",color:"green"}} value={this.state.progressState}/>
+                    <progress
+                      className="ml-1"
+                      style={{ width: "50px", height: "10px", color: "green" }}
+                      value={this.state.progressState}
+                    />
                   </button>
                   <Errors
                     className="text-danger"
@@ -476,13 +476,10 @@ class PetProfile extends Component {
       breed: "",
       mainColor: "",
       secondaryColor: "",
-      progressState:0
+      progressState: 0,
     };
-
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleSubmit(values) {
+  handleSubmit = (values) => {
     this.props.addUserInfo(
       this.props.uniqueId.uniqueId,
       this.state.profileImageURL,
@@ -490,9 +487,9 @@ class PetProfile extends Component {
     );
 
     // this.props.resetProfileForm();
-  }
+  };
 
-  handleInputChange(event) {
+  handleInputChange = (event) => {
     const target = event.target;
     const name = target.name;
     const value = target.type === "checkbox" ? target.checked : target.value;
@@ -500,7 +497,7 @@ class PetProfile extends Component {
     this.setState({
       [name]: value,
     });
-  }
+  };
 
   handleChange = (e) => {
     if (e.target.files[0]) {
@@ -568,7 +565,6 @@ class PetProfile extends Component {
           <Row className="form-group">
             <Label htmlFor="profileImage" md={2} className="">
               Profile Image
-             
             </Label>
             <Col md={10}>
               <Control.file
@@ -580,14 +576,17 @@ class PetProfile extends Component {
                 onChange={this.handleChange}
                 style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
               />
-               <button
+              <button
                 type="button"
                 className="btn btn-primary text-nowrap mt-1"
                 onClick={this.handleUpload}
-          
               >
                 Upload
-                <progress className="ml-1" style={{width:"50px",height:"10px"}} value={this.state.progressState}/>
+                <progress
+                  className="ml-1"
+                  style={{ width: "50px", height: "10px" }}
+                  value={this.state.progressState}
+                />
               </button>
               <Errors
                 className="text-danger"

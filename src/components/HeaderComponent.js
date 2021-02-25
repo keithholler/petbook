@@ -128,18 +128,8 @@ class Header extends Component {
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar className="mx-auto">
-              {/* <NavItem className="m-2 ">
-                <NavLink
-                  tag={RRNavLink}
-                  className="headerLinks"
-                  activeClassName="active"
-                  to="/Shelters"
-                  onClick={!this.state.collapsed ? this.toggleNav : ""}
-                >
-                  <h5>Shelters</h5>
-                </NavLink>
-              </NavItem> */}
-              <NavItem className="m-2 ">
+       
+              <NavItem className="m-2">
                 <NavLink
                   tag={RRNavLink}
                   style={{
@@ -155,6 +145,7 @@ class Header extends Component {
                   }}
                 >
                   {window.location.pathname === "/LostPets" ? (
+                    <div style={{textAlign:"justify",width:"40px",marginRight:"50px"}} className="text-center">
                     <img
                       src="petbook/assets/lostFound.png"
                       alt="lostPets"
@@ -163,10 +154,15 @@ class Header extends Component {
                         height: "40px",
                         position: "relative",
                         margin: "3px",
+                        marginLeft:"60%",
+                        display:"block",
                       }}
                       className="lostFound2"
                     />
+                    <span className="text-nowrap">Lost & Found</span>
+                   </div>
                   ) : (
+                    
                     <img
                       src="petbook/assets/lostFound.png"
                       alt="lostPets"
@@ -175,13 +171,17 @@ class Header extends Component {
                         height: "40px",
                         position: "relative",
                         margin: "3px",
+                        marginLeft:"60%",
+                        display:"block",
                       }}
                       className="lostFound"
                     />
+                
+                   
                   )}
                 </NavLink>
               </NavItem>
-              <NavItem className="m-2 align-self-center">
+              <NavItem className="m-2">
                 <NavLink
                   tag={RRNavLink}
                   onClick={!this.state.collapsed ? this.toggleNav : ""}
@@ -198,6 +198,7 @@ class Header extends Component {
                   activeClassName="petHome"
                 >
                   {window.location.pathname === "/Feed" ? (
+                        <div style={{textAlign:"justify",width:"40px"}}>
                     <img
                       src="petbook/assets/home4.png"
                       alt="feed"
@@ -206,10 +207,14 @@ class Header extends Component {
                         height: "40px",
                         position: "relative",
                         margin: "3px",
+                        display:"block",
                       }}
                       className="petHome2"
                     />
+                    <span className="text-nowrap">Home</span>
+                    </div>
                   ) : (
+                    <div style={{textAlign:"justify",width:"40px"}}>
                     <img
                       src="petbook/assets/home4.png"
                       alt="feed"
@@ -218,9 +223,12 @@ class Header extends Component {
                         height: "40px",
                         position: "relative",
                         margin: "3px",
+                        display:"block",
                       }}
                       className="petHome"
                     />
+                    <span className="text-nowrap">Home</span>
+                    </div>
                   )}
                 </NavLink>
               </NavItem>

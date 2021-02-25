@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/petbook/static/css/main.3813dd14.chunk.css",
-    "main.js": "/petbook/static/js/main.80f841e8.chunk.js",
-    "main.js.map": "/petbook/static/js/main.80f841e8.chunk.js.map",
+    "main.css": "/petbook/static/css/main.33914655.chunk.css",
+    "main.js": "/petbook/static/js/main.2d4fa9f2.chunk.js",
+    "main.js.map": "/petbook/static/js/main.2d4fa9f2.chunk.js.map",
     "runtime-main.js": "/petbook/static/js/runtime-main.4728381c.js",
     "runtime-main.js.map": "/petbook/static/js/runtime-main.4728381c.js.map",
     "static/css/2.9ee112b9.chunk.css": "/petbook/static/css/2.9ee112b9.chunk.css",
@@ -12,7 +12,7 @@
     "static/js/3.2f39f2ca.chunk.js.map": "/petbook/static/js/3.2f39f2ca.chunk.js.map",
     "index.html": "/petbook/index.html",
     "static/css/2.9ee112b9.chunk.css.map": "/petbook/static/css/2.9ee112b9.chunk.css.map",
-    "static/css/main.3813dd14.chunk.css.map": "/petbook/static/css/main.3813dd14.chunk.css.map",
+    "static/css/main.33914655.chunk.css.map": "/petbook/static/css/main.33914655.chunk.css.map",
     "static/js/2.ddc5df6a.chunk.js.LICENSE.txt": "/petbook/static/js/2.ddc5df6a.chunk.js.LICENSE.txt",
     "static/media/font-awesome.css": "/petbook/static/media/fontawesome-webfont.f691f37e.woff"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.4728381c.js",
     "static/css/2.9ee112b9.chunk.css",
     "static/js/2.ddc5df6a.chunk.js",
-    "static/css/main.3813dd14.chunk.css",
-    "static/js/main.80f841e8.chunk.js"
+    "static/css/main.33914655.chunk.css",
+    "static/js/main.2d4fa9f2.chunk.js"
   ]
 }

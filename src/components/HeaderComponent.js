@@ -159,10 +159,12 @@ class Header extends Component {
                       }}
                       className="lostFound2"
                     />
+                    
                     <span className="text-nowrap">Lost & Found</span>
                    </div>
                   ) : (
-                    
+                    <div style={{textAlign:"justify",width:"40px",marginRight:"50px"}} className="text-center">
+
                     <img
                       src="petbook/assets/lostFound.png"
                       alt="lostPets"
@@ -177,7 +179,8 @@ class Header extends Component {
                       className="lostFound"
                     />
                 
-                   
+                    <span className="text-nowrap">Lost & Found</span>
+                    </div>
                   )}
                 </NavLink>
               </NavItem>

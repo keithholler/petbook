@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { Switch, Route, Redirect, withRouter,HashRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "./HeaderComponent";
 import Feed from "./FeedComponent";
@@ -67,7 +67,8 @@ class Main extends Component {
           addUserInfo={this.props.addUserInfo}
           userInfo={this.props.userInfo}
         />
-        <Switch>
+       
+          <Switch>
           <Route
             exact
             path="/"
@@ -111,7 +112,7 @@ class Main extends Component {
             <Shelters />
           </Route>
           <Route
-            path="/LostPets"
+      path="/LostPets"
             render={() => (
               <Lostpet
               addUniqueId={this.props.addUniqueId}
@@ -125,7 +126,7 @@ class Main extends Component {
             )}
           />
           <Route
-            path="/Feed"
+            exact path="/Feed"
             render={() => (
               <Feed
                 postComment={this.props.postComment}
@@ -136,7 +137,7 @@ class Main extends Component {
           />
 
           <Redirect to="/LostPets" />
-        </Switch>
+          </Switch>
       </React.Fragment>
     );
   }

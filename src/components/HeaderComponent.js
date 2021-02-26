@@ -144,25 +144,9 @@ class Header extends Component {
                     textDecoration: "underline",
                   }}
                 >
-                  {window.location.pathname === "/LostPets" ? (
+                 
                     <div style={{textAlign:"justify",width:"40px",marginRight:"50px"}} className="text-center">
-                    <img
-                      src="petbook/assets/lostFound.png"
-                      alt="lostPets"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        position: "relative",
-                        margin: "3px",
-                        marginLeft:"60%",
-                        display:"block",
-                      }}
-                      className="lostFound2"
-                    />
-                    <span className="text-nowrap">Lost & Found</span>
-                   </div>
-                  ) : (
-                    <div style={{textAlign:"justify",width:"40px",marginRight:"50px"}} className="text-center">
+
                     <img
                       src="petbook/assets/lostFound.png"
                       alt="lostPets"
@@ -179,7 +163,7 @@ class Header extends Component {
                 
                     <span className="text-nowrap">Lost & Found</span>
                     </div>
-                  )}
+             
                 </NavLink>
               </NavItem>
               <NavItem className="m-2">
@@ -198,8 +182,8 @@ class Header extends Component {
                   }}
                   activeClassName="petHome"
                 >
-                  {window.location.pathname === "/Feed" ? (
-                        <div style={{textAlign:"justify",width:"40px"}}>
+                  
+                 <div style={{textAlign:"justify",width:"40px",marginLeft:"4.5%"}} className="text-center">
                     <img
                       src="petbook/assets/home4.png"
                       alt="feed"
@@ -209,30 +193,13 @@ class Header extends Component {
                         position: "relative",
                         margin: "3px",
                         display:"block",
-                        marginLeft:"60%",
-                      }}
-                      className="petHome2"
-                    />
-                    <span style={{marginLeft:"55%",}} className="text-nowrap">Home</span>
-                    </div>
-                  ) : (
-                    <div style={{textAlign:"justify",width:"40px"}}>
-                    <img
-                      src="petbook/assets/home4.png"
-                      alt="feed"
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        position: "relative",
-                        margin: "3px",
-                        display:"block",
-                        marginLeft:"60%",
+                        marginLeft:"5%",
                       }}
                       className="petHome"
                     />
-                    <span style={{marginLeft:"55%",}} className="text-nowrap">Home</span>
+                    <span  className="text-nowrap">Home</span>
                     </div>
-                  )}
+                  
                 </NavLink>
               </NavItem>
             </Nav>
@@ -263,7 +230,7 @@ class Header extends Component {
 
             {this.state.collapsed ? (
               <DropdownMenu right>
-                .
+                
                 <NavItem className="">
                   {this.props.userInfo.userInfo.profileInfo ? (
                     <Link style={{ color: "black" }} to="/PetProfile">

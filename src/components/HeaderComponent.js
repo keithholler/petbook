@@ -128,8 +128,8 @@ class Header extends Component {
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar className="mx-auto">
-       
-              <NavItem className="mr-5">
+
+              <NavItem className="mr-5 ml-4">
                 <NavLink
                   tag={RRNavLink}
                   style={{
@@ -144,26 +144,23 @@ class Header extends Component {
                     textDecoration: "underline",
                   }}
                 >
-                 
-                    <div style={{textAlign:"justify",width:"40px"}} className="text-center">
+
+          
 
                     <img
                       src="petbook/assets/lostFound.png"
                       alt="lostPets"
                       style={{
-                        width: "40px",
-                        height: "40px",
+                        width: "30px",
+                        height: "30px",
                         position: "relative",
                         margin: "3px",
-                        marginLeft:"60%",
-                        display:"block",
                       }}
-                      className="lostFound"
                     />
-                
-                    <span className="text-nowrap">Lost & Found</span>
-                    </div>
-             
+          
+                    <span style={{display: "inline"}} className="text-nowrap align-bottom">Lost & Found</span>
+                  
+
                 </NavLink>
               </NavItem>
               <NavItem className="mr-5 ml-4">
@@ -182,24 +179,19 @@ class Header extends Component {
                   }}
                   activeClassName="petHome"
                 >
-                  
-                 <div style={{textAlign:"justify",width:"40px"}} className="text-center">
                     <img
                       src="petbook/assets/home4.png"
                       alt="feed"
                       style={{
-                        width: "40px",
-                        height: "40px",
+                        width: "30px",
+                        height: "30px",
                         position: "relative",
                         margin: "3px",
-                        display:"block",
-                        marginLeft:"5%",
                       }}
-                      className="petHome"
                     />
-                    <span  className="text-nowrap">Home</span>
-                    </div>
-                  
+                    <span style={{display: "inline"}}  className="text-nowrap align-bottom">Home</span>
+                
+
                 </NavLink>
               </NavItem>
             </Nav>
@@ -230,7 +222,7 @@ class Header extends Component {
 
             {this.state.collapsed ? (
               <DropdownMenu right>
-                
+
                 <NavItem className="">
                   {this.props.userInfo.userInfo.profileInfo ? (
                     <Link style={{ color: "black" }} to="/PetProfile">

@@ -47,7 +47,7 @@ function Post(props) {
                     {post.text}
                   </div>
                   <div className="text-center">
-                  {post.postImage=== null ? <div></div>:<img style= {{ width: "400px" }} src={post.postImage} />}
+                  {post.postImage=== null ? <div></div>:<img style= {{ width: "20vw" }} src={post.postImage} />}
                     
                   </div>
                 </h3>
@@ -85,7 +85,6 @@ class PostForm extends Component {
   
     this.props.postComment(values.text, this.state.feedPicPostURL);
     
-    this.setState({ feedPicPostURL: null });
   };
   handleChange = (e) => {
     if (e.target.files[0]) {

@@ -144,9 +144,6 @@ class Header extends Component {
                     textDecoration: "underline",
                   }}
                 >
-
-          
-
                     <img
                       src="petbook/assets/lostFound.png"
                       alt="lostPets"

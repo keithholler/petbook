@@ -162,7 +162,7 @@ class Header extends Component {
                     <span className="text-nowrap">Lost & Found</span>
                    </div>
                   ) : (
-                    
+                    <div style={{textAlign:"justify",width:"40px",marginRight:"50px"}} className="text-center">
                     <img
                       src="petbook/assets/lostFound.png"
                       alt="lostPets"
@@ -177,7 +177,8 @@ class Header extends Component {
                       className="lostFound"
                     />
                 
-                   
+                    <span className="text-nowrap">Lost & Found</span>
+                    </div>
                   )}
                 </NavLink>
               </NavItem>
@@ -208,10 +209,11 @@ class Header extends Component {
                         position: "relative",
                         margin: "3px",
                         display:"block",
+                        marginLeft:"60%",
                       }}
                       className="petHome2"
                     />
-                    <span className="text-nowrap">Home</span>
+                    <span style={{marginLeft:"55%",}} className="text-nowrap">Home</span>
                     </div>
                   ) : (
                     <div style={{textAlign:"justify",width:"40px"}}>
@@ -224,10 +226,11 @@ class Header extends Component {
                         position: "relative",
                         margin: "3px",
                         display:"block",
+                        marginLeft:"60%",
                       }}
                       className="petHome"
                     />
-                    <span className="text-nowrap">Home</span>
+                    <span style={{marginLeft:"55%",}} className="text-nowrap">Home</span>
                     </div>
                   )}
                 </NavLink>

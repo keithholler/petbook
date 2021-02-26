@@ -230,40 +230,39 @@ class AddPet extends Component {
 
   handleChange = (e) => {
     if (e.target.files[0]) {
-      this.setState({ petImg: e.target.files[0] });
+      this.setState({ petImg: e.target.files[0] },this.handleUpload = (event) => {
+        console.log(this.state.petImg);
+        const uploadTask = storage
+          .ref(`images/${this.state.petImg.name}`)
+          .put(this.state.petImg);
+    
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            this.setState({ progressState: progress });
+          },
+          (error) => {
+            console.log(error);
+          },
+          () => {
+            storage
+              .ref("images")
+              .child(this.state.petImg.name)
+              .getDownloadURL()
+              .then((url) => {
+                console.log(url);
+                this.setState({ petImgURL: url });
+                console.log(this.state.petImgURL);
+              });
+          }
+        );
+      });
     }
   };
-  handleUpload = (event) => {
-    event.preventDefault();
-    console.log(this.state.petImg);
-    const uploadTask = storage
-      .ref(`images/${this.state.petImg.name}`)
-      .put(this.state.petImg);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        this.setState({ progressState: progress });
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(this.state.petImg.name)
-          .getDownloadURL()
-          .then((url) => {
-            console.log(url);
-            this.setState({ petImgURL: url });
-            console.log(this.state.petImgURL);
-          });
-      }
-    );
-  };
+  
 
   render() {
     return (
@@ -321,19 +320,7 @@ class AddPet extends Component {
                     className="form-control"
                     onChange={this.handleChange}
                     style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
-                  />
-                  <button
-                    type="button"
-                    className=" btn btn-primary mt-1"
-                    onClick={this.handleUpload}
-                  >
-                    Upload
-                    <progress
-                      className="ml-1"
-                      style={{ width: "50px", height: "10px", color: "green" }}
-                      value={this.state.progressState}
-                    />
-                  </button>
+                  />                  
                   <Errors
                     className="text-danger"
                     model=".petImg"
@@ -501,38 +488,38 @@ class PetProfile extends Component {
 
   handleChange = (e) => {
     if (e.target.files[0]) {
-      this.setState({ profileImage: e.target.files[0] });
+      this.setState({ profileImage: e.target.files[0] },this.handleUpload = () => {
+        const uploadTask = storage
+          .ref(`images/${this.state.profileImage.name}`)
+          .put(this.state.profileImage);
+    
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            this.setState({ progressState: progress });
+          },
+          (error) => {
+            console.log(error);
+          },
+          () => {
+            storage
+              .ref("images")
+              .child(this.state.profileImage.name)
+              .getDownloadURL()
+              .then((url) => {
+                console.log(url);
+                this.setState({ profileImageURL: url });
+              });
+          }
+        );
+      });
     }
   };
 
-  handleUpload = () => {
-    const uploadTask = storage
-      .ref(`images/${this.state.profileImage.name}`)
-      .put(this.state.profileImage);
-
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        this.setState({ progressState: progress });
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(this.state.profileImage.name)
-          .getDownloadURL()
-          .then((url) => {
-            console.log(url);
-            this.setState({ profileImageURL: url });
-          });
-      }
-    );
-  };
+  
 
   render() {
     return (
@@ -566,7 +553,8 @@ class PetProfile extends Component {
             <Label htmlFor="profileImage" md={2} className="">
               Profile Image
             </Label>
-            <Col md={10}>
+            <Col md={8}>
+              
               <Control.file
                 model=".profileImage"
                 id="profileImage"
@@ -576,18 +564,6 @@ class PetProfile extends Component {
                 onChange={this.handleChange}
                 style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
               />
-              <button
-                type="button"
-                className="btn btn-primary text-nowrap mt-1"
-                onClick={this.handleUpload}
-              >
-                Upload
-                <progress
-                  className="ml-1"
-                  style={{ width: "50px", height: "10px" }}
-                  value={this.state.progressState}
-                />
-              </button>
               <Errors
                 className="text-danger"
                 model=".profileImage"
@@ -600,7 +576,7 @@ class PetProfile extends Component {
             <Label htmlFor="profileName" md={2}>
               Profile Name
             </Label>
-            <Col md={10}>
+            <Col md={8}>
               <Control.text
                 model=".profileName"
                 id="profileName"
@@ -625,7 +601,7 @@ class PetProfile extends Component {
             <Label htmlFor="firstName" md={2}>
               First Name
             </Label>
-            <Col md={10}>
+            <Col md={8}>
               <Control.text
                 model=".firstName"
                 id="firstName"
@@ -647,7 +623,7 @@ class PetProfile extends Component {
             <Label htmlFor="LastName" md={2}>
               Last Name
             </Label>
-            <Col md={10}>
+            <Col md={8}>
               <Control.text
                 model=".lastName"
                 id="lastName"
@@ -668,7 +644,7 @@ class PetProfile extends Component {
             <Label htmlFor="email" md={2}>
               Email
             </Label>
-            <Col md={10}>
+            <Col md={8}>
               <Control.text
                 model=".email"
                 id="email"

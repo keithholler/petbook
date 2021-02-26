@@ -23,7 +23,7 @@ function Post(props) {
                 style={{ backgroundColor: "white" }}
               >
                 <h3 className="projectreason ">
-                  {/* {props.userInfo.userPick} */}
+                
                   <div style={{ fontSize: "12px" }}>
                     <img
                       id="music"
@@ -47,7 +47,8 @@ function Post(props) {
                     {post.text}
                   </div>
                   <div className="text-center">
-                    <img style={{ width: "500px" }} src={post.postImage} />
+                  {post.postImage=== null ? <div></div>:<img style= {{ width: "400px" }} src={post.postImage} />}
+                    
                   </div>
                 </h3>
               </div>
@@ -70,6 +71,7 @@ class PostForm extends Component {
       feedPicPost: null,
       feedPicPostURL: null,
       progressState: 0,
+      text:null
     };
   }
 
@@ -80,42 +82,43 @@ class PostForm extends Component {
   };
   handleSubmit = (values) => {
     this.toggleModal();
-    // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
+  
     this.props.postComment(values.text, this.state.feedPicPostURL);
+    
+    this.setState({ feedPicPostURL: null });
   };
   handleChange = (e) => {
     if (e.target.files[0]) {
-      this.setState({ feedPicPost: e.target.files[0] });
+      this.setState({ feedPicPost: e.target.files[0] },this.handleUpload = () => {
+        const uploadTask = storage
+          .ref(`images/${this.state.feedPicPost.name}`)
+          .put(this.state.feedPicPost);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            );
+            this.setState({ progressState: progress });
+          },
+          (error) => {
+            console.log(error);
+          },
+          () => {
+            storage
+              .ref("images")
+              .child(this.state.feedPicPost.name)
+              .getDownloadURL()
+              .then((url) => {
+                console.log(url);
+                this.setState({ feedPicPostURL: url });
+              });
+          }
+        );
+      });
     }
   };
-  handleUpload = (event) => {
-    event.preventDefault();
-    const uploadTask = storage
-      .ref(`images/${this.state.feedPicPost.name}`)
-      .put(this.state.feedPicPost);
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        const progress = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        );
-        this.setState({ progressState: progress });
-      },
-      (error) => {
-        console.log(error);
-      },
-      () => {
-        storage
-          .ref("images")
-          .child(this.state.feedPicPost.name)
-          .getDownloadURL()
-          .then((url) => {
-            console.log(url);
-            this.setState({ feedPicPostURL: url });
-          });
-      }
-    );
-  };
+  
 
   render() {
     return (
@@ -166,14 +169,6 @@ class PostForm extends Component {
                     className="form-control"
                     onChange={this.handleChange}
                   />
-                  <button
-                    type="button"
-                    className="ml-4 btn btn-primary"
-                    onClick={this.handleUpload}
-                  >
-                    Upload
-                  </button>
-                  <progress value={this.state.progressState} />
                 </FormGroup>
                 <Button type="submit" value="submit" color="primary">
                   Submit
@@ -229,13 +224,25 @@ class Feed extends Component {
               >
                 <h3 className="projectreason text-nowrap">
                   <div style={{ fontSize: "12px" }}>
-                    <img
-                      id="music"
-                      className="profileImg mr-2"
-                      src={this.props.userInfo.userInfo.userPick}
-                      alt=""
-                      style={{ width: "40px" }}
-                    />
+                  {typeof this.props.userInfo.userInfo.profileInfo ===
+                "undefined" ||
+              this.props.userInfo.userInfo.userPick === "localImageUrl" ? (
+                <img
+                  id="proPic"
+                  className="profileImg rounded-circle ml-3"
+                  src="petbook/assets/default.png"
+                  alt=""
+                  style={{ width: "40px" }}
+                />
+              ) : (
+                <img
+                  id="proPic"
+                  className="profileImg rounded-circle ml-3"
+                  src={this.props.userInfo.userInfo.userPick}
+                  alt=""
+                  style={{ width: "40px" }}
+                />
+              )}
                     {!typeof this.props.userInfo.userInfo.profileInfo ===
                     "undefined"
                       ? this.props.userInfo.userInfo.profileInfo.profileName

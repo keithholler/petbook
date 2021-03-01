@@ -43,7 +43,7 @@ function ProfilePet(props) {
               className="profileImg "
               src={pet.petImage}
               alt=""
-              style={{ width: "70%" }}
+              style={{ width: "90%",maxWidth:"100%",height:"auto"}}
             ></img>
           </div>
           <div className="flip-card-back rounded-lg ">

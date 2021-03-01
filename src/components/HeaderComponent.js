@@ -47,7 +47,6 @@ class Header extends Component {
       alert("Please Register First");
     }
     this.toggleModal();
-    alert(this.props.userInfo.userInfo.userPick);
   };
 
   handleRegister = (values) => {
@@ -498,7 +497,7 @@ class Header extends Component {
             </TabContent>
           </ModalBody>
         </Modal>
-        <Modal
+        {/* <Modal
           isOpen={this.state.isPetIdModalOpen}
           toggle={this.toggleModalPetId}
         >
@@ -513,7 +512,7 @@ class Header extends Component {
             Owner Id
           </ModalHeader>
           <ModalBody>{this.props.uniqueId.uniqueId}</ModalBody>
-        </Modal>
+        </Modal> */}
       </React.Fragment>
     );
   }

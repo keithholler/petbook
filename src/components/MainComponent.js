@@ -50,7 +50,7 @@ const mapDispatchToProps = {
       secondaryColor
     ),
   addPetCard: (petId, petcard,petImage) => addPetCard(petId, petcard,petImage),
-  // resetProfileForm: () => actions.reset("profileForm"),
+   resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
 
@@ -129,9 +129,12 @@ class Main extends Component {
             exact path="/Feed"
             render={() => (
               <Feed
+              addUniqueId={this.props.addUniqueId}
                 postComment={this.props.postComment}
                 post={this.props.post}
                 userInfo={this.props.userInfo}
+                uniqueId={this.props.uniqueId}
+                addUserInfo={this.props.addUserInfo}
               />
             )}
           />

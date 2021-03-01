@@ -65,11 +65,11 @@ body,
 }
 
 .App {
-  background: rgb(240, 240, 240);
+  background: rgb(253, 225, 166);
   z-index: -1;
 }
 html {
-  background: rgb(240, 240, 240);
+  background: rgb(253, 225, 166);
 }
 
 .square-box {
@@ -82,9 +82,7 @@ html {
   left: 600px;
   border-style: dashed;
 }
-progress::-webkit-progress-value {
-  background: green;
-}
+
 
 .rectangle {
   cursor: pointer;
@@ -166,6 +164,7 @@ progress::-webkit-progress-value {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  width:100%;
 }
 
 .flip-card-front:hover {
@@ -190,3 +189,7 @@ img {
   height: 100%;
 }
 
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}

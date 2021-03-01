@@ -7,9 +7,23 @@ import {
   Modal,
   ModalBody,
   Label,
+  Card,
+  CardBody,
+  CardTitle,
+  CardText,
+  CardImg,
+  TabPane,
+  TabContent,
+  Row,
+  Col,
+  Nav,
+  NavItem,
+  NavLink,
 } from "reactstrap";
-import { Control, LocalForm } from "react-redux-form";
+import { Control, LocalForm, Form } from "react-redux-form";
 import { storage } from "../firebase";
+import classnames from "classnames";
+import uuid from "react-uuid";
 
 function Post(props) {
   return props.post.post.map((post, index) => {
@@ -17,42 +31,57 @@ function Post(props) {
       <div className="container" key={index}>
         <div className="row row-content">
           <div className="col-12 mx-auto p-2">
-            <div className="flip-cardfeed ">
-              <div
-                className="flip-card-frontfeed rounded-lg"
-                style={{ backgroundColor: "white" }}
-              >
-                <h3 className="projectreason ">
-                
-                  <div style={{ fontSize: "12px" }}>
-                    <img
-                      id="music"
-                      className="profileImg mr-2"
-                      src={props.userPick}
-                      alt=""
-                      style={{ width: "40px" }}
-                    />
-                    {props.userInfo.userInfo.profileInfo.profileName
-                      ? props.userInfo.userInfo.profileInfo.profileName
-                      : "Not Logged In"}
-                  </div>
-
-                  <div
-                    className="text-center text-break text-wrap"
-                    style={{
-                      fontSize: "calc(1em + 1vw)",
-                      height: "auto!important",
-                    }}
-                  >
-                    {post.text}
-                  </div>
-                  <div className="text-center">
-                  {post.postImage=== null ? <div></div>:<img style= {{ width: "20vw" }} src={post.postImage} />}
-                    
-                  </div>
-                </h3>
+            <Card className="m-2 lostPetCard">
+            <div class="card-horizontal">
+            {typeof props.userInfo.userInfo.profileInfo ===
+                      "undefined" ||
+                    props.userInfo.userInfo.userPick ===
+                      "localImageUrl" ? (
+                        <CardImg
+                        id="music"
+                        className="profileImg mr-2"
+                        src="petbook/assets/default.png"
+                        alt=""
+                        style={{ width: "40px" }}
+                      />
+                    ) : (
+                      <CardImg
+                id="music"
+                className="profileImg mr-2"
+                src={props.userInfo.userInfo.userPick}
+                alt=""
+                style={{ width: "40px" }}
+              />
+                    )}
+            
+              <CardTitle style={{fontFamily: "Fredoka One",
+                fontWeight: "200" }} className="mt-2">
+                {" "}
+                {typeof props.userInfo.userInfo.profileInfo ===
+                          "undefined" ? "Not Logged In"
+                      : props.userInfo.userInfo.profileInfo.profileName}
+              </CardTitle>
+           
               </div>
-            </div>
+              <CardBody  className="mx-auto" style={{width:"100%",height:"auto"}}>
+                <CardText
+                  className="text-center text-break text-wrap"
+                  style={{
+                    fontSize: "calc(.5em + 1vw)",
+                    height: "auto!important",
+                    fontFamily: "Nunito",
+                fontWeight: "400",
+                  }}
+                >
+                  {post.text}
+                </CardText>
+                {post.postImage === null ? (
+                  <div></div>
+                ) : (
+                  <CardImg style={{maxWidth:"100%",height:"auto"}} src={post.postImage} />
+                )}
+              </CardBody>
+            </Card>
           </div>
         </div>
       </div>
@@ -71,7 +100,7 @@ class PostForm extends Component {
       feedPicPost: null,
       feedPicPostURL: null,
       progressState: 0,
-      text:null
+      text: null,
     };
   }
 
@@ -82,42 +111,43 @@ class PostForm extends Component {
   };
   handleSubmit = (values) => {
     this.toggleModal();
-  
+
     this.props.postComment(values.text, this.state.feedPicPostURL);
-    
   };
   handleChange = (e) => {
     if (e.target.files[0]) {
-      this.setState({ feedPicPost: e.target.files[0] },this.handleUpload = () => {
-        const uploadTask = storage
-          .ref(`images/${this.state.feedPicPost.name}`)
-          .put(this.state.feedPicPost);
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            this.setState({ progressState: progress });
-          },
-          (error) => {
-            console.log(error);
-          },
-          () => {
-            storage
-              .ref("images")
-              .child(this.state.feedPicPost.name)
-              .getDownloadURL()
-              .then((url) => {
-                console.log(url);
-                this.setState({ feedPicPostURL: url });
-              });
-          }
-        );
-      });
+      this.setState(
+        { feedPicPost: e.target.files[0] },
+        (this.handleUpload = () => {
+          const uploadTask = storage
+            .ref(`images/${this.state.feedPicPost.name}`)
+            .put(this.state.feedPicPost);
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+              this.setState({ progressState: progress });
+            },
+            (error) => {
+              console.log(error);
+            },
+            () => {
+              storage
+                .ref("images")
+                .child(this.state.feedPicPost.name)
+                .getDownloadURL()
+                .then((url) => {
+                  console.log(url);
+                  this.setState({ feedPicPostURL: url });
+                });
+            }
+          );
+        })
+      );
     }
   };
-  
 
   render() {
     return (
@@ -126,10 +156,10 @@ class PostForm extends Component {
           type="submit"
           color="primary"
           outline
-          className="fa-lg"
+          className="fa-sm"
           onClick={this.toggleModal}
         >
-          <i className="fa fa-pencil" /> Post
+          <i className="fa fa-pencil " /> Post
         </Button>
 
         <div className="rectangle rounded" onClick={this.toggleModal}></div>
@@ -156,6 +186,10 @@ class PostForm extends Component {
                   rows="6"
                   className="form-control"
                   defaultValue=""
+                  style={{
+                    fontFamily: "Nunito",
+                fontWeight: "400",
+                  }}
                 />
               </div>
               <div className="form-group">
@@ -188,6 +222,7 @@ class Feed extends Component {
       mainProfileName: "Keith",
       postText: "",
       postImage: "",
+      activeTab: "2",
     };
   }
   handleInputChange = (event) => {
@@ -207,6 +242,48 @@ class Feed extends Component {
       postImage: "",
     });
   };
+  handleLogin = (values) => {
+    if (values.email) {
+      alert("Logged In");
+    } else {
+      alert("Please Register First");
+    }
+    this.toggleModal();
+  };
+
+  handleRegister = (values) => {
+    this.props.addUserInfo(
+      this.props.uniqueId.uniqueId,
+      "localImageUrl",
+      values,
+      true
+    );
+    this.toggleModal();
+    this.generateId();
+  };
+
+  generateId = () => {
+    this.props.addUniqueId(uuid());
+  };
+
+  toggleModal = () => {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen,
+    });
+  };
+
+  componentDidMount = () => {
+    if (typeof this.props.userInfo.userInfo.profileInfo === "undefined") {
+      this.setState({
+        isModalOpen: !this.state.isModalOpen,
+      });
+    }
+  };
+  toggleTab = (tab) => {
+    if (this.state.activeTab !== tab) {
+      this.setState({ activeTab: tab });
+    }
+  };
   render() {
     return (
       <div className="container ">
@@ -216,52 +293,207 @@ class Feed extends Component {
           style={{ position: "relative" }}
         >
           <div className="col-12 mx-auto p-2 ">
-            <div className="flip-cardfeed ">
-              <div
-                className="flip-card-frontfeed rounded-lg"
-                style={{ backgroundColor: "white" }}
-              >
-                <h3 className="projectreason text-nowrap">
-                  <div style={{ fontSize: "12px" }}>
-                  {typeof this.props.userInfo.userInfo.profileInfo ===
-                "undefined" ||
-              this.props.userInfo.userInfo.userPick === "localImageUrl" ? (
-                <img
-                  id="proPic"
-                  className="profileImg rounded-circle ml-3"
-                  src="petbook/assets/default.png"
-                  alt=""
-                  style={{ width: "40px" }}
-                />
-              ) : (
-                <img
-                  id="proPic"
-                  className="profileImg rounded-circle ml-3"
-                  src={this.props.userInfo.userInfo.userPick}
-                  alt=""
-                  style={{ width: "40px" }}
-                />
-              )}
-                    {!typeof this.props.userInfo.userInfo.profileInfo ===
-                    "undefined"
-                      ? this.props.userInfo.userInfo.profileInfo.profileName
-                      : "Not Logged In"}
-                    <div className="border">
+
+
+          <Card className="m-2 lostPetCard">
+            <div class="card-horizontal">
+            {typeof this.props.userInfo.userInfo.profileInfo ===
+                      "undefined" ||
+                    this.props.userInfo.userInfo.userPick ===
+                      "localImageUrl" ? (
+                        <CardImg
+                        id="music"
+                        className="profileImg mr-2"
+                        src="petbook/assets/default.png"
+                        alt=""
+                        style={{ width: "40px" }}
+                      />
+                    ) : (
+                      <CardImg
+                id="music"
+                className="profileImg mr-2"
+                src={this.props.userInfo.userInfo.userPick}
+                alt=""
+                style={{ width: "40px" }}
+              />
+                    )}
+            
+              <CardTitle style={{fontFamily: "Fredoka One",
+                fontWeight: "200" }} className="mt-2">
+                {" "}
+                {typeof this.props.userInfo.userInfo.profileInfo ===
+                          "undefined" ? "Not Logged In"
+                      : this.props.userInfo.userInfo.profileInfo.profileName}
+              </CardTitle>
+              </div>
+              <div className="border">
                       <PostForm postComment={this.props.postComment} />
                     </div>
-                  </div>
-                </h3>
-              </div>
-            </div>
+              </Card>
           </div>
         </div>
-        <div className="border">
+        <div className="">
           <Post
             post={this.props.post}
             userInfo={this.props.userInfo}
             userPick={this.props.userInfo.userInfo.userPick}
           />
         </div>
+        <Modal
+          backdrop="static"
+          isOpen={this.state.isModalOpen}
+          toggle={this.toggleModal}
+        >
+          <ModalHeader
+            toggle={this.toggleModal}
+            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636 "}}
+
+          >
+            Login
+          </ModalHeader >
+          <ModalBody>
+            <Nav tabs>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === "1",
+                  })}
+                  onClick={() => {
+                    this.toggleTab("1");
+                  }}
+                  href="#"
+                >
+                  Log In
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink
+                  className={classnames({
+                    active: this.state.activeTab === "2",
+                  })}
+                  onClick={() => {
+                    this.toggleTab("2");
+                  }}
+                  href="#"
+                >
+                  Register
+                </NavLink>
+              </NavItem>
+            </Nav>
+            <TabContent activeTab={this.state.activeTab}>
+              <TabPane tabId="1">
+                <Form
+                  model="profileForm"
+                  onSubmit={(values) => this.handleLogin(values)}
+                  className="mt-2"
+                >
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="email" className="ml-3">
+                        Email:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".email"
+                          id="email"
+                          name="email"
+                          placeholder="email"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="password" className="ml-3">
+                        Password:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".password"
+                          id="password"
+                          name="password"
+                          placeholder="password"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+
+                  <Button type="submit" value="submit" color="primary">
+                    Login
+                  </Button>
+                </Form>
+              </TabPane>
+              <TabPane tabId="2">
+                <Form
+                  model="profileForm"
+                  onSubmit={(values) => this.handleRegister(values)}
+                  className="mt-2"
+                >
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="profileName" className="ml-3">
+                        Profile Name:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".profileName"
+                          id="profileName"
+                          name="profileName"
+                          placeholder="profileName"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="email" className="ml-3">
+                        Email:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".email"
+                          id="email"
+                          name="email"
+                          placeholder="email"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+                  <Row className="form-group ">
+                    <Col>
+                      <Label htmlFor="password" className="ml-3">
+                        Password:
+                      </Label>
+
+                      <Col md={10}>
+                        <Control.text
+                          model=".password"
+                          id="password"
+                          name="password"
+                          placeholder="password"
+                          className="form-control"
+                        />
+                      </Col>
+                    </Col>
+                  </Row>
+
+                  <Button type="submit" value="submit" color="primary">
+                    Register
+                  </Button>
+                </Form>
+              </TabPane>
+            </TabContent>
+          </ModalBody>
+        </Modal>
       </div>
     );
   }

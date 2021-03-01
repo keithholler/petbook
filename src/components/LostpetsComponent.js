@@ -231,7 +231,7 @@ class Lostpet extends Component {
 
           >
             Login
-          </ModalHeader>
+          </ModalHeader >
           <ModalBody>
             <Nav tabs>
               <NavItem>

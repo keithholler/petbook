@@ -17,7 +17,7 @@ function Post(props) {
       <div className="container">
         <div className="row row-content">
           <div className="col-12 mx-auto p-2">
-            <Card className="m-2 lostPetCard">
+            <Card className="m-2 lostPetCard"style={{ width: "auto", height: "auto",boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)" }}>
               <div class="card-horizontal">
                 {typeof props.userInfo.userInfo.profileInfo === "undefined" ||
                 props.userInfo.userInfo.userPick === "localImageUrl" ||
@@ -59,7 +59,7 @@ function Post(props) {
               </div>
               <CardBody
                 className="mx-auto"
-                style={{ width: "auto", height: "auto" }}
+                style={{ width: "100%", height: "auto" }}
               >
                 <CardText
                   className="text-center text-break text-wrap"
@@ -78,8 +78,8 @@ function Post(props) {
                   <CardImg
                     className="img-fluid mx-auto"
                     style={{
-                      width: "auto",
-                      height: "90vh",
+                      width: "70vh",
+                      height: "auto",
                       objectFit: "contain",
                       objectPosition: "50% 50%",
                       display: "block",

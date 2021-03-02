@@ -139,7 +139,8 @@ class Lostpet extends Component {
   render() {
     return (
       <div>
-        <h4 className="text-center m-3">Lost Pet Submission</h4>
+        <h4 className="text-center m-3" style={{ fontFamily: "Nunito",
+                    fontWeight: "700",}}>Lost Pet Submission</h4>
         <Container>
           <Row>
             <Col>
@@ -150,7 +151,7 @@ class Lostpet extends Component {
               >
                 <Row className="form-group">
                   <Label htmlFor="petId" md={2}>
-                    Enter Lost Pet ID:
+                   Lost Pet ID:
                   </Label>
                   <Col md={8}>
                     <Control.text

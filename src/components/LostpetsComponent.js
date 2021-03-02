@@ -140,7 +140,7 @@ class Lostpet extends Component {
     return (
       <div>
         <h4 className="text-center m-3" style={{ fontFamily: "Nunito",
-                    fontWeight: "700",}}>Lost Pet Submission</h4>
+                    fontWeight: "700",}}>Lost Pet Submission  </h4>
         <Container>
           <Row>
             <Col>

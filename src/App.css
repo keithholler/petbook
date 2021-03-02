@@ -7,12 +7,12 @@ body,
   scroll-behavior: smooth;
   margin: 0;
   padding: 0;
-  font-family: "Nunit", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: bold;
 }
 
 .modal-open {
-  font-family: "Nunit", sans-serif;
+  font-family: "Nunito", sans-serif;
   font-weight: bold;
 }
 .site-header {

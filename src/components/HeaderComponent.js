@@ -127,7 +127,6 @@ class Header extends Component {
           <NavbarToggler onClick={this.toggleNav} className="mr-2" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar className="mx-auto">
-
               <NavItem className="mr-5 ml-4">
                 <NavLink
                   tag={RRNavLink}
@@ -143,20 +142,23 @@ class Header extends Component {
                     textDecoration: "underline",
                   }}
                 >
-                    <img
-                      src="petbook/assets/lostFound.png"
-                      alt="lostPets"
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        position: "relative",
-                        margin: "3px",
-                      }}
-                    />
-          
-                    <span style={{display: "inline"}} className="text-nowrap align-bottom">Lost & Found</span>
-                  
+                  <img
+                    src="petbook/assets/lostFound.png"
+                    alt="lostPets"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      position: "relative",
+                      margin: "3px",
+                    }}
+                  />
 
+                  <span
+                    style={{ display: "inline" }}
+                    className="text-nowrap align-bottom"
+                  >
+                    Lost & Found
+                  </span>
                 </NavLink>
               </NavItem>
               <NavItem className="mr-5 ml-4">
@@ -175,19 +177,22 @@ class Header extends Component {
                   }}
                   activeClassName="petHome"
                 >
-                    <img
-                      src="petbook/assets/home4.png"
-                      alt="feed"
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        position: "relative",
-                        margin: "3px",
-                      }}
-                    />
-                    <span style={{display: "inline"}}  className="text-nowrap align-bottom">Home</span>
-                
-
+                  <img
+                    src="petbook/assets/home4.png"
+                    alt="feed"
+                    style={{
+                      width: "30px",
+                      height: "30px",
+                      position: "relative",
+                      margin: "3px",
+                    }}
+                  />
+                  <span
+                    style={{ display: "inline" }}
+                    className="text-nowrap align-bottom"
+                  >
+                    Home
+                  </span>
                 </NavLink>
               </NavItem>
             </Nav>
@@ -197,7 +202,8 @@ class Header extends Component {
               Profile
               {typeof this.props.userInfo.userInfo.profileInfo ===
                 "undefined" ||
-              this.props.userInfo.userInfo.userPick === "localImageUrl" ? (
+              this.props.userInfo.userInfo.userPick === "localImageUrl" ||
+              this.props.userInfo.userInfo.userPick === "" ? (
                 <img
                   id="proPic"
                   className="profileImg rounded-circle ml-3"
@@ -218,7 +224,6 @@ class Header extends Component {
 
             {this.state.collapsed ? (
               <DropdownMenu right>
-
                 <NavItem className="">
                   {this.props.userInfo.userInfo.profileInfo ? (
                     <Link style={{ color: "black" }} to="/PetProfile">
@@ -226,21 +231,30 @@ class Header extends Component {
                         {typeof this.props.userInfo.userInfo.profileInfo ===
                           "undefined" ||
                         this.props.userInfo.userInfo.userPick ===
-                          "localImageUrl" ? (
+                          "localImageUrl" ||
+                        this.props.userInfo.userInfo.userPick === "" ? (
                           <img
                             id="proPic"
-                            className="profileImg rounded-circle ml-3"
+                            className="profileImg rounded-circle mr-2"
                             src="petbook/assets/default.png"
                             alt=""
-                            style={{ width: "40px" }}
+                            style={{
+                              width: "40px",
+                              objectFit: "cover",
+                              objectPosition: "50% 50%",
+                            }}
                           />
                         ) : (
                           <img
                             id="proPic"
-                            className="profileImg rounded-circle ml-3"
+                            className="profileImg rounded-circle mr-2"
                             src={this.props.userInfo.userInfo.userPick}
                             alt=""
-                            style={{ width: "40px" }}
+                            style={{
+                              width: "40px",
+                              objectFit: "cover",
+                              objectPosition: "50% 50%",
+                            }}
                           />
                         )}
                         Your Profile
@@ -260,7 +274,11 @@ class Header extends Component {
                           className="profileImg rounded-circle"
                           src="petbook/assets/default.png"
                           alt=""
-                          style={{ width: "40px" }}
+                          style={{
+                            width: "40px",
+                            objectFit: "cover",
+                            objectPosition: "50% 50%",
+                          }}
                         />
                         Your Profile
                       </DropdownItem>
@@ -292,10 +310,14 @@ class Header extends Component {
                       <DropdownItem id="profileSettings">
                         <img
                           id="music"
-                          className="profileImg rounded-circle"
+                          className="profileImg rounded-circle "
                           src="petbook/assets/default.png"
                           alt=""
-                          style={{ width: "40px" }}
+                          style={{
+                            width: "40px",
+                            objectFit: "cover",
+                            objectPosition: "50% 50%",
+                          }}
                         />
                         Your Profile
                       </DropdownItem>
@@ -314,7 +336,11 @@ class Header extends Component {
                           className="profileImg rounded-circle"
                           src="petbook/assets/default.png"
                           alt=""
-                          style={{ width: "40px" }}
+                          style={{
+                            width: "40px",
+                            objectFit: "cover",
+                            objectPosition: "50% 50%",
+                          }}
                         />
                         Your Profile
                       </DropdownItem>

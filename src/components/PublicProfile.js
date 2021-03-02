@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Row, Col, Card, CardBody, CardTitle } from "reactstrap";
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardTitle,
+  CardImg,
+  CardText,
+} from "reactstrap";
 
 function Post(props) {
   const profileName = props.userInfo.userInfo.profileInfo.profileName;
@@ -9,31 +17,78 @@ function Post(props) {
       <div className="container">
         <div className="row row-content">
           <div className="col-12 mx-auto p-2">
-            <div className="flip-cardfeed ">
-              <div
-                className="flip-card-frontfeed rounded-lg"
-                style={{ backgroundColor: "white" }}
-              >
-                <h3 className="projectreason text-nowrap">
-                  {/* {props.userInfo.userPick} */}
-                  <div style={{ fontSize: "12px" }}>
-                    <img
-                      id="music"
-                      className="profileImg"
-                      src={props.userInfo.userInfo.userPick}
-                      alt=""
-                      style={{ width: "40px" }}
-                    />
-                    {profileName ? profileName : "Not Logged In"}
-                  </div>
+            <Card className="m-2 lostPetCard">
+              <div class="card-horizontal">
+                {typeof props.userInfo.userInfo.profileInfo === "undefined" ||
+                props.userInfo.userInfo.userPick === "localImageUrl" ||
+                this.props.userInfo.userInfo.userPick === "" ? (
+                  <CardImg
+                    id="music"
+                    className="profileImg mr-2"
+                    src="petbook/assets/default.png"
+                    alt=""
+                    style={{
+                      width: "60px",
+                      objectFit: "cover",
+                      objectPosition: "50% 50%",
+                    }}
+                  />
+                ) : (
+                  <CardImg
+                    id="music"
+                    className="profileImg mr-2"
+                    src={props.userInfo.userInfo.userPick}
+                    alt=""
+                    style={{
+                      width: "60px",
+                      objectFit: "cover",
+                      objectPosition: "50% 50%",
+                    }}
+                  />
+                )}
 
-                  <div className="text-center">{post.text} </div>
-                  <div className="text-center">
-                    <img style={{ width: "500px" }} src={post.postImage} />
-                  </div>
-                </h3>
+                <CardTitle
+                  style={{ fontFamily: "Fredoka One", fontWeight: "200" }}
+                  className="mt-2"
+                >
+                  {" "}
+                  {typeof props.userInfo.userInfo.profileInfo === "undefined"
+                    ? "Not Logged In"
+                    : props.userInfo.userInfo.profileInfo.profileName}
+                </CardTitle>
               </div>
-            </div>
+              <CardBody
+                className="mx-auto"
+                style={{ width: "auto", height: "auto" }}
+              >
+                <CardText
+                  className="text-center text-break text-wrap"
+                  style={{
+                    fontSize: "calc(.5em + 1vw)",
+                    height: "auto!important",
+                    fontFamily: "Nunito",
+                    fontWeight: "400",
+                  }}
+                >
+                  {post.text}
+                </CardText>
+                {post.postImage === null ? (
+                  <div></div>
+                ) : (
+                  <CardImg
+                    className="img-fluid mx-auto"
+                    style={{
+                      width: "auto",
+                      height: "90vh",
+                      objectFit: "contain",
+                      objectPosition: "50% 50%",
+                      display: "block",
+                    }}
+                    src={post.postImage}
+                  />
+                )}
+              </CardBody>
+            </Card>
           </div>
         </div>
       </div>
@@ -74,23 +129,37 @@ class PublicProfile extends Component {
     const pets = this.props.petcard.petcard.map((pet, index) => {
       return (
         <div key={index} className=" container-container col col-lg-6 ">
-          <div className="flip-card-container mx-auto pr-3 pr-md-0 mb-5">
+          <div
+            key={index}
+            className="flip-card-container mx-auto pr-3 pr-md-0 mb-5"
+          >
             <div className="flip-card ">
               <div
                 className="flip-card-front rounded-lg text-center"
                 style={{ color: "black" }}
               >
-                <div>{pet.petcard.name}</div>
-
-                <img
-                  id="profile"
-                  className="profileImg "
-                  src={pet.petImage}
-                  alt=""
-                  style={{ width: "70%" }}
-                ></img>
+                <div style={{ fontFamily: "Fredoka One", fontWeight: "400" }}>
+                  {pet.petcard.name}
+                </div>
+                {pet.petImage === "" ? (
+                  <img
+                    id="profile"
+                    className="profileImg "
+                    src="petbook/assets/petDefault.png"
+                    alt=""
+                    style={{ width: "90%", maxWidth: "100%", height: "90%" }}
+                  ></img>
+                ) : (
+                  <img
+                    id="profile"
+                    className="profileImg "
+                    src={pet.petImage}
+                    alt=""
+                    style={{ width: "90%", maxWidth: "100%", height: "90%" }}
+                  ></img>
+                )}
               </div>
-              <div className="flip-card-back rounded-lg">
+              <div className="flip-card-back rounded-lg ">
                 <Card
                   style={{ height: "100%", width: "100%", overflow: "hidden" }}
                   className="d-flex flex-column "
@@ -225,11 +294,11 @@ class PublicProfile extends Component {
                     </div>
 
                     <Row
-                      className="d-flex flex-column align-items-stretch "
-                      style={{ height: "50%", width: "108.4%" }}
+                      className="d-flex flex-column"
+                      style={{ height: "38%", width: "108.4%" }}
                     >
                       <div
-                        className="d-flex flex-column  align-items-stretch align-self-stretch text-break text-wrap"
+                        className="d-flex flex-column  text-break text-wrap overflow-auto"
                         style={{
                           backgroundColor: "white",
                           border: "1px solid #1b8eb1",
@@ -257,10 +326,11 @@ class PublicProfile extends Component {
               data-aos-duration="1000"
               style={{ color: "black" }}
             >
-              Hello I am
+              Hello I am {this.props.userInfo.userInfo.profileInfo.firstName}
             </h3>
             {typeof this.props.userInfo.userInfo.profileInfo === "undefined" ||
-            this.props.userInfo.userInfo.userPick === "localImageUrl" ? (
+            this.props.userInfo.userInfo.userPick === "localImageUrl" ||
+            this.props.userInfo.userInfo.userPick === "" ? (
               <img
                 className="rounded-circle me mx-auto d-block"
                 data-aos="fade-up"
@@ -294,8 +364,7 @@ class PublicProfile extends Component {
               data-aos="fade-up"
               data-aos-duration="1000"
             >
-              And I am a web developer who creates user friendly functional
-              websites.
+              {this.props.userInfo.userInfo.profileInfo.ownerAbout}
             </p>
           </div>
         </div>

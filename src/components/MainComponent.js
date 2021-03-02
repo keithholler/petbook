@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect, withRouter,HashRouter } from "react-router-dom";
+import {
+  Switch,
+  Route,
+  Redirect,
+  withRouter,
+  HashRouter,
+} from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "./HeaderComponent";
 import Feed from "./FeedComponent";
@@ -26,7 +32,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addUniqueId: (uniqueId) => addUniqueId(uniqueId),
-  postComment: (postImage,text) => postComment(postImage,text),
+  postComment: (postImage, text) => postComment(postImage, text),
   addUserInfo: (
     profileImage,
     profileName,
@@ -49,8 +55,9 @@ const mapDispatchToProps = {
       mainColor,
       secondaryColor
     ),
-  addPetCard: (petId, petcard,petImage) => addPetCard(petId, petcard,petImage),
-   resetProfileForm: () => actions.reset("profileForm"),
+  addPetCard: (petId, petcard, petImage) =>
+    addPetCard(petId, petcard, petImage),
+  resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
 
@@ -67,8 +74,8 @@ class Main extends Component {
           addUserInfo={this.props.addUserInfo}
           userInfo={this.props.userInfo}
         />
-       
-          <Switch>
+
+        <Switch>
           <Route
             exact
             path="/"
@@ -112,10 +119,10 @@ class Main extends Component {
             <Shelters />
           </Route>
           <Route
-      path="/LostPets"
+            path="/LostPets"
             render={() => (
               <Lostpet
-              addUniqueId={this.props.addUniqueId}
+                addUniqueId={this.props.addUniqueId}
                 resetLostPetForm={this.props.resetLostPetForm}
                 petcard={this.props.petcard}
                 uniqueId={this.props.uniqueId}
@@ -126,10 +133,11 @@ class Main extends Component {
             )}
           />
           <Route
-            exact path="/Feed"
+            exact
+            path="/Feed"
             render={() => (
               <Feed
-              addUniqueId={this.props.addUniqueId}
+                addUniqueId={this.props.addUniqueId}
                 postComment={this.props.postComment}
                 post={this.props.post}
                 userInfo={this.props.userInfo}
@@ -140,7 +148,7 @@ class Main extends Component {
           />
 
           <Redirect to="/LostPets" />
-          </Switch>
+        </Switch>
       </React.Fragment>
     );
   }

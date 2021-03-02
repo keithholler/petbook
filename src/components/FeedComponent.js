@@ -31,16 +31,21 @@ function Post(props) {
       <div className="container" key={index}>
         <div className="row row-content">
           <div className="col-12 mx-auto p-2">
-            <Card className="m-2 lostPetCard" >
+            <Card className="m-2 lostPetCard">
               <div class="card-horizontal">
                 {typeof props.userInfo.userInfo.profileInfo === "undefined" ||
-                props.userInfo.userInfo.userPick === "localImageUrl" ? (
+                props.userInfo.userInfo.userPick === "localImageUrl" ||
+                this.props.userInfo.userInfo.userPick === "" ? (
                   <CardImg
                     id="music"
                     className="profileImg mr-2"
                     src="petbook/assets/default.png"
                     alt=""
-                    style={{ width: "40px" }}
+                    style={{
+                      width: "60px",
+                      objectFit: "cover",
+                      objectPosition: "50% 50%",
+                    }}
                   />
                 ) : (
                   <CardImg
@@ -48,7 +53,11 @@ function Post(props) {
                     className="profileImg mr-2"
                     src={props.userInfo.userInfo.userPick}
                     alt=""
-                    style={{ width: "40px" }}
+                    style={{
+                      width: "60px",
+                      objectFit: "cover",
+                      objectPosition: "50% 50%",
+                    }}
                   />
                 )}
 
@@ -64,8 +73,7 @@ function Post(props) {
               </div>
               <CardBody
                 className="mx-auto"
-                style={{ width: "auto",
-                height: "auto",}}
+                style={{ width: "auto", height: "auto" }}
               >
                 <CardText
                   className="text-center text-break text-wrap"
@@ -82,7 +90,7 @@ function Post(props) {
                   <div></div>
                 ) : (
                   <CardImg
-                  className="img-fluid mx-auto"
+                    className="img-fluid mx-auto"
                     style={{
                       width: "auto",
                       height: "90vh",
@@ -154,9 +162,7 @@ class PostForm extends Component {
                 .getDownloadURL()
                 .then((url) => {
                   console.log(url);
-                  this.setState(
-                    { feedPicPostURL: url }
-                  );
+                  this.setState({ feedPicPostURL: url });
                 });
             }
           );
@@ -164,8 +170,6 @@ class PostForm extends Component {
       );
     }
   };
-
-  
 
   render() {
     return (
@@ -181,12 +185,9 @@ class PostForm extends Component {
           >
             Crop
           </ModalHeader>
-          <ModalBody style={{width:"100%",height:"400px",objectFit: "none"}}>
-      
-     
-     
-          
-          </ModalBody>
+          <ModalBody
+            style={{ width: "100%", height: "400px", objectFit: "none" }}
+          ></ModalBody>
         </Modal>
         <Button
           type="submit"
@@ -333,7 +334,8 @@ class Feed extends Component {
               <div class="card-horizontal">
                 {typeof this.props.userInfo.userInfo.profileInfo ===
                   "undefined" ||
-                this.props.userInfo.userInfo.userPick === "localImageUrl" ? (
+                this.props.userInfo.userInfo.userPick === "localImageUrl" ||
+                this.props.userInfo.userInfo.userPick === "" ? (
                   <CardImg
                     id="music"
                     className="profileImg mr-2"

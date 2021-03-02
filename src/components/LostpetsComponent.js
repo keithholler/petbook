@@ -227,11 +227,14 @@ class Lostpet extends Component {
         >
           <ModalHeader
             toggle={this.toggleModal}
-            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636 "}}
-
+            style={{
+              backgroundColor: "#1b8eb1",
+              color: "white",
+              textShadow: "1px 1px 3px #363636 ",
+            }}
           >
             Login
-          </ModalHeader >
+          </ModalHeader>
           <ModalBody>
             <Nav tabs>
               <NavItem>
@@ -382,7 +385,11 @@ class Lostpet extends Component {
         >
           <ModalHeader
             toggle={this.toggleModalEmailSent}
-            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+            style={{
+              backgroundColor: "#1b8eb1",
+              color: "white",
+              textShadow: "1px 1px 3px #363636",
+            }}
           >
             Notification
           </ModalHeader>
@@ -395,7 +402,11 @@ class Lostpet extends Component {
         >
           <ModalHeader
             toggle={this.toggleModalEmailNotSent}
-            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+            style={{
+              backgroundColor: "#1b8eb1",
+              color: "white",
+              textShadow: "1px 1px 3px #363636",
+            }}
           >
             Notification
           </ModalHeader>

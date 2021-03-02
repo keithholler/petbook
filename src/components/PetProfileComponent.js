@@ -36,15 +36,26 @@ function ProfilePet(props) {
             className="flip-card-front rounded-lg text-center"
             style={{ color: "black" }}
           >
-            <div>{pet.petcard.name}</div>
-
-            <img
-              id="profile"
-              className="profileImg "
-              src={pet.petImage}
-              alt=""
-              style={{ width: "90%",maxWidth:"100%",height:"auto"}}
-            ></img>
+            <div style={{ fontFamily: "Fredoka One", fontWeight: "400" }}>
+              {pet.petcard.name}
+            </div>
+            {pet.petImage === "" ? (
+              <img
+                id="profile"
+                className="profileImg "
+                src="petbook/assets/petDefault.png"
+                alt=""
+                style={{ width: "90%", maxWidth: "100%", height: "90%" }}
+              ></img>
+            ) : (
+              <img
+                id="profile"
+                className="profileImg "
+                src={pet.petImage}
+                alt=""
+                style={{ width: "90%", maxWidth: "100%", height: "90%" }}
+              ></img>
+            )}
           </div>
           <div className="flip-card-back rounded-lg ">
             <Card
@@ -181,11 +192,11 @@ function ProfilePet(props) {
                 </div>
 
                 <Row
-                  className="d-flex flex-column align-items-stretch "
-                  style={{ height: "50%", width: "108.4%" }}
+                  className="d-flex flex-column"
+                  style={{ height: "38%", width: "108.4%" }}
                 >
                   <div
-                    className="d-flex flex-column  align-items-stretch align-self-stretch text-break text-wrap"
+                    className="d-flex flex-column  text-break text-wrap overflow-auto"
                     style={{
                       backgroundColor: "white",
                       border: "1px solid #1b8eb1",
@@ -230,53 +241,59 @@ class AddPet extends Component {
 
   handleChange = (e) => {
     if (e.target.files[0]) {
-      this.setState({ petImg: e.target.files[0] },this.handleUpload = (event) => {
-        console.log(this.state.petImg);
-        const uploadTask = storage
-          .ref(`images/${this.state.petImg.name}`)
-          .put(this.state.petImg);
-    
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            this.setState({ progressState: progress });
-          },
-          (error) => {
-            console.log(error);
-          },
-          () => {
-            storage
-              .ref("images")
-              .child(this.state.petImg.name)
-              .getDownloadURL()
-              .then((url) => {
-                console.log(url);
-                this.setState({ petImgURL: url });
-                console.log(this.state.petImgURL);
-              });
-          }
-        );
-      });
+      this.setState(
+        { petImg: e.target.files[0] },
+        (this.handleUpload = (event) => {
+          console.log(this.state.petImg);
+          const uploadTask = storage
+            .ref(`images/${this.state.petImg.name}`)
+            .put(this.state.petImg);
+
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+              this.setState({ progressState: progress });
+            },
+            (error) => {
+              console.log(error);
+            },
+            () => {
+              storage
+                .ref("images")
+                .child(this.state.petImg.name)
+                .getDownloadURL()
+                .then((url) => {
+                  console.log(url);
+                  this.setState({ petImgURL: url });
+                  console.log(this.state.petImgURL);
+                });
+            }
+          );
+        })
+      );
     }
   };
-  
 
   render() {
     return (
       <div>
         <i
-          className="fa fa-plus-circle fa-2x d-flex align-items-center"
-          style={{ color: "black", cursor: "pointer" }}
+          className="fa fa-plus-circle fa-2x d-flex align-items-center btn btn-primary btn-sm"
+          style={{ color: "", cursor: "pointer" }}
           onClick={this.toggleModal}
         />
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader
             toggle={this.toggleModal}
-            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636" }}
+            style={{
+              backgroundColor: "#1b8eb1",
+              color: "white",
+              textShadow: "1px 1px 3px #363636",
+            }}
           >
             Animal Details
           </ModalHeader>
@@ -320,7 +337,7 @@ class AddPet extends Component {
                     className="form-control"
                     onChange={this.handleChange}
                     style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
-                  />                  
+                  />
                   <Errors
                     className="text-danger"
                     model=".petImg"
@@ -428,12 +445,17 @@ class AddPet extends Component {
                     placeholder="About"
                     className="form-control"
                     style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
+                    validators={{}}
                   />
                   <Errors
                     className="text-danger"
                     model=".about"
-                    show="touched"
+                    show={true}
                     component="div"
+                    messages={{
+                      required: "Required",
+                      maxLength: "Must be 108 characters or less",
+                    }}
                   />
                 </Col>
               </Row>
@@ -488,38 +510,39 @@ class PetProfile extends Component {
 
   handleChange = (e) => {
     if (e.target.files[0]) {
-      this.setState({ profileImage: e.target.files[0] },this.handleUpload = () => {
-        const uploadTask = storage
-          .ref(`images/${this.state.profileImage.name}`)
-          .put(this.state.profileImage);
-    
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            this.setState({ progressState: progress });
-          },
-          (error) => {
-            console.log(error);
-          },
-          () => {
-            storage
-              .ref("images")
-              .child(this.state.profileImage.name)
-              .getDownloadURL()
-              .then((url) => {
-                console.log(url);
-                this.setState({ profileImageURL: url });
-              });
-          }
-        );
-      });
+      this.setState(
+        { profileImage: e.target.files[0] },
+        (this.handleUpload = () => {
+          const uploadTask = storage
+            .ref(`images/${this.state.profileImage.name}`)
+            .put(this.state.profileImage);
+
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress = Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              );
+              this.setState({ progressState: progress });
+            },
+            (error) => {
+              console.log(error);
+            },
+            () => {
+              storage
+                .ref("images")
+                .child(this.state.profileImage.name)
+                .getDownloadURL()
+                .then((url) => {
+                  console.log(url);
+                  this.setState({ profileImageURL: url });
+                });
+            }
+          );
+        })
+      );
     }
   };
-
-  
 
   render() {
     return (
@@ -554,7 +577,6 @@ class PetProfile extends Component {
               Profile Image
             </Label>
             <Col md={8}>
-              
               <Control.file
                 model=".profileImage"
                 id="profileImage"
@@ -665,6 +687,32 @@ class PetProfile extends Component {
               />
             </Col>
           </Row>
+          <Row className="form-group">
+            <Label htmlFor="ownerAbout" md={2}>
+              Owner About:
+            </Label>
+            <Col md={8}>
+              <Control.textarea
+                model=".ownerAbout"
+                id="ownerAbout"
+                name="aboownerAboutut"
+                placeholder="About"
+                className="form-control"
+                style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}
+                validators={{}}
+              />
+              <Errors
+                className="text-danger"
+                model=".about"
+                show={true}
+                component="div"
+                messages={{
+                  required: "Required",
+                  maxLength: "Must be 108 characters or less",
+                }}
+              />
+            </Col>
+          </Row>
 
           <Row className="form-group">
             <Col md={{ size: 10, offset: 2 }}>
@@ -675,7 +723,14 @@ class PetProfile extends Component {
           </Row>
 
           <Row className="form-group mx-auto align-items-center">
-            <h2 className="mr-2" style={{ cursor: "default" }}>
+            <h2
+              className="mr-2 "
+              style={{
+                cursor: "default",
+                fontFamily: "Nunito",
+                fontWeight: "700",
+              }}
+            >
               Pets
             </h2>
 

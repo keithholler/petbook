@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/petbook/static/css/main.060f6a2c.chunk.css",
-    "main.js": "/petbook/static/js/main.2c07c159.chunk.js",
-    "main.js.map": "/petbook/static/js/main.2c07c159.chunk.js.map",
-    "runtime-main.js": "/petbook/static/js/runtime-main.26034976.js",
-    "runtime-main.js.map": "/petbook/static/js/runtime-main.26034976.js.map",
+    "main.css": "/petbook/static/css/main.7d0220d5.chunk.css",
+    "main.js": "/petbook/static/js/main.8d0ad304.chunk.js",
+    "main.js.map": "/petbook/static/js/main.8d0ad304.chunk.js.map",
+    "runtime-main.js": "/petbook/static/js/runtime-main.630283cc.js",
+    "runtime-main.js.map": "/petbook/static/js/runtime-main.630283cc.js.map",
     "static/css/2.9ee112b9.chunk.css": "/petbook/static/css/2.9ee112b9.chunk.css",
-    "static/js/2.671bdc3d.chunk.js": "/petbook/static/js/2.671bdc3d.chunk.js",
-    "static/js/2.671bdc3d.chunk.js.map": "/petbook/static/js/2.671bdc3d.chunk.js.map",
-    "static/js/3.c0692464.chunk.js": "/petbook/static/js/3.c0692464.chunk.js",
-    "static/js/3.c0692464.chunk.js.map": "/petbook/static/js/3.c0692464.chunk.js.map",
+    "static/js/2.1a8a2d85.chunk.js": "/petbook/static/js/2.1a8a2d85.chunk.js",
+    "static/js/2.1a8a2d85.chunk.js.map": "/petbook/static/js/2.1a8a2d85.chunk.js.map",
+    "static/js/3.ae27add1.chunk.js": "/petbook/static/js/3.ae27add1.chunk.js",
+    "static/js/3.ae27add1.chunk.js.map": "/petbook/static/js/3.ae27add1.chunk.js.map",
     "index.html": "/petbook/index.html",
     "static/css/2.9ee112b9.chunk.css.map": "/petbook/static/css/2.9ee112b9.chunk.css.map",
-    "static/css/main.060f6a2c.chunk.css.map": "/petbook/static/css/main.060f6a2c.chunk.css.map",
-    "static/js/2.671bdc3d.chunk.js.LICENSE.txt": "/petbook/static/js/2.671bdc3d.chunk.js.LICENSE.txt",
+    "static/css/main.7d0220d5.chunk.css.map": "/petbook/static/css/main.7d0220d5.chunk.css.map",
+    "static/js/2.1a8a2d85.chunk.js.LICENSE.txt": "/petbook/static/js/2.1a8a2d85.chunk.js.LICENSE.txt",
     "static/media/font-awesome.css": "/petbook/static/media/fontawesome-webfont.f691f37e.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.26034976.js",
+    "static/js/runtime-main.630283cc.js",
     "static/css/2.9ee112b9.chunk.css",
-    "static/js/2.671bdc3d.chunk.js",
-    "static/css/main.060f6a2c.chunk.css",
-    "static/js/main.2c07c159.chunk.js"
+    "static/js/2.1a8a2d85.chunk.js",
+    "static/css/main.7d0220d5.chunk.css",
+    "static/js/main.8d0ad304.chunk.js"
   ]
 }

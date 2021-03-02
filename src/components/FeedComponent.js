@@ -24,53 +24,56 @@ import { Control, LocalForm, Form } from "react-redux-form";
 import { storage } from "../firebase";
 import classnames from "classnames";
 import uuid from "react-uuid";
-
+import Cropper from "react-easy-crop";
 function Post(props) {
   return props.post.post.map((post, index) => {
     return (
       <div className="container" key={index}>
         <div className="row row-content">
           <div className="col-12 mx-auto p-2">
-            <Card className="m-2 lostPetCard">
-            <div class="card-horizontal">
-            {typeof props.userInfo.userInfo.profileInfo ===
-                      "undefined" ||
-                    props.userInfo.userInfo.userPick ===
-                      "localImageUrl" ? (
-                        <CardImg
-                        id="music"
-                        className="profileImg mr-2"
-                        src="petbook/assets/default.png"
-                        alt=""
-                        style={{ width: "40px" }}
-                      />
-                    ) : (
-                      <CardImg
-                id="music"
-                className="profileImg mr-2"
-                src={props.userInfo.userInfo.userPick}
-                alt=""
-                style={{ width: "40px" }}
-              />
-                    )}
-            
-              <CardTitle style={{fontFamily: "Fredoka One",
-                fontWeight: "200" }} className="mt-2">
-                {" "}
-                {typeof props.userInfo.userInfo.profileInfo ===
-                          "undefined" ? "Not Logged In"
-                      : props.userInfo.userInfo.profileInfo.profileName}
-              </CardTitle>
-           
+            <Card className="m-2 lostPetCard" >
+              <div class="card-horizontal">
+                {typeof props.userInfo.userInfo.profileInfo === "undefined" ||
+                props.userInfo.userInfo.userPick === "localImageUrl" ? (
+                  <CardImg
+                    id="music"
+                    className="profileImg mr-2"
+                    src="petbook/assets/default.png"
+                    alt=""
+                    style={{ width: "40px" }}
+                  />
+                ) : (
+                  <CardImg
+                    id="music"
+                    className="profileImg mr-2"
+                    src={props.userInfo.userInfo.userPick}
+                    alt=""
+                    style={{ width: "40px" }}
+                  />
+                )}
+
+                <CardTitle
+                  style={{ fontFamily: "Fredoka One", fontWeight: "200" }}
+                  className="mt-2"
+                >
+                  {" "}
+                  {typeof props.userInfo.userInfo.profileInfo === "undefined"
+                    ? "Not Logged In"
+                    : props.userInfo.userInfo.profileInfo.profileName}
+                </CardTitle>
               </div>
-              <CardBody  className="mx-auto" style={{width:"100%",height:"auto"}}>
+              <CardBody
+                className="mx-auto"
+                style={{ width: "auto",
+                height: "auto",}}
+              >
                 <CardText
                   className="text-center text-break text-wrap"
                   style={{
                     fontSize: "calc(.5em + 1vw)",
                     height: "auto!important",
                     fontFamily: "Nunito",
-                fontWeight: "400",
+                    fontWeight: "400",
                   }}
                 >
                   {post.text}
@@ -78,7 +81,17 @@ function Post(props) {
                 {post.postImage === null ? (
                   <div></div>
                 ) : (
-                  <CardImg style={{maxWidth:"100%",height:"auto"}} src={post.postImage} />
+                  <CardImg
+                  className="img-fluid mx-auto"
+                    style={{
+                      width: "auto",
+                      height: "90vh",
+                      objectFit: "contain",
+                      objectPosition: "50% 50%",
+                      display: "block",
+                    }}
+                    src={post.postImage}
+                  />
                 )}
               </CardBody>
             </Card>
@@ -109,6 +122,7 @@ class PostForm extends Component {
       isModalOpen: !this.state.isModalOpen,
     });
   };
+
   handleSubmit = (values) => {
     this.toggleModal();
 
@@ -140,7 +154,9 @@ class PostForm extends Component {
                 .getDownloadURL()
                 .then((url) => {
                   console.log(url);
-                  this.setState({ feedPicPostURL: url });
+                  this.setState(
+                    { feedPicPostURL: url }
+                  );
                 });
             }
           );
@@ -149,9 +165,29 @@ class PostForm extends Component {
     }
   };
 
+  
+
   render() {
     return (
       <div className="m-2">
+        <Modal isOpen={this.state.isCropOpen} toggle={this.toggleModalCropOpen}>
+          <ModalHeader
+            toggle={this.toggleModalCropOpen}
+            style={{
+              backgroundColor: "#1b8eb1",
+              color: "white",
+              textShadow: "1px 1px 3px #363636",
+            }}
+          >
+            Crop
+          </ModalHeader>
+          <ModalBody style={{width:"100%",height:"400px",objectFit: "none"}}>
+      
+     
+     
+          
+          </ModalBody>
+        </Modal>
         <Button
           type="submit"
           color="primary"
@@ -188,7 +224,7 @@ class PostForm extends Component {
                   defaultValue=""
                   style={{
                     fontFamily: "Nunito",
-                fontWeight: "400",
+                    fontWeight: "400",
                   }}
                 />
               </div>
@@ -293,43 +329,43 @@ class Feed extends Component {
           style={{ position: "relative" }}
         >
           <div className="col-12 mx-auto p-2 ">
-
-
-          <Card className="m-2 lostPetCard">
-            <div class="card-horizontal">
-            {typeof this.props.userInfo.userInfo.profileInfo ===
-                      "undefined" ||
-                    this.props.userInfo.userInfo.userPick ===
-                      "localImageUrl" ? (
-                        <CardImg
-                        id="music"
-                        className="profileImg mr-2"
-                        src="petbook/assets/default.png"
-                        alt=""
-                        style={{ width: "40px" }}
-                      />
-                    ) : (
-                      <CardImg
-                id="music"
-                className="profileImg mr-2"
-                src={this.props.userInfo.userInfo.userPick}
-                alt=""
-                style={{ width: "40px" }}
-              />
-                    )}
-            
-              <CardTitle style={{fontFamily: "Fredoka One",
-                fontWeight: "200" }} className="mt-2">
-                {" "}
+            <Card className="m-2 lostPetCard">
+              <div class="card-horizontal">
                 {typeof this.props.userInfo.userInfo.profileInfo ===
-                          "undefined" ? "Not Logged In"
-                      : this.props.userInfo.userInfo.profileInfo.profileName}
-              </CardTitle>
+                  "undefined" ||
+                this.props.userInfo.userInfo.userPick === "localImageUrl" ? (
+                  <CardImg
+                    id="music"
+                    className="profileImg mr-2"
+                    src="petbook/assets/default.png"
+                    alt=""
+                    style={{ width: "40px" }}
+                  />
+                ) : (
+                  <CardImg
+                    id="music"
+                    className="profileImg mr-2"
+                    src={this.props.userInfo.userInfo.userPick}
+                    alt=""
+                    style={{ width: "40px" }}
+                  />
+                )}
+
+                <CardTitle
+                  style={{ fontFamily: "Fredoka One", fontWeight: "200" }}
+                  className="mt-2"
+                >
+                  {" "}
+                  {typeof this.props.userInfo.userInfo.profileInfo ===
+                  "undefined"
+                    ? "Not Logged In"
+                    : this.props.userInfo.userInfo.profileInfo.profileName}
+                </CardTitle>
               </div>
               <div className="border">
-                      <PostForm postComment={this.props.postComment} />
-                    </div>
-              </Card>
+                <PostForm postComment={this.props.postComment} />
+              </div>
+            </Card>
           </div>
         </div>
         <div className="">
@@ -346,11 +382,14 @@ class Feed extends Component {
         >
           <ModalHeader
             toggle={this.toggleModal}
-            style={{ backgroundColor: "#1b8eb1", color: "white",textShadow: "1px 1px 3px #363636 "}}
-
+            style={{
+              backgroundColor: "#1b8eb1",
+              color: "white",
+              textShadow: "1px 1px 3px #363636 ",
+            }}
           >
             Login
-          </ModalHeader >
+          </ModalHeader>
           <ModalBody>
             <Nav tabs>
               <NavItem>

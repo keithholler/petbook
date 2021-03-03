@@ -2,7 +2,7 @@
 
 PetBook is an idea where people share their pets pictures and question. The unique feature is when you sign up you are mailed a special tag for their collar.
 If they ever get lost you scan the NFC tag and you will be provided a unique id. The person can then submit the id online along with their phone number and 
-let the owner know they found their pet with and email.
+let the owner know they found their pet with an email.
 
 # Motivation
 The mostivation behind this was to practice Redux while also homing in on my React Skills. One day I hope to make this site and idea tto life in the real world.
@@ -30,7 +30,7 @@ yarn create react-app
 Step1 Register
 Step2 Login
 Step 3 Go to Pet Profile settings
-Step 4 Creat your pets info cards
+Step 4 Create your pets info cards
 Step 5 view public profile and post comments to feed.
 
 # Contribute

@@ -24,7 +24,6 @@ import { Control, LocalForm, Form } from "react-redux-form";
 import { storage } from "../firebase";
 import classnames from "classnames";
 import uuid from "react-uuid";
-import Cropper from "react-easy-crop";
 function Post(props) {
   return props.post.post.map((post, index) => {
     return (
@@ -38,7 +37,7 @@ function Post(props) {
                 this.props.userInfo.userInfo.userPick === "" ? (
                   <CardImg
                     id="music"
-                    className="profileImg mr-2"
+                    className="profileImg mr-2 ml-2 mt-2"
                     src="/petbook/assets/default.png"
                     alt="profileImg"
                     style={{
@@ -50,7 +49,7 @@ function Post(props) {
                 ) : (
                   <CardImg
                     id="music"
-                    className="profileImg mr-2"
+                    className="profileImg mr-2 ml-2 mt-2"
                     src={props.userInfo.userInfo.userPick}
                     alt="profileImg"
                     style={{
@@ -63,7 +62,7 @@ function Post(props) {
 
                 <CardTitle
                   style={{ fontFamily: "Fredoka One", fontWeight: "200" }}
-                  className="mt-2"
+                  className="mt-4"
                 >
                   {" "}
                   {typeof props.userInfo.userInfo.profileInfo === "undefined"
@@ -76,7 +75,7 @@ function Post(props) {
                 style={{ width: "100%", height: "auto" }}
               >
                 <CardText
-                  className="text-center text-break text-wrap"
+                  className="text-center text-break text-wrap "
                   style={{
                     fontSize: "calc(.5em + 1vw)",
                     height: "auto!important",
@@ -339,7 +338,7 @@ class Feed extends Component {
                 this.props.userInfo.userInfo.userPick === "" ? (
                   <CardImg
                     id="music"
-                    className="profileImg mr-2"
+                    className="profileImg m-2"
                     src="/petbook/assets/default.png"
                     alt="profileImg"
                     style={{ width: "40px" }}
@@ -347,7 +346,7 @@ class Feed extends Component {
                 ) : (
                   <CardImg
                     id="music"
-                    className="profileImg mr-2"
+                    className="profileImg m-2"
                     src={this.props.userInfo.userInfo.userPick}
                     alt="profileImg"
                     style={{ width: "40px" }}
@@ -356,7 +355,7 @@ class Feed extends Component {
 
                 <CardTitle
                   style={{ fontFamily: "Fredoka One", fontWeight: "200" }}
-                  className="mt-2"
+                  className="mt-3"
                 >
                   {" "}
                   {typeof this.props.userInfo.userInfo.profileInfo ===

@@ -107,7 +107,7 @@ class Header extends Component {
           style={{ boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)" }}
           light
         >
-          <NavbarBrand to="/home" className="ml-4" style={{ color: "white" }}>
+          <NavbarBrand tag={RRNavLink} to="/petbook" className="ml-4" style={{ color: "white" }}>
             <h5
               style={{
                 fontSize: "40px",

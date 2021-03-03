@@ -4,7 +4,7 @@ import {
   Route,
   Redirect,
   withRouter,
-  HashRouter,
+  BrowserRouter,
 } from "react-router-dom";
 import { connect } from "react-redux";
 import Header from "./HeaderComponent";
@@ -74,7 +74,6 @@ class Main extends Component {
           addUserInfo={this.props.addUserInfo}
           userInfo={this.props.userInfo}
         />
-
         <Switch>
           <Route
             exact
@@ -83,7 +82,7 @@ class Main extends Component {
               return this.props.userInfo.userInfo.profileName ? (
                 <Redirect to="/PetProfile" />
               ) : (
-                <Redirect to="/" />
+                <Redirect to="/petbook" />
               );
             }}
           />
@@ -128,12 +127,10 @@ class Main extends Component {
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
                 userInfo={this.props.userInfo}
-                petcard={this.props.petcard}
               />
             )}
           />
           <Route
-            exact
             path="/Feed"
             render={() => (
               <Feed
@@ -156,13 +153,13 @@ class Main extends Component {
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
                 userInfo={this.props.userInfo}
-                petcard={this.props.petcard}
               />
             )}
           />
 
           {/* <Redirect to="/LostPets" /> */}
         </Switch>
+        
       </React.Fragment>
     );
   }

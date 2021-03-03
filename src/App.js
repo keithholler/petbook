@@ -9,7 +9,7 @@ const store = ConfigureStore();
 function App() {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <BrowserRouter basename="/PetBook" >
         <div className="App">
           <Main />
         </div>

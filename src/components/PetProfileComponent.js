@@ -43,8 +43,8 @@ function ProfilePet(props) {
               <img
                 id="profile"
                 className="profileImg "
-                src="petbook/assets/petDefault.png"
-                alt=""
+                src="/petbook/assets/petDefault.png"
+                alt="profileImg"
                 style={{ width: "90%", maxWidth: "100%", height: "90%" }}
               ></img>
             ) : (
@@ -52,7 +52,7 @@ function ProfilePet(props) {
                 id="profile"
                 className="profileImg "
                 src={pet.petImage}
-                alt=""
+                alt="profileImg"
                 style={{ width: "90%", maxWidth: "100%", height: "90%" }}
               ></img>
             )}

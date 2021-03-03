@@ -25,8 +25,8 @@ function Post(props) {
                   <CardImg
                     id="music"
                     className="profileImg mr-2"
-                    src="petbook/assets/default.png"
-                    alt=""
+                    src="/petbook/assets/default.png"
+                    alt="profileImg"
                     style={{
                       width: "60px",
                       objectFit: "cover",
@@ -38,7 +38,7 @@ function Post(props) {
                     id="music"
                     className="profileImg mr-2"
                     src={props.userInfo.userInfo.userPick}
-                    alt=""
+                    alt="profileImg"
                     style={{
                       width: "60px",
                       objectFit: "cover",
@@ -145,8 +145,8 @@ class PublicProfile extends Component {
                   <img
                     id="profile"
                     className="profileImg "
-                    src="petbook/assets/petDefault.png"
-                    alt=""
+                    src="/petbook/assets/petDefault.png"
+                    alt="petDefault"
                     style={{ width: "90%", maxWidth: "100%", height: "90%" }}
                   ></img>
                 ) : (
@@ -154,7 +154,7 @@ class PublicProfile extends Component {
                     id="profile"
                     className="profileImg "
                     src={pet.petImage}
-                    alt=""
+                    alt="petDefault"
                     style={{ width: "90%", maxWidth: "100%", height: "90%" }}
                   ></img>
                 )}
@@ -335,8 +335,8 @@ class PublicProfile extends Component {
                 className="rounded-circle me mx-auto d-block"
                 data-aos="fade-up"
                 data-aos-duration="1000"
-                src="petbook/assets/default.png"
-                alt=""
+                src="/petbook/assets/default.png"
+                alt="profileImg"
                 id="profile"
                 style={{ width: "200px", height: "200px" }}
               />
@@ -346,7 +346,7 @@ class PublicProfile extends Component {
                 data-aos="fade-up"
                 data-aos-duration="1000"
                 src={this.props.userInfo.userInfo.userPick}
-                alt=""
+                alt="profileImg"
                 id="profile"
                 style={{ width: "200px", height: "200px" }}
               />

@@ -39,8 +39,8 @@ function Post(props) {
                   <CardImg
                     id="music"
                     className="profileImg mr-2"
-                    src="petbook/assets/default.png"
-                    alt=""
+                    src="/petbook/assets/default.png"
+                    alt="profileImg"
                     style={{
                       width: "60px",
                       objectFit: "cover",
@@ -52,7 +52,7 @@ function Post(props) {
                     id="music"
                     className="profileImg mr-2"
                     src={props.userInfo.userInfo.userPick}
-                    alt=""
+                    alt="profileImg"
                     style={{
                       width: "60px",
                       objectFit: "cover",
@@ -340,8 +340,8 @@ class Feed extends Component {
                   <CardImg
                     id="music"
                     className="profileImg mr-2"
-                    src="petbook/assets/default.png"
-                    alt=""
+                    src="/petbook/assets/default.png"
+                    alt="profileImg"
                     style={{ width: "40px" }}
                   />
                 ) : (
@@ -349,7 +349,7 @@ class Feed extends Component {
                     id="music"
                     className="profileImg mr-2"
                     src={this.props.userInfo.userInfo.userPick}
-                    alt=""
+                    alt="profileImg"
                     style={{ width: "40px" }}
                   />
                 )}

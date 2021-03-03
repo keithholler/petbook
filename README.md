@@ -12,7 +12,7 @@ Build status of continus integration
 
 # Screenshots
 
-![PetBook](https://github.com/keithholler/petbook/blob/gh-pages/assets/Screenshot.JPG)
+![PetBook](https://github.com/keithholler/petbook/blob/main/public/assets/Screenshot2.JPG)
 
 # Built with
 Yarn,

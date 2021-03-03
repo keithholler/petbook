@@ -30,7 +30,7 @@ yarn create react-app
 Step1 Register
 Step2 Login
 Step 3 Go to Pet Profile settings
-Step 4 Creat your pets info cards
+Step 4 Create your pets info cards
 Step 5 view public profile and post comments to feed.
 
 # Contribute

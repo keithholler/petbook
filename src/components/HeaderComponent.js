@@ -120,7 +120,7 @@ class Header extends Component {
               <img
                 src="petbook/assets/pawPrint2.png"
                 style={{ width: "40px", margin: "3px" }}
-              />
+              ></img>
               k
             </h5>
           </NavbarBrand>

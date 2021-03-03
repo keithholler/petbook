@@ -130,6 +130,7 @@ class Header extends Component {
               <NavItem className="mr-5 ml-4">
                 <NavLink
                   tag={RRNavLink}
+                 
                   style={{
                     fontWeight: "bold",
                     color: "white",
@@ -137,9 +138,10 @@ class Header extends Component {
                   to="/LostPets"
                   onClick={!this.state.collapsed ? this.toggleNav : ""}
                   activeStyle={{
-                    fontWeight: "bold",
+                    fontWeight: "900",
                     color: "white",
                     textDecoration: "underline",
+                    
                   }}
                 >
                   <img
@@ -150,7 +152,9 @@ class Header extends Component {
                       height: "30px",
                       position: "relative",
                       margin: "3px",
+                      display: "inline-block" 
                     }}
+                    className="align-bottom"
                   />
 
                   <span
@@ -171,11 +175,11 @@ class Header extends Component {
                     color: "white",
                   }}
                   activeStyle={{
-                    fontWeight: "bold",
+                    fontWeight: "900",
                     color: "white",
                     textDecoration: "underline",
                   }}
-                  activeClassName="petHome"
+                
                 >
                   <img
                     src="/petbook/assets/home4.png"
@@ -185,7 +189,9 @@ class Header extends Component {
                       height: "30px",
                       position: "relative",
                       margin: "3px",
+                      display: "inline-block" 
                     }}
+                    className="align-bottom"
                   />
                   <span
                     style={{ display: "inline" }}

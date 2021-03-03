@@ -146,8 +146,22 @@ class Main extends Component {
               />
             )}
           />
+           <Route
+            path="/petbook"
+            render={() => (
+              <Lostpet
+                addUniqueId={this.props.addUniqueId}
+                resetLostPetForm={this.props.resetLostPetForm}
+                petcard={this.props.petcard}
+                uniqueId={this.props.uniqueId}
+                addUserInfo={this.props.addUserInfo}
+                userInfo={this.props.userInfo}
+                petcard={this.props.petcard}
+              />
+            )}
+          />
 
-          <Redirect to="/LostPets" />
+          {/* <Redirect to="/LostPets" /> */}
         </Switch>
       </React.Fragment>
     );

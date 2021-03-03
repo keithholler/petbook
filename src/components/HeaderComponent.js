@@ -118,7 +118,7 @@ class Header extends Component {
             >
               PetB
               <img
-                src="petbook/assets/pawPrint2.png"
+                src="/petbook/assets/pawprint2.png"
                 style={{ width: "40px", margin: "3px" }}
               ></img>
               k
@@ -143,7 +143,7 @@ class Header extends Component {
                   }}
                 >
                   <img
-                    src="petbook/assets/lostFound.png"
+                    src="/petbook/assets/lostFound.png"
                     alt="lostPets"
                     style={{
                       width: "30px",
@@ -178,7 +178,7 @@ class Header extends Component {
                   activeClassName="petHome"
                 >
                   <img
-                    src="petbook/assets/home4.png"
+                    src="/petbook/assets/home4.png"
                     alt="feed"
                     style={{
                       width: "30px",
@@ -207,8 +207,8 @@ class Header extends Component {
                 <img
                   id="proPic"
                   className="profileImg rounded-circle ml-3"
-                  src="petbook/assets/default.png"
-                  alt=""
+                  src="/petbook/assets/default.png"
+                  alt="profileImg"
                   style={{ width: "40px" }}
                 />
               ) : (
@@ -216,7 +216,7 @@ class Header extends Component {
                   id="proPic"
                   className="profileImg rounded-circle ml-3"
                   src={this.props.userInfo.userInfo.userPick}
-                  alt=""
+                  alt="profileImg"
                   style={{ width: "40px" }}
                 />
               )}
@@ -236,8 +236,8 @@ class Header extends Component {
                           <img
                             id="proPic"
                             className="profileImg rounded-circle mr-2"
-                            src="petbook/assets/default.png"
-                            alt=""
+                            src="/petbook/assets/default.png"
+                            alt="profileImg"
                             style={{
                               width: "40px",
                               objectFit: "cover",
@@ -249,7 +249,7 @@ class Header extends Component {
                             id="proPic"
                             className="profileImg rounded-circle mr-2"
                             src={this.props.userInfo.userInfo.userPick}
-                            alt=""
+                            alt="profileImg"
                             style={{
                               width: "40px",
                               objectFit: "cover",
@@ -272,8 +272,8 @@ class Header extends Component {
                         <img
                           id="music"
                           className="profileImg rounded-circle"
-                          src="petbook/assets/default.png"
-                          alt=""
+                          src="/petbook/assets/default.png"
+                          alt="profileImg"
                           style={{
                             width: "40px",
                             objectFit: "cover",
@@ -311,8 +311,8 @@ class Header extends Component {
                         <img
                           id="music"
                           className="profileImg rounded-circle "
-                          src="petbook/assets/default.png"
-                          alt=""
+                          src="/petbook/assets/default.png"
+                          alt="profileImg"
                           style={{
                             width: "40px",
                             objectFit: "cover",
@@ -332,10 +332,9 @@ class Header extends Component {
                     <Link style={{ color: "black" }} to="/">
                       <DropdownItem id="profileSettings">
                         <img
-                          id="music"
                           className="profileImg rounded-circle"
-                          src="petbook/assets/default.png"
-                          alt=""
+                          src="/petbook/assets/default.png"
+                          alt="profileImg"
                           style={{
                             width: "40px",
                             objectFit: "cover",

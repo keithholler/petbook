@@ -1,26 +1,26 @@
 {
   "files": {
     "main.css": "/petbook/static/css/main.7d0220d5.chunk.css",
-    "main.js": "/petbook/static/js/main.b25e91cd.chunk.js",
-    "main.js.map": "/petbook/static/js/main.b25e91cd.chunk.js.map",
+    "main.js": "/petbook/static/js/main.962e9b08.chunk.js",
+    "main.js.map": "/petbook/static/js/main.962e9b08.chunk.js.map",
     "runtime-main.js": "/petbook/static/js/runtime-main.630283cc.js",
     "runtime-main.js.map": "/petbook/static/js/runtime-main.630283cc.js.map",
     "static/css/2.9ee112b9.chunk.css": "/petbook/static/css/2.9ee112b9.chunk.css",
-    "static/js/2.1a8a2d85.chunk.js": "/petbook/static/js/2.1a8a2d85.chunk.js",
-    "static/js/2.1a8a2d85.chunk.js.map": "/petbook/static/js/2.1a8a2d85.chunk.js.map",
+    "static/js/2.0156cf3b.chunk.js": "/petbook/static/js/2.0156cf3b.chunk.js",
+    "static/js/2.0156cf3b.chunk.js.map": "/petbook/static/js/2.0156cf3b.chunk.js.map",
     "static/js/3.ae27add1.chunk.js": "/petbook/static/js/3.ae27add1.chunk.js",
     "static/js/3.ae27add1.chunk.js.map": "/petbook/static/js/3.ae27add1.chunk.js.map",
     "index.html": "/petbook/index.html",
     "static/css/2.9ee112b9.chunk.css.map": "/petbook/static/css/2.9ee112b9.chunk.css.map",
     "static/css/main.7d0220d5.chunk.css.map": "/petbook/static/css/main.7d0220d5.chunk.css.map",
-    "static/js/2.1a8a2d85.chunk.js.LICENSE.txt": "/petbook/static/js/2.1a8a2d85.chunk.js.LICENSE.txt",
+    "static/js/2.0156cf3b.chunk.js.LICENSE.txt": "/petbook/static/js/2.0156cf3b.chunk.js.LICENSE.txt",
     "static/media/font-awesome.css": "/petbook/static/media/fontawesome-webfont.f691f37e.woff"
   },
   "entrypoints": [
     "static/js/runtime-main.630283cc.js",
     "static/css/2.9ee112b9.chunk.css",
-    "static/js/2.1a8a2d85.chunk.js",
+    "static/js/2.0156cf3b.chunk.js",
     "static/css/main.7d0220d5.chunk.css",
-    "static/js/main.b25e91cd.chunk.js"
+    "static/js/main.962e9b08.chunk.js"
   ]
 }

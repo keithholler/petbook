@@ -103,7 +103,7 @@ class Header extends Component {
         <Navbar
           id="navbar"
           className="site-header "
-          expand="lg"
+          expand="md"
           style={{ boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)" }}
           light
         >
@@ -124,7 +124,7 @@ class Header extends Component {
               k
             </h5>
           </NavbarBrand>
-          <NavbarToggler onClick={this.toggleNav} className="mr-2" />
+        
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar className="mx-auto">
               <NavItem className="mr-5 ml-4">
@@ -203,6 +203,7 @@ class Header extends Component {
               </NavItem>
             </Nav>
           </Collapse>
+          
           <UncontrolledDropdown inNavbar>
             <DropdownToggle nav caret style={{ color: "white" }}>
               Profile
@@ -240,7 +241,7 @@ class Header extends Component {
                           <img
                             id="proPic"
                             className="profileImg rounded-circle mr-1"
-                            src="/petbook/assets/default.png"
+                            src="/petbook/assets/default.png" 
                             alt="profileImg"
                             style={{
                               width: "40px",
@@ -306,7 +307,9 @@ class Header extends Component {
                   </span>
                 </DropdownItem>
               </DropdownMenu>
+              
           </UncontrolledDropdown>
+          <NavbarToggler onClick={this.toggleNav} className="mr-2" />
         </Navbar>
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>

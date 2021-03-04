@@ -205,7 +205,7 @@ class Header extends Component {
           </Collapse>
           
           <UncontrolledDropdown inNavbar>
-            <DropdownToggle nav caret style={{ color: "white" }}>
+            <DropdownToggle nav caret style={{ color: "white" }} className="dropdownTogglePosition">
               Profile
               {typeof this.props.userInfo.userInfo.profileInfo ===
                 "undefined" ||
@@ -227,7 +227,7 @@ class Header extends Component {
                   style={{ width: "40px" }}
                 />
               )}
-            </DropdownToggle>
+            </DropdownToggle >
               <DropdownMenu className="dropdownPosition">
                 <NavItem className="">
                   {this.props.userInfo.userInfo.profileInfo ? (

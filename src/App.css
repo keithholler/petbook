@@ -204,3 +204,8 @@ img {
     left:-35px !important;
     }
 }
+@media only screen and (max-width: 767px) {
+.dropdownTogglePosition{
+margin-left: 15px;
+}
+}

@@ -204,6 +204,17 @@ img {
     left:-35px !important;
     }
 }
+@media only screen and (max-width: 459px) {
+  .dropdownPosition{
+    left:-20px!important;
+    }
+}
+
+
+.hamburger{
+  margin-left: 30px;
+}
+
 @media only screen and (max-width: 767px) {
 .dropdownTogglePosition{
 margin-left: 15px;

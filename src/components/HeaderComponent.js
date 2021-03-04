@@ -309,7 +309,7 @@ class Header extends Component {
               </DropdownMenu>
               
           </UncontrolledDropdown>
-          <NavbarToggler onClick={this.toggleNav} className="mr-2" />
+          <NavbarToggler onClick={this.toggleNav} className="mr-2 hamburger" />
         </Navbar>
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>

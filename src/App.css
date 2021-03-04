@@ -193,8 +193,14 @@ img {
   display: flex;
   flex: 1 1 auto;
 }
-@media only screen and (min-width: 445px) {
-.dropdownPosition{
-right:50px;
+@media only screen and (max-width: 445px) {
+  .dropdownPosition{
+    left:15px !important;
+    }
 }
+
+@media only screen and (min-width: 446px) {
+  .dropdownPosition{
+    left:-35px !important;
+    }
 }

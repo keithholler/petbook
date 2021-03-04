@@ -124,7 +124,7 @@ class Header extends Component {
               k
             </h5>
           </NavbarBrand>
-        
+          <NavbarToggler onClick={this.toggleNav} className="mr-2 hamburger" />
           <Collapse isOpen={!this.state.collapsed} navbar>
             <Nav navbar className="mx-auto">
               <NavItem className="mr-5 ml-4">
@@ -202,9 +202,7 @@ class Header extends Component {
                 </NavLink>
               </NavItem>
             </Nav>
-          </Collapse>
-          
-          <UncontrolledDropdown inNavbar>
+            <UncontrolledDropdown inNavbar>
             <DropdownToggle nav caret style={{ color: "white" }} className="dropdownTogglePosition">
               Profile
               {typeof this.props.userInfo.userInfo.profileInfo ===
@@ -309,7 +307,10 @@ class Header extends Component {
               </DropdownMenu>
               
           </UncontrolledDropdown>
-          <NavbarToggler onClick={this.toggleNav} className="mr-2 hamburger" />
+          </Collapse>
+          
+          
+        
         </Navbar>
 
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>

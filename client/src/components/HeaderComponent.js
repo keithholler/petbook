@@ -45,26 +45,26 @@ class Header extends Component {
     };
   }
 
-  handleLogin = (values) => {
-    if (values.email) {
-      alert("Logged In");
-    } else {
-      alert("Please Register First");
-    }
-    this.toggleModal();
-  };
+  // handleLogin = (values) => {
+  //   if (values.email) {
+  //     alert("Logged In");
+  //   } else {
+  //     alert("Please Register First");
+  //   }
+  //   this.toggleModal();
+  // };
 
-  handleRegister = (values) => {
-    this.props.addUserInfo(
-      this.props.uniqueId.uniqueId,
-      "localImageUrl",
-      values,
-      true
-    );
-    this.toggleModal();
-    this.toggleModalPetId();
-    this.generateId();
-  };
+  // handleRegister = (values) => {
+  //   this.props.addUserInfo(
+  //     this.props.uniqueId.uniqueId,
+  //     "localImageUrl",
+  //     values,
+  //     true
+  //   );
+  //   this.toggleModal();
+  //   this.toggleModalPetId();
+  //   this.generateId();
+  // };
 
   
   toggleModal = () => {
@@ -239,7 +239,7 @@ class Header extends Component {
             </DropdownToggle >
               <DropdownMenu className="dropdownPosition">
                 <NavItem className="">
-                  {this.props.userInfo.userInfo.profileInfo ? (
+                  {this.props.auth.isAuthenticated ? (
                     <Link style={{ color: "black" }} to="/PetProfile">
                       <DropdownItem id="profileSettings">
                         {typeof this.props.userInfo.userInfo.profileInfo ===

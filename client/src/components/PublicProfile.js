@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 
 function Post(props) {
-  const profileName = props.userInfo.userInfo.profileInfo.profileName;
+  //const profileName = props.userInfo.userInfo.profileInfo.profileName;
 
   return props.post.post.map((post) => {
     return (
@@ -52,9 +52,9 @@ function Post(props) {
                   className="mt-2"
                 >
                   {" "}
-                  {typeof props.userInfo.userInfo.profileInfo === "undefined"
+                  {!props.auth.isAuthenticated 
                     ? "Not Logged In"
-                    : props.userInfo.userInfo.profileInfo.profileName}
+                    : props.auth.user.name }
                 </CardTitle>
               </div>
               <CardBody
@@ -125,7 +125,6 @@ class PublicProfile extends Component {
   };
 
   render() {
-    console.log(this.props.userInfo.userInfo.profileInfo.profileName);
     const pets = this.props.petcard.petcard.map((pet, index) => {
       return (
         <div key={index} className=" container-container col col-lg-6 ">
@@ -326,7 +325,7 @@ class PublicProfile extends Component {
               data-aos-duration="1000"
               style={{ color: "black" }}
             >
-              Hello I am {this.props.userInfo.userInfo.profileInfo.firstName}
+              Hello I am {this.props.auth.user.name}
             </h3>
             {typeof this.props.userInfo.userInfo.profileInfo === "undefined" ||
             this.props.userInfo.userInfo.userPick === "localImageUrl" ||
@@ -364,14 +363,15 @@ class PublicProfile extends Component {
               data-aos="fade-up"
               data-aos-duration="1000"
             >
-              {this.props.userInfo.userInfo.profileInfo.ownerAbout}
+              {/* {this.props.userInfo.userInfo.profileInfo.ownerAbout === "undefined"?this.props.userInfo.userInfo.profileInfo.ownerAbout:""} */}
+             
             </p>
           </div>
         </div>
 
         <div className="row row-content justify-content-around">
           {pets}
-          <Post post={this.props.post} userInfo={this.props.userInfo} />
+          <Post post={this.props.post} userInfo={this.props.userInfo} auth={this.props.auth}/>
         </div>
       </div>
     );

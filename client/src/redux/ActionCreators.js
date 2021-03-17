@@ -73,6 +73,18 @@ export const setUserLoading = () => {
     type: ActionTypes.USER_LOADING
   };
 };
+
+
+export const addAuthUserInfo = userData =>{
+  axios
+  .put("/api/users/:userId", userData)
+  return{
+    type: ActionTypes.ADD_USER_POST
+  }
+ }
+
+
+
 // Log user out
 export const logoutUser = () => dispatch => {
   // Remove token from local storage

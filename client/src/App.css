@@ -212,3 +212,7 @@ img {
 margin-left: 15px;
 }
 }
+
+.modal-header .close {
+  display:none;
+}

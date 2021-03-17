@@ -22,6 +22,9 @@ import {
 import classnames from "classnames";
 import uuid from "react-uuid";
 import * as emailjs from "emailjs-com";
+import Register from "./register"
+import Login from "./login"
+
 class Lostpet extends Component {
   constructor(props) {
     super(props);
@@ -125,11 +128,16 @@ class Lostpet extends Component {
   };
 
   componentDidMount = () => {
-    if (typeof this.props.userInfo.userInfo.profileInfo === "undefined") {
-      this.setState({
+    if(!this.props.auth.isAuthenticated){
+         this.setState({
         isModalOpen: !this.state.isModalOpen,
       });
     }
+    // if (typeof this.props.userInfo.userInfo.profileInfo === "undefined") {
+    //   this.setState({
+    //     isModalOpen: !this.state.isModalOpen,
+    //   });
+    // }
   };
   toggleTab = (tab) => {
     if (this.state.activeTab !== tab) {
@@ -267,114 +275,11 @@ class Lostpet extends Component {
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-                <Form
-                  model="profileForm"
-                  onSubmit={(values) => this.handleLogin(values)}
-                  className="mt-2"
-                >
-                  <Row className="form-group ">
-                    <Col>
-                      <Label htmlFor="email" className="ml-3">
-                        Email:
-                      </Label>
-
-                      <Col md={10}>
-                        <Control.text
-                          model=".email"
-                          id="email"
-                          name="email"
-                          placeholder="email"
-                          className="form-control"
-                        />
-                      </Col>
-                    </Col>
-                  </Row>
-
-                  <Row className="form-group ">
-                    <Col>
-                      <Label htmlFor="password" className="ml-3">
-                        Password:
-                      </Label>
-
-                      <Col md={10}>
-                        <Control.text
-                          model=".password"
-                          id="password"
-                          name="password"
-                          placeholder="password"
-                          className="form-control"
-                        />
-                      </Col>
-                    </Col>
-                  </Row>
-
-                  <Button type="submit" value="submit" color="primary">
-                    Login
-                  </Button>
-                </Form>
+              <Login toggleModal={this.toggleModal} addUserInfo={this.props.addUserInfo}/>
               </TabPane>
               <TabPane tabId="2">
-                <Form
-                  model="profileForm"
-                  onSubmit={(values) => this.handleRegister(values)}
-                  className="mt-2"
-                >
-                  <Row className="form-group ">
-                    <Col>
-                      <Label htmlFor="profileName" className="ml-3">
-                        Profile Name:
-                      </Label>
-
-                      <Col md={10}>
-                        <Control.text
-                          model=".profileName"
-                          id="profileName"
-                          name="profileName"
-                          placeholder="profileName"
-                          className="form-control"
-                        />
-                      </Col>
-                    </Col>
-                  </Row>
-                  <Row className="form-group ">
-                    <Col>
-                      <Label htmlFor="email" className="ml-3">
-                        Email:
-                      </Label>
-
-                      <Col md={10}>
-                        <Control.text
-                          model=".email"
-                          id="email"
-                          name="email"
-                          placeholder="email"
-                          className="form-control"
-                        />
-                      </Col>
-                    </Col>
-                  </Row>
-                  <Row className="form-group ">
-                    <Col>
-                      <Label htmlFor="password" className="ml-3">
-                        Password:
-                      </Label>
-
-                      <Col md={10}>
-                        <Control.text
-                          model=".password"
-                          id="password"
-                          name="password"
-                          placeholder="password"
-                          className="form-control"
-                        />
-                      </Col>
-                    </Col>
-                  </Row>
-
-                  <Button type="submit" value="submit" color="primary">
-                    Register
-                  </Button>
-                </Form>
+             
+              <Register toggleModal={this.toggleModal} addUserInfo={this.props.addUserInfo}/>
               </TabPane>
             </TabContent>
           </ModalBody>

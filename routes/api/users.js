@@ -9,6 +9,10 @@ const validateLoginInput = require("../../validation/login");
 // Load User model
 const User = require("../../models/User");
 
+
+
+
+
 // @route POST api/users/register
 // @desc Register user
 // @access Public
@@ -92,5 +96,49 @@ router.post("/login", (req, res) => {
       });
     });
   });
+
+
+  router.get("/:userId", (req, res, next) => {
+  User.findById( req.params.userId)
+  .then((User) => {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.json(User);
+  })
+  .catch((err) => next(err));
+  })
+
+
+  // .put("/:userId",(req, res, next) => {
+  //   User.findByIdAndUpdate(
+  //       req.params.userId,
+  //       {
+  //         $set: req.body,
+  //       },
+  //       { new: true }
+  //     )
+  //       .then((User) => {
+  //         res.statusCode = 200;
+  //         res.setHeader("Content-Type", "application/json");
+  //         res.json(User);
+  //       })
+  //       .catch((err) => next(err));
+  //   }
+  // )
+ 
+
+/* GET users listing. */
+router.get(
+  "/",
+  function (req, res, next) {
+    User.find()
+      .then((user) => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(user);
+      })
+      .catch((err) => next(err));
+  }
+)
 
   module.exports = router;

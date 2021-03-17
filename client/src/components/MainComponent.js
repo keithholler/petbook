@@ -17,15 +17,15 @@ import PetProfile from "./PetProfileComponent";
 import PublicProfile from "./PublicProfile";
 import Shelters from "./SheltersComponent";
 import Lostpet from "./LostpetsComponent";
-import Login from "./login";
-import Register from "./register";
+
 import { actions } from "react-redux-form";
 import {
   addUniqueId,
   postComment,
   addUserInfo,
   addPetCard,
-  logoutUser
+  logoutUser,
+  addAuthUserInfo
 } from "../redux/ActionCreators";
 //import { FEED } from "../shared/feedObjects";
 const mapStateToProps = (state) => {
@@ -67,7 +67,7 @@ const mapDispatchToProps = {
   addPetCard: (petId, petcard, petImage) =>
     addPetCard(petId, petcard, petImage),
     logoutUser: ()=>logoutUser(),
-
+    addAuthUserInfo:(post)=>addAuthUserInfo(post),
   resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
@@ -128,6 +128,7 @@ class Main extends Component {
                 petcard={this.props.petcard}
                 addPetCard={this.props.addPetCard}
                 userInfo={this.props.userInfo}
+                auth={this.props.auth}
               />
             )}
           />
@@ -144,6 +145,7 @@ class Main extends Component {
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
                 userInfo={this.props.userInfo}
+                auth={this.props.auth}
               />
             )}
           />
@@ -157,6 +159,8 @@ class Main extends Component {
                 userInfo={this.props.userInfo}
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
+                auth={this.props.auth}
+                addAuthUserInfo={this.props.addAuthUserInfo}
               />
             )}
           />
@@ -170,6 +174,7 @@ class Main extends Component {
                 uniqueId={this.props.uniqueId}
                 addUserInfo={this.props.addUserInfo}
                 userInfo={this.props.userInfo}
+                auth={this.props.auth}
               />
             )}
           />

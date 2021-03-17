@@ -1,6 +1,7 @@
 import {
     SET_CURRENT_USER,
-    USER_LOADING
+    USER_LOADING,
+    ADD_USER_POST
   } from "./ActionTypes";
   const isEmpty = require("is-empty");
   const initialState = {
@@ -20,6 +21,11 @@ import {
         return {
           ...state,
           loading: true
+        };
+        case ADD_USER_POST:
+        return {
+          ...state,
+          // post:state.post.reverse().concat(action.payload).reverse()
         };
       default:
         return state;

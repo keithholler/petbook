@@ -549,7 +549,7 @@ class PetProfile extends Component {
       <React.Fragment>
         <div className="row">
           <h5 className="col-2 ml-4 mt-2 text-nowrap">
-            {this.props.userInfo.userInfo.profileInfo ? (
+            {this.props.auth.isAuthenticated  ? (
               <Link to="/PublicProfile" style={{ textDecoration: "none" }}>
                 View Public Profile
               </Link>
@@ -604,8 +604,8 @@ class PetProfile extends Component {
                 id="profileName"
                 name="profileName"
                 placeholder={
-                  this.props.userInfo.userInfo.userId
-                    ? this.props.userInfo.userInfo.userId.profileName
+                  this.props.auth.isAuthenticated 
+                    ? this.props.auth.user.name
                     : ""
                 }
                 className="form-control"

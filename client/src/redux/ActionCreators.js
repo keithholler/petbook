@@ -94,3 +94,32 @@ export const logoutUser = () => dispatch => {
   // Set current user to empty object {} which will set isAuthenticated to false
   dispatch(setCurrentUser({}));
 };
+
+
+// export const userPost = ( title, body,callback) => dispatch => {
+//   axios
+//     .post("/api/posts/createpost", {title,body})
+
+//     // .then(res => {
+
+//     //  })
+//     .catch(err =>
+//       dispatch({
+//         type: ActionTypes.ADD_USER_POST,
+//         payload: err.response.data
+//       })
+//     );
+// };
+
+export function userPost(title, body) {
+
+  return dispatch => { //return function
+    return axios.post("/api/posts/createpost", {title,body}) //return post request response
+    .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
+      dispatch({
+        type:ActionTypes.ADD_USER_POST,
+        payload: data
+      })
+    })
+  }
+}

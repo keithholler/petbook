@@ -25,7 +25,7 @@ import {
   addUserInfo,
   addPetCard,
   logoutUser,
-  addAuthUserInfo
+  userPost
 } from "../redux/ActionCreators";
 //import { FEED } from "../shared/feedObjects";
 const mapStateToProps = (state) => {
@@ -35,6 +35,7 @@ const mapStateToProps = (state) => {
     userInfo: state.userInfo,
     petcard: state.petcard,
     auth:state.auth,
+    postreducer:state.postreducer,
     errors:state.errors
   };
 };
@@ -67,7 +68,7 @@ const mapDispatchToProps = {
   addPetCard: (petId, petcard, petImage) =>
     addPetCard(petId, petcard, petImage),
     logoutUser: ()=>logoutUser(),
-    addAuthUserInfo:(post)=>addAuthUserInfo(post),
+    userPost:(title,body)=>userPost(title,body),
   resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
@@ -114,6 +115,7 @@ class Main extends Component {
                 addUserInfo={this.props.addUserInfo}
                 userInfo={this.props.userInfo}
                 auth={this.props.auth}
+                
               />
             )}
           />
@@ -161,6 +163,8 @@ class Main extends Component {
                 addUserInfo={this.props.addUserInfo}
                 auth={this.props.auth}
                 addAuthUserInfo={this.props.addAuthUserInfo}
+                userPost={this.props.userPost}
+                postreducer={this.props.postreducer}
               />
             )}
           />

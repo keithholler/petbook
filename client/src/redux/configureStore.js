@@ -9,6 +9,7 @@ import {InitialFeedback} from './profileForm';
 import {InitialFeedback2} from './lostPetForm';
 import {InitialFeedback3} from './petForm';
 import {authReducer} from "./authReducer";
+import {postReducer} from "./postReducer";
 import {errorReducer} from "./errorReducer";
 const initialState = {};
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
@@ -20,6 +21,7 @@ const store = createStore(
       userInfo:UserInfo,
       petcard:Petcard,
       auth: authReducer,
+      postreducer:postReducer,
   errors: errorReducer,
       ...createForms({
         profileForm: InitialFeedback,

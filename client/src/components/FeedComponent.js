@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 import {
   FormGroup,
   Button,
@@ -14,20 +14,25 @@ import {
   CardImg,
   TabPane,
   TabContent,
-  Row,
-  Col,
   Nav,
   NavItem,
   NavLink,
 } from "reactstrap";
-import { Control, LocalForm, Form } from "react-redux-form";
+import { Control, LocalForm } from "react-redux-form";
 import { storage } from "../firebase";
 import classnames from "classnames";
 import uuid from "react-uuid";
 import Register from "./register"
 import Login from "./login"
 function Post(props) {
-  return props.post.post.map((post, index) => {
+
+
+console.log(props.posts)
+
+
+  //return   props.postreducer.post.filter(id =>id.postedBy._id === props.auth.user.id).map((post, index) => {
+  
+  return  props.posts.posts.map((post, index) => {
     return (
       <div className="container" key={index}>
         <div className="row row-content">
@@ -85,7 +90,9 @@ function Post(props) {
                     fontWeight: "400",
                   }}
                 >
-                  {/* {post.text} */}
+                  
+                   {/* {post.body}  */}
+                   
                 </CardText>
                 {post.postImage === null ? (
                   <div></div>
@@ -134,8 +141,10 @@ class PostForm extends Component {
   };
 
   handleSubmit = (values) => {
+
+    //alert(this.props.postreducer.body)
     this.toggleModal();
-    this.props.addAuthUserInfo(values.text)
+    this.props.userPost("This is a Title Test",values.text)
     this.props.postComment(values.text, this.state.feedPicPostURL);
   };
   handleChange = (e) => {
@@ -254,6 +263,18 @@ class PostForm extends Component {
   }
 }
 
+const apiPser = axios.create({
+  baseURL:'http://localhost:5000/api/users/'
+})
+
+const apiPosts = axios.create({
+  baseURL:'http://localhost:5000/api/posts/'
+})
+
+
+
+
+
 class Feed extends Component {
   constructor(props) {
     super(props);
@@ -262,7 +283,28 @@ class Feed extends Component {
       postText: "",
       postImage: "",
       activeTab: "2",
+      data:[],
+      posts:[]
     };
+
+
+    // api.get('/',{
+    //   headers:{
+    //     "Authorization":localStorage.getItem("jwtToken"),
+    //     "Content-Type":"application/json",
+    //     'Access-Control-Allow-Origin':'*'
+    //   }
+    // })
+    // .then(response => {
+    //   response.statusCode = 200;
+    //   response.setHeader("Content-Type", "application/json","Access-Control-Allow-Origin", "*");
+    //  console.log(response.data)
+    // });
+    apiPosts.get('/allpost')
+ .then(response => { 
+  // console.log(response.data)
+   this.setState({posts:response.data})
+ })
   }
   handleInputChange = (event) => {
     const target = event.target;
@@ -317,18 +359,39 @@ class Feed extends Component {
      isModalOpen: !this.state.isModalOpen,
    });
  }
+
+ const AlPost = ()=>{<Post
+ post={this.props.post}
+ userInfo={this.props.userInfo}
+ userPick={this.props.userInfo.userInfo.userPick}
+ auth={this.props.auth}
+ userPost={this.props.userPost}
+ postreducer={this.props.postreducer}
+ posts={this.state.posts}
+/>
+
+ }
+}
+
+
+
+
     // if (typeof this.props.userInfo.userInfo.profileInfo === "undefined") {
     //   this.setState({
     //     isModalOpen: !this.state.isModalOpen,
     //   });
     // }
-  };
+  
   toggleTab = (tab) => {
     if (this.state.activeTab !== tab) {
       this.setState({ activeTab: tab });
     }
   };
   render() {
+    
+ //const name = this.state.data.filter(id =>id._id === this.props.auth.user.id)
+//console.log(name)
+
     return (
       <div className="container ">
         <div
@@ -337,6 +400,17 @@ class Feed extends Component {
           style={{ position: "relative" }}
         >
           <div className="col-12 mx-auto p-2 ">
+          <Button
+          type="submit"
+          color="primary"
+          outline
+          className="fa-sm"
+          onClick={this.seeBackEndPost}
+        >
+          
+          <i className="fa fa-pencil " /> Post
+       
+        </Button>
             <Card className="m-2 lostPetCard">
               <div class="card-horizontal">
                 {typeof this.props.userInfo.userInfo.profileInfo ===
@@ -371,19 +445,23 @@ class Feed extends Component {
                 </CardTitle>
               </div>
               <div className="border">
-                <PostForm postComment={this.props.postComment} addAuthUserInfo={this.props.addAuthUserInfo} />
+                <PostForm postComment={this.props.postComment} userPost={this.props.userPost} postreducer={this.props.postreducer}/>
               </div>
             </Card>
           </div>
         </div>
         <div className="">
-          <Post
+        {this.props.AlPost}
+          {/* <Post
             post={this.props.post}
             userInfo={this.props.userInfo}
             userPick={this.props.userInfo.userInfo.userPick}
             auth={this.props.auth}
-            addAuthUserInfo={this.props.addAuthUserInfo}
-          />
+            userPost={this.props.userPost}
+            postreducer={this.props.postreducer}
+            posts={this.state.posts}
+          /> */}
+
         </div>
         <Modal
           backdrop="static"

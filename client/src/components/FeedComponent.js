@@ -22,102 +22,8 @@ import { Control, LocalForm } from "react-redux-form";
 import { storage } from "../firebase";
 import classnames from "classnames";
 import uuid from "react-uuid";
-import Register from "./register"
-import Login from "./login"
-function Post(props) {
-
-
-console.log(props.posts)
-
-
-  //return   props.postreducer.post.filter(id =>id.postedBy._id === props.auth.user.id).map((post, index) => {
-  
-  return  props.posts.posts.map((post, index) => {
-    return (
-      <div className="container" key={index}>
-        <div className="row row-content">
-          <div className="col-12 mx-auto p-2" >
-            <Card className="m-2 lostPetCard" style={{ width: "auto", height: "auto",boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)" }}>
-              <div class="card-horizontal">
-                {typeof props.userInfo.userInfo.profileInfo === "undefined" ||
-                props.userInfo.userInfo.userPick === "localImageUrl" ||
-                this.props.userInfo.userInfo.userPick === "" ? (
-                  <CardImg
-                    id="music"
-                    className="profileImg mr-2 ml-2 mt-2"
-                    src="/petbook/assets/default.png"
-                    alt="profileImg"
-                    style={{
-                      width: "60px",
-                      objectFit: "cover",
-                      objectPosition: "50% 50%",
-                    }}
-                  />
-                ) : (
-                  <CardImg
-                    id="music"
-                    className="profileImg mr-2 ml-2 mt-2"
-                    src={props.userInfo.userInfo.userPick}
-                    alt="profileImg"
-                    style={{
-                      width: "60px",
-                      objectFit: "cover",
-                      objectPosition: "50% 50%",
-                    }}
-                  />
-                )}
-
-                <CardTitle
-                  style={{ fontFamily: "Fredoka One", fontWeight: "200" }}
-                  className="mt-4"
-                >
-                  {" "}
-                  {!props.auth.isAuthenticated 
-                    ? "Not Logged In"
-                    : props.auth.user.name }
-                </CardTitle>
-              </div>
-              <CardBody
-                className="mx-auto"
-                style={{ width: "100%", height: "auto" }}
-              >
-                <CardText
-                  className="text-center text-break text-wrap "
-                  style={{
-                    fontSize: "calc(.5em + 1vw)",
-                    height: "auto!important",
-                    fontFamily: "Nunito",
-                    fontWeight: "400",
-                  }}
-                >
-                  
-                   {/* {post.body}  */}
-                   
-                </CardText>
-                {post.postImage === null ? (
-                  <div></div>
-                ) : (
-                  <CardImg
-                    className="img-fluid mx-auto"
-                    style={{
-                      width: "70vh",
-                      height: "auto",
-                      objectFit: "contain",
-                      objectPosition: "50% 50%",
-                      display: "block",
-                      verticalAlign:"top"
-                    }}
-                    src={post.postImage}
-                  />
-                )}
-              </CardBody>
-            </Card>
-          </div>
-        </div>
-      </div>
-    );
-  });
-}
+import Register from "./register";
+import Login from "./login";
 
 class PostForm extends Component {
   constructor(props) {
@@ -141,12 +47,16 @@ class PostForm extends Component {
   };
 
   handleSubmit = (values) => {
-
     //alert(this.props.postreducer.body)
     this.toggleModal();
-    this.props.userPost("This is a Title Test",values.text)
+    this.props.userPost("This is a Title Test", values.text);
     this.props.postComment(values.text, this.state.feedPicPostURL);
+ 
+     
+    setTimeout(() => this.props.rerenderParentCallback(), 1000)
   };
+
+
   handleChange = (e) => {
     if (e.target.files[0]) {
       this.setState(
@@ -264,16 +174,12 @@ class PostForm extends Component {
 }
 
 const apiPser = axios.create({
-  baseURL:'http://localhost:5000/api/users/'
-})
+  baseURL: "http://localhost:5000/api/users/",
+});
 
 const apiPosts = axios.create({
-  baseURL:'http://localhost:5000/api/posts/'
-})
-
-
-
-
+  baseURL: "http://localhost:5000/api/posts/",
+});
 
 class Feed extends Component {
   constructor(props) {
@@ -283,10 +189,10 @@ class Feed extends Component {
       postText: "",
       postImage: "",
       activeTab: "2",
-      data:[],
-      posts:[]
+      data: [],
+      posts: [],
+      error: "",
     };
-
 
     // api.get('/',{
     //   headers:{
@@ -300,12 +206,8 @@ class Feed extends Component {
     //   response.setHeader("Content-Type", "application/json","Access-Control-Allow-Origin", "*");
     //  console.log(response.data)
     // });
-    apiPosts.get('/allpost')
- .then(response => { 
-  // console.log(response.data)
-   this.setState({posts:response.data})
- })
   }
+
   handleInputChange = (event) => {
     const target = event.target;
     const name = target.name;
@@ -321,7 +223,9 @@ class Feed extends Component {
     this.setState({
       postText: "",
       postImage: "",
-    });
+    }
+    );
+
   };
   handleLogin = (values) => {
     if (values.email) {
@@ -354,44 +258,65 @@ class Feed extends Component {
   };
 
   componentDidMount = () => {
-    if(!this.props.auth.isAuthenticated){
+    if (!this.props.auth.isAuthenticated) {
       this.setState({
-     isModalOpen: !this.state.isModalOpen,
-   });
- }
+        isModalOpen: !this.state.isModalOpen,
+      });
+    }
 
- const AlPost = ()=>{<Post
- post={this.props.post}
- userInfo={this.props.userInfo}
- userPick={this.props.userInfo.userInfo.userPick}
- auth={this.props.auth}
- userPost={this.props.userPost}
- postreducer={this.props.postreducer}
- posts={this.state.posts}
-/>
+    apiPosts
+      .get("/allpost")
+      //.then((response) => response.json())
+      .then((response) => {
+        //console.log(response.data)
+        this.setState({ posts: response.data }
+        //  , () => console.log(this.state.posts)
+        );
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
+    if (this.state.error || !Array.isArray(this.state.posts)) {
+      return console.log("This is not an array");
+    }
+  };
 
- }
-}
+  // componentDidUpdate(prevProps) {
+  //   console.log(prevProps.post.post)
+  //   console.log(this.state.posts.posts)
+  //   if (prevProps.post.post !== [] || prevProps.post.post !== this.state.posts.posts ) {
+  //     console.log("hi")
+  //   }
+  // }
+  rerenderParentCallback = () => {
+    apiPosts
+    .get("/allpost")
+    //.then((response) => response.json())
+    .then((response) => {
+      console.log(response.data)
+      this.setState({ posts: response.data }
+      //  , () => console.log(this.state.posts)
+      );
+    })
+    .catch((err) => {
+      this.setState({ error: err });
+    });
+  if (this.state.error || !Array.isArray(this.state.posts)) {
+    return console.log("This is not an array ");
+  }
+  }
 
-
-
-
-    // if (typeof this.props.userInfo.userInfo.profileInfo === "undefined") {
-    //   this.setState({
-    //     isModalOpen: !this.state.isModalOpen,
-    //   });
-    // }
-  
   toggleTab = (tab) => {
     if (this.state.activeTab !== tab) {
       this.setState({ activeTab: tab });
     }
   };
   render() {
-    
- //const name = this.state.data.filter(id =>id._id === this.props.auth.user.id)
-//console.log(name)
 
+    
+    console.log(`Parent rendered.`);
+    //console.log(props.posts.posts)
+    //return   props.postreducer.post.filter(id =>id.postedBy._id === props.auth.user.id).map((post, index) => {
     return (
       <div className="container ">
         <div
@@ -400,17 +325,7 @@ class Feed extends Component {
           style={{ position: "relative" }}
         >
           <div className="col-12 mx-auto p-2 ">
-          <Button
-          type="submit"
-          color="primary"
-          outline
-          className="fa-sm"
-          onClick={this.seeBackEndPost}
-        >
-          
-          <i className="fa fa-pencil " /> Post
-       
-        </Button>
+            
             <Card className="m-2 lostPetCard">
               <div class="card-horizontal">
                 {typeof this.props.userInfo.userInfo.profileInfo ===
@@ -439,19 +354,127 @@ class Feed extends Component {
                   className="mt-3"
                 >
                   {" "}
-                  {!this.props.auth.isAuthenticated 
+                  {!this.props.auth.isAuthenticated
                     ? "Not Logged In"
-                    : this.props.auth.user.name }
+                    : this.props.auth.user.name}
                 </CardTitle>
               </div>
               <div className="border">
-                <PostForm postComment={this.props.postComment} userPost={this.props.userPost} postreducer={this.props.postreducer}/>
+                <PostForm
+                  postComment={this.props.postComment}
+                  userPost={this.props.userPost}
+                  postreducer={this.props.postreducer}
+                  rerenderParentCallback={this.rerenderParentCallback}
+                />
               </div>
             </Card>
           </div>
         </div>
         <div className="">
-        {this.props.AlPost}
+          {typeof this.state.posts.posts === "undefined" ? (
+            <div></div>
+          ) : (
+            this.state.posts.posts.map((post, index) => {
+              return (
+                <div className="container" key={index}>
+                  <div className="row row-content">
+                    <div className="col-12 mx-auto p-2">
+                      <Card
+                        className="m-2 lostPetCard"
+                        style={{
+                          width: "auto",
+                          height: "auto",
+                          boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)",
+                        }}
+                      >
+                        <div class="card-horizontal">
+                          {typeof this.props.userInfo.userInfo.profileInfo ===
+                            "undefined" ||
+                          this.props.userInfo.userInfo.userPick ===
+                            "localImageUrl" ||
+                          this.props.userInfo.userInfo.userPick === "" ? (
+                            <CardImg
+                              id="music"
+                              className="profileImg mr-2 ml-2 mt-2"
+                              src="/petbook/assets/default.png"
+                              alt="profileImg"
+                              style={{
+                                width: "60px",
+                                objectFit: "cover",
+                                objectPosition: "50% 50%",
+                              }}
+                            />
+                          ) : (
+                            <CardImg
+                              id="music"
+                              className="profileImg mr-2 ml-2 mt-2"
+                              src={this.props.userInfo.userInfo.userPick}
+                              alt="profileImg"
+                              style={{
+                                width: "60px",
+                                objectFit: "cover",
+                                objectPosition: "50% 50%",
+                              }}
+                            />
+                          )}
+
+                          <CardTitle
+                            style={{
+                              fontFamily: "Fredoka One",
+                              fontWeight: "200",
+                            }}
+                            className="mt-4"
+                          >
+                            {" "}
+                            {post.postedBy.map((item, i) => {
+                              return (
+                                <div style={{ color: "black" }} key={i}>
+                                  {item.name}
+                                </div>
+                              );
+                            })}
+                          </CardTitle>
+                        </div>
+                        <CardBody
+                          className="mx-auto"
+                          style={{ width: "100%", height: "auto" }}
+                        >
+                          <CardText
+                            className="text-center text-break text-wrap "
+                            style={{
+                              fontSize: "calc(.5em + 1vw)",
+                              height: "auto!important",
+                              fontFamily: "Nunito",
+                              fontWeight: "400",
+                            }}
+                          >
+                            {post.body}
+                          </CardText>
+                          {post.postImage === null ? (
+                            <div></div>
+                          ) : (
+                            <CardImg
+                              className="img-fluid mx-auto"
+                              style={{
+                                width: "70vh",
+                                height: "auto",
+                                objectFit: "contain",
+                                objectPosition: "50% 50%",
+                                display: "block",
+                                verticalAlign: "top",
+                              }}
+                              src={post.postImage}
+                            />
+                          )}
+                        </CardBody>
+                      </Card>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          )}
+
           {/* <Post
             post={this.props.post}
             userInfo={this.props.userInfo}
@@ -460,8 +483,7 @@ class Feed extends Component {
             userPost={this.props.userPost}
             postreducer={this.props.postreducer}
             posts={this.state.posts}
-          /> */}
-
+          />  */}
         </div>
         <Modal
           backdrop="static"
@@ -509,10 +531,16 @@ class Feed extends Component {
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-              <Login toggleModal={this.toggleModal} addUserInfo={this.props.addUserInfo}/>
+                <Login
+                  toggleModal={this.toggleModal}
+                  addUserInfo={this.props.addUserInfo}
+                />
               </TabPane>
               <TabPane tabId="2">
-              <Register toggleModal={this.toggleModal} addUserInfo={this.props.addUserInfo}/>
+                <Register
+                  toggleModal={this.toggleModal}
+                  addUserInfo={this.props.addUserInfo}
+                />
               </TabPane>
             </TabContent>
           </ModalBody>

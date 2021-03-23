@@ -8,93 +8,11 @@ import {
   CardImg,
   CardText,
 } from "reactstrap";
+import axios from "axios";
 
-function Post(props) {
-  //const profileName = props.userInfo.userInfo.profileInfo.profileName;
-
-  return props.post.post.map((post) => {
-    return (
-      <div className="container">
-        <div className="row row-content">
-          <div className="col-12 mx-auto p-2">
-            <Card className="m-2 lostPetCard"style={{ width: "auto", height: "auto",boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)" }}>
-              <div class="card-horizontal">
-                {typeof props.userInfo.userInfo.profileInfo === "undefined" ||
-                props.userInfo.userInfo.userPick === "localImageUrl" ||
-                this.props.userInfo.userInfo.userPick === "" ? (
-                  <CardImg
-                    id="music"
-                    className="profileImg mr-2"
-                    src="/petbook/assets/default.png"
-                    alt="profileImg"
-                    style={{
-                      width: "60px",
-                      objectFit: "cover",
-                      objectPosition: "50% 50%",
-                    }}
-                  />
-                ) : (
-                  <CardImg
-                    id="music"
-                    className="profileImg mr-2"
-                    src={props.userInfo.userInfo.userPick}
-                    alt="profileImg"
-                    style={{
-                      width: "60px",
-                      objectFit: "cover",
-                      objectPosition: "50% 50%",
-                    }}
-                  />
-                )}
-
-                <CardTitle
-                  style={{ fontFamily: "Fredoka One", fontWeight: "200" }}
-                  className="mt-2"
-                >
-                  {" "}
-                  {!props.auth.isAuthenticated 
-                    ? "Not Logged In"
-                    : props.auth.user.name }
-                </CardTitle>
-              </div>
-              <CardBody
-                className="mx-auto"
-                style={{ width: "100%", height: "auto" }}
-              >
-                <CardText
-                  className="text-center text-break text-wrap"
-                  style={{
-                    fontSize: "calc(.5em + 1vw)",
-                    height: "auto!important",
-                    fontFamily: "Nunito",
-                    fontWeight: "400",
-                  }}
-                >
-                  {post.text}
-                </CardText>
-                {post.postImage === null ? (
-                  <div></div>
-                ) : (
-                  <CardImg
-                    className="img-fluid mx-auto"
-                    style={{
-                      width: "70vh",
-                      height: "auto",
-                      objectFit: "contain",
-                      objectPosition: "50% 50%",
-                      display: "block",
-                    }}
-                    src={post.postImage}
-                  />
-                )}
-              </CardBody>
-            </Card>
-          </div>
-        </div>
-      </div>
-    );
-  });
-}
+const apiPosts = axios.create({
+  baseURL: "http://localhost:5000/api/posts/",
+});
 
 class PublicProfile extends Component {
   constructor(props) {
@@ -103,6 +21,9 @@ class PublicProfile extends Component {
       mainProfileName: "Keith",
       postText: "",
       postImage: "",
+      data: [],
+      posts: [],
+      error: "",
     };
   }
   handleInputChange = (event) => {
@@ -122,6 +43,31 @@ class PublicProfile extends Component {
       postText: "",
       postImage: "",
     });
+  };
+
+  componentDidMount = () => {
+    if (!this.props.auth.isAuthenticated) {
+      this.setState({
+        isModalOpen: !this.state.isModalOpen,
+      });
+    }
+
+    apiPosts
+      .get("/allpost")
+      //.then((response) => response.json())
+      .then((response) => {
+        //console.log(response.data)
+        this.setState(
+          { posts: response.data }
+          //  , () => console.log(this.state.posts.posts[0].postedBy[0]._id)
+        );
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
+    if (this.state.error || !Array.isArray(this.state.posts)) {
+      return console.log("This is not an array");
+    }
   };
 
   render() {
@@ -362,16 +308,120 @@ class PublicProfile extends Component {
               className="intro text-no-wroap text-center"
               data-aos="fade-up"
               data-aos-duration="1000"
-            >
-              {/* {this.props.userInfo.userInfo.profileInfo.ownerAbout === "undefined"?this.props.userInfo.userInfo.profileInfo.ownerAbout:""} */}
-             
-            </p>
+            ></p>
           </div>
         </div>
 
         <div className="row row-content justify-content-around">
           {pets}
-          <Post post={this.props.post} userInfo={this.props.userInfo} auth={this.props.auth}/>
+
+          {typeof this.state.posts.posts === "undefined" ? (
+            <div>trjhertj</div>
+          ) : (
+            this.state.posts.posts
+              .filter((a) => a.postedByPrivate === this.props.auth.user.id)
+              .map((post, index) => {
+                return (
+                  <div className="container" key={index}>
+                    <div className="row row-content">
+                      <div className="col-12 mx-auto p-2">
+                        <Card
+                          className="m-2 lostPetCard"
+                          style={{
+                            width: "auto",
+                            height: "auto",
+                            boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)",
+                          }}
+                        >
+                          <div class="card-horizontal">
+                            {typeof this.props.userInfo.userInfo.profileInfo ===
+                              "undefined" ||
+                            this.props.userInfo.userInfo.userPick ===
+                              "localImageUrl" ||
+                            this.props.userInfo.userInfo.userPick === "" ? (
+                              <CardImg
+                                id="music"
+                                className="profileImg mr-2 ml-2 mt-2"
+                                src="/petbook/assets/default.png"
+                                alt="profileImg"
+                                style={{
+                                  width: "60px",
+                                  objectFit: "cover",
+                                  objectPosition: "50% 50%",
+                                }}
+                              />
+                            ) : (
+                              <CardImg
+                                id="music"
+                                className="profileImg mr-2 ml-2 mt-2"
+                                src={this.props.userInfo.userInfo.userPick}
+                                alt="profileImg"
+                                style={{
+                                  width: "60px",
+                                  objectFit: "cover",
+                                  objectPosition: "50% 50%",
+                                }}
+                              />
+                            )}
+
+                            <CardTitle
+                              style={{
+                                fontFamily: "Fredoka One",
+                                fontWeight: "200",
+                              }}
+                              className="mt-4"
+                            >
+                              {" "}
+                              {post.postedBy.map((item, i) => {
+                                return (
+                                  <div style={{ color: "black" }} key={i}>
+                                    {item.name}
+                                  </div>
+                                );
+                              })}
+                            </CardTitle>
+                          </div>
+                          <CardBody
+                            className="mx-auto"
+                            style={{ width: "100%", height: "auto" }}
+                          >
+                            <CardText
+                              className="text-center text-break text-wrap "
+                              style={{
+                                fontSize: "calc(.5em + 1vw)",
+                                height: "auto!important",
+                                fontFamily: "Nunito",
+                                fontWeight: "400",
+                              }}
+                            >
+                              {post.body}
+                            </CardText>
+                            {post.postImage === null ? (
+                              <div></div>
+                            ) : (
+                              <CardImg
+                                className="img-fluid mx-auto"
+                                style={{
+                                  width: "70vh",
+                                  height: "auto",
+                                  objectFit: "contain",
+                                  objectPosition: "50% 50%",
+                                  display: "block",
+                                  verticalAlign: "top",
+                                }}
+                                src={post.postImage}
+                              />
+                            )}
+                          </CardBody>
+                        </Card>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+          )}
+
+          {/* <Post post={this.props.post} userInfo={this.props.userInfo} auth={this.props.auth}/> */}
         </div>
       </div>
     );

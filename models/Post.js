@@ -21,11 +21,16 @@ const postSchema = new mongoose.Schema(
         postedBy: { type: ObjectId, ref: "User" },
       },
     ],
-    postedBy: {
+    postedBy: [{
+      type: ObjectId,
+      ref: "User",
+    }],
+    postedByPrivate: {
       type: ObjectId,
       ref: "User",
     },
   },
+
   { timestamps: true }
 );
 

@@ -57,12 +57,13 @@ router.post("/createpost", requireLogin, (req, res) => {
     // photo:pic,
 
     postedBy: req.user,
+    postedByPrivate: req.user,
   });
   console.log(req.user);
   post
     .save()
     .then((result) => {
-      res.json({ post: result });
+      res.json({ post:result  });
     })
     .catch((err) => {
       console.log(err);

@@ -39,12 +39,12 @@ router.get("/getsubpost", requireLogin, (req, res) => {
 // @route POST api/posts/createpost
 router.post("/createpost", requireLogin, (req, res) => {
   const {
-    title,
+    pic,
     body,
     //  ,pic
   } = req.body;
   if (
-    !title ||
+    !pic ||
     !body
     //|| !pic
   ) {
@@ -52,7 +52,7 @@ router.post("/createpost", requireLogin, (req, res) => {
   }
   // req.user.password = undefined
   const post = new Post({
-    title,
+    pic,
     body,
     // photo:pic,
 

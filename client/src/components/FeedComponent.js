@@ -49,7 +49,8 @@ class PostForm extends Component {
   handleSubmit = (values) => {
     //alert(this.props.postreducer.body)
     this.toggleModal();
-    this.props.userPost("This is a Title Test", values.text);
+    console.log(this.props.userInfo.userInfo.length)
+    this.props.userPost(this.props.userInfo.userInfo.length === 0  ?" ":this.props.userInfo.userInfo.info.PicPostURL, values.text);
     this.props.postComment(values.text, this.state.feedPicPostURL);
  
      
@@ -83,6 +84,7 @@ class PostForm extends Component {
                 .getDownloadURL()
                 .then((url) => {
                   console.log(url);
+                  this.props.addUserInfo({PicPostURL: url})
                   this.setState({ feedPicPostURL: url });
                 });
             }
@@ -364,6 +366,8 @@ class Feed extends Component {
                   postComment={this.props.postComment}
                   userPost={this.props.userPost}
                   postreducer={this.props.postreducer}
+                  addUserInfo={this.props.addUserInfo}
+                  userInfo={this.props.userInfo}
                   rerenderParentCallback={this.rerenderParentCallback}
                 />
               </div>
@@ -463,7 +467,7 @@ class Feed extends Component {
                                 display: "block",
                                 verticalAlign: "top",
                               }}
-                              src={post.postImage}
+                              src={post.pic}
                             />
                           )}
                         </CardBody>

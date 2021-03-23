@@ -494,7 +494,10 @@ class PetProfile extends Component {
       this.state.profileImageURL,
       values
     );
-
+    this.props.addUserInfoDB("I am an IMAGE",
+      "I am firstName",
+      "I am lastName",
+      "I am about",)
     // this.props.resetProfileForm();
   };
 

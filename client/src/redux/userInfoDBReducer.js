@@ -1,5 +1,5 @@
 import {
-    ADD_USER_POST
+    ADD_USER_INFODB
   } from "./ActionTypes";
   const isEmpty = require("is-empty");
   const initialState = {
@@ -7,12 +7,12 @@ import {
     body: "",
     loading: false
   };
-  export const postReducer = (state = { post: [] }, action)=> {
+  export const userInfoDBReducer = (state = { userInfoDB: [] }, action)=> {
     switch (action.type) {
-        case ADD_USER_POST:
+        case ADD_USER_INFODB:
             return {
               ...state,
-              post:state.post.reverse().concat(action.payload.data.post).reverse()
+              userInfoDB:action.payload
              // title: action.payload.data.post.title,
             //  body: action.payload.data.post.body
               // post:state.post.reverse().concat(action.payload).reverse()

@@ -25,7 +25,8 @@ import {
   addUserInfo,
   addPetCard,
   logoutUser,
-  userPost
+  userPost,
+  addUserInfoDB
 } from "../redux/ActionCreators";
 //import { FEED } from "../shared/feedObjects";
 const mapStateToProps = (state) => {
@@ -34,9 +35,10 @@ const mapStateToProps = (state) => {
     post: state.post,
     userInfo: state.userInfo,
     petcard: state.petcard,
-    auth:state.auth,
-    postreducer:state.postreducer,
-    errors:state.errors
+    auth: state.auth,
+    postreducer: state.postreducer,
+    userinfodbReducer: state.userinfodbReducer,
+    errors: state.errors,
   };
 };
 
@@ -67,12 +69,13 @@ const mapDispatchToProps = {
     ),
   addPetCard: (petId, petcard, petImage) =>
     addPetCard(petId, petcard, petImage),
-    logoutUser: ()=>logoutUser(),
-    userPost:(title,body)=>userPost(title,body),
+  logoutUser: () => logoutUser(),
+  userPost: (pic, body) => userPost(pic, body),
+  addUserInfoDB: (profileImage, firstName, lastName, about) =>
+    addUserInfoDB(profileImage, firstName, lastName, about),
   resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
-
 
 class Main extends Component {
   constructor(props) {
@@ -115,7 +118,7 @@ class Main extends Component {
                 addUserInfo={this.props.addUserInfo}
                 userInfo={this.props.userInfo}
                 auth={this.props.auth}
-                
+                addUserInfoDB={this.props.addUserInfoDB}
               />
             )}
           />
@@ -168,7 +171,7 @@ class Main extends Component {
               />
             )}
           />
-           <Route
+          <Route
             path="/petbook"
             render={() => (
               <Lostpet
@@ -185,7 +188,6 @@ class Main extends Component {
 
           {/* <Redirect to="/LostPets" /> */}
         </Switch>
-        
       </React.Fragment>
     );
   }

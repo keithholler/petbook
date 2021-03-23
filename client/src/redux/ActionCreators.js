@@ -15,9 +15,9 @@ export const postComment = (text,postImage) => ({
   payload: {text,postImage}
 });
 
-export const addUserInfo = (userId,userPick,profileInfo, isRegistered) => ({
+export const addUserInfo = (info,userPick,profileInfo, isRegistered) => ({
   type: ActionTypes.ADD_USERINFO,
-  payload: {userId,userPick,profileInfo,isRegistered},
+  payload: {info,userPick,profileInfo,isRegistered},
 });
 
 export const addPetCard = (petId,petcard,petImage) => ({
@@ -111,13 +111,32 @@ export const logoutUser = () => dispatch => {
 //     );
 // };
 
-export function userPost(title, body) {
+export function userPost(pic, body) {
 
   return dispatch => { //return function
-    return axios.post("/api/posts/createpost", {title,body}) //return post request response
+    return axios.post("/api/posts/createpost", {pic,body}) //return post request response
     .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
       dispatch({
         type:ActionTypes.ADD_USER_POST,
+        payload: data
+      })
+    })
+  }
+}
+
+
+export function addUserInfoDB(profileImage,
+  firstName,
+  lastName,
+  about,) {
+
+  return dispatch => { //return function
+    return axios.post("/api/usersInfoDB/createuserdata", {profileImage,firstName,
+      lastName,
+      about}) //return post request response
+    .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
+      dispatch({
+        type:ActionTypes.ADD_USER_INFODB,
         payload: data
       })
     })

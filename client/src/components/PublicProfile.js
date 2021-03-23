@@ -409,7 +409,7 @@ class PublicProfile extends Component {
                                   display: "block",
                                   verticalAlign: "top",
                                 }}
-                                src={post.postImage}
+                                src={post.pic}
                               />
                             )}
                           </CardBody>

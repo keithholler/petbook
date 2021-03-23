@@ -6,5 +6,6 @@ export const GET_ERRORS = "GET_ERRORS";
 export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const ADD_USER_POST = "ADD_USER_POST";
+export const ADD_USER_INFODB = "ADD_USER_INFODB";
 
 

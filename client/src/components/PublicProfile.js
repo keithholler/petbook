@@ -26,6 +26,11 @@ class PublicProfile extends Component {
       error: "",
     };
   }
+
+
+  
+  componentDidMount = () => { this.props.getUserInfoDB()}
+  
   handleInputChange = (event) => {
     const target = event.target;
     const name = target.name;
@@ -334,11 +339,7 @@ class PublicProfile extends Component {
                           }}
                         >
                           <div class="card-horizontal">
-                            {typeof this.props.userInfo.userInfo.profileInfo ===
-                              "undefined" ||
-                            this.props.userInfo.userInfo.userPick ===
-                              "localImageUrl" ||
-                            this.props.userInfo.userInfo.userPick === "" ? (
+                          {!this.props.userinfodb.userInfodb.mydata.length ? (
                               <CardImg
                                 id="music"
                                 className="profileImg mr-2 ml-2 mt-2"
@@ -354,8 +355,8 @@ class PublicProfile extends Component {
                               <CardImg
                                 id="music"
                                 className="profileImg mr-2 ml-2 mt-2"
-                                src={this.props.userInfo.userInfo.userPick}
-                                alt="profileImg"
+                                src={this.props.userinfodb.userInfodb.mydata[0].profileImage}
+                                alt="profileImg2"
                                 style={{
                                   width: "60px",
                                   objectFit: "cover",

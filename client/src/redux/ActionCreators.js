@@ -125,13 +125,19 @@ export function userPost(pic, body) {
 }
 
 
-export function addUserInfoDB(profileImage,
+
+// export const registerUser = (userData, history) => dispatch => {
+//   axios
+ 
+//   .post("/api/users/register", userData)
+//   .then(res => history.push("/PetProfile")) 
+
+
+export const addUserInfoDB = (profileImage,
   firstName,
   lastName,
-  about,) {
-
-  return dispatch => { //return function
-    return axios.post("/api/usersInfoDB/createuserdata", {profileImage,firstName,
+  about) => dispatch => {
+    axios.post("/api/userinfodbs/createuserdata", {profileImage,firstName,
       lastName,
       about}) //return post request response
     .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
@@ -141,4 +147,29 @@ export function addUserInfoDB(profileImage,
       })
     })
   }
-}
+
+  export const updateUserInfoDB = (profileImage,
+    firstName,
+    lastName,
+    about) => dispatch => {
+      axios.put("/api/userinfodbs/updatedata", {profileImage,firstName,
+        lastName,
+        about}) //return post request response
+      .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
+        dispatch({
+          type:ActionTypes.UPDATE_USER_INFODB,
+          payload: data
+        })
+      })
+    }
+
+    export const getUserInfoDB = () => dispatch =>{
+      axios.get("/api/userinfodbs/mydata")
+      .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
+        dispatch({
+          type:ActionTypes.GET_USER_INFODB,
+          payload: data
+        })
+      })
+    }
+

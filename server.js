@@ -6,7 +6,7 @@ const passport = require("passport");
 const users = require("./routes/api/users");
 const userData = require("./routes/api/userData");
 const posts = require("./routes/api/posts");
-const userinfodb = require("./routes/api/userinfodb");
+const userinfodbs = require("./routes/api/userinfodbs");
 const app = express();
 // Bodyparser middleware
 app.use(
@@ -30,8 +30,12 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/posts", posts);
-app.use("./api/userinfodb", userinfodb);
-app.use("./api/userData", userData);
+app.use("/api/userinfodbs", userinfodbs);
+app.use("/api/userData", userData);
+
+// app.get('/api/userinfodbs', function(req, res) {
+//   res.send("Yep it's working");
+// });
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));

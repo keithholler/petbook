@@ -23,7 +23,7 @@ const store = createStore(
       petcard:Petcard,
       auth: authReducer,
       postreducer:postReducer,
-      userinfodbReducer:userInfoDBReducer,
+      userinfodb:userInfoDBReducer,
   errors: errorReducer,
       ...createForms({
         profileForm: InitialFeedback,

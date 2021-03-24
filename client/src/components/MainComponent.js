@@ -26,7 +26,9 @@ import {
   addPetCard,
   logoutUser,
   userPost,
-  addUserInfoDB
+  addUserInfoDB,
+  updateUserInfoDB,
+  getUserInfoDB,
 } from "../redux/ActionCreators";
 //import { FEED } from "../shared/feedObjects";
 const mapStateToProps = (state) => {
@@ -37,7 +39,7 @@ const mapStateToProps = (state) => {
     petcard: state.petcard,
     auth: state.auth,
     postreducer: state.postreducer,
-    userinfodbReducer: state.userinfodbReducer,
+    userinfodb: state.userinfodb,
     errors: state.errors,
   };
 };
@@ -71,8 +73,13 @@ const mapDispatchToProps = {
     addPetCard(petId, petcard, petImage),
   logoutUser: () => logoutUser(),
   userPost: (pic, body) => userPost(pic, body),
+
   addUserInfoDB: (profileImage, firstName, lastName, about) =>
     addUserInfoDB(profileImage, firstName, lastName, about),
+
+  updateUserInfoDB: (profileImage, firstName, lastName, about) =>
+    updateUserInfoDB(profileImage, firstName, lastName, about),
+    getUserInfoDB:()=>getUserInfoDB(),
   resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
@@ -118,7 +125,10 @@ class Main extends Component {
                 addUserInfo={this.props.addUserInfo}
                 userInfo={this.props.userInfo}
                 auth={this.props.auth}
+                userinfodb={this.props.userinfodb}
                 addUserInfoDB={this.props.addUserInfoDB}
+                updateUserInfoDB={this.props.updateUserInfoDB}
+                getUserInfoDB={this.props.getUserInfoDB}
               />
             )}
           />
@@ -134,6 +144,7 @@ class Main extends Component {
                 addPetCard={this.props.addPetCard}
                 userInfo={this.props.userInfo}
                 auth={this.props.auth}
+                userinfodb={this.props.userinfodb}
               />
             )}
           />

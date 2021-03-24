@@ -5,6 +5,7 @@ const userinfodbSchema = new mongoose.Schema(
     profileImage: {
       type: String,
       required: false,
+      default: " "
     },
     firstName: {
       type: String,

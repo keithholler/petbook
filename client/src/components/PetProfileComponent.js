@@ -494,12 +494,35 @@ class PetProfile extends Component {
       this.state.profileImageURL,
       values
     );
-    this.props.addUserInfoDB("I am an IMAGE",
-      "I am firstName",
-      "I am lastName",
-      "I am about",)
+
+
+
+    if (!this.props.userinfodb.userInfodb.mydata.length
+      ){
+
+      this.props.addUserInfoDB(!this.state.profileImageURL?" ":this.state.profileImageURL,
+      !values.firstName ?" ":values.firstName,
+      !values.lastName?" ":values.lastName,
+      !values.ownerAbout?" ":values.ownerAbout)
+
+    }else{
+      this.props.updateUserInfoDB(!this.state.profileImageURL?" ":this.state.profileImageURL,
+      !values.firstName ?" ":values.firstName,
+      !values.lastName?" ":values.lastName,
+      !values.ownerAbout?" ":values.ownerAbout)
+    }
+
+    
+      
     // this.props.resetProfileForm();
   };
+
+
+
+  componentDidMount = () => { this.props.getUserInfoDB()}
+ 
+
+
 
   handleInputChange = (event) => {
     const target = event.target;
@@ -675,8 +698,8 @@ class PetProfile extends Component {
                 id="email"
                 name="email"
                 placeholder={
-                  this.props.userInfo.userInfo.profileInfo
-                    ? this.props.userInfo.userInfo.profileInfo.email
+                  this.props.auth.user.email 
+                    ? this.props.auth.user.email
                     : ""
                 }
                 className="form-control"
@@ -698,7 +721,7 @@ class PetProfile extends Component {
               <Control.textarea
                 model=".ownerAbout"
                 id="ownerAbout"
-                name="aboownerAboutut"
+                name="ownerAbout"
                 placeholder="About"
                 className="form-control"
                 style={{ boxShadow: "0 2px 2px 0 rgba(0, 0, 0, 0.5)" }}

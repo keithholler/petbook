@@ -7,5 +7,7 @@ export const USER_LOADING = "USER_LOADING";
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const ADD_USER_POST = "ADD_USER_POST";
 export const ADD_USER_INFODB = "ADD_USER_INFODB";
+export const UPDATE_USER_INFODB = "UPDATE_USER_INFODB";
+export const GET_USER_INFODB = "GET_USER_INFODB";
 
 

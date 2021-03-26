@@ -25,11 +25,12 @@ class PublicProfile extends Component {
       posts: [],
       error: "",
     };
+    this.props.getUserPost()
   }
 
 
   
-  componentDidMount = () => { this.props.getUserInfoDB()}
+  //componentDidMount = () => { this.props.getUserInfoDB()}
   
   handleInputChange = (event) => {
     const target = event.target;
@@ -56,23 +57,10 @@ class PublicProfile extends Component {
         isModalOpen: !this.state.isModalOpen,
       });
     }
-
-    apiPosts
-      .get("/allpost")
-      //.then((response) => response.json())
-      .then((response) => {
-        //console.log(response.data)
-        this.setState(
-          { posts: response.data }
-          //  , () => console.log(this.state.posts.posts[0].postedBy[0]._id)
-        );
-      })
-      .catch((err) => {
-        this.setState({ error: err });
-      });
-    if (this.state.error || !Array.isArray(this.state.posts)) {
-      return console.log("This is not an array");
-    }
+ 
+    
+    this.props.getUserInfoDB()
+   // this.props.getUserPost()
   };
 
   render() {
@@ -319,13 +307,11 @@ class PublicProfile extends Component {
 
         <div className="row row-content justify-content-around">
           {pets}
-
-          {typeof this.state.posts.posts === "undefined" ? (
-            <div>trjhertj</div>
-          ) : (
-            this.state.posts.posts
-              .filter((a) => a.postedByPrivate === this.props.auth.user.id)
-              .map((post, index) => {
+        
+        {typeof this.props.postreducer.post.mypost === "undefined" ? (
+            <div></div>
+          ) : 
+              this.props.postreducer.post.mypost.map((post, index) => {
                 return (
                   <div className="container" key={index}>
                     <div className="row row-content">
@@ -339,7 +325,16 @@ class PublicProfile extends Component {
                           }}
                         >
                           <div class="card-horizontal">
-                          {!this.props.userinfodb.userInfodb.mydata.length ? (
+                          {
+
+
+                            typeof this.props.userinfodb.userInfodb.mydata === "undefined" ? (
+                              <div></div>
+                            ) : 
+                          
+                          !this.props.userinfodb.userInfodb.mydata[0]?" ":
+                          
+                          this.props.userinfodb.userInfodb.mydata[0].profileImage === " " ? (
                               <CardImg
                                 id="music"
                                 className="profileImg mr-2 ml-2 mt-2"
@@ -420,7 +415,7 @@ class PublicProfile extends Component {
                   </div>
                 );
               })
-          )}
+          }
 
           {/* <Post post={this.props.post} userInfo={this.props.userInfo} auth={this.props.auth}/> */}
         </div>

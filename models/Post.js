@@ -4,7 +4,7 @@ const postSchema = new mongoose.Schema(
   {
     pic: {
       type: String,
-      required: true,
+      required: false,
     },
     body: {
       type: String,
@@ -14,21 +14,26 @@ const postSchema = new mongoose.Schema(
     //     type:String,
     //    // required:true
     // },
-    likes: [{ type: ObjectId, ref: "User" }],
+    likes: [{ type: ObjectId, 
+      ref: "User" }],
     comments: [
       {
         text: String,
-        postedBy: { type: ObjectId, ref: "User" },
+        postedBy: { type: ObjectId,
+           ref: "User" },
       },
     ],
-    postedBy: [{
-      type: ObjectId,
-      ref: "User",
-    }],
     postedByPrivate: {
       type: ObjectId,
       ref: "User",
     },
+
+    postedBy: [{
+      type: ObjectId,
+      ref: "User",
+    }],
+
+   
   },
 
   { timestamps: true }

@@ -166,8 +166,20 @@ export const addUserInfoDB = (profileImage,
     export const getUserInfoDB = () => dispatch =>{
       axios.get("/api/userinfodbs/mydata")
       .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
+        console.log(data)
         dispatch({
           type:ActionTypes.GET_USER_INFODB,
+          payload: data
+        })
+      })
+    }
+
+    export const getUserPost = () => dispatch =>{
+      axios.get("/api/posts/mypost")
+      .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
+        console.log(data)
+        dispatch({
+          type:ActionTypes.GET_USER_POST,
           payload: data
         })
       })

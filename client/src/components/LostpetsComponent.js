@@ -19,12 +19,15 @@ import {
   NavItem,
   NavLink,
 } from "reactstrap";
+import axios from "axios";
 import classnames from "classnames";
 import uuid from "react-uuid";
 import * as emailjs from "emailjs-com";
 import Register from "./register"
 import Login from "./login"
-
+const apiUserInfoDBs = axios.create({
+  baseURL: "http://localhost:5000/api/userinfodbs/",
+});
 class Lostpet extends Component {
   constructor(props) {
     super(props);
@@ -133,6 +136,11 @@ class Lostpet extends Component {
         isModalOpen: !this.state.isModalOpen,
       });
     }
+
+
+
+
+
     // if (typeof this.props.userInfo.userInfo.profileInfo === "undefined") {
     //   this.setState({
     //     isModalOpen: !this.state.isModalOpen,

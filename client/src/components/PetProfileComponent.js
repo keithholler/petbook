@@ -489,15 +489,14 @@ class PetProfile extends Component {
     };
   }
   handleSubmit = (values) => {
-    this.props.addUserInfo(
-      this.props.uniqueId.uniqueId,
-      this.state.profileImageURL,
-      values
-    );
+    // this.props.addUserInfo(
+    //   this.props.uniqueId.uniqueId,
+    //   this.state.profileImageURL,
+    //   values
+    // );
 
 
-
-    if (!this.props.userinfodb.userInfodb.mydata.length
+    if (!this.props.userinfodb.userInfodb.mydata[0]
       ){
 
       this.props.addUserInfoDB(!this.state.profileImageURL?" ":this.state.profileImageURL,
@@ -519,7 +518,8 @@ class PetProfile extends Component {
 
 
 
-  componentDidMount = () => { this.props.getUserInfoDB()}
+  componentDidMount = () => { this.props.getUserInfoDB()
+    this.props.getUserPost()}
  
 
 

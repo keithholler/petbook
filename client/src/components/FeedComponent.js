@@ -49,7 +49,7 @@ class PostForm extends Component {
   handleSubmit = (values) => {
     //alert(this.props.postreducer.body)
     this.toggleModal();
-    console.log(this.props.userInfo.userInfo.length)
+    //console.log(this.props.userInfo.userInfo.length)
     this.props.userPost(this.props.userInfo.userInfo.length === 0  ?" ":this.props.userInfo.userInfo.info.PicPostURL, values.text);
     this.props.postComment(values.text, this.state.feedPicPostURL);
  
@@ -182,6 +182,9 @@ const apiPser = axios.create({
 const apiPosts = axios.create({
   baseURL: "http://localhost:5000/api/posts/",
 });
+const apiUserInfoDBs = axios.create({
+  baseURL: "http://localhost:5000/api/userinfodbs/",
+});
 
 class Feed extends Component {
   constructor(props) {
@@ -193,6 +196,8 @@ class Feed extends Component {
       activeTab: "2",
       data: [],
       posts: [],
+      userinfo:[],
+      userInfoDB:[],
       error: "",
     };
 
@@ -265,14 +270,15 @@ class Feed extends Component {
         isModalOpen: !this.state.isModalOpen,
       });
     }
-
+    this.props.getUserInfoDB()
     apiPosts
       .get("/allpost")
       //.then((response) => response.json())
       .then((response) => {
+        console.log(response.data)
         //console.log(response.data)
         this.setState({ posts: response.data }
-        //  , () => console.log(this.state.posts)
+         , () => console.log(this.state.posts)
         );
       })
       .catch((err) => {
@@ -281,21 +287,32 @@ class Feed extends Component {
     if (this.state.error || !Array.isArray(this.state.posts)) {
       return console.log("This is not an array");
     }
+
+
+    apiUserInfoDBs
+    .get("/alluserinfo")
+    //.then((response) => response.json())
+    .then((response) => {
+      //console.log(response.data)
+      //console.log(response.data)
+      this.setState({ userinfo: response.data }
+       , () => console.log(this.state.userinfo)
+      );
+    })
+    .catch((err) => {
+      this.setState({ error: err });
+    });
+
+    this.setState({userInfoDB: this.props.userinfodb})
   };
 
-  // componentDidUpdate(prevProps) {
-  //   console.log(prevProps.post.post)
-  //   console.log(this.state.posts.posts)
-  //   if (prevProps.post.post !== [] || prevProps.post.post !== this.state.posts.posts ) {
-  //     console.log("hi")
-  //   }
-  // }
+
   rerenderParentCallback = () => {
     apiPosts
     .get("/allpost")
     //.then((response) => response.json())
     .then((response) => {
-      console.log(response.data)
+      
       this.setState({ posts: response.data }
       //  , () => console.log(this.state.posts)
       );
@@ -314,11 +331,7 @@ class Feed extends Component {
     }
   };
   render() {
-
     
-    console.log(`Parent rendered.`);
-    //console.log(props.posts.posts)
-    //return   props.postreducer.post.filter(id =>id.postedBy._id === props.auth.user.id).map((post, index) => {
     return (
       <div className="container ">
         <div
@@ -330,10 +343,15 @@ class Feed extends Component {
             
             <Card className="m-2 lostPetCard">
               <div class="card-horizontal">
-                {typeof this.props.userInfo.userInfo.profileInfo ===
-                  "undefined" ||
-                this.props.userInfo.userInfo.userPick === "localImageUrl" ||
-                this.props.userInfo.userInfo.userPick === "" ? (
+               {
+                this.props.userinfodb.userInfodb.length === 0 ?<CardImg
+                id="music"
+                className="profileImg m-2"
+                src="/petbook/assets/default.png"
+                alt="profileImg"
+                style={{ width: "40px" }}
+              /> :
+                this.props.userinfodb.userInfodb.mydata[0].profileImage === " " ? (
                   <CardImg
                     id="music"
                     className="profileImg m-2"
@@ -345,8 +363,8 @@ class Feed extends Component {
                   <CardImg
                     id="music"
                     className="profileImg m-2"
-                    src={this.props.userInfo.userInfo.userPick}
-                    alt="profileImg"
+                    src={this.props.userinfodb.userInfodb.mydata[0].profileImage}
+                    alt="profileImg2"
                     style={{ width: "40px" }}
                   />
                 )}
@@ -391,16 +409,19 @@ class Feed extends Component {
                           boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)",
                         }}
                       >
+
                         <div class="card-horizontal">
-                          {typeof this.props.userInfo.userInfo.profileInfo ===
-                            "undefined" ||
-                          this.props.userInfo.userInfo.userPick ===
-                            "localImageUrl" ||
-                          this.props.userInfo.userInfo.userPick === "" ? (
+                       
+                          {console.log(this.state.userinfo
+                            )}
+                          {
+                          this.state.userinfo.length === 0  ? (
                             <CardImg
                               id="music"
                               className="profileImg mr-2 ml-2 mt-2"
                               src="/petbook/assets/default.png"
+                              //src={this.state.userinfo.userinfo.filter(id1=>  this.state.posts.posts.some(id2=> id1.userIdentity === id2.postedBy._id)).profileImage}
+
                               alt="profileImg"
                               style={{
                                 width: "60px",
@@ -411,16 +432,19 @@ class Feed extends Component {
                           ) : (
                             <CardImg
                               id="music"
-                              className="profileImg mr-2 ml-2 mt-2"
-                              src={this.props.userInfo.userInfo.userPick}
-                              alt="profileImg"
+                              className="profileImg mr-2 ml-2 mt-2"          
+                              
+                             // result1.filter(o1 => result2.some(o2 => o1.id === o2.id));
+                              src={this.state.userinfo.userinfo.filter(element => element.userIdentity === post.postedByPrivate)[0].profileImage}
+                              alt="profileImg2"
                               style={{
                                 width: "60px",
                                 objectFit: "cover",
                                 objectPosition: "50% 50%",
                               }}
                             />
-                          )}
+                          )}                                                                                         
+                            {/* {console.log(this.state.userinfo.userinfo.filter(id=> id.userIdentity).map(a => {a.profileImage}))} */}
 
                           <CardTitle
                             style={{
@@ -479,15 +503,7 @@ class Feed extends Component {
             })
           )}
 
-          {/* <Post
-            post={this.props.post}
-            userInfo={this.props.userInfo}
-            userPick={this.props.userInfo.userInfo.userPick}
-            auth={this.props.auth}
-            userPost={this.props.userPost}
-            postreducer={this.props.postreducer}
-            posts={this.state.posts}
-          />  */}
+
         </div>
         <Modal
           backdrop="static"

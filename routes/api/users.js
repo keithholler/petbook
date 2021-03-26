@@ -72,7 +72,7 @@ router.post("/login", (req, res) => {
           name: user.name,
           email:user.email
         };
-        // Sign token
+        // Sign token 
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -131,17 +131,17 @@ router.get("/:userId", (req, res, next) => {
 //   }
 // )
 
-// router.route('/')
-// .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-// /* GET users listing. */
-// .get(cors.cors, (req, res, next) => {
-//   User.find()
-//     .then((user) => {
-//       res.statusCode = 200;
-//       res.setHeader("Content-Type", "application/json");
-//       res.json(user);
-//     })
-//     .catch((err) => next(err));
-// });
+router.route('/')
+.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+/* GET users listing. */
+.get(cors.cors, (req, res, next) => {
+  User.find()
+    .then((user) => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json(user);
+    })
+    .catch((err) => next(err));
+});
 
 module.exports = router;

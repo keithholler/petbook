@@ -16,7 +16,7 @@ router.post("/createuserdata", requireLogin, (req, res) => {
       about
       //  ,pic
     } = req.body;
-    if (
+    if ( 
         !profileImage ||
         !firstName ||
         !lastName ||
@@ -37,10 +37,11 @@ router.post("/createuserdata", requireLogin, (req, res) => {
       userIdentity: req.user,
     });
     console.log(req.user);
-    userinfodb
+   req.userinfo = userinfodb
+   userinfodb
       .save()
       .then((result) => {
-        res.json({ mydata:result  });
+        res.json({ mydata:[result]  });
       })
       .catch((err) => {
         console.log(err);
@@ -51,8 +52,9 @@ router.post("/createuserdata", requireLogin, (req, res) => {
   router.get("/mydata", requireLogin, (req, res) => {
     Userinfodb.find({ userIdentity: req.user._id })
       .populate("UserIdentity", "_id name")
-      .then((mydata) => {
-        res.json({ mydata });
+      .then((result) => {
+        console.log(result);
+        res.json({ mydata:result  });
       })
       .catch((err) => {
         console.log(err);
@@ -78,13 +80,13 @@ router.post("/createuserdata", requireLogin, (req, res) => {
         if (err) {
           return res.status(422).json({ error: "pic canot post" });
         }
-        res.json({ mydata:result  });
+        res.json({ mydata:[result]  });
       }
     );
   });
 
 
-  router.route('/')
+  router.route('/alluserinfo')
 .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
 /* GET users listing. */
 .get(cors.cors, (req, res, next) => {
@@ -92,7 +94,20 @@ router.post("/createuserdata", requireLogin, (req, res) => {
     .then((userinfodb) => {
       res.statusCode = 200;
       res.setHeader("Content-Type", "application/json");
-      res.json(userinfodb);
+      res.json({userinfo:userinfodb});
+    })
+    .catch((err) => next(err));
+});
+
+router.route('/')
+.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+/* GET users listing. */
+.get(cors.cors, (req, res, next) => {
+  Userinfodb.find()
+    .then((userinfodb) => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json({userinfo:userinfodb});
     })
     .catch((err) => next(err));
 });

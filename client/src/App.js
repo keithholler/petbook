@@ -7,6 +7,7 @@ import { ConfigureStore } from "./redux/configureStore";
 import { setCurrentUser,logoutUser } from "./redux/ActionCreators";
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from "jwt-decode";
+
 const store = ConfigureStore();
 
 if (localStorage.jwtToken) {

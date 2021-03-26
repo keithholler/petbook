@@ -2,7 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-
+var cors = require('cors')
 const users = require("./routes/api/users");
 const userData = require("./routes/api/userData");
 const posts = require("./routes/api/posts");
@@ -26,7 +26,7 @@ mongoose
 app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
-
+app.use(cors())
 // Routes
 app.use("/api/users", users);
 app.use("/api/posts", posts);

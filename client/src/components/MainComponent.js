@@ -29,7 +29,10 @@ import {
   addUserInfoDB,
   updateUserInfoDB,
   getUserInfoDB,
-  getUserPost
+  getUserPost,
+  getPets,
+  updatePet,
+  addPet
 } from "../redux/ActionCreators";
 
 
@@ -43,6 +46,7 @@ const mapStateToProps = (state) => {
     postreducer: state.postreducer,
     userinfodb: state.userinfodb,
     errors: state.errors,
+    pet:state.pet
   };
 };
 
@@ -81,8 +85,19 @@ const mapDispatchToProps = {
 
   updateUserInfoDB: (profileImage, firstName, lastName, about) =>
     updateUserInfoDB(profileImage, firstName, lastName, about),
+
     getUserInfoDB:()=>getUserInfoDB(),
     getUserPost:()=>getUserPost(),
+
+    addPet: (name, petImage, animalType, breed, mainColor,secondaryColor,about) =>
+    addPet(name, petImage, animalType, breed, mainColor,secondaryColor,about),
+
+  updatePet: (name, petImage, animalType, breed, mainColor,secondaryColor,about) =>
+  updatePet(name, petImage, animalType, breed, mainColor,secondaryColor,about),
+
+    getPets:()=>getPets(),
+  
+
   resetProfileForm: () => actions.reset("profileForm"),
   resetLostPetForm: () => actions.reset("lostPetForm"),
 };
@@ -140,6 +155,11 @@ class Main extends Component {
                 updateUserInfoDB={this.props.updateUserInfoDB}
                 getUserInfoDB={this.props.getUserInfoDB}
                 getUserPost={this.props.getUserPost}
+                addPet={this.props.addPet}
+                updatePet={this.props.updatePet}
+                getPets={this.props.getPets}
+                pet={this.props.pet}
+
               />
             )}
           />
@@ -159,6 +179,8 @@ class Main extends Component {
                 getUserInfoDB={this.props.getUserInfoDB}
                 getUserPost={this.props.getUserPost}
                 postreducer={this.props.postreducer}
+                getPets={this.props.getPets}
+                pet={this.props.pet}
               />
             )}
           />

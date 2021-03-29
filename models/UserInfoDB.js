@@ -24,6 +24,10 @@ const userinfodbSchema = new mongoose.Schema(
       type: ObjectId,
       ref: "User",
     },
+    userEmail: {
+      type: ObjectId,
+      ref: "User",
+    },
   },
 
   { timestamps: true }

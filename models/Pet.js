@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 const petSchema = new mongoose.Schema(
   {
-    naem: {
+    name: {
         type: String,
         required: false,
       },
@@ -13,7 +13,7 @@ const petSchema = new mongoose.Schema(
       default: "edwedweded"
     }, 
  
-    anamilType: {
+    animalType: {
         type: String,
         required: false,
       },
@@ -49,4 +49,4 @@ const petSchema = new mongoose.Schema(
 
 mongoose.model("Pet", petSchema);
 const Pet = mongoose.model("Pet", petSchema);
-module.exports = Userinfodb;
+module.exports = Pet;

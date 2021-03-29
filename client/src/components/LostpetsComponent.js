@@ -28,6 +28,9 @@ import Login from "./login"
 const apiUserInfoDBs = axios.create({
   baseURL: "http://localhost:5000/api/userinfodbs/",
 });
+const apiPets = axios.create({
+  baseURL: "http://localhost:5000/api/pets/",
+});
 class Lostpet extends Component {
   constructor(props) {
     super(props);
@@ -36,19 +39,33 @@ class Lostpet extends Component {
       isModalOpen: false,
       activeTab: "2",
       profileNameHolder: null,
+      pets:[],
+      userinfo:[],
+      userInfoDB:[]
     };
   }
 
   handleSubmit = (values) => {
+console.log( this.state.pets.filter(element => element._id === values.petId)[0].userIdentity)
+
+if (
+ this.state.userinfo.userinfo.filter(ele => ele._id === this.state.pets.filter(element => element._id === values.petId)[0].userIdentity ).email
+
+) {
+
+
+}
     if (
-      this.props.petcard.petcard[0].petId === values.petId
+      this.state.pets.filter(element => element._id === values.petId)
+
+      //this.state.pets === values.petId
       // +
       //   this.props.userInfo.userInfo.userId ===
       // values.petId
     ) {
       let templateParams = {
         from: "PetProfile",
-        to: this.props.userInfo.userInfo.profileInfo.email,
+        to: this.state.userinfo.userinfo ,
         subject: "PetFound",
         html: `Your Pet Was Found Please call ${values.phoneNumber} to contact the person who found them.`,
       };
@@ -138,15 +155,39 @@ class Lostpet extends Component {
     }
 
 
+    apiPets
+    .get("/")
+    //.then((response) => response.json())
+    .then((response) => {
+      //console.log(response.data)
+      console.log(response.data.pet)
+      this.setState({ pets: response.data.pet }
+       , () => console.log(this.state.pets)
+      );
+    })
+    .catch((err) => {
+      this.setState({ error: err });
+    });
 
+    apiUserInfoDBs
+    .get("/alluserinfo")
+    //.then((response) => response.json())
+    .then((response) => {
+      //console.log(response.data)
+      //console.log(response.data)
+      this.setState({ userinfo: response.data }
+       , () => console.log(this.state.userinfo)
+      );
+    })
+    .catch((err) => {
+      this.setState({ error: err });
+    });
 
-
-    // if (typeof this.props.userInfo.userInfo.profileInfo === "undefined") {
-    //   this.setState({
-    //     isModalOpen: !this.state.isModalOpen,
-    //   });
-    // }
+    this.setState({userInfoDB: this.props.userinfodb})
   };
+
+
+  
   toggleTab = (tab) => {
     if (this.state.activeTab !== tab) {
       this.setState({ activeTab: tab });

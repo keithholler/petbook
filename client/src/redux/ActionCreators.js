@@ -185,3 +185,35 @@ export const addUserInfoDB = (profileImage,
       })
     }
 
+
+    export const addPet = (name, petImage, animalType, breed, mainColor,secondaryColor,about) => dispatch => {
+        axios.post("/api/pets/createpet", {name, petImage, animalType, breed, mainColor,secondaryColor,about}) //return post request response
+        .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
+          dispatch({
+            type:ActionTypes.ADD_PET,
+            payload: data
+          })
+        })
+      }
+    
+      export const updatePet= (name, petImage, animalType, breed, mainColor,secondaryColor,about) => dispatch => {
+          axios.put("/api/pets/updatepet", {name, petImage, animalType, breed, mainColor,secondaryColor,about}) //return post request response
+          .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
+            dispatch({
+              type:ActionTypes.UPDATE_PET,
+              payload: data
+            })
+          })
+        }
+    
+        export const getPets = () => dispatch =>{
+          axios.get("/api/pets/mypets")
+          .then((data) => { //pass data in as a parameter, call the callback, dispatch the action. 
+            console.log(data)
+            dispatch({
+              type:ActionTypes.GET_PETS,
+              payload: data
+            })
+          })
+        }
+

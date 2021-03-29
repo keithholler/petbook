@@ -10,6 +10,7 @@ import {InitialFeedback2} from './lostPetForm';
 import {InitialFeedback3} from './petForm';
 import {authReducer} from "./authReducer";
 import {postReducer} from "./postReducer";
+import {petReducer} from "./petReducer";
 import {userInfoDBReducer} from "./userInfoDBReducer";
 import {errorReducer} from "./errorReducer";
 const initialState = {};
@@ -24,6 +25,7 @@ const store = createStore(
       auth: authReducer,
       postreducer:postReducer,
       userinfodb:userInfoDBReducer,
+      pet:petReducer,
   errors: errorReducer,
       ...createForms({
         profileForm: InitialFeedback,
@@ -37,20 +39,3 @@ const store = createStore(
   return store; 
  
 };
-// export const store = createStore(
-//   combineReducers({
-//     uniqueId: UniqueIds,
-//     post: Post, 
-//     userInfo:UserInfo,
-//     petcard:Petcard,
-//     auth: authReducer,
-// errors: errorReducer,
-//     ...createForms({
-//       profileForm: InitialFeedback,
-//       lostPetForm: InitialFeedback2,
-//       petForm: InitialFeedback3
-//     })
-//   }),
-//   composeEnhancers(applyMiddleware(thunk))
-
-// );

@@ -35,6 +35,7 @@ router.post("/createuserdata", requireLogin, (req, res) => {
   
     //   postedBy: req.user,
       userIdentity: req.user,
+      //userEmail:req.user
     });
     console.log(req.user);
    req.userinfo = userinfodb
@@ -98,6 +99,7 @@ router.post("/createuserdata", requireLogin, (req, res) => {
     })
     .catch((err) => next(err));
 });
+
 
 router.route('/')
 .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))

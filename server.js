@@ -7,6 +7,7 @@ const users = require("./routes/api/users");
 const userData = require("./routes/api/userData");
 const posts = require("./routes/api/posts");
 const userinfodbs = require("./routes/api/userinfodbs");
+const pets = require("./routes/api/pets");
 const app = express();
 // Bodyparser middleware
 app.use(
@@ -30,7 +31,8 @@ app.use(cors())
 // Routes
 app.use("/api/users", users);
 app.use("/api/posts", posts);
-app.use("/api/userinfodbs", userinfodbs);
+app.use("/api/userinfodbs", userinfodbs); 
+app.use("/api/pets", pets); 
 app.use("/api/userData", userData);
 
 // app.get('/api/userinfodbs', function(req, res) {

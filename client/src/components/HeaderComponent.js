@@ -66,6 +66,10 @@ class Header extends Component {
   //   this.generateId();
   // };
 
+  componentDidMount = () => {
+    this.props.getUserInfoDB()
+  }
+
   
   toggleModal = () => {
 
@@ -216,22 +220,27 @@ class Header extends Component {
             <UncontrolledDropdown inNavbar>
             <DropdownToggle nav caret style={{ color: "white" }} className="dropdownTogglePosition">
               Profile
-              {typeof this.props.userInfo.userInfo.profileInfo ===
-                "undefined" ||
-              this.props.userInfo.userInfo.userPick === "localImageUrl" ||
-              this.props.userInfo.userInfo.userPick === "" ? (
+              {
+                this.props.userinfodb.userInfodb.length === 0 ?<img
+                id="music"
+                className="profileImg m-2"
+                src="/petbook/assets/default.png"
+                alt="profileImg"
+                style={{ width: "40px" }}
+              /> :
+                this.props.userinfodb.userInfodb.mydata[0].profileImage === " " ? (
+                  <img
+                    id="music"
+                    className="profileImg m-2"
+                    src="/petbook/assets/default.png"
+                    alt="profileImg"
+                    style={{ width: "40px" }}
+                  />
+                ): (
                 <img
                   id="proPic"
                   className="profileImg rounded-circle ml-3"
-                  src="/petbook/assets/default.png"
-                  alt="profileImg"
-                  style={{ width: "40px" }}
-                />
-              ) : (
-                <img
-                  id="proPic"
-                  className="profileImg rounded-circle ml-3"
-                  src={this.props.userInfo.userInfo.userPick}
+                  src={this.props.userinfodb.userInfodb.mydata[0].profileImage}
                   alt="profileImg"
                   style={{ width: "40px" }}
                 />
@@ -242,28 +251,27 @@ class Header extends Component {
                   {this.props.auth.isAuthenticated ? (
                     <Link style={{ color: "black" }} to="/PetProfile">
                       <DropdownItem id="profileSettings">
-                        {typeof this.props.userInfo.userInfo.profileInfo ===
-                          "undefined" ||
-                        this.props.userInfo.userInfo.userPick ===
-                          "localImageUrl" ||
-                        this.props.userInfo.userInfo.userPick === "" ? (
-                          <img
-                            id="proPic"
-                            className="profileImg rounded-circle mr-1"
-                            src="/petbook/assets/default.png" 
-                            alt="profileImg"
-                            style={{
-                              width: "40px",
-                              objectFit: "cover",
-                              objectPosition: "50% 50%",
-                             
-                            }}
-                          />
-                        ) : (
+                      {
+                this.props.userinfodb.userInfodb.length === 0 ?<img
+                id="music"
+                className="profileImg m-2"
+                src="/petbook/assets/default.png"
+                alt="profileImg"
+                style={{ width: "40px" }}
+              /> :
+                this.props.userinfodb.userInfodb.mydata[0].profileImage === " " ? (
+                  <img
+                    id="music"
+                    className="profileImg m-2"
+                    src="/petbook/assets/default.png"
+                    alt="profileImg"
+                    style={{ width: "40px" }}
+                  />
+                ): (
                           <img
                             id="proPic"
                             className="profileImg rounded-circle mr-2"
-                            src={this.props.userInfo.userInfo.userPick}
+                            src={this.props.userinfodb.userInfodb.mydata[0].profileImage}
                             alt="profileImg"
                             style={{
                               width: "40px",

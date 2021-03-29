@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { registerUser } from "../redux/ActionCreators";
 import classnames from "classnames";
 import { Control, Form } from "react-redux-form";
-import uuid from "react-uuid";
+//import uuid from "react-uuid";
 import {
     Button,
     Label,
@@ -23,9 +23,9 @@ class Register extends Component {
       errors: {}
     };
   }
-  generateId = () => {
-    this.props.addUniqueId(uuid());
-  };
+  // generateId = () => {
+  //   this.props.addUserInfoDB(uuid());
+  // };
   componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
@@ -52,19 +52,19 @@ onSubmit = (e) => {
             errors: this.props.errors.name = null,
           });
     }
-     if(this.state.email != ""){
+     if(this.state.email !== ""){
         this.setState({
 
             errors: this.props.errors.email = null,
           });
     }
-   if(this.state.password != ""){
+   if(this.state.password !== ""){
         this.setState({
 
             errors: this.props.errors.password = null,
           });
     }
-   if(this.state.password2 != ""){
+   if(this.state.password2 !== ""){
         this.setState({
             errors: this.props.errors.password2 = null,
           });

@@ -560,6 +560,7 @@ class Feed extends Component {
                 <Register
                   toggleModal={this.toggleModal}
                   addUserInfo={this.props.addUserInfo}
+                  addUserInfoDB={this.props.addUserInfoDB}
                 />
               </TabPane>
             </TabContent>

@@ -108,6 +108,8 @@ class Main extends Component {
           userInfo={this.props.userInfo}         // need to change info to getUserInfoDB
           auth={this.props.auth}
           logoutUser={this.props.loginUser}
+          getUserInfoDB={this.props.getUserInfoDB}
+          userinfodb={this.props.userinfodb}
         />
         <Switch>
           <Route
@@ -193,6 +195,7 @@ class Main extends Component {
                 postreducer={this.props.postreducer}
                 userinfodb={this.props.userinfodb}
                 getUserInfoDB={this.props.getUserInfoDB}
+
                 
               />
             )}

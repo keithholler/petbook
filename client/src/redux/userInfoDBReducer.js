@@ -5,7 +5,7 @@ import {
   } from "./ActionTypes";
   const isEmpty = require("is-empty");
 
-  export const userInfoDBReducer = (state = { userInfodb: [] }, action)=> {
+  export const userInfoDBReducer = (state = {    loading: false, userInfodb: [] }, action)=> {
     switch (action.type) {
         case ADD_USER_INFODB:
             return {

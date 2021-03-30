@@ -14,6 +14,7 @@ router.post("/createuserdata", requireLogin, (req, res) => {
       firstName,
       lastName,
       about
+      
       //  ,pic
     } = req.body;
     if ( 
@@ -31,14 +32,12 @@ router.post("/createuserdata", requireLogin, (req, res) => {
         firstName,
         lastName,
         about,
-      // photo:pic,
-  
-    //   postedBy: req.user,
+
       userIdentity: req.user,
-      //userEmail:req.user
+      userEmail:req.user.email
     });
     console.log(req.user);
-   req.userinfo = userinfodb
+
    userinfodb
       .save()
       .then((result) => {
@@ -70,7 +69,8 @@ router.post("/createuserdata", requireLogin, (req, res) => {
         profileImage : req.body.profileImage,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        about: req.body.about
+        about: req.body.about,
+        //userEmail:req.body.email
         // profileImage : "req.body.profileImage",
         // firstName: "req.body.firstName",
         // lastName: "req.body.lastName",

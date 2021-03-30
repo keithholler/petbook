@@ -16,6 +16,8 @@ router.get("/users/:id", (req, res) => {
     .then((user) => {
       Post.find({ postedBy: req.params.id })
         .populate("postedBy", "_id name")
+       
+
         .exec((err, posts) => {
           if (err) {
             return res.status(422).json({ error: err });

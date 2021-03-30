@@ -16,13 +16,13 @@ import uuid from "react-uuid";
 import { Link } from "react-router-dom";
 import { storage } from "../firebase";
 
-function Uni(props) {
-  if (props.uniqueId.uniqueId) {
-    return <div>{props.uniqueId.uniqueId}</div>;
-  } else {
-    return <div>Failed</div>;
-  }
-}
+// function Uni(props) {
+//   if (props.uniqueId.uniqueId) {
+//     return <div>{props.uniqueId.uniqueId}</div>;
+//   } else {
+//     return <div>Failed</div>;
+//   }
+// }
 
 
 class AddPet extends Component {
@@ -310,9 +310,18 @@ class PetProfile extends Component {
     //   this.state.profileImageURL,
     //   values
     // );
+ 
+    if (this.props.userinfodb.userInfodb.length === 0
+      ){
 
+      this.props.addUserInfoDB(!this.state.profileImageURL?" ":this.state.profileImageURL,
+      !values.firstName ?" ":values.firstName,
+      !values.lastName?" ":values.lastName,
+      !values.ownerAbout?" ":values.ownerAbout)
 
-    if (!this.props.userinfodb.userInfodb.mydata[0]
+    }
+
+    else if (!this.props.userinfodb.userInfodb.mydata[0]
       ){
 
       this.props.addUserInfoDB(!this.state.profileImageURL?" ":this.state.profileImageURL,
@@ -412,7 +421,7 @@ class PetProfile extends Component {
               Owners Id:
             </Label>
             <Col md={10}>
-              <Uni uniqueId={this.props.uniqueId} />
+              {/* <Uni uniqueId={this.props.uniqueId} /> */}
             </Col>
           </Row>
           <Row className="form-group">

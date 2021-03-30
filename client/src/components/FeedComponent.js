@@ -199,6 +199,7 @@ class Feed extends Component {
       userinfo:[],
       userInfoDB:[],
       error: "",
+      isLoading:true
     };
 
     // api.get('/',{
@@ -270,7 +271,7 @@ class Feed extends Component {
         isModalOpen: !this.state.isModalOpen,
       });
     }
-    this.props.getUserInfoDB()
+    
     apiPosts
       .get("/allpost")
       //.then((response) => response.json())
@@ -303,7 +304,7 @@ class Feed extends Component {
       this.setState({ error: err });
     });
 
-    this.setState({userInfoDB: this.props.userinfodb})
+    this.setState({isLoading:false},()=>this.props.getUserInfoDB())
   };
 
 
@@ -331,7 +332,10 @@ class Feed extends Component {
     }
   };
   render() {
-    
+    if(this.state.isLoading) return <div>Loading</div>
+    if(this.props.userinfodb.userInfodb.length === 0) {
+      return <div></div>
+    }else if (this.props.userinfodb.userInfodb.mydata.length >= 0 ) {
     return (
       <div className="container ">
         <div
@@ -344,7 +348,7 @@ class Feed extends Component {
             <Card className="m-2 lostPetCard">
               <div class="card-horizontal">
                {
-                this.props.userinfodb.userInfodb.length === 0 ?<CardImg
+                this.props.userinfodb.userInfodb.mydata.length === 0 ?<CardImg
                 id="music"
                 className="profileImg m-2"
                 src="/petbook/assets/default.png"
@@ -568,6 +572,7 @@ class Feed extends Component {
         </Modal>
       </div>
     );
+                }
   }
 }
 

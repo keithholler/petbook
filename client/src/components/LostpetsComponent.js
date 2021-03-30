@@ -46,8 +46,10 @@ class Lostpet extends Component {
   }
 
   handleSubmit = (values) => {
-console.log( this.state.pets.filter(element => element._id === values.petId)[0].userIdentity)
-
+// console.log( this.state.pets.filter(element => element._id === values.petId)[0].userIdentity)
+// console.log( this.state.userinfo.userinfo)
+// console.log( this.state.userinfo.userinfo.filter(ele => ele._id === "605ca2e58a58f945c4c8189b"))
+console.log( this.state.userinfo.userinfo.filter(ele => ele.userIdentity === this.state.pets.filter(element => element._id === values.petId)[0].userIdentity )[0].userEmail)
 if (
  this.state.userinfo.userinfo.filter(ele => ele._id === this.state.pets.filter(element => element._id === values.petId)[0].userIdentity ).email
 
@@ -65,7 +67,7 @@ if (
     ) {
       let templateParams = {
         from: "PetProfile",
-        to: this.state.userinfo.userinfo ,
+        to: this.state.userinfo.userinfo.filter(ele => ele.userIdentity === this.state.pets.filter(element => element._id === values.petId)[0].userIdentity )[0].userEmail ,
         subject: "PetFound",
         html: `Your Pet Was Found Please call ${values.phoneNumber} to contact the person who found them.`,
       };

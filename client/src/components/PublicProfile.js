@@ -77,18 +77,18 @@ class PublicProfile extends Component {
             {
                 this.props.userinfodb.userInfodb.length === 0 ?<img
                 id="music"
-                className="profileImg m-2"
+                className="rounded-circle me mx-auto d-block"
                 src="/petbook/assets/default.png"
                 alt="profileImg"
-                style={{ width: "40px" }}
+                style={{ width: "200px", height: "200px" }}
               /> :
                 this.props.userinfodb.userInfodb.mydata[0].profileImage === " " ? (
                   <img
                     id="music"
-                    className="profileImg m-2"
+                    className="rounded-circle me mx-auto d-block"
                     src="/petbook/assets/default.png"
                     alt="profileImg"
-                    style={{ width: "40px" }}
+                    style={{ width: "200px", height: "200px" }}
                   />
                 ) : (
               <img

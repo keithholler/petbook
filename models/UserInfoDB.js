@@ -25,8 +25,8 @@ const userinfodbSchema = new mongoose.Schema(
       ref: "User",
     },
     userEmail: {
-      type: ObjectId,
-      ref: "User",
+      type: String,
+     
     },
   },
 

@@ -1,7 +1,7 @@
 {
   "name": "petbook",
   "version": "1.0.0",
-  "description": "",
+  "description": "PetBook",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

@@ -3,7 +3,7 @@ import {
     UPDATE_USER_INFODB,
     GET_USER_INFODB
   } from "./ActionTypes";
-  const isEmpty = require("is-empty");
+
 
   export const userInfoDBReducer = (state = {    loading: false, userInfodb: [] }, action)=> {
     switch (action.type) {

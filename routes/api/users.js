@@ -95,15 +95,15 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/:userId", (req, res, next) => {
-  User.findById(req.params.userId)
-    .then((User) => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(User);
-    })
-    .catch((err) => next(err));
-});
+// router.get("/:userId", (req, res, next) => {
+//   User.findById(req.params.userId)
+//     .then((User) => {
+//       res.statusCode = 200;
+//       res.setHeader("Content-Type", "application/json");
+//       res.json(User);
+//     })
+//     .catch((err) => next(err));
+// });
 
 
 // axios.get('http://localhost:5000/api/users/')
@@ -131,17 +131,17 @@ router.get("/:userId", (req, res, next) => {
 //   }
 // )
 
-router.route('/')
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-/* GET users listing. */
-.get(cors.cors, (req, res, next) => {
-  User.find()
-    .then((user) => {
-      res.statusCode = 200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(user);
-    })
-    .catch((err) => next(err));
-});
+// router.route('/')
+// .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+// /* GET users listing. */
+// .get(cors.cors, (req, res, next) => {
+//   User.find()
+//     .then((user) => {
+//       res.statusCode = 200;
+//       res.setHeader("Content-Type", "application/json");
+//       res.json(user);
+//     })
+//     .catch((err) => next(err));
+// });
 
 module.exports = router;

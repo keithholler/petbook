@@ -6,7 +6,7 @@ const requireLogin = require("../../middleware/requireLogin");
 //const User = mongoose.model("users")
 //const Post =  mongoose.model("Post")
 //const User = mongoose.model("User")
-const User = require("../../models/User");
+const User = require("../../models/user");
 const Post = require("../../models/Post");
 
 

@@ -39,14 +39,14 @@ const petSchema = new mongoose.Schema(
       },
 
     userIdentity: {
-      type: ObjectId,
+      type: ObjectId   ,
       ref: "User",
     },
   },
-  
+    //testing
   { timestamps: true }
 );
-    
+        
 mongoose.model("Pet", petSchema);
 const Pet = mongoose.model("Pet", petSchema);
 module.exports = Pet;

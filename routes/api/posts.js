@@ -5,7 +5,7 @@ const cors = require('./cors');
 const requireLogin = require("../../middleware/requireLogin");
 //const Post =  mongoose.model("Post")
 const Post = require("../../models/Post");
-const Useringodb = require("../../models/Userinfodb");
+//const Useringodb = require("../../models/Userinfodb");
 
 router.route("/allpost")
 .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))

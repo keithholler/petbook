@@ -43,7 +43,7 @@ const petSchema = new mongoose.Schema(
       ref: "User",
     },
   },
-
+  
   { timestamps: true }
 );
 

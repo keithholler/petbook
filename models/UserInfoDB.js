@@ -29,7 +29,7 @@ const userinfodbSchema = new mongoose.Schema(
      
     },
   },
-
+  
   { timestamps: true }
 );
 

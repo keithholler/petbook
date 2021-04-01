@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require('./cors');
 const requireLogin = require("../../middleware/requireLogin");
 //const Post =  mongoose.model("Post")
-const Userinfodb = require("../../models/Userinfodb");
+const Userinfodb = require("../../models/userinfodb");
 
 
 // @route POST api/posts/userinfodb

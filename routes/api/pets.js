@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const cors = require('./cors');
 const requireLogin = require("../../middleware/requireLogin");
 //const Post =  mongoose.model("Post")
-const Pet = require("../../models/Pet");
+const Pet = require("../../models/pet");
 
 
 

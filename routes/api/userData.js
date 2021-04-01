@@ -7,7 +7,7 @@ const requireLogin = require("../../middleware/requireLogin");
 //const Post =  mongoose.model("Post")
 //const User = mongoose.model("User")
 const User = require("../../models/user");
-const Post = require("../../models/Post");
+const Post = require("../../models/post");
 
 
 router.get("/users/:id", (req, res) => {

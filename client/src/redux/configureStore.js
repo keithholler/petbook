@@ -13,7 +13,7 @@ import {postReducer} from "./postReducer";
 import {petReducer} from "./petReducer";
 import {userInfoDBReducer} from "./userInfoDBReducer";
 import {errorReducer} from "./errorReducer";
-const initialState = {};
+//const initialState = {};
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 export const ConfigureStore = () => {
 const store = createStore(

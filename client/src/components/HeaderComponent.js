@@ -8,7 +8,7 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  Label,
+
   NavItem,
   TabContent,
   TabPane,
@@ -22,12 +22,11 @@ import {
   DropdownItem,
   Button,
   UncontrolledTooltip,
-  Row,
-  Col,
+
 } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import classnames from "classnames";
-import { Control, Form, Errors } from "react-redux-form";
+
 import Register from "./register"
 import Login from "./login"
 import { logoutUser } from "../redux/ActionCreators";
@@ -140,6 +139,7 @@ class Header extends Component {
                 <img
                   src="/petbook/assets/pawprint2.png"
                   style={{ width: "40px", margin: "3px" }}
+                  alt="pawprint"
                 ></img>
                 k
               </h5>
@@ -504,6 +504,7 @@ class Header extends Component {
               <img
                 src="/petbook/assets/pawprint2.png"
                 style={{ width: "40px", margin: "3px" }}
+                alt="pawprint"
               ></img>
               k
             </h5>

@@ -4,7 +4,6 @@ import {
   Route,
   Redirect,
   withRouter,
-  BrowserRouter,
 } from "react-router-dom";
 
 //import {ConfigureStore} from "../redux/configureStore";

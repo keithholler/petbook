@@ -8,6 +8,7 @@ const userData = require("./routes/api/userData");
 const posts = require("./routes/api/posts");
 const userinfodbs = require("./routes/api/userinfodbs");
 const pets = require("./routes/api/pets");
+const path = require('path');
 const app = express();
 // Bodyparser middleware
 app.use(

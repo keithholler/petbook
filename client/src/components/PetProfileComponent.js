@@ -627,7 +627,7 @@ class PetProfile extends Component {
               <img
                 id="profile"
                 className="profileImg "
-                src="/petbook/assets/petDefault.png"
+                src="/./assets/petDefault.png"
                 alt="profileImg"
                 style={{ width: "90%", maxWidth: "100%", height: "90%" }}
               ></img>

@@ -76,7 +76,7 @@ class PublicProfile extends Component {
                 this.props.userinfodb.userInfodb.length === 0 ?<img
                 id="music"
                 className="rounded-circle me mx-auto d-block"
-                src="/petbook/assets/default.png"
+                src="/./assets/default.png"
                 alt="profileImg"
                 style={{ width: "200px", height: "200px" }}
               /> :
@@ -84,7 +84,7 @@ class PublicProfile extends Component {
                   <img
                     id="music"
                     className="rounded-circle me mx-auto d-block"
-                    src="/petbook/assets/default.png"
+                    src="/./assets/default.png"
                     alt="profileImg"
                     style={{ width: "200px", height: "200px" }}
                   />
@@ -144,7 +144,7 @@ class PublicProfile extends Component {
               <img
                 id="profile"
                 className="profileImg "
-                src="/petbook/assets/petDefault.png"
+                src="/./assets/petDefault.png"
                 alt="profileImg"
                 style={{ width: "90%", maxWidth: "100%", height: "90%" }}
               ></img>
@@ -357,7 +357,7 @@ class PublicProfile extends Component {
                               <CardImg
                                 id="music"
                                 className="profileImg mr-2 ml-2 mt-2"
-                                src="/petbook/assets/default.png"
+                                src="/./assets/default.png"
                                 alt="profileImg"
                                 style={{
                                   width: "60px",

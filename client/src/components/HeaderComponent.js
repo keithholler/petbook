@@ -165,7 +165,7 @@ class Header extends Component {
                     }}
                   >
                     <img
-                      src="/petbook/assets/lostFound.png"
+                      src="/./assets/lostFound.png"
                       alt="lostPets"
                       style={{
                         width: "30px",
@@ -202,7 +202,7 @@ class Header extends Component {
                   
                   >
                     <img
-                      src="/petbook/assets/home4.png"
+                      src="/./assets/home4.png"
                       alt="feed"
                       style={{
                         width: "30px",
@@ -229,7 +229,7 @@ class Header extends Component {
                   <img
                   id="music"
                   className="profileImg m-2"
-                  src="/petbook/assets/default.png"
+                  src="/./assets/default.png"
                   alt="profileImg"
                   style={{ width: "40px" }}
               />
@@ -243,7 +243,7 @@ class Header extends Component {
                   <img
                   id="music"
                   className="profileImg m-2"
-                  src="/petbook/assets/default.png"
+                  src="/./assets/default.png"
                   alt="profileImg"
                   style={{ width: "40px" }}
                 /> 
@@ -261,7 +261,7 @@ class Header extends Component {
                         <DropdownItem id="profileSettings" className="text-center m-0">
                           <img
                             className="profileImg rounded-circle mr-1"
-                            src="/petbook/assets/default.png"
+                            src="/./assets/default.png"
                             alt="profileImg"
                             style={{
                               width: "40px",
@@ -530,7 +530,7 @@ class Header extends Component {
                   }}
                 >
                   <img
-                    src="/petbook/assets/lostFound.png"
+                    src="/./assets/lostFound.png"
                     alt="lostPets"
                     style={{
                       width: "30px",
@@ -567,7 +567,7 @@ class Header extends Component {
                 
                 >
                   <img
-                    src="/petbook/assets/home4.png"
+                    src="/./assets/home4.png"
                     alt="feed"
                     style={{
                       width: "30px",
@@ -597,7 +597,7 @@ class Header extends Component {
                 <img
                 id="music"
                 className="profileImg m-2"
-                src="/petbook/assets/default.png"
+                src="/./assets/default.png"
                 alt="profileImg"
                 style={{ width: "40px" }}
               /> :
@@ -606,7 +606,7 @@ class Header extends Component {
                   <img
                     id="music"
                     className="profileImg m-2"
-                    src="/petbook/assets/default.png"
+                    src="/./assets/default.png"
                     alt="profileImg"
                     style={{ width: "40px" }}
                   />
@@ -630,7 +630,7 @@ class Header extends Component {
                 this.props.userinfodb.userInfodb.mydata.length === 0?<img
                 id="music"
                 className="profileImg m-2"
-                src="/petbook/assets/default.png"
+                src="/./assets/default.png"
                 alt="profileImg"
                 style={{ width: "40px" }}
               /> :
@@ -638,7 +638,7 @@ class Header extends Component {
                   <img
                     id="music"
                     className="profileImg m-2"
-                    src="/petbook/assets/default.png"
+                    src="/./assets/default.png"
                     alt="profileImg"
                     style={{ width: "40px" }}
                   />
@@ -669,7 +669,7 @@ class Header extends Component {
                       <DropdownItem id="profileSettings" className="text-center m-0">
                         <img
                           className="profileImg rounded-circle mr-1"
-                          src="/petbook/assets/default.png"
+                          src="/./assets/default.png"
                           alt="profileImg"
                           style={{
                             width: "40px",

@@ -348,7 +348,7 @@ class Feed extends Component {
                 this.props.userinfodb.userInfodb.mydata.length === 0 ?<CardImg
                 id="music"
                 className="profileImg m-2"
-                src="/petbook/assets/default.png"
+                src="/./assets/default.png"
                 alt="profileImg"
                 style={{ width: "40px" }}
               /> :
@@ -356,7 +356,7 @@ class Feed extends Component {
                   <CardImg
                     id="music"
                     className="profileImg m-2"
-                    src="/petbook/assets/default.png"
+                    src="/./assets/default.png"
                     alt="profileImg"
                     style={{ width: "40px" }}
                   />
@@ -420,7 +420,7 @@ class Feed extends Component {
                             <CardImg
                               id="music"
                               className="profileImg mr-2 ml-2 mt-2"
-                              src="/petbook/assets/default.png"
+                              src="/./assets/default.png"
                               //src={this.state.userinfo.userinfo.filter(id1=>  this.state.posts.posts.some(id2=> id1.userIdentity === id2.postedBy._id)).profileImage}
 
                               alt="profileImg"

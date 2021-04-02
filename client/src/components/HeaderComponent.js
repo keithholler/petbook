@@ -137,7 +137,7 @@ class Header extends Component {
               >
                 PetB
                 <img
-                  src="/petbook/assets/pawprint2.png"
+                  src="/./assets/pawprint2.png"
                   style={{ width: "40px", margin: "3px" }}
                   alt="pawprint"
                 ></img>
@@ -502,7 +502,7 @@ class Header extends Component {
             >
               PetB
               <img
-                src="/petbook/assets/pawprint2.png"
+                src="/./assets/pawprint2.png"
                 style={{ width: "40px", margin: "3px" }}
                 alt="pawprint"
               ></img>

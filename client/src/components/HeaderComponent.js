@@ -112,6 +112,7 @@ class Header extends Component {
   };
   onLogoutClick = () => {
    this.props.logoutUser();
+   this.props.resetState();
   };
 
   render() {

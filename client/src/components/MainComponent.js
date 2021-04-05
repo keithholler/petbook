@@ -31,7 +31,8 @@ import {
   getUserPost,
   getPets,
   updatePet,
-  addPet
+  addPet,
+  resetState
 } from "../redux/ActionCreators";
 
 
@@ -95,6 +96,7 @@ const mapDispatchToProps = {
   updatePet(name, petImage, animalType, breed, mainColor,secondaryColor,about),
 
     getPets:()=>getPets(),
+    resetState:()=>resetState(),
   
 
   resetProfileForm: () => actions.reset("profileForm"),
@@ -123,6 +125,7 @@ class Main extends Component {
           logoutUser={this.props.loginUser}
           getUserInfoDB={this.props.getUserInfoDB}
           userinfodb={this.props.userinfodb}
+          resetState={this.props.resetState}
         />
         <Switch>
           <Route

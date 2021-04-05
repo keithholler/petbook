@@ -18,4 +18,8 @@ export const ADD_PET = "ADD_PET";
 export const UPDATE_PET = "UPDATE_PET";
 export const GET_PETS = "GET_PETS";
 
+export const RESET_STORE = 'RESET_STORE';
+
+export const RESET_STATE = 'RESET_STATE';
+
 

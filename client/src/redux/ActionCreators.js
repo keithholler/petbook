@@ -217,3 +217,11 @@ export const addUserInfoDB = (profileImage,
           })
         }
 
+
+
+        export const resetState = () => {
+          return {
+            type: ActionTypes.RESET_STATE
+          }
+        }
+

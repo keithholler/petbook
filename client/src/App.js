@@ -3,12 +3,12 @@ import "./App.css";
 import Main from "./components/MainComponent";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { ConfigureStore } from "./redux/configureStore";
+import { store } from "./redux/configureStore";
 import { setCurrentUser,logoutUser } from "./redux/ActionCreators";
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-const store = ConfigureStore();
+//const store = configureStore();
 
 if (localStorage.jwtToken) {
   // Set auth token header auth

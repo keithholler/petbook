@@ -87,7 +87,7 @@ this.props.registerUser(newUser, this.props.history);
 render() {
     const { errors } = this.state;
 return (
-
+ 
   <Form
     model="profileForm"
     onSubmit={(values) => this.onSubmit(values)}

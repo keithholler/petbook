@@ -132,7 +132,7 @@ class Main extends Component {
             exact
             path="/"
             render={() => {
-              return this.props.userInfo.userInfo.profileName ? (
+              return this.props.auth.isAuthenticated ? (
                 <Redirect to="/PetProfile" />
               ) : (
                 <Redirect to="/petbook" />

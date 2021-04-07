@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {  withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../redux/ActionCreators";
@@ -18,30 +19,42 @@ class Login extends Component {
       password: "",
       errors: {}
     };
-  }
+  } 
   componentDidMount() {
     //If logged in and user navigates to Login page, should redirect them to dashboard
     // if (this.props.auth.isAuthenticated) {
-    //   this.props.history.push("/petbook");
-    //   this.props.toggleModal()
-    //   alert("Already Loged In")
+ 
+  
+    //   //alert("Already Loged In")
     // }
   }
 componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      //this.props.history.push("/Feed"); // push user to dashboard when they login
-      this.props.toggleModal()
-    }
+
+  
 if (nextProps.errors) {
+
       this.setState({
         errors: nextProps.errors
       });
+       console.log(this.state.errors)
     }
-  }
+ 
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/Feed");
+      this.props.toggleModal()
+     // alert("Already Loged In")
+    }   
+    }
+  
 onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
   };
 onSubmit = e => {
+  // if (this.props.auth.isAuthenticated) {
+  //   this.props.history.push("/Feed");
+  //   this.props.toggleModal()
+  //   alert("Already Loged In")
+  // }
     //e.preventDefault();
   
   //    if(this.state.email != ""){
@@ -64,7 +77,7 @@ const userData = {
       email: this.state.email,
       password: this.state.password
     };
-this.props.loginUser(userData); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
+this.props.loginUser(userData,this.props.history); // since we handle the redirect within our component, we don't need to pass in this.props.history as a parameter
   };
 render() {
     const { errors } = this.state;
@@ -121,7 +134,8 @@ return (
                })}
           />
           <span className="text-danger m-1">{errors.password}
-                   {errors.passwordincorrect}</span>
+                   {errors.passwordincorrect}
+                   </span>
         </Col>
       </Col>
     </Row>
@@ -144,4 +158,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { loginUser }
-)(Login);
+)((withRouter(Login)));

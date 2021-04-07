@@ -1,11 +1,15 @@
 import {
     ADD_PET,
     GET_PETS,
-    UPDATE_PET
+    UPDATE_PET,
+    RESET_STATE
   } from "./ActionTypes";
   const isEmpty = require("is-empty");
-
-  export const petReducer = (state = { pets: [] }, action)=> {
+  const initialState = {
+    pets: []
+  
+  };
+  export const petReducer = (state = initialState, action)=> {
     switch (action.type) {
         case ADD_PET:
             return {
@@ -25,6 +29,8 @@ import {
                   pets:action.payload.data
             
                 };
+                case RESET_STATE:
+              return initialState
           default:
             return state;      
     }

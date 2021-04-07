@@ -402,7 +402,7 @@ class Header extends Component {
                     model="profileForm"
                     onSubmit={(values) => this.handleRegister(values)}
                     className="mt-2"
-                  >
+                  > 
                     <Row className="form-group ">
                       <Col>
                         <Label htmlFor="profileName" className="ml-3">

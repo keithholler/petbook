@@ -1,9 +1,17 @@
 import * as ActionTypes from "./ActionTypes";
 
-export const UserInfo = (state = { userInfo: [] }, action) => {
+const initialState = {
+  userInfo: []
+
+};
+
+
+export const UserInfo = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.ADD_USERINFO:
       return { ...state, userInfo: action.payload };
+      case ActionTypes.RESET_STATE:
+              return initialState
     default:
       return state;
   }

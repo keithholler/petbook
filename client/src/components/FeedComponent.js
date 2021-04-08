@@ -50,13 +50,16 @@ class PostForm extends Component {
     //alert(this.props.postreducer.body)
     this.toggleModal();
     //console.log(this.props.userInfo.userInfo.length)
-    this.props.userPost(this.props.userInfo.userInfo.length === 0  ?" ":this.props.userInfo.userInfo.info.PicPostURL, values.text);
-    this.props.postComment(values.text, this.state.feedPicPostURL);
- 
-     
-    setTimeout(() => this.props.rerenderParentCallback(), 1000)
-  };
+    this.props.userPost(
+      this.props.userInfo.userInfo.length === 0
+        ? " "
+        : this.props.userInfo.userInfo.info.PicPostURL,
+      values.text
+    );
+    // this.props.postComment(values.text, this.state.feedPicPostURL);
 
+    setTimeout(() => this.props.rerenderParentCallback(), 1000);
+  };
 
   handleChange = (e) => {
     if (e.target.files[0]) {
@@ -84,7 +87,7 @@ class PostForm extends Component {
                 .getDownloadURL()
                 .then((url) => {
                   console.log(url);
-                  this.props.addUserInfo({PicPostURL: url})
+                  this.props.addUserInfo({ PicPostURL: url });
                   this.setState({ feedPicPostURL: url });
                 });
             }
@@ -175,7 +178,6 @@ class PostForm extends Component {
   }
 }
 
-
 const apiPosts = axios.create({
   baseURL: "http://localhost:5000/api/posts/",
 });
@@ -193,24 +195,11 @@ class Feed extends Component {
       activeTab: "2",
       data: [],
       posts: [],
-      userinfo:[],
-      userInfoDB:[],
+      userinfo: [],
+      userInfoDB: [],
       error: "",
-      isLoading:true
+      isLoading: true,
     };
-
-    // api.get('/',{
-    //   headers:{
-    //     "Authorization":localStorage.getItem("jwtToken"),
-    //     "Content-Type":"application/json",
-    //     'Access-Control-Allow-Origin':'*'
-    //   }
-    // })
-    // .then(response => {
-    //   response.statusCode = 200;
-    //   response.setHeader("Content-Type", "application/json","Access-Control-Allow-Origin", "*");
-    //  console.log(response.data)
-    // });
   }
 
   handleInputChange = (event) => {
@@ -228,9 +217,7 @@ class Feed extends Component {
     this.setState({
       postText: "",
       postImage: "",
-    }
-    );
-
+    });
   };
   handleLogin = (values) => {
     if (values.email) {
@@ -268,60 +255,23 @@ class Feed extends Component {
         isModalOpen: !this.state.isModalOpen,
       });
     }
-    
-    apiPosts
-      .get("/allpost")
-      //.then((response) => response.json())
-      .then((response) => {
-        console.log(response.data)
-        //console.log(response.data)
-        this.setState({ posts: response.data }
-         , () => console.log(this.state.posts)
-        );
-      })
-      .catch((err) => {
-        this.setState({ error: err });
-      });
-    if (this.state.error || !Array.isArray(this.state.posts)) {
-      return console.log("This is not an array");
-    }
+    this.props.getAllPost();
+    this.props.getAllUser();
+    setTimeout(
+      () => this.setState({ posts: this.props.allPostsdb.allPostsdb }),
+      1000
+    );
+    setTimeout(
+      () => this.setState({ userinfo: this.props.allUsersdb.allUsersdb }),
+      1000
+    );
 
-
-    apiUserInfoDBs
-    .get("/alluserinfo")
-    //.then((response) => response.json())
-    .then((response) => {
-      //console.log(response.data)
-      //console.log(response.data)
-      this.setState({ userinfo: response.data }
-       , () => console.log(this.state.userinfo)
-      );
-    })
-    .catch((err) => {
-      this.setState({ error: err });
-    });
-
-    this.setState({isLoading:false},()=>this.props.getUserInfoDB())
+    this.setState({ isLoading: false }, () => this.props.getUserInfoDB());
   };
 
-
   rerenderParentCallback = () => {
-    apiPosts
-    .get("/allpost")
-    //.then((response) => response.json())
-    .then((response) => {
-      
-      this.setState({ posts: response.data }
-      //  , () => console.log(this.state.posts)
-      );
-    })
-    .catch((err) => {
-      this.setState({ error: err });
-    });
-  if (this.state.error || !Array.isArray(this.state.posts)) {
-    return console.log("This is not an array ");
-  }
-  }
+    this.props.getAllPost();
+  };
 
   toggleTab = (tab) => {
     if (this.state.activeTab !== tab) {
@@ -329,247 +279,246 @@ class Feed extends Component {
     }
   };
   render() {
-    if(this.state.isLoading) return <div>Loading</div>
-    if(this.props.userinfodb.userInfodb.length === 0) {
-      return <div></div>
-    }else if (this.props.userinfodb.userInfodb.mydata.length >= 0 ) {
-    return (
-      <div className="container ">
-        <div
-          id="postHead"
-          className="row row-content"
-          style={{ position: "relative" }}
-        >
-          <div className="col-12 mx-auto p-2 ">
-            
-            <Card className="m-2 lostPetCard">
-              <div class="card-horizontal">
-               {
-                this.props.userinfodb.userInfodb.mydata.length === 0 ?<CardImg
-                id="music"
-                className="profileImg m-2"
-                src="/./assets/default.png"
-                alt="profileImg"
-                style={{ width: "40px" }}
-              /> :
-                this.props.userinfodb.userInfodb.mydata[0].profileImage === " " ? (
-                  <CardImg
-                    id="music"
-                    className="profileImg m-2"
-                    src="/./assets/default.png"
-                    alt="profileImg"
-                    style={{ width: "40px" }}
-                  />
-                ) : (
-                  <CardImg
-                    id="music"
-                    className="profileImg m-2"
-                    src={this.props.userinfodb.userInfodb.mydata[0].profileImage}
-                    alt="profileImg2"
-                    style={{ width: "40px" }}
-                  />
-                )}
+    if (this.state.isLoading) return <div>Loading</div>;
+    if (this.props.userinfodb.userInfodb.length === 0) {
+      return <div></div>;
+    } else if (this.props.userinfodb.userInfodb.mydata.length >= 0) {
+      return (
+        <div className="container ">
+          <div
+            id="postHead"
+            className="row row-content"
+            style={{ position: "relative" }}
+          >
+            <div className="col-12 mx-auto p-2 ">
+              <Card className="m-2 lostPetCard">
+                <div class="card-horizontal">
+                  {this.props.userinfodb.userInfodb.mydata.length === 0 ? (
+                    <CardImg
+                      id="music"
+                      className="profileImg m-2"
+                      src="/./assets/default.png"
+                      alt="profileImg"
+                      style={{ width: "40px" }}
+                    />
+                  ) : this.props.userinfodb.userInfodb.mydata[0]
+                      .profileImage === " " ? (
+                    <CardImg
+                      id="music"
+                      className="profileImg m-2"
+                      src="/./assets/default.png"
+                      alt="profileImg"
+                      style={{ width: "40px" }}
+                    />
+                  ) : (
+                    <CardImg
+                      id="music"
+                      className="profileImg m-2"
+                      src={
+                        this.props.userinfodb.userInfodb.mydata[0].profileImage
+                      }
+                      alt="profileImg3"
+                      style={{ width: "40px" }}
+                    />
+                  )}
 
-                <CardTitle
-                  style={{ fontFamily: "Fredoka One", fontWeight: "200" }}
-                  className="mt-3"
-                >
-                  {" "}
-                  {!this.props.auth.isAuthenticated
-                    ? "Not Logged In"
-                    : this.props.auth.user.name}
-                </CardTitle>
-              </div>
-              <div className="border">
-                <PostForm
-                  postComment={this.props.postComment}
-                  userPost={this.props.userPost}
-                  postreducer={this.props.postreducer}
-                  addUserInfo={this.props.addUserInfo}
-                  userInfo={this.props.userInfo}
-                  rerenderParentCallback={this.rerenderParentCallback}
-                />
-              </div>
-            </Card>
+                  <CardTitle
+                    style={{ fontFamily: "Fredoka One", fontWeight: "200" }}
+                    className="mt-3"
+                  >
+                    {" "}
+                    {!this.props.auth.isAuthenticated
+                      ? "Not Logged In"
+                      : this.props.auth.user.name}
+                  </CardTitle>
+                </div>
+                <div className="border">
+                  <PostForm
+                    postComment={this.props.postComment}
+                    userPost={this.props.userPost}
+                    postreducer={this.props.postreducer}
+                    addUserInfo={this.props.addUserInfo}
+                    userInfo={this.props.userInfo}
+                    rerenderParentCallback={this.rerenderParentCallback}
+                  />
+                </div>
+              </Card>
+            </div>
           </div>
-        </div>
-        <div className="">
-          {typeof this.state.posts.posts === "undefined" ? (
-            <div></div>
-          ) : (
-            this.state.posts.posts.map((post, index) => {
-              return (
-                <div className="container" key={index}>
-                  <div className="row row-content">
-                    <div className="col-12 mx-auto p-2">
-                      <Card
-                        className="m-2 lostPetCard"
-                        style={{
-                          width: "auto",
-                          height: "auto",
-                          boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)",
-                        }}
-                      >
+          <div className="">
+            {typeof this.props.allPostsdb.allPostsdb.posts === "undefined" ? (
+              <div></div>
+            ) : (
+              this.props.allPostsdb.allPostsdb.posts.map((post, index) => {
+                return (
+                  <div className="container" key={index}>
+                    <div className="row row-content">
+                      <div className="col-12 mx-auto p-2">
+                        <Card
+                          className="m-2 lostPetCard"
+                          style={{
+                            width: "auto",
+                            height: "auto",
+                            boxShadow: "0 4px 4px 0 rgba(0, 0, 0, 0.5)",
+                          }}
+                        >
+                          <div class="card-horizontal">
+                            {!this.props.allUsersdb.allUsersdb.userinfo ? (
+                              <CardImg
+                                id="music"
+                                className="profileImg mr-2 ml-2 mt-2"
+                                src="/./assets/default.png"
+                                //src={this.state.userinfo.userinfo.filter(id1=>  this.state.posts.posts.some(id2=> id1.userIdentity === id2.postedBy._id)).profileImage}
 
-                        <div class="card-horizontal">
-                       
-                          {console.log(this.state.userinfo
+                                alt="profileImg"
+                                style={{
+                                  width: "60px",
+                                  objectFit: "cover",
+                                  objectPosition: "50% 50%",
+                                }}
+                              />
+                            ) : (
+                              <CardImg
+                                id="music"
+                                className="profileImg mr-2 ml-2 mt-2"
+                                src={
+                                  this.props.allUsersdb.allUsersdb.userinfo.filter(
+                                    (element) =>
+                                      element.userIdentity ===
+                                      post.postedByPrivate
+                                  )[0].profileImage
+                                }
+                                alt="profileImg2"
+                                style={{
+                                  width: "60px",
+                                  objectFit: "cover",
+                                  objectPosition: "50% 50%",
+                                }}
+                              />
                             )}
-                          {
-                          this.state.userinfo.length === 0  ? (
-                            <CardImg
-                              id="music"
-                              className="profileImg mr-2 ml-2 mt-2"
-                              src="/./assets/default.png"
-                              //src={this.state.userinfo.userinfo.filter(id1=>  this.state.posts.posts.some(id2=> id1.userIdentity === id2.postedBy._id)).profileImage}
-
-                              alt="profileImg"
-                              style={{
-                                width: "60px",
-                                objectFit: "cover",
-                                objectPosition: "50% 50%",
-                              }}
-                            />
-                          ) : (
-                            <CardImg
-                              id="music"
-                              className="profileImg mr-2 ml-2 mt-2"          
-                              
-                             // result1.filter(o1 => result2.some(o2 => o1.id === o2.id));
-                              src={this.state.userinfo.userinfo.filter(element => element.userIdentity === post.postedByPrivate)[0].profileImage}
-                              alt="profileImg2"
-                              style={{
-                                width: "60px",
-                                objectFit: "cover",
-                                objectPosition: "50% 50%",
-                              }}
-                            />
-                          )}                                                                                         
                             {/* {console.log(this.state.userinfo.userinfo.filter(id=> id.userIdentity).map(a => {a.profileImage}))} */}
 
-                          <CardTitle
-                            style={{
-                              fontFamily: "Fredoka One",
-                              fontWeight: "200",
-                            }}
-                            className="mt-4"
-                          >
-                            {" "}
-                            {post.postedBy.map((item, i) => {
+                            <CardTitle
+                              style={{
+                                fontFamily: "Fredoka One",
+                                fontWeight: "200",
+                              }}
+                              className="mt-4"
+                            >
+                              {" "}
+                              {/* {post.postedBy.map((item, i) => {
                               return (
                                 <div style={{ color: "black" }} key={i}>
                                   {item.name}
                                 </div>
                               );
-                            })}
-                          </CardTitle>
-                        </div>
-                        <CardBody
-                          className="mx-auto"
-                          style={{ width: "100%", height: "auto" }}
-                        >
-                          <CardText
-                            className="text-center text-break text-wrap "
-                            style={{
-                              fontSize: "calc(.5em + 1vw)",
-                              height: "auto!important",
-                              fontFamily: "Nunito",
-                              fontWeight: "400",
-                            }}
+                            })} */}
+                            </CardTitle>
+                          </div>
+                          <CardBody
+                            className="mx-auto"
+                            style={{ width: "100%", height: "auto" }}
                           >
-                            {post.body}
-                          </CardText>
-                          {post.postImage === null ? (
-                            <div></div>
-                          ) : (
-                            <CardImg
-                              className="img-fluid mx-auto"
+                            <CardText
+                              className="text-center text-break text-wrap "
                               style={{
-                                width: "70vh",
-                                height: "auto",
-                                objectFit: "contain",
-                                objectPosition: "50% 50%",
-                                display: "block",
-                                verticalAlign: "top",
+                                fontSize: "calc(.5em + 1vw)",
+                                height: "auto!important",
+                                fontFamily: "Nunito",
+                                fontWeight: "400",
                               }}
-                              src={post.pic}
-                            />
-                          )}
-                        </CardBody>
-                      </Card>
+                            >
+                              {post.body}
+                            </CardText>
+                            {post.pic === null ? (
+                              <div></div>
+                            ) : (
+                              <CardImg
+                                className="img-fluid mx-auto"
+                                style={{
+                                  width: "70vh",
+                                  height: "auto",
+                                  objectFit: "contain",
+                                  objectPosition: "50% 50%",
+                                  display: "block",
+                                  verticalAlign: "top",
+                                }}
+                                src={post.pic}
+                              />
+                            )}
+                          </CardBody>
+                        </Card>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })
-          )}
-
-
-        </div>
-        <Modal
-          backdrop="static"
-          isOpen={this.state.isModalOpen}
-          toggle={this.toggleModal}
-        >
-          <ModalHeader
+                );
+              })
+            )}
+          </div>
+          <Modal
+            backdrop="static"
+            isOpen={this.state.isModalOpen}
             toggle={this.toggleModal}
-            style={{
-              backgroundColor: "#1b8eb1",
-              color: "white",
-              textShadow: "1px 1px 3px #363636 ",
-            }}
           >
-            Login
-          </ModalHeader>
-          <ModalBody>
-            <Nav tabs>
-              <NavItem>
-                <NavLink
-                  className={classnames({
-                    active: this.state.activeTab === "1",
-                  })}
-                  onClick={() => {
-                    this.toggleTab("1");
-                  }}
-                  href="#"
-                >
-                  Log In
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink
-                  className={classnames({
-                    active: this.state.activeTab === "2",
-                  })}
-                  onClick={() => {
-                    this.toggleTab("2");
-                  }}
-                  href="#"
-                >
-                  Register
-                </NavLink>
-              </NavItem>
-            </Nav>
-            <TabContent activeTab={this.state.activeTab}>
-              <TabPane tabId="1">
-                <Login
-                  toggleModal={this.toggleModal}
-                  addUserInfo={this.props.addUserInfo}
-                />
-              </TabPane>
-              <TabPane tabId="2">
-                <Register
-                  toggleModal={this.toggleModal}
-                  addUserInfo={this.props.addUserInfo}
-                  addUserInfoDB={this.props.addUserInfoDB}
-                />
-              </TabPane>
-            </TabContent>
-          </ModalBody>
-        </Modal>
-      </div>
-    );
-                }
+            <ModalHeader
+              toggle={this.toggleModal}
+              style={{
+                backgroundColor: "#1b8eb1",
+                color: "white",
+                textShadow: "1px 1px 3px #363636 ",
+              }}
+            >
+              Login
+            </ModalHeader>
+            <ModalBody>
+              <Nav tabs>
+                <NavItem>
+                  <NavLink
+                    className={classnames({
+                      active: this.state.activeTab === "1",
+                    })}
+                    onClick={() => {
+                      this.toggleTab("1");
+                    }}
+                    href="#"
+                  >
+                    Log In
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    className={classnames({
+                      active: this.state.activeTab === "2",
+                    })}
+                    onClick={() => {
+                      this.toggleTab("2");
+                    }}
+                    href="#"
+                  >
+                    Register
+                  </NavLink>
+                </NavItem>
+              </Nav>
+              <TabContent activeTab={this.state.activeTab}>
+                <TabPane tabId="1">
+                  <Login
+                    toggleModal={this.toggleModal}
+                    addUserInfo={this.props.addUserInfo}
+                  />
+                </TabPane>
+                <TabPane tabId="2">
+                  <Register
+                    toggleModal={this.toggleModal}
+                    addUserInfo={this.props.addUserInfo}
+                    addUserInfoDB={this.props.addUserInfoDB}
+                  />
+                </TabPane>
+              </TabContent>
+            </ModalBody>
+          </Modal>
+        </div>
+      );
+    }
   }
 }
 

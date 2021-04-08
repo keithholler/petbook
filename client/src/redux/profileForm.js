@@ -1,7 +1,7 @@
 export const InitialFeedback = {
-    profileImage: "",
-      profileName: "",
-      firstName: "",
-      lastName: "",
-      email: "",
+  profileImage: "",
+  profileName: "",
+  firstName: "",
+  lastName: "",
+  email: "",
 };

@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const cors = require('./cors');
+const cors = require("./cors");
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
@@ -70,9 +70,9 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           name: user.name,
-          email:user.email
+          email: user.email,
         };
-        // Sign token 
+        // Sign token
         jwt.sign(
           payload,
           keys.secretOrKey,
@@ -95,16 +95,15 @@ router.post("/login", (req, res) => {
   });
 });
 
-// router.get("/:userId", (req, res, next) => {
-//   User.findById(req.params.userId)
-//     .then((User) => {
-//       res.statusCode = 200;
-//       res.setHeader("Content-Type", "application/json");
-//       res.json(User);
-//     })
-//     .catch((err) => next(err));
-// });
-
+router.get("/:userId", (req, res, next) => {
+  User.findById(req.params.userId)
+    .then((User) => {
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
+      res.json(User);
+    })
+    .catch((err) => next(err));
+});
 
 // axios.get('http://localhost:5000/api/users/')
 // .then(response => {
@@ -112,7 +111,6 @@ router.post("/login", (req, res) => {
 //   response.setHeader("Content-Type", "application/json");
 //  console.log(response.data)
 // });
-
 
 // .put("/:userId",(req, res, next) => {
 //   User.findByIdAndUpdate(
@@ -131,17 +129,18 @@ router.post("/login", (req, res) => {
 //   }
 // )
 
-// router.route('/')
-// .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-// /* GET users listing. */
-// .get(cors.cors, (req, res, next) => {
-//   User.find()
-//     .then((user) => {
-//       res.statusCode = 200;
-//       res.setHeader("Content-Type", "application/json");
-//       res.json(user);
-//     })
-//     .catch((err) => next(err));
-// });
+router
+  .route("/")
+  .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+  /* GET users listing. */
+  .get(cors.cors, (req, res, next) => {
+    User.find()
+      .then((user) => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(user);
+      })
+      .catch((err) => next(err));
+  });
 
 module.exports = router;

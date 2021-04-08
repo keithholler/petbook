@@ -1,23 +1,24 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const cors = require('./cors');
+const cors = require("./cors");
 const requireLogin = require("../../middleware/requireLogin");
 //const Post =  mongoose.model("Post")
 const Post = require("../../models/post");
 //const Useringodb = require("../../models/Userinfodb");
 
-router.route("/allpost")
-.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
-.get(cors.cors, //requireLogin
-   (req, res) => {
+//router.route("/allpost")
+router.get("/allpost", requireLogin, (req, res) => {
+  //.options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
+  // .get(cors.cors, //requireLogin
+  //    (req, res) => {
   Post.find()
- 
+
     .populate("postedBy", "_id name")
     .populate("comments.postedBy", "_id name")
     .sort("-createdAt")
     .then((posts) => {
-      console.log(posts)
+      console.log(posts);
       res.json({ posts });
     })
     .catch((err) => {
@@ -47,7 +48,7 @@ router.post("/createpost", requireLogin, (req, res) => {
     //  ,pic
   } = req.body;
   if (
-  //  !pic ||
+    //  !pic ||
     !body
     //|| !pic
   ) {
@@ -58,10 +59,8 @@ router.post("/createpost", requireLogin, (req, res) => {
     pic,
     body,
 
-   
     postedBy: req.user,
     postedByPrivate: req.user,
-  
   });
   //console.log(req.user);
   console.log("I am looking ");
@@ -70,27 +69,24 @@ router.post("/createpost", requireLogin, (req, res) => {
     .save()
     .then((result) => {
       //console.log("I am looking ");
-      res.json({ post:result  });
+      res.json({ post: result });
     })
     .catch((err) => {
       console.log(err);
     });
 });
- 
 
-
-router.get("/mypost", requireLogin,(req, res) => {
+router.get("/mypost", requireLogin, (req, res) => {
   Post.find({ postedByPrivate: req.user._id })
-    .populate("postedByPrivate", "_id name")
+    .populate("postedByPrivate", "_id")
     .then((result) => {
       //console.log(result);
-      res.json({ mypost:result  });
+      res.json({ mypost: result });
     })
     .catch((err) => {
       console.log(err);
     });
 });
-
 
 // router.route("/mypost")
 // .options(cors.corsWithOptions, (req, res) => res.sendStatus(200))
@@ -106,7 +102,5 @@ router.get("/mypost", requireLogin,(req, res) => {
 //       console.log(err);
 //     });
 // });
-
-
 
 module.exports = router;

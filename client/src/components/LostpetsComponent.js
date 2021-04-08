@@ -23,8 +23,8 @@ import axios from "axios";
 import classnames from "classnames";
 import uuid from "react-uuid";
 import * as emailjs from "emailjs-com";
-import Register from "./register"
-import Login from "./login"
+import Register from "./register";
+import Login from "./login";
 const apiUserInfoDBs = axios.create({
   baseURL: "http://localhost:5000/api/userinfodbs/",
 });
@@ -39,26 +39,35 @@ class Lostpet extends Component {
       isModalOpen: false,
       activeTab: "2",
       profileNameHolder: null,
-      pets:[],
-      userinfo:[],
-      userInfoDB:[]
+      pets: [],
+      userinfo: [],
+      userInfoDB: [],
     };
   }
 
   handleSubmit = (values) => {
-// console.log( this.state.pets.filter(element => element._id === values.petId)[0].userIdentity)
-// console.log( this.state.userinfo.userinfo)
-// console.log( this.state.userinfo.userinfo.filter(ele => ele._id === "605ca2e58a58f945c4c8189b"))
-console.log( this.state.userinfo.userinfo.filter(ele => ele.userIdentity === this.state.pets.filter(element => element._id === values.petId)[0].userIdentity )[0].userEmail)
-if (
- this.state.userinfo.userinfo.filter(ele => ele._id === this.state.pets.filter(element => element._id === values.petId)[0].userIdentity ).email
-
-) {
-
-
-}
+    // console.log( this.state.pets.filter(element => element._id === values.petId)[0].userIdentity)
+    // console.log( this.state.userinfo.userinfo)
+    // console.log( this.state.userinfo.userinfo.filter(ele => ele._id === "605ca2e58a58f945c4c8189b"))
+    console.log(
+      this.state.userinfo.userinfo.filter(
+        (ele) =>
+          ele.userIdentity ===
+          this.state.pets.filter((element) => element._id === values.petId)[0]
+            .userIdentity
+      )[0].userEmail
+    );
     if (
-      this.state.pets.filter(element => element._id === values.petId)
+      this.state.userinfo.userinfo.filter(
+        (ele) =>
+          ele._id ===
+          this.state.pets.filter((element) => element._id === values.petId)[0]
+            .userIdentity
+      ).email
+    ) {
+    }
+    if (
+      this.state.pets.filter((element) => element._id === values.petId)
 
       //this.state.pets === values.petId
       // +
@@ -67,7 +76,12 @@ if (
     ) {
       let templateParams = {
         from: "PetProfile",
-        to: this.state.userinfo.userinfo.filter(ele => ele.userIdentity === this.state.pets.filter(element => element._id === values.petId)[0].userIdentity )[0].userEmail ,
+        to: this.state.userinfo.userinfo.filter(
+          (ele) =>
+            ele.userIdentity ===
+            this.state.pets.filter((element) => element._id === values.petId)[0]
+              .userIdentity
+        )[0].userEmail,
         subject: "PetFound",
         html: `Your Pet Was Found Please call ${values.phoneNumber} to contact the person who found them.`,
       };
@@ -150,46 +164,43 @@ if (
   };
 
   componentDidMount = () => {
-    if(!this.props.auth.isAuthenticated){
-         this.setState({
+    if (!this.props.auth.isAuthenticated) {
+      this.setState({
         isModalOpen: !this.state.isModalOpen,
       });
     }
 
-
     apiPets
-    .get("/")
-    //.then((response) => response.json())
-    .then((response) => {
-      //console.log(response.data)
-      console.log(response.data.pet)
-      this.setState({ pets: response.data.pet }
-       , () => console.log(this.state.pets)
-      );
-    })
-    .catch((err) => {
-      this.setState({ error: err });
-    });
+      .get("/")
+      //.then((response) => response.json())
+      .then((response) => {
+        //console.log(response.data)
+        console.log(response.data.pet);
+        this.setState({ pets: response.data.pet }, () =>
+          console.log(this.state.pets)
+        );
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
 
     apiUserInfoDBs
-    .get("/alluserinfo")
-    //.then((response) => response.json())
-    .then((response) => {
-      //console.log(response.data)
-      //console.log(response.data)
-      this.setState({ userinfo: response.data }
-       , () => console.log(this.state.userinfo)
-      );
-    })
-    .catch((err) => {
-      this.setState({ error: err });
-    });
+      .get("/alluserinfo")
+      //.then((response) => response.json())
+      .then((response) => {
+        //console.log(response.data)
+        //console.log(response.data)
+        this.setState({ userinfo: response.data }, () =>
+          console.log(this.state.userinfo)
+        );
+      })
+      .catch((err) => {
+        this.setState({ error: err });
+      });
 
-    this.setState({userInfoDB: this.props.userinfodb})
+    this.setState({ userInfoDB: this.props.userinfodb });
   };
 
-
-  
   toggleTab = (tab) => {
     if (this.state.activeTab !== tab) {
       this.setState({ activeTab: tab });
@@ -198,8 +209,12 @@ if (
   render() {
     return (
       <div>
-        <h4 className="text-center m-3" style={{ fontFamily: "Nunito",
-                    fontWeight: "700",}}>Lost Pet Submission  </h4>
+        <h4
+          className="text-center m-3"
+          style={{ fontFamily: "Nunito", fontWeight: "700" }}
+        >
+          Lost Pet Submission{" "}
+        </h4>
         <Container>
           <Row>
             <Col>
@@ -210,7 +225,7 @@ if (
               >
                 <Row className="form-group">
                   <Label htmlFor="petId" md={2}>
-                   Lost Pet ID:
+                    Lost Pet ID:
                   </Label>
                   <Col md={8}>
                     <Control.text
@@ -326,11 +341,16 @@ if (
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-              <Login toggleModal={this.toggleModal} addUserInfo={this.props.addUserInfo}/>
+                <Login
+                  toggleModal={this.toggleModal}
+                  addUserInfo={this.props.addUserInfo}
+                />
               </TabPane>
               <TabPane tabId="2">
-             
-              <Register toggleModal={this.toggleModal} addUserInfo={this.props.addUserInfo}/>
+                <Register
+                  toggleModal={this.toggleModal}
+                  addUserInfo={this.props.addUserInfo}
+                />
               </TabPane>
             </TabContent>
           </ModalBody>

@@ -9,14 +9,12 @@ const requireLogin = require("../../middleware/requireLogin");
 const User = require("../../models/user");
 const Post = require("../../models/post");
 
-
 router.get("/users/:id", (req, res) => {
   User.findOne({ _id: req.params.id })
     .select("-password")
     .then((user) => {
       Post.find({ postedBy: req.params.id })
         .populate("postedBy", "_id name")
-       
 
         .exec((err, posts) => {
           if (err) {

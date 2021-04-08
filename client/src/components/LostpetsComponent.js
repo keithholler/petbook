@@ -144,7 +144,7 @@ class Lostpet extends Component {
 
   handleRegister = (values) => {
     this.props.addUserInfo(
-      this.props.uniqueId.uniqueId,
+      " ",
       "localImageUrl",
       values,
       true
@@ -153,9 +153,7 @@ class Lostpet extends Component {
     this.generateId();
   };
 
-  generateId = () => {
-    this.props.addUniqueId(uuid());
-  };
+ 
 
   toggleModal = () => {
     this.setState({
@@ -349,7 +347,7 @@ class Lostpet extends Component {
               <TabPane tabId="2">
                 <Register
                   toggleModal={this.toggleModal}
-                  addUserInfo={this.props.addUserInfo}
+                  addUserInfoDB={this.props.addUserInfoDB}
                 />
               </TabPane>
             </TabContent>

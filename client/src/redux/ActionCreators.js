@@ -3,10 +3,7 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 
-export const addUniqueId = (uniqueId) => ({
-  type: ActionTypes.ADD_UNIQUEID,
-  payload: uniqueId,
-});
+
 
 export const postComment = (text, postImage) => ({
   type: ActionTypes.ADD_POST,
@@ -18,10 +15,7 @@ export const addUserInfo = (info, userPick, profileInfo, isRegistered) => ({
   payload: { info, userPick, profileInfo, isRegistered },
 });
 
-export const addPetCard = (petId, petcard, petImage) => ({
-  type: ActionTypes.ADD_PETCARD,
-  payload: { petId, petcard, petImage },
-});
+
 
 // Register User
 export const registerUser = (userData, history) => (dispatch) => {

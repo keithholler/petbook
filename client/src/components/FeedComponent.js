@@ -230,18 +230,15 @@ class Feed extends Component {
 
   handleRegister = (values) => {
     this.props.addUserInfo(
-      this.props.uniqueId.uniqueId,
+   " ",
       "localImageUrl",
       values,
       true
     );
     this.toggleModal();
-    this.generateId();
+
   };
 
-  generateId = () => {
-    this.props.addUniqueId(uuid());
-  };
 
   toggleModal = () => {
     this.setState({
@@ -509,7 +506,6 @@ class Feed extends Component {
                 <TabPane tabId="2">
                   <Register
                     toggleModal={this.toggleModal}
-                    addUserInfo={this.props.addUserInfo}
                     addUserInfoDB={this.props.addUserInfoDB}
                   />
                 </TabPane>

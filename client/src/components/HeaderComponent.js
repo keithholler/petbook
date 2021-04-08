@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link, NavLink as RRNavLink } from "react-router-dom";
+import { Link, NavLink as RRNavLink,withRouter } from "react-router-dom";
 import uuid from "react-uuid";
 import {
   Nav,
@@ -43,26 +43,7 @@ class Header extends Component {
     };
   }
 
-  // handleLogin = (values) => {
-  //   if (values.email) {
-  //     alert("Logged In");
-  //   } else {
-  //     alert("Please Register First");
-  //   }
-  //   this.toggleModal();
-  // };
 
-  // handleRegister = (values) => {
-  //   this.props.addUserInfo(
-  //     this.props.uniqueId.uniqueId,
-  //     "localImageUrl",
-  //     values,
-  //     true
-  //   );
-  //   this.toggleModal();
-  //   this.toggleModalPetId();
-  //   this.generateId();
-  // };
 
   componentDidMount = () => {
     this.setState({ isLoading: false }, () => this.props.getUserInfoDB());
@@ -73,9 +54,7 @@ class Header extends Component {
       isModalOpen: !this.state.isModalOpen,
     });
   };
-  generateId = () => {
-    this.props.addUniqueId(uuid());
-  };
+
   toggleModalPetId = () => {
     this.setState(
       {
@@ -107,6 +86,7 @@ class Header extends Component {
   onLogoutClick = () => {
     this.props.logoutUser();
     this.props.resetState();
+    this.props.history.push("/petbook");
   };
 
   render() {
@@ -403,7 +383,7 @@ class Header extends Component {
                 <TabPane tabId="2">
                   <Register
                     toggleModal={this.toggleModal}
-                    addUserInfo={this.props.addUserInfo}
+                    addUserInfoDB={this.props.addUserInfoDB}
                   />
                   {/* <Form
                     model="profileForm"
@@ -469,22 +449,7 @@ class Header extends Component {
               </TabContent>
             </ModalBody>
           </Modal>
-          {/* <Modal
-            isOpen={this.state.isPetIdModalOpen}
-            toggle={this.toggleModalPetId}
-          >
-            <ModalHeader
-              toggle={this.toggleModalPetId}
-              style={{
-                backgroundColor: "#1b8eb1",
-                color: "white",
-                textShadow: "1px 1px 3px #363636",
-              }}
-            >
-              Owner Id
-            </ModalHeader>
-            <ModalBody>{this.props.uniqueId.uniqueId}</ModalBody>
-          </Modal> */}
+        
         </React.Fragment>
       );
     } else if (this.props.userinfodb.userInfodb.mydata.length >= 0) {
@@ -828,7 +793,7 @@ class Header extends Component {
                 <TabPane tabId="2">
                   <Register
                     toggleModal={this.toggleModal}
-                    addUserInfo={this.props.addUserInfo}
+                    addUserInfoDB={this.props.addUserInfoDB}
                   />
                   {/* <Form
                   model="profileForm"
@@ -894,22 +859,7 @@ class Header extends Component {
               </TabContent>
             </ModalBody>
           </Modal>
-          {/* <Modal
-          isOpen={this.state.isPetIdModalOpen}
-          toggle={this.toggleModalPetId}
-        >
-          <ModalHeader
-            toggle={this.toggleModalPetId}
-            style={{
-              backgroundColor: "#1b8eb1",
-              color: "white",
-              textShadow: "1px 1px 3px #363636",
-            }}
-          >
-            Owner Id
-          </ModalHeader>
-          <ModalBody>{this.props.uniqueId.uniqueId}</ModalBody>
-        </Modal> */}
+        
         </React.Fragment>
       );
     }
@@ -919,4 +869,4 @@ Header.propTypes = {
   logoutUser: PropTypes.func.isRequired,
 };
 
-export default connect("", { logoutUser })(Header);
+export default connect("", { logoutUser })(withRouter(Header));

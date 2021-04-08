@@ -14,10 +14,8 @@ import Lostpet from "./LostpetsComponent";
 
 import { actions } from "react-redux-form";
 import {
-  addUniqueId,
   postComment,
   addUserInfo,
-  addPetCard,
   logoutUser,
   userPost,
   addUserInfoDB,
@@ -34,9 +32,8 @@ import {
 
 const mapStateToProps = (state) => {
   return {
-    uniqueId: state.uniqueId,
     post: state.post,
-    userInfo: state.userInfo,
+
     petcard: state.petcard,
     auth: state.auth,
     postreducer: state.postreducer,
@@ -50,7 +47,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  addUniqueId: (uniqueId) => addUniqueId(uniqueId),
   postComment: (postImage, text) => postComment(postImage, text),
   addUserInfo: (
     profileImage,
@@ -74,8 +70,7 @@ const mapDispatchToProps = {
       mainColor,
       secondaryColor
     ),
-  addPetCard: (petId, petcard, petImage) =>
-    addPetCard(petId, petcard, petImage),
+
   logoutUser: () => logoutUser(),
   userPost: (pic, body) => userPost(pic, body),
 
@@ -135,13 +130,9 @@ class Main extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* <Register/>
-        <Login/> */}
         <Header
-          addUniqueId={this.props.addUniqueId} //will be replaced with backend call
-          uniqueId={this.props.uniqueId} //will be replaced with backend call
           addUserInfo={this.props.addUserInfo} // need to change info to addUserInfoDB
-          userInfo={this.props.userInfo} // need to change info to getUserInfoDB
+          addUserInfoDB={this.props.addUserInfoDB}
           auth={this.props.auth}
           logoutUser={this.props.loginUser}
           getUserInfoDB={this.props.getUserInfoDB}
@@ -166,11 +157,8 @@ class Main extends Component {
             render={() => (
               <PetProfile
                 //postComment={this.props.postComment}  Take out
-                petcard={this.props.petcard} //will be replaced with backend call
-                uniqueId={this.props.uniqueId} //will be replaced with backend call
-                addPetCard={this.props.addPetCard} //will be replaced with backend call
+
                 addUserInfo={this.props.addUserInfo} // need to change info to addUserInfoDB
-                userInfo={this.props.userInfo} // need to change info to getUserInfoDB
                 auth={this.props.auth}
                 userinfodb={this.props.userinfodb}
                 addUserInfoDB={this.props.addUserInfoDB}
@@ -189,12 +177,9 @@ class Main extends Component {
             render={() => (
               <PublicProfile
                 post={this.props.post} //will be replaced with backend call
-                uniqueId={this.props.uniqueId} //will be replaced with backend call
                 addUserInfo={this.props.addUserInfo} // need to change info to addUserInfoDB
                 resetProfileForm={this.props.resetProfileForm}
                 petcard={this.props.petcard} //will be replaced with backend call
-                addPetCard={this.props.addPetCard} //will be replaced with backend call
-                userInfo={this.props.userInfo} // need to change info to getUserInfoDB
                 auth={this.props.auth}
                 userinfodb={this.props.userinfodb}
                 getUserInfoDB={this.props.getUserInfoDB}
@@ -212,12 +197,10 @@ class Main extends Component {
             path="/LostPets"
             render={() => (
               <Lostpet
-                addUniqueId={this.props.addUniqueId} //will be replaced with backend call
                 resetLostPetForm={this.props.resetLostPetForm}
                 petcard={this.props.petcard} //will be replaced with backend call
-                uniqueId={this.props.uniqueId} //will be replaced with backend call
+                addUserInfoDB={this.props.addUserInfoDB}
                 addUserInfo={this.props.addUserInfo} // need to change info to addUserInfoDB
-                userInfo={this.props.userInfo} // need to change info to getUserInfoDB
                 auth={this.props.auth}
               />
             )}
@@ -226,11 +209,8 @@ class Main extends Component {
             path="/Feed"
             render={() => (
               <Feed
-                addUniqueId={this.props.addUniqueId} //will be replaced with backend call
                 postComment={this.props.postComment}
-                //post={this.props.post}                            //will be replaced with postreducer
-                userInfo={this.props.userInfo} // need to change info to getUserInfoDB
-                uniqueId={this.props.uniqueId} //will be replaced with backend call
+                addUserInfoDB={this.props.addUserInfoDB}
                 addUserInfo={this.props.addUserInfo} // need to change info to addUserInfoDB
                 auth={this.props.auth}
                 addAuthUserInfo={this.props.addAuthUserInfo}
@@ -249,12 +229,9 @@ class Main extends Component {
             path="/petbook"
             render={() => (
               <Lostpet
-                addUniqueId={this.props.addUniqueId} //will be replaced with backend call
                 resetLostPetForm={this.props.resetLostPetForm}
                 petcard={this.props.petcard} //will be replaced with backend call
-                uniqueId={this.props.uniqueId} //will be replaced with backend call
                 addUserInfo={this.props.addUserInfo} // need to change info to addUserInfoDB
-                userInfo={this.props.userInfo} // need to change info to getUserInfoDB
                 auth={this.props.auth}
               />
             )}

@@ -18,9 +18,7 @@ class Register extends Component {
       errors: {},
     };
   }
-  // generateId = () => {
-  //   this.props.addUserInfoDB(uuid());
-  // };
+
   componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
@@ -67,9 +65,11 @@ class Register extends Component {
       this.props.errors.password === null &&
       this.props.errors.password2 === null
     ) {
-      this.props.toggleModal();
+      this.props.toggleModal(); 
     }
-    this.props.addUserInfo({ profileName: this.state.name });
+
+  
+    this.props.addUserInfoDB({ profileName: this.state.name });
 
     const newUser = {
       name: this.state.name,
@@ -101,10 +101,10 @@ class Register extends Component {
                 onChange={this.onChange}
                 value={this.state.name}
                 className={classnames("form-control", {
-                  invalid: errors.name,
+                  //invalid: errors.name,
                 })}
               />
-              <span className="text-danger m-1">{errors.name}</span>
+              {/* <span className="text-danger m-1">{errors.name}</span> */}
             </Col>
           </Col>
         </Row>

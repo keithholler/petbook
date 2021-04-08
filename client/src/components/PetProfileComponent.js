@@ -16,13 +16,7 @@ import uuid from "react-uuid";
 import { Link } from "react-router-dom";
 import { storage } from "../firebase";
 
-// function Uni(props) {
-//   if (props.uniqueId.uniqueId) {
-//     return <div>{props.uniqueId.uniqueId}</div>;
-//   } else {
-//     return <div>Failed</div>;
-//   }
-// }
+
 
 class AddPet extends Component {
   constructor(props) {
@@ -45,8 +39,7 @@ class AddPet extends Component {
   };
   handleSubmit = (values) => {
     this.toggleModal();
-    // const localImageUrl =  window.URL.createObjectURL(values.file[0]);
-    this.props.addPetCard(uuid(), values, this.state.petImgURL);
+
     this.props.addPet(
       values.name,
       this.state.petImgURL,
@@ -88,7 +81,7 @@ class AddPet extends Component {
                 .then((url) => {
                   console.log(url);
                   this.setState({ petImgURL: url });
-                  console.log(this.state.petImgURL);
+                  //console.log(this.state.petImgURL);
                 });
             }
           );
@@ -309,12 +302,7 @@ class PetProfile extends Component {
     };
   }
   handleSubmit = (values) => {
-    // this.props.addUserInfo(
-    //   this.props.uniqueId.uniqueId,
-    //   this.state.profileImageURL,
-    //   values
-    // );
-
+ 
     if (this.props.userinfodb.userInfodb.length === 0) {
       this.props.addUserInfoDB(
         !this.state.profileImageURL ? " " : this.state.profileImageURL,
@@ -411,12 +399,7 @@ class PetProfile extends Component {
           onSubmit={(values) => this.handleSubmit(values)}
           className="ml-4"
         >
-          <Row className="form-group">
-            <Label htmlFor="profileImage" md={2}>
-              Owners Id:
-            </Label>
-            <Col md={10}>{/* <Uni uniqueId={this.props.uniqueId} /> */}</Col>
-          </Row>
+         
           <Row className="form-group">
             <Label htmlFor="profileImage" md={2} className="">
               Profile Image
@@ -578,7 +561,7 @@ class PetProfile extends Component {
             </h2>
 
             <AddPet
-              addPetCard={this.props.addPetCard}
+
               addPet={this.props.addPet}
               getPets={this.props.getPets}
             />
@@ -592,11 +575,7 @@ class PetProfile extends Component {
             className="row row-content justify-content-around"
             style={{ color: "black" }}
           >
-            {/* <ProfilePet
-              petcard={this.props.petcard}
-              uniqueId={this.props.uniqueId}
-              pet={this.props.pet}
-            /> */}
+
 
             {
               this.props.pet.pets.length === 0 ? (

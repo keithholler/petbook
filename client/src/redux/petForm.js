@@ -5,4 +5,5 @@ export const InitialFeedback3 = {
   mainColor: "",
   secondaryColor: "",
   about: "",
+  petImg:[{}]
 };

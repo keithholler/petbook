@@ -39,37 +39,37 @@ class Register extends Component {
   };
   onSubmit = (e) => {
     //e.preventDefault();
-    if (this.state.name !== "") {
-      this.setState({
-        errors: (this.props.errors.name = null),
-      });
-    }
-    if (this.state.email !== "") {
-      this.setState({
-        errors: (this.props.errors.email = null),
-      });
-    }
-    if (this.state.password !== "") {
-      this.setState({
-        errors: (this.props.errors.password = null),
-      });
-    }
-    if (this.state.password2 !== "") {
-      this.setState({
-        errors: (this.props.errors.password2 = null),
-      });
-    }
-    if (
-      this.props.errors.name === null &&
-      this.props.errors.email === null &&
-      this.props.errors.password === null &&
-      this.props.errors.password2 === null
-    ) {
-      this.props.toggleModal(); 
-    }
+    // if (this.state.name !== "") {
+    //   this.setState({
+    //     errors: (this.props.errors.name = null),
+    //   });
+    // }
+    // if (this.state.email !== "") {
+    //   this.setState({
+    //     errors: (this.props.errors.email = null),
+    //   });
+    // }
+    // if (this.state.password !== "") {
+    //   this.setState({
+    //     errors: (this.props.errors.password = null),
+    //   });
+    // }
+    // if (this.state.password2 !== "") {
+    //   this.setState({
+    //     errors: (this.props.errors.password2 = null),
+    //   });
+    // }
+    // if (
+    //   this.props.errors.name === null &&
+    //   this.props.errors.email === null &&
+    //   this.props.errors.password === null &&
+    //   this.props.errors.password2 === null
+    // ) {
+    //   this.props.toggleModal(); 
+    // }
 
   
-    this.props.addUserInfoDB({ profileName: this.state.name });
+    //this.props.addUserInfoDB({ name: this.state.name });
 
     const newUser = {
       name: this.state.name,

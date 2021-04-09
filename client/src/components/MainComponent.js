@@ -75,7 +75,7 @@ const mapDispatchToProps = {
   userPost: (pic, body) => userPost(pic, body),
 
   addUserInfoDB: (profileImage, firstName, lastName, about) =>
-    addUserInfoDB(profileImage, firstName, lastName, about),
+  addUserInfoDB(profileImage, firstName, lastName, about),
 
   updateUserInfoDB: (profileImage, firstName, lastName, about) =>
     updateUserInfoDB(profileImage, firstName, lastName, about),
